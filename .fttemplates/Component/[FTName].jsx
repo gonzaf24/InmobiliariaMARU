@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import styles from './[FTName].module.scss';
+import { useTranslation } from 'react-i18next';
 
 const propTypes={
   className: PropTypes.string,
@@ -16,9 +17,14 @@ const defaultProps={
   id: undefined,
 };
 
-const [FTName]=({ className, testId, id, texts: textsProp }) => {
+const texts: {
+  Title: '[FTName].Title',
+},
+
+const [FTName]=({ className, testId, id }) => {
 
   const <FTName |camelcase>ClassNames = classnames(styles.[FTName], className);
+  const { t } = useTranslation();
 
   return (
     <div
@@ -27,6 +33,7 @@ const [FTName]=({ className, testId, id, texts: textsProp }) => {
       id={ id }
     >
       Text Component Example
+      {t(texts.Title)}
     </div>
   );
 };
