@@ -3,7 +3,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { sendToVercelAnalytics } from "./vitals";
-import './translations/i18n'
+import "./translations/i18n";
 
 import { createRoot } from "react-dom/client";
 const container = document.getElementById("root");

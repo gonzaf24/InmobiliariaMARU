@@ -1,0 +1,85 @@
+.ToastMessages {
+  margin-bottom: 50px;
+
+  .Toast {
+    background-color: var(--bs-white-20) !important;
+    border-radius: var(--bs-radius-medium) !important;
+
+    .Icon {
+      width: 15px;
+    }
+
+    .MiddleContent {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .ButtonClose {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 20px;
+      height: 20px;
+      padding: 0px;
+      border: none;
+      background-color: transparent;
+      color: var(--bs-white);
+
+      .CloseIcon {
+        width: 15px;
+        height: 15px;
+        color: black
+      }
+    }
+
+    .ToastBody {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--bs-white-20);
+      border-radius: var(--bs-radius-medium);
+      padding: 10px 25px;
+      height: fit-content;
+      gap: 15px;
+      min-height: 40px;
+      border-width: 2px;
+      border-style: solid;
+      border-color: var(--bs-white-20);
+
+      &.ToastBodyInfo {
+        border-color: var(--bs-info);
+      }
+
+      &.ToastBodySuccess {
+        border-color: var(--bs-success);
+      }
+
+      &.ToastBodyWarning {
+        border-color: var(--bs-warning);
+      }
+
+      &.ToastBodyError {
+        border-color: var(--bs-danger);
+      }
+
+      .LeftContent {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        min-width: 10px;
+        width: 100%;
+      }
+
+      .RightContent {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        min-width: 10px;
+        width: 100%;
+      }
+    }
+  }
+}

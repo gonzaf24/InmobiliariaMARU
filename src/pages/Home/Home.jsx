@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 
 import styles from "./Home.module.scss";
 import { useTranslation } from "react-i18next";
+import useToastContext from "../../context/toastContext";
 
 const propTypes = {
   className: PropTypes.string,
@@ -26,11 +27,23 @@ const texts = {
 const Home = ({ className, testId, id, texts: textsProp }) => {
   const homeClassNames = classnames(styles.Home, className);
   const { t, i18n } = useTranslation();
+  const { addToast } = useToastContext();
+
 
   const changeLanguage = () => {
     const lang = i18n.language === "en" ? "es" : "en";
     i18n.changeLanguage(lang);
   };
+
+  const handleCreateToast = () => {
+    addToast({
+      id: 1,
+      type: "success",
+      middleContent: "Toast created",
+      useAutoHide: false
+    });
+  };
+
 
   return (
     <div className={homeClassNames} testid={testId} id={id}>
@@ -40,6 +53,8 @@ const Home = ({ className, testId, id, texts: textsProp }) => {
       <Button variant="outline-success" onClick={changeLanguage}>{t(texts.ChangeLanguage)}</Button>
       <br/><br/><br/>
       <span>{`Lenguaje:  ${i18n.language}`}</span>
+      <br/><br/><br/>
+      <Button variant="outline-success" onClick={ handleCreateToast }>Test Toast</Button>
     </div>
   );
 };

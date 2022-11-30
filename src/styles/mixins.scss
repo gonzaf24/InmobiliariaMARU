@@ -1,10 +1,16 @@
 @import "./effects";
 
-@mixin card {
-  background-color: var(--bs-black);
-  border: 1px solid var(--bs-white);
-  border-radius: var(--bs-radius-large);
-  padding: 20px;
+@mixin increaseOnHover() {
+  &:hover {
+    transition: 0.3s;
+    transform: scale(1.05);
+  }
+}
+
+@mixin brightnessOnHover() {
+  &:hover {
+    filter: brightness(0.7);
+  }
 }
 
 @mixin focus() {
@@ -18,17 +24,4 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-@mixin increaseOnHover() {
-  &:hover {
-    transition: 0.3s;
-    transform: scale(1.05);
-  }
-}
-
-@mixin brightnessOnHover() {
-  &:hover {
-    filter: brightness(0.7);
-  }
 }
