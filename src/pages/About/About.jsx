@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-import styles from './Home.module.scss';
+import styles from './About.module.scss';
 
 const propTypes={
   className: PropTypes.string,
@@ -16,22 +16,22 @@ const defaultProps={
   id: undefined,
 };
 
-const Home=({ className, testId, id, texts: textsProp }) => {
+const About=({ className, testId, id, texts: textsProp }) => {
 
-  const homeClassNames=classnames(styles.Home, className);
+  const aboutClassNames = classnames(styles.About, className);
 
   return (
     <div
-      className={ homeClassNames }
+      className={ aboutClassNames }
       testid={ testId }
       id={ id }
     >
-      <span>Text  Home </span>
+      <span>Text  About </span>
     </div>
   );
 };
 
-Home.propTypes=propTypes;
-Home.defaultProps=defaultProps;
+About.propTypes=propTypes;
+About.defaultProps=defaultProps;
 
-export default Home;
+export default About;
