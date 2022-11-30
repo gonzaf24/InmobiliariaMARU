@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import { Logo } from './assets';
 
 function App() {
