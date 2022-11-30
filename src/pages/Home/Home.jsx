@@ -1,6 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 import PropTypes from "prop-types";
+import Button from 'react-bootstrap/Button';
 
 import styles from "./Home.module.scss";
 import { useTranslation } from "react-i18next";
@@ -36,7 +37,7 @@ const Home = ({ className, testId, id, texts: textsProp }) => {
       <br/><br/><br/>
       <span>{t(texts.TestText)}</span>
       <br/><br/><br/>
-      <button onClick={changeLanguage}>{t(texts.ChangeLanguage)}</button>
+      <Button variant="outline-success" onClick={changeLanguage}>{t(texts.ChangeLanguage)}</Button>
       <br/><br/><br/>
       <span>{`Lenguaje:  ${i18n.language}`}</span>
     </div>
