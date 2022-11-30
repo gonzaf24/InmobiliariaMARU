@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-import styles from './[FTName].module.scss';
+import styles from './Home.module.scss';
 
 const propTypes={
   className: PropTypes.string,
@@ -16,13 +16,13 @@ const defaultProps={
   id: undefined,
 };
 
-const [FTName]=({ className, testId, id, texts: textsProp }) => {
+const Home=({ className, testId, id, texts: textsProp }) => {
 
-  const <FTName |camelcase>ClassNames = classnames(styles.[FTName], className);
+  const homeClassNames=classnames(styles.Home, className);
 
   return (
     <div
-      className={ <FTName |camelcase>ClassNames }
+      className={ homeClassNames }
       testid={ testId }
       id={ id }
     >
@@ -31,7 +31,7 @@ const [FTName]=({ className, testId, id, texts: textsProp }) => {
   );
 };
 
-[FTName].propTypes=propTypes;
-[FTName].defaultProps=defaultProps;
+Home.propTypes=propTypes;
+Home.defaultProps=defaultProps;
 
-export default [FTName];
+export default Home;
