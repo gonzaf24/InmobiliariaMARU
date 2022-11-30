@@ -1,8 +1,7 @@
 import React from 'react';
-import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-import styles from './[FTName].module.scss';
+import './[FTName].module.scss';
 
 const propTypes = {
   className: PropTypes.string,
@@ -14,16 +13,15 @@ const defaultProps = {
   id: undefined,
 };
 
-const [FTName]=({ className, id, texts: textsProp }) => {
-
-  const <FTName |camelcase>ClassNames = classnames(styles.[FTName], className);
+const [FTName] = ({ className, id }) => {
+  const classComponent = [[FTName], className].join(' ').trim();
 
   return (
     <div
-      className={ <FTName |camelcase>ClassNames }
+      className={ classComponent }
       id={ id }
     >
-      ComponentText
+      [FTName] component
     </div>
   );
 };

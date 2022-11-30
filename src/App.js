@@ -1,4 +1,4 @@
-import './App.scss';
+import './App.css';
 import { Logo } from './assets';
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Chage me
+          Learn React
         </a>
       </header>
     </div>
