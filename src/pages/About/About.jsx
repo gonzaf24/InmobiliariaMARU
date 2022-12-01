@@ -26,6 +26,7 @@ const About=({ className, testId, id, texts: textsProp }) => {
       testid={ testId }
       id={ id }
     >
+       <h1>ABOUT</h1>
       <span>Text  About </span>
     </div>
   );
