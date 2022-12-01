@@ -23,10 +23,10 @@ const createContext = (contextName, defaultState, displayName = undefined) => {
   };
 };
 
-const createGamiumLibContext = (contextName, defaultState) => createContext(
+const createContextProvider = (contextName, defaultState) => createContext(
   contextName,
   defaultState,
   `${contextName} Context`,
 );
 
-export { createContext, createGamiumLibContext };
+export { createContext, createContextProvider };
