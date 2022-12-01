@@ -29,7 +29,7 @@ const [FTName]=({ className, testId, id }) => {
   return (
     <div
       className={ <FTName |camelcase>ClassNames }
-      testid={ testId }
+      data-testid={ testId }
       id={ id }
     >
       Text Component Example

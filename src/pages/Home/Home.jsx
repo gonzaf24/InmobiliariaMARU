@@ -1,76 +1,88 @@
-import React from "react";
-import classnames from "classnames";
-import PropTypes from "prop-types";
+import React from 'react';
+import classnames from 'classnames';
+import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 
-import styles from "./Home.module.scss";
-import { useTranslation } from "react-i18next";
-import useToastContext from "../../context/toastContext";
-import useUserContext from "../../context/userContext";
+import styles from './Home.module.scss';
+import { useTranslation } from 'react-i18next';
+import useToastContext from '../../context/toastContext';
+import useUserContext from '../../context/userContext';
 
 const propTypes = {
-  className: PropTypes.string,
-  testId: PropTypes.string,
-  id: PropTypes.string,
+	className: PropTypes.string,
+	testId: PropTypes.string,
+	id: PropTypes.string,
 };
 
 const defaultProps = {
-  className: "",
-  testId: undefined,
-  id: undefined,
+	className: '',
+	testId: undefined,
+	id: undefined,
 };
 
 const texts = {
-  TestText: "Home.TestText",
-  ChangeLanguage: "Home.ChangeLanguage",
-}
+	TestText: 'Home.TestText',
+	ChangeLanguage: 'Home.ChangeLanguage',
+};
 
-const Home = ({ className, testId, id, texts: textsProp }) => {
-  const homeClassNames = classnames(styles.Home, className);
-  const { t, i18n } = useTranslation();
-  const { addToast } = useToastContext();
-  const { user } = useUserContext();
+const Home = ({ className, testId, id }) => {
+	const homeClassNames = classnames(styles.Home, className);
+	const { t, i18n } = useTranslation();
+	const { addToast } = useToastContext();
+	const { user } = useUserContext();
 
+	const changeLanguage = () => {
+		const lang = i18n.language === 'en' ? 'es' : 'en';
+		i18n.changeLanguage(lang);
+	};
 
-  const changeLanguage = () => {
-    const lang = i18n.language === "en" ? "es" : "en";
-    i18n.changeLanguage(lang);
-  };
+	const handleCreateToast = () => {
+		addToast({
+			id: 1,
+			type: 'success',
+			middleContent: 'Toast created',
+			useAutoHide: false,
+		});
+	};
 
-  const handleCreateToast = () => {
-    addToast({
-      id: 1,
-      type: "success",
-      middleContent: "Toast created",
-      useAutoHide: false
-    });
-  };
-
-
-  return (
-    <div className={homeClassNames} testid={testId} id={id}>
-      <h1>HOME</h1>
-      <br/><br/><br/>
-      <span>{t(texts.TestText)}</span>
-      <br/><br/><br/>
-      <Button variant="outline-success" onClick={changeLanguage}>{t(texts.ChangeLanguage)}</Button>
-      <br/><br/><br/>
-      <span>{`Lenguaje:  ${i18n.language}`}</span>
-      <br/><br/><br/>
-      <Button variant="outline-success" onClick={ handleCreateToast }>Test Toast</Button>
-      <br/><br/><br/>
-      <span>Moked User context</span>
-      <br/>
-      <br/>
-      <span>{`Id:  ${user?.id}`}</span>
-      <br/>
-      <span>{`Name:  ${user?.name}`}</span>
-      <br/>
-      <span>{`Email:  ${user?.email}`}</span>
-      <br/>
-      <span>{`Token:  ${user?.token}`}</span>
-    </div>
-  );
+	return (
+		<div className={homeClassNames} data-testid={testId} id={id}>
+			<h1>HOME</h1>
+			<br />
+			<br />
+			<br />
+			<span>{t(texts.TestText)}</span>
+			<br />
+			<br />
+			<br />
+			<Button variant='outline-success' onClick={changeLanguage}>
+				{t(texts.ChangeLanguage)}
+			</Button>
+			<br />
+			<br />
+			<br />
+			<span>{`Lenguaje:  ${i18n.language}`}</span>
+			<br />
+			<br />
+			<br />
+			<Button variant='outline-success' onClick={handleCreateToast}>
+				Test Toast
+			</Button>
+			<br />
+			<br />
+			<br />
+			<span>Moked User context</span>
+			<br />
+			<br />
+			<span>{`Id:  ${user?.id}`}</span>
+			<br />
+			<span>{`Name:  ${user?.name}`}</span>
+			<br />
+			<span>{`Email:  ${user?.email}`}</span>
+			<br />
+			<span>{`Token:  ${user?.token}`}</span>
+		</div>
+	);
 };
 
 Home.propTypes = propTypes;

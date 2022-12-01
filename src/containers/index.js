@@ -1,3 +1,3 @@
-import ToastMessages from "./ToastMessages";
+import ToastMessages from './ToastMessages';
 
 export { ToastMessages };
