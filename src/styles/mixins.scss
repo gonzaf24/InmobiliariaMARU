@@ -1,27 +1,27 @@
-@import "./effects";
+@import './effects';
 
 @mixin increaseOnHover() {
-  &:hover {
-    transition: 0.3s;
-    transform: scale(1.05);
-  }
+	&:hover {
+		transition: 0.3s;
+		transform: scale(1.05);
+	}
 }
 
 @mixin brightnessOnHover() {
-  &:hover {
-    filter: brightness(0.7);
-  }
+	&:hover {
+		filter: brightness(0.7);
+	}
 }
 
 @mixin focus() {
-  &:hover {
-    transition: 0.75s;
-    transform: scale(1.01);
-  }
+	&:hover {
+		transition: 0.75s;
+		transform: scale(1.01);
+	}
 }
 
 @mixin text-ellipsis {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
