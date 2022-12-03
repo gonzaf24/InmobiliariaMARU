@@ -12,22 +12,21 @@ const propTypes = {
 
 const defaultProps = {};
 
-const DEFAULT_USER = {
-	id: 166253,
-	name: 'Consuelo Teconsuelta',
-	email: 'consuelo@gmail.com',
-	token: 'SDKUFH7834R-WIF7FHIHFC-ANSKCF7W3EOEW3D8U0-ZSA93E',
-};
-
 const UserProvider = ({ children }) => {
-	const [user, setUser] = useState(DEFAULT_USER);
+	const userSession = window.sessionStorage.getItem('user');
+	const jwtSession = window.sessionStorage.getItem('jwt');
+
+	const [user, setUser] = useState(JSON.parse(userSession));
+	const [jwt, setJWT] = useState(jwtSession);
 
 	const contextValue = useMemo(
 		() => ({
 			user,
 			setUser,
+			jwt,
+			setJWT,
 		}),
-		[user, setUser]
+		[user, setUser, jwt, setJWT]
 	);
 
 	return (

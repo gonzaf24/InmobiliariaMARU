@@ -3,6 +3,8 @@ import { createContext } from '../../utils/context';
 const CONTEXT_NAME = 'User';
 
 const defaultState = {
+	jwt: null,
+	setJWT: () => {},
 	user: undefined,
 	setUser: () => {},
 };

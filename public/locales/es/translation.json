@@ -1,4 +1,8 @@
 {
 	"Home.TestText": "Esto es un texto de prueba",
-	"Home.ChangeLanguage": "Cambiar lenguaje"
+	"Home.ChangeLanguage": "Cambiar lenguaje",
+	"RegisterForm.Title": "Registro",
+	"RecoveryForm.Title": "Recuperar contraseña",
+	"LoginForm.Title": "Iniciar sesión",
+	"LoginForm.BadCredentials": "Usuario o contraseña incorrectos"
 }

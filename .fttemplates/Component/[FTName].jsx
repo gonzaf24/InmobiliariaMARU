@@ -17,9 +17,9 @@ const defaultProps={
   id: undefined,
 };
 
-const texts: {
+const texts= {
   Title: '[FTName].Title',
-},
+};
 
 const [FTName]=({ className, testId, id }) => {
 
