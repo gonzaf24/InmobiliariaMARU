@@ -7,6 +7,7 @@ import styles from './Home.module.scss';
 import { useTranslation } from 'react-i18next';
 import useToastContext from '../../context/toastContext';
 import useUserContext from '../../context/userContext';
+import useUser from '../../hooks/useUser';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -30,6 +31,7 @@ const Home = ({ className, testId, id }) => {
 	const { t, i18n } = useTranslation();
 	const { addToast } = useToastContext();
 	const { user } = useUserContext();
+	const { logout } = useUser();
 
 	const changeLanguage = () => {
 		const lang = i18n.language === 'en' ? 'es' : 'en';
@@ -76,11 +78,15 @@ const Home = ({ className, testId, id }) => {
 			<br />
 			<span>{`Id:  ${user?.id}`}</span>
 			<br />
-			<span>{`Name:  ${user?.name}`}</span>
+			<span>{`Username:  ${user?.username}`}</span>
 			<br />
-			<span>{`Email:  ${user?.email}`}</span>
+			<span>{`Type:  ${user?.name}`}</span>
 			<br />
 			<span>{`Token:  ${user?.token}`}</span>
+			<br />
+			<br />
+			<br />
+			<Button onClick={logout}>Logout</Button>
 		</div>
 	);
 };
