@@ -34,7 +34,7 @@ const LoginForm = ({ className, testId, id }) => {
 
 	const submitForm = e => {
 		addToast({
-			id: 1,
+			id: 2,
 			type: 'success',
 			middleContent: 'Entro',
 			useAutoHide: false,
@@ -45,13 +45,19 @@ const LoginForm = ({ className, testId, id }) => {
 		const password = e.target[1].value;
 		addToast({
 			id: 1,
-			type: 'success',
+			type: 'error',
 			middleContent: `aca es  ${username} ${password}`,
 			useAutoHide: false,
 		});
 		console.log('values catched ', username, password);
 		login({ username, password });
 		console.log('after login');
+		addToast({
+			id: 1,
+			type: 'error',
+			middleContent: `aca es  ${username} ${password}`,
+			useAutoHide: false,
+		});
 	};
 
 	const getError = errorCode => {
