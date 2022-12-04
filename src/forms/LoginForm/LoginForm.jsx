@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import styles from './LoginForm.module.scss';
 import useUser from '../../hooks/useUser';
 import dataApi from '../../services/utils/dataApi';
+import useToastContext from '../../context/toastContext';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -29,12 +30,28 @@ const LoginForm = ({ className, testId, id }) => {
 	const loginFormClassNames = classnames(styles.LoginForm, className);
 	const { t } = useTranslation();
 	const { login, errorCode } = useUser();
+	const { addToast } = useToastContext();
 
 	const submitForm = e => {
+		addToast({
+			id: 1,
+			type: 'success',
+			middleContent: 'Entro',
+			useAutoHide: false,
+		});
+		console.log('submitForm', e);
 		e.preventDefault();
 		const username = e.target[0].value;
 		const password = e.target[1].value;
+		addToast({
+			id: 1,
+			type: 'success',
+			middleContent: `aca es  ${username} ${password}`,
+			useAutoHide: false,
+		});
+		console.log('values catched ', username, password);
 		login({ username, password });
+		console.log('after login');
 	};
 
 	const getError = errorCode => {
