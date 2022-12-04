@@ -2,10 +2,12 @@ import { useCallback, useState } from 'react';
 import useUserContext from '../context/userContext/userContext';
 import loginService from '../services/loginService';
 import { useNavigate } from 'react-router-dom';
+import useToastContext from '../context/toastContext';
 
 export default function useUser() {
 	const { setJWT, setUser, user } = useUserContext();
 	const navigate = useNavigate();
+	const { addToast } = useToastContext();
 
 	const [state, setState] = useState({
 		loading: false,
@@ -49,7 +51,20 @@ export default function useUser() {
 				errorCode: null,
 				errorMessage: null,
 			});
-			navigate('/');
+			addToast({
+				id: 1,
+				type: 'error',
+				middleContent: `antes del navigate `,
+				useAutoHide: false,
+			});
+			navigate('/', { replace: true });
+
+			addToast({
+				id: 1,
+				type: 'error',
+				middleContent: `lueg ooooo del navigate `,
+				useAutoHide: false,
+			});
 		}
 	}, []);
 
