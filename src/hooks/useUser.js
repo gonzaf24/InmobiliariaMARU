@@ -1,9 +1,12 @@
 import { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useUserContext from '../context/userContext/userContext';
 import loginService from '../services/loginService';
 
 export default function useUser() {
 	const { jwt, setJWT, setUser, user } = useUserContext();
+
+	const navigate = useNavigate();
 
 	const [state, setState] = useState({
 		loading: false,
@@ -19,37 +22,35 @@ export default function useUser() {
 		setJWT(null);
 	};
 
-	const login = useCallback(async ({ username, password }) => {
-		setState({
-			loading: true,
-			hasError: false,
-			errorCode: null,
-			errorMessage: null,
-		});
-		const user = await loginService({ username, password });
-		if (user.errorCode) {
-			setState({
-				loading: false,
-				hasError: true,
-				errorCode: user.errorCode,
-				errorMessage: user.errorMessage,
-			});
-			removeUserSession();
-			return false;
-		} else {
-			window.sessionStorage.setItem('user', JSON.stringify(user));
-			window.sessionStorage.setItem('jwt', user.token);
-			setUser(user);
-			setJWT(user.token);
-			setState({
-				loading: false,
-				error: false,
-				errorCode: null,
-				errorMessage: null,
-			});
-			return true;
-		}
-	}, []);
+	const login = useCallback(
+		async ({ username, password }) => {
+			setState({ loading: true, error: false });
+			loginService({ username, password })
+				.then(user => {
+					window.sessionStorage.setItem('user', JSON.stringify(user));
+					window.sessionStorage.setItem('jwt', user.token);
+					setUser(user);
+					setJWT(user.token);
+					setState({
+						loading: false,
+						error: false,
+						errorCode: null,
+						errorMessage: null,
+					});
+					navigate('/', { replace: true });
+				})
+				.catch(error => {
+					setState({
+						loading: false,
+						hasError: true,
+						errorCode: null,
+						errorMessage: error.message,
+					});
+					removeUserSession();
+				});
+		},
+		[setJWT]
+	);
 
 	const logout = useCallback(() => {
 		removeUserSession();

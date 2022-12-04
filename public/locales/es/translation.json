@@ -4,5 +4,6 @@
 	"RegisterForm.Title": "Registro",
 	"RecoveryForm.Title": "Recuperar contraseña",
 	"LoginForm.Title": "Iniciar sesión",
-	"LoginForm.BadCredentials": "Usuario o contraseña incorrectos"
+	"Errors.401": "Usuario o contraseña incorrectos",
+	"Errors.500": "Error del servidor"
 }

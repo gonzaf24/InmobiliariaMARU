@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 
 import styles from './LoginForm.module.scss';
 import useUser from '../../hooks/useUser';
-import dataApi from '../../services/utils/dataApi';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -24,13 +23,12 @@ const defaultProps = {
 
 const texts = {
 	Title: 'LoginForm.Title',
-	BadCredentials: 'LoginForm.BadCredentials',
 };
 
 const LoginForm = ({ className, testId, id }) => {
 	const loginFormClassNames = classnames(styles.LoginForm, className);
 	const { t } = useTranslation();
-	const { login, errorCode } = useUser();
+	const { login, isLoading, errorMessage } = useUser();
 
 	const navigate = useNavigate();
 
@@ -42,18 +40,9 @@ const LoginForm = ({ className, testId, id }) => {
 		isLogged && navigate('/', { replace: true });
 	};
 
-	const getError = errorCode => {
-		const errorList = {
-			401: t(texts.BadCredentials),
-			500: 'Error interno del servidor',
-		};
-		return errorList[errorCode];
-	};
-
 	return (
 		<div className={loginFormClassNames} data-testid={testId} id={id}>
 			<span>{t(texts.Title)}</span>
-			{dataApi.BASE_URL}
 			<Form onSubmit={submitForm}>
 				<Form.Group className='mb-3' controlId='Email'>
 					<Form.Label className='text-center'>Email address</Form.Label>
@@ -70,9 +59,9 @@ const LoginForm = ({ className, testId, id }) => {
 						</a>
 					</p>
 				</Form.Group>
-				<span>{getError(errorCode)}</span>
+				<span>{t(errorMessage)}</span>
 				<div className='d-grid'>
-					<Button variant='primary' type='submit'>
+					<Button disabled={isLoading} variant='primary' type='submit'>
 						Login
 					</Button>
 				</div>
