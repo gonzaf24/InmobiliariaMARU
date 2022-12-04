@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next';
 import styles from './LoginForm.module.scss';
 import useUser from '../../hooks/useUser';
 import dataApi from '../../services/utils/dataApi';
-import useToastContext from '../../context/toastContext';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -32,43 +31,15 @@ const LoginForm = ({ className, testId, id }) => {
 	const loginFormClassNames = classnames(styles.LoginForm, className);
 	const { t } = useTranslation();
 	const { login, errorCode } = useUser();
-	const { addToast } = useToastContext();
 
 	const navigate = useNavigate();
 
-	const submitForm = e => {
-		addToast({
-			id: 2,
-			type: 'success',
-			middleContent: 'Entro',
-			useAutoHide: false,
-		});
-		console.log('submitForm', e);
+	const submitForm = async e => {
 		e.preventDefault();
 		const username = e.target[0].value;
 		const password = e.target[1].value;
-		addToast({
-			id: 1,
-			type: 'error',
-			middleContent: `aca es  ${username} ${password}`,
-			useAutoHide: false,
-		});
-		login({ username, password });
-
-		addToast({
-			id: 2,
-			type: 'error',
-			middleContent: `antes del navigate `,
-			useAutoHide: false,
-		});
-		navigate('/', { replace: true });
-
-		addToast({
-			id: 3,
-			type: 'error',
-			middleContent: `luegooooo del navigate `,
-			useAutoHide: false,
-		});
+		const isLogged = await login({ username, password });
+		isLogged && navigate('/', { replace: true });
 	};
 
 	const getError = errorCode => {
@@ -88,7 +59,6 @@ const LoginForm = ({ className, testId, id }) => {
 					<Form.Label className='text-center'>Email address</Form.Label>
 					<Form.Control type='text' placeholder='Enter email' required />
 				</Form.Group>
-
 				<Form.Group className='mb-3' controlId='Password'>
 					<Form.Label>Password</Form.Label>
 					<Form.Control type='password' placeholder='Password' required />
