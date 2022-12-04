@@ -3,7 +3,7 @@ import useUserContext from '../context/userContext/userContext';
 import loginService from '../services/loginService';
 
 export default function useUser() {
-	const { setJWT, setUser, user } = useUserContext();
+	const { jwt, setJWT, setUser, user } = useUserContext();
 
 	const [state, setState] = useState({
 		loading: false,
@@ -27,7 +27,6 @@ export default function useUser() {
 			errorMessage: null,
 		});
 		const user = await loginService({ username, password });
-		console.log('user', user);
 		if (user.errorCode) {
 			setState({
 				loading: false,
@@ -36,6 +35,7 @@ export default function useUser() {
 				errorMessage: user.errorMessage,
 			});
 			removeUserSession();
+			return false;
 		} else {
 			window.sessionStorage.setItem('user', JSON.stringify(user));
 			window.sessionStorage.setItem('jwt', user.token);
@@ -47,6 +47,7 @@ export default function useUser() {
 				errorCode: null,
 				errorMessage: null,
 			});
+			return true;
 		}
 	}, []);
 
@@ -55,6 +56,7 @@ export default function useUser() {
 	}, []);
 
 	return {
+		isLogged: Boolean(jwt),
 		isLoading: state.loading,
 		hasError: state.error,
 		errorCode: state.errorCode,
