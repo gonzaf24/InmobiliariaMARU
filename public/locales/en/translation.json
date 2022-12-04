@@ -4,5 +4,7 @@
 	"RegisterForm.Title": "Register",
 	"RecoveryForm.Title": "Recovery",
 	"LoginForm.Title": "Login",
-	"LoginForm.BadCredentials": "User or password incorrect"
+	"Errors.401": "User or password incorrect",
+	"Errors.500": "Server error"
 }
+
