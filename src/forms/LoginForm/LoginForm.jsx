@@ -9,6 +9,8 @@ import useUser from '../../hooks/useUser';
 import dataApi from '../../services/utils/dataApi';
 import useToastContext from '../../context/toastContext';
 
+import { useNavigate } from 'react-router-dom';
+
 const propTypes = {
 	className: PropTypes.string,
 	testId: PropTypes.string,
@@ -32,6 +34,8 @@ const LoginForm = ({ className, testId, id }) => {
 	const { login, errorCode } = useUser();
 	const { addToast } = useToastContext();
 
+	const navigate = useNavigate();
+
 	const submitForm = e => {
 		addToast({
 			id: 2,
@@ -49,13 +53,20 @@ const LoginForm = ({ className, testId, id }) => {
 			middleContent: `aca es  ${username} ${password}`,
 			useAutoHide: false,
 		});
-		console.log('values catched ', username, password);
 		login({ username, password });
-		console.log('after login');
+
 		addToast({
-			id: 1,
+			id: 2,
 			type: 'error',
-			middleContent: `aca es  ${username} ${password}`,
+			middleContent: `antes del navigate `,
+			useAutoHide: false,
+		});
+		navigate('/', { replace: true });
+
+		addToast({
+			id: 3,
+			type: 'error',
+			middleContent: `luegooooo del navigate `,
 			useAutoHide: false,
 		});
 	};
