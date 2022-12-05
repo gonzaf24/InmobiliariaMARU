@@ -1,12 +1,12 @@
 import useUserContext from '../../context/userContext/userContext';
 
-export const customFetch = (method = 'POST', params) => {
+export const customFetch = (method = 'POST', params = undefined) => {
 	return {
 		method,
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ ...params }),
+		body: params ? JSON.stringify({ ...params }) : undefined,
 	};
 };
 
@@ -19,6 +19,6 @@ export const protectedFetch = (method = 'POST', params) => {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${jwt}`,
 		},
-		body: JSON.stringify({ ...params }),
+		body: params ? JSON.stringify({ ...params }) : undefined,
 	};
 };
