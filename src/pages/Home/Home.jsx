@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
@@ -31,7 +31,7 @@ const Home = ({ className, testId, id }) => {
 	const { t, i18n } = useTranslation();
 	const { addToast } = useToastContext();
 	const { user } = useUserContext();
-	const { logout } = useUser();
+	const { logout, users } = useUser();
 
 	const changeLanguage = () => {
 		const lang = i18n.language === 'en' ? 'es' : 'en';
@@ -46,6 +46,15 @@ const Home = ({ className, testId, id }) => {
 			useAutoHide: false,
 		});
 	};
+
+	const aa = async () => {
+		const usersOut = await users();
+		console.log('usersOut ', usersOut);
+	};
+
+	useEffect(() => {
+		aa();
+	}, []);
 
 	return (
 		<div className={homeClassNames} data-testid={testId} id={id}>
@@ -78,15 +87,20 @@ const Home = ({ className, testId, id }) => {
 			<br />
 			<span>{`Id:  ${user?.id}`}</span>
 			<br />
+			<span>{`Nane:  ${user?.name}`}</span>
+			<br />
 			<span>{`Username:  ${user?.username}`}</span>
 			<br />
-			<span>{`Type:  ${user?.name}`}</span>
+			<span>{`Type:  ${user?.type}`}</span>
 			<br />
 			<span>{`Token:  ${user?.token}`}</span>
 			<br />
 			<br />
 			<br />
 			<Button onClick={logout}>Logout</Button>
+			<br />
+			<br />
+			<br />
 		</div>
 	);
 };

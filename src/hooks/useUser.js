@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useUserContext from '../context/userContext/userContext';
 import loginService from '../services/loginService';
+import getUsers from '../services/userService';
 
 export default function useUser() {
 	const { jwt, setJWT, setUser, user } = useUserContext();
@@ -25,7 +26,7 @@ export default function useUser() {
 	const login = useCallback(
 		async ({ username, password }) => {
 			setState({ loading: true, error: false });
-			loginService({ username, password })
+			await loginService({ username, password })
 				.then(user => {
 					window.sessionStorage.setItem('user', JSON.stringify(user));
 					window.sessionStorage.setItem('jwt', user.token);
@@ -52,6 +53,30 @@ export default function useUser() {
 		[setJWT]
 	);
 
+	const users = useCallback(async () => {
+		setState({ loading: true, error: false });
+		return await getUsers()
+			.then(users => {
+				setState({
+					loading: false,
+					error: false,
+					errorCode: null,
+					errorMessage: null,
+				});
+				console.log(' users: ', users);
+				return users;
+			})
+			.catch(error => {
+				setState({
+					loading: false,
+					hasError: true,
+					errorCode: null,
+					errorMessage: error.message,
+				});
+				return [];
+			});
+	}, []);
+
 	const logout = useCallback(() => {
 		removeUserSession();
 	}, []);
@@ -65,5 +90,6 @@ export default function useUser() {
 		user,
 		login,
 		logout,
+		users,
 	};
 }
