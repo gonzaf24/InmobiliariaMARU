@@ -63,10 +63,11 @@ export default function useUser() {
 					errorCode: null,
 					errorMessage: null,
 				});
-				console.log(' users: ', users);
+				console.log(' users are: ', users);
 				return users;
 			})
 			.catch(error => {
+				console.log(' Error retriving Users: ', error);
 				setState({
 					loading: false,
 					hasError: true,
