@@ -1,0 +1,8 @@
+@import '/src/styles/mixins.scss';
+
+.Users {
+	.Actions {
+		display: flex;
+		gap: 15px;
+	}
+}

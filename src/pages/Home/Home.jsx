@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
@@ -31,7 +31,7 @@ const Home = ({ className, testId, id }) => {
 	const { t, i18n } = useTranslation();
 	const { addToast } = useToastContext();
 	const { user } = useUserContext();
-	const { logout, users } = useUser();
+	const { logout } = useUser();
 
 	const changeLanguage = () => {
 		const lang = i18n.language === 'en' ? 'es' : 'en';
@@ -46,15 +46,6 @@ const Home = ({ className, testId, id }) => {
 			useAutoHide: false,
 		});
 	};
-
-	const aa = async () => {
-		const usersOut = await users();
-		console.log('usersOut ', usersOut);
-	};
-
-	useEffect(() => {
-		aa();
-	}, []);
 
 	return (
 		<div className={homeClassNames} data-testid={testId} id={id}>

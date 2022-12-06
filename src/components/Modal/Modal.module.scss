@@ -1,0 +1,72 @@
+@import '/src/styles/mixins';
+
+.Modal {
+	[class~='modal-content'] {
+		border-radius: var(--bs-radius-large);
+		padding: 10px;
+		overflow: auto;
+	}
+
+	.Header {
+		gap: 25px;
+		display: flex;
+		border-bottom: 0px;
+		justify-content: space-between;
+
+		&.Empty {
+			justify-content: flex-end;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			text-align: center;
+			width: 100%;
+			margin-bottom: 0px;
+		}
+
+		.CloseIcon {
+			width: 20px;
+			height: 20px;
+		}
+
+		svg {
+			width: 20px;
+			height: 20px;
+			cursor: pointer;
+		}
+	}
+
+	.LoaderContainer {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.Loader {
+			width: 45px;
+			height: 45px;
+		}
+	}
+
+	.Body {
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+		flex-direction: column;
+		overflow: auto;
+	}
+
+	.Footer {
+		border-top: 0px;
+		justify-content: center;
+		flex-direction: row;
+
+		Button {
+			flex: 1;
+		}
+	}
+}

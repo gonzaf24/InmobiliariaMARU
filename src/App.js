@@ -8,6 +8,7 @@ import About from './pages/About/About';
 import { ToastProvider } from './context/toastContext';
 import { UserProvider } from './context/userContext';
 import Login from './pages/Login/Login';
+import Users from './pages/Admin/Users';
 
 function App() {
 	return (
@@ -26,12 +27,16 @@ function App() {
 								<li>
 									<Link to='/login'>Login</Link>
 								</li>
+								<li>
+									<Link to='/users'>Users</Link>
+								</li>
 							</ul>
 							<hr />
 							<Routes>
 								<Route path='/' element={<Home />} />
 								<Route path='/about' element={<About />} />
 								<Route path='/login' element={<Login />} />
+								<Route path='/users' element={<Users />} />
 							</Routes>
 						</div>
 					</Router>
