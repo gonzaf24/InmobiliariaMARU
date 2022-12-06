@@ -49,6 +49,7 @@ const Users = ({ className, testId, id }) => {
 	return (
 		<div className={usersClassNames} data-testid={testId} id={id}>
 			{t(texts.Title)}
+			{'Aqui los users'}
 			<Table striped bordered hover>
 				<thead>
 					<tr>
