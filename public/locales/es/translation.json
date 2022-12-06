@@ -5,5 +5,8 @@
 	"RecoveryForm.Title": "Recuperar contraseña",
 	"LoginForm.Title": "Iniciar sesión",
 	"Errors.401": "Usuario o contraseña incorrectos",
-	"Errors.500": "Error del servidor"
+	"Errors.500": "Error del servidor",
+	"Users.Title": "Usuarios",
+	"ActionModal.AcceptButton": "Aceptar",
+	"ActionModal.RejectButton": "Cancelar"
 }

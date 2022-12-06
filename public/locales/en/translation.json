@@ -5,6 +5,9 @@
 	"RecoveryForm.Title": "Recovery",
 	"LoginForm.Title": "Login",
 	"Errors.401": "User or password incorrect",
-	"Errors.500": "Server error"
+	"Errors.500": "Server error",
+	"Users.Title": "Users",
+	"ActionModal.AcceptButton": "Accept",
+	"ActionModal.RejectButton": "Cancel"
 }
 
