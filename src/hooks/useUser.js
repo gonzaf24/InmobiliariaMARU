@@ -28,7 +28,6 @@ export default function useUser() {
 			setState({ loading: true, error: false });
 			await loginService({ username, password })
 				.then(user => {
-					console.log(' useUser -->  loginService: ', user);
 					window.sessionStorage.setItem('user', JSON.stringify(user));
 					window.sessionStorage.setItem('jwt', user.token);
 					setUser(user);
@@ -42,7 +41,6 @@ export default function useUser() {
 					navigate('/', { replace: true });
 				})
 				.catch(error => {
-					console.log(' useUser -->  loginService: error ', error);
 					setState({
 						loading: false,
 						hasError: true,
@@ -65,11 +63,9 @@ export default function useUser() {
 					errorCode: null,
 					errorMessage: null,
 				});
-				console.log(' users are: ', users);
 				return users;
 			})
 			.catch(error => {
-				console.log(' Error retriving Users: ', error);
 				setState({
 					loading: false,
 					hasError: true,

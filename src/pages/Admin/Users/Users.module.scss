@@ -4,5 +4,11 @@
 	.Actions {
 		display: flex;
 		gap: 15px;
+
+		.ButtonActions {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
 	}
 }

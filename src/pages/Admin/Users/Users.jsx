@@ -8,6 +8,9 @@ import useUser from '../../../hooks/useUser';
 import { Button, Table } from 'react-bootstrap';
 import useOpenToggle from '../../../hooks/useOpenToggle';
 import ActionModal from '../../../components/ActionModal';
+import { MdDeleteForever, MdEdit } from 'react-icons/md';
+import Modal from '../../../components/Modal';
+import { EditUser } from '../../../forms';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -31,11 +34,12 @@ const Users = ({ className, testId, id }) => {
 	const { users, isLoading } = useUser();
 	const [dataTable, setDataTable] = useState([]);
 
+	const [user, setUser] = useState(undefined);
+
 	useEffect(() => {
 		const aa = async () => {
 			const usersOut = await users();
 			setDataTable(usersOut);
-			console.log('usersOut ', usersOut);
 		};
 		aa();
 	}, []);
@@ -46,11 +50,21 @@ const Users = ({ className, testId, id }) => {
 		close: closeConfirmDeleteUser,
 	} = useOpenToggle(false);
 
+	const {
+		isOpen: isOpenEditUser,
+		open: openEditUser,
+		close: closeEditUser,
+	} = useOpenToggle(false);
+
+	const handleEditeUser = user => {
+		setUser(user);
+		openEditUser();
+	};
+
 	return (
 		<div className={usersClassNames} data-testid={testId} id={id}>
 			{t(texts.Title)}
-			{'Aqui los users'}
-			<Table striped bordered hover>
+			<Table striped bordered hover responsive>
 				<thead>
 					<tr>
 						<th>#</th>
@@ -75,8 +89,18 @@ const Users = ({ className, testId, id }) => {
 								<td>{user.name}</td>
 								<td>{user.type}</td>
 								<td className={styles.Actions}>
-									<Button>Edit</Button>
-									<Button onClick={openConfirmDeleteUser}>Delete</Button>
+									<Button
+										className={styles.ButtonActions}
+										onClick={() => handleEditeUser(user)}
+									>
+										<MdEdit />
+									</Button>
+									<Button
+										className={styles.ButtonActions}
+										onClick={openConfirmDeleteUser}
+									>
+										<MdDeleteForever />
+									</Button>
 								</td>
 							</tr>
 						))
@@ -95,6 +119,17 @@ const Users = ({ className, testId, id }) => {
 			>
 				<span>Seguro desea eliminar el usuario?</span>
 			</ActionModal>
+
+			<Modal
+				id={id}
+				size='xs'
+				isOpen={isOpenEditUser}
+				onHide={closeEditUser}
+				onClose={closeEditUser}
+				header='Edite usuario'
+			>
+				<EditUser data={user} />
+			</Modal>
 		</div>
 	);
 };
