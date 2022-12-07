@@ -1,0 +1,24 @@
+@import '/src/styles/mixins.scss';
+
+.EditUser {
+	width: 100%;
+
+	.Form {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 15px;
+
+		& :disabled {
+			background-color: #0000000f;
+			color: #0000001f;
+		}
+
+		.Footer {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 25px;
+		}
+	}
+}
