@@ -11,7 +11,7 @@
 
 		& :disabled {
 			background-color: #0000000f;
-			color: #0000001f;
+			color: #00000052;
 		}
 
 		.Footer {
@@ -19,6 +19,17 @@
 			justify-content: space-between;
 			align-items: center;
 			gap: 25px;
+		}
+
+		.TextInput {
+			max-width: 500px;
+			border-radius: var(--bs-radius-medium);
+			color: var(--bs-dark-secondary);
+			justify-content: flex-end;
+
+			&::placeholder {
+				color: var(--bs-dark-secondary);
+			}
 		}
 	}
 }

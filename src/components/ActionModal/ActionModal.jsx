@@ -70,15 +70,6 @@ const ActionModal = ({
 			data-testid={dataTestId}
 			footer={
 				<>
-					{onReject && (
-						<Button
-							variant='danger'
-							className={styles.RejectButton}
-							onClick={onReject}
-						>
-							{t(texts.RejectButton)}
-						</Button>
-					)}
 					{onAccept && (
 						<Button
 							variant='primary'
@@ -86,6 +77,15 @@ const ActionModal = ({
 							onClick={onAccept}
 						>
 							{t(texts.AcceptButton)}
+						</Button>
+					)}
+					{onReject && (
+						<Button
+							variant='danger'
+							className={styles.RejectButton}
+							onClick={onReject}
+						>
+							{t(texts.RejectButton)}
 						</Button>
 					)}
 				</>

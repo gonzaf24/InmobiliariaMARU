@@ -1,4 +1,35 @@
 @import '/src/styles/mixins.scss';
 
 .NewUser {
+	width: 100%;
+
+	.Form {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 15px;
+
+		& :disabled {
+			background-color: #0000000f;
+			color: #00000052;
+		}
+
+		.Footer {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 25px;
+		}
+
+		.TextInput {
+			max-width: 500px;
+			border-radius: var(--bs-radius-medium);
+			color: var(--bs-dark-secondary);
+			justify-content: flex-end;
+
+			&::placeholder {
+				color: var(--bs-dark-secondary);
+			}
+		}
+	}
 }
