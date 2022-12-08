@@ -7,8 +7,6 @@ import { useTranslation } from 'react-i18next';
 import styles from './LoginForm.module.scss';
 import useUser from '../../hooks/useUser';
 
-import { useNavigate } from 'react-router-dom';
-
 const propTypes = {
 	className: PropTypes.string,
 	testId: PropTypes.string,
@@ -30,14 +28,11 @@ const LoginForm = ({ className, testId, id }) => {
 	const { t } = useTranslation();
 	const { login, isLoading, errorMessage } = useUser();
 
-	const navigate = useNavigate();
-
 	const submitForm = async e => {
 		e.preventDefault();
 		const username = e.target[0].value;
 		const password = e.target[1].value;
-		const isLogged = await login({ username, password });
-		isLogged && navigate('/', { replace: true });
+		await login({ username, password });
 	};
 
 	return (

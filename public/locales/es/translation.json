@@ -8,5 +8,9 @@
 	"Errors.500": "Error del servidor",
 	"Users.Title": "Usuarios",
 	"ActionModal.AcceptButton": "Aceptar",
-	"ActionModal.RejectButton": "Cancelar"
+	"ActionModal.RejectButton": "Cancelar",
+	"EditUser.Title": "EDITAR USUARIO",
+	"NewUser.Title": "NUEVO USUARIO",
+	"DeleteHeader": "ELIMINAR USUARIO",
+	"DeleteMessage": "¿Está seguro de que desea eliminar este usuario?",
 }

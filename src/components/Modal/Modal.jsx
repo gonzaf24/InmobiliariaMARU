@@ -64,7 +64,7 @@ const Modal = ({
 
 	return (
 		<ModalBoostrap
-			aria-labelledby='gamium-modal-center'
+			aria-labelledby='modal-center'
 			centered
 			className={modalClassNames}
 			data-testid={dataTestId}
@@ -75,6 +75,7 @@ const Modal = ({
 		>
 			{(header || onClose) && (
 				<ModalBoostrap.Header className={headerClassNames}>
+					<span />
 					{header}
 					{onClose && (
 						<MdClose

@@ -8,6 +8,10 @@
 	"Errors.500": "Server error",
 	"Users.Title": "Users",
 	"ActionModal.AcceptButton": "Accept",
-	"ActionModal.RejectButton": "Cancel"
+	"ActionModal.RejectButton": "Cancel",
+	"EditUser.Title": "EDIT USER",
+	"NewUser.Title": "NEW USER",
+	"DeleteHeader": "DELETE USER",
+	"DeleteMessage": "Are you sure you want to delete the user?"
 }
 

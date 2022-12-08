@@ -10,7 +10,7 @@ import useOpenToggle from '../../../hooks/useOpenToggle';
 import ActionModal from '../../../components/ActionModal';
 import { MdDeleteForever, MdEdit } from 'react-icons/md';
 import Modal from '../../../components/Modal';
-import { EditUser } from '../../../forms';
+import { EditUser, NewUser } from '../../../forms';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -26,6 +26,10 @@ const defaultProps = {
 
 const texts = {
 	Title: 'Users.Title',
+	DeleteHeader: 'DeleteHeader',
+	DeleteMessage: 'DeleteMessage',
+	EditUser: 'EditUser.Title',
+	NewUser: 'NewUser.Title',
 };
 
 const Users = ({ className, testId, id }) => {
@@ -56,6 +60,12 @@ const Users = ({ className, testId, id }) => {
 		close: closeEditUser,
 	} = useOpenToggle(false);
 
+	const {
+		isOpen: isOpenNewUser,
+		open: openNewUser,
+		close: closeNewUser,
+	} = useOpenToggle(false);
+
 	const handleEditeUser = user => {
 		setUser(user);
 		openEditUser();
@@ -64,6 +74,7 @@ const Users = ({ className, testId, id }) => {
 	return (
 		<div className={usersClassNames} data-testid={testId} id={id}>
 			{t(texts.Title)}
+			<Button onClick={openNewUser}>New User</Button>
 			<Table striped bordered hover responsive>
 				<thead>
 					<tr>
@@ -115,9 +126,9 @@ const Users = ({ className, testId, id }) => {
 				onClose={closeConfirmDeleteUser}
 				onReject={closeConfirmDeleteUser}
 				onAccept={closeConfirmDeleteUser}
-				header='Confirmar eliminación'
+				header={t(texts.DeleteHeader)}
 			>
-				<span>Seguro desea eliminar el usuario?</span>
+				<span>{t(texts.DeleteMessage)}</span>
 			</ActionModal>
 
 			<Modal
@@ -126,9 +137,20 @@ const Users = ({ className, testId, id }) => {
 				isOpen={isOpenEditUser}
 				onHide={closeEditUser}
 				onClose={closeEditUser}
-				header='Edite usuario'
+				header={t(texts.EditUser)}
 			>
-				<EditUser data={user} />
+				<EditUser data={user} onClose={closeEditUser} />
+			</Modal>
+
+			<Modal
+				id={id}
+				size='xs'
+				isOpen={isOpenNewUser}
+				onHide={closeNewUser}
+				onClose={closeNewUser}
+				header={t(texts.NewUser)}
+			>
+				<NewUser data={user} onClose={closeNewUser} />
 			</Modal>
 		</div>
 	);
