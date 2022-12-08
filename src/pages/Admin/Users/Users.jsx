@@ -9,6 +9,8 @@ import { Button, Table } from 'react-bootstrap';
 import useOpenToggle from '../../../hooks/useOpenToggle';
 import ActionModal from '../../../components/ActionModal';
 import { MdDeleteForever, MdEdit } from 'react-icons/md';
+import { ImUserPlus } from 'react-icons/im';
+
 import Modal from '../../../components/Modal';
 import { EditUser, NewUser } from '../../../forms';
 
@@ -73,8 +75,10 @@ const Users = ({ className, testId, id }) => {
 
 	return (
 		<div className={usersClassNames} data-testid={testId} id={id}>
-			{t(texts.Title)}
-			<Button onClick={openNewUser}>New User</Button>
+			<span>{t(texts.Title)}</span>
+			<Button className={styles.NewUserButton} onClick={openNewUser}>
+				<ImUserPlus />
+			</Button>
 			<Table striped bordered hover responsive>
 				<thead>
 					<tr>
