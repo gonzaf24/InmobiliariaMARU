@@ -6,4 +6,4 @@ export const TOASTS_TYPES = {
 	WARNING: 'WARNING',
 };
 
-export const DEFAULT_CLOSE_TIME_DELAY = 2500;
+export const DEFAULT_CLOSE_TIME_DELAY = 4000;

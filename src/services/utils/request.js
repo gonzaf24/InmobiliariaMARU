@@ -1,6 +1,4 @@
-import useUserContext from '../../context/userContext/userContext';
-
-export const customFetch = (method = 'POST', params = undefined) => {
+export function customFetch(method = 'POST', params = undefined) {
 	return {
 		method,
 		headers: {
@@ -8,10 +6,10 @@ export const customFetch = (method = 'POST', params = undefined) => {
 		},
 		body: params ? JSON.stringify({ ...params }) : undefined,
 	};
-};
+}
 
-export const protectedFetch = (method = 'POST', params) => {
-	const { jwt } = useUserContext();
+export function protectedFetch(method = 'POST', params) {
+	const jwt = window.sessionStorage.getItem('jwt');
 
 	return {
 		method,
@@ -21,4 +19,4 @@ export const protectedFetch = (method = 'POST', params) => {
 		},
 		body: params ? JSON.stringify({ ...params }) : undefined,
 	};
-};
+}

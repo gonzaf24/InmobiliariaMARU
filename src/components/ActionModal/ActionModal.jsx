@@ -42,8 +42,8 @@ const defaultProps = {
 };
 
 const texts = {
-	AcceptButton: 'ActionModal.AcceptButton',
-	RejectButton: 'ActionModal.RejectButton',
+	Accept: 'Accept',
+	Cancel: 'Cancel',
 };
 
 const ActionModal = ({
@@ -76,7 +76,7 @@ const ActionModal = ({
 							className={styles.AcceptButton}
 							onClick={onAccept}
 						>
-							{t(texts.AcceptButton)}
+							{t(texts.Accept)}
 						</Button>
 					)}
 					{onReject && (
@@ -85,7 +85,7 @@ const ActionModal = ({
 							className={styles.RejectButton}
 							onClick={onReject}
 						>
-							{t(texts.RejectButton)}
+							{t(texts.Cancel)}
 						</Button>
 					)}
 				</>

@@ -5,13 +5,15 @@
 	"RecoveryForm.Title": "Recovery",
 	"LoginForm.Title": "Login",
 	"Errors.401": "User or password incorrect",
+	"Errors.406": "Insufficient permissions",
 	"Errors.500": "Server error",
 	"Users.Title": "Users",
-	"ActionModal.AcceptButton": "Accept",
-	"ActionModal.RejectButton": "Cancel",
 	"EditUser.Title": "EDIT USER",
 	"NewUser.Title": "NEW USER",
 	"DeleteHeader": "DELETE USER",
-	"DeleteMessage": "Are you sure you want to delete the user?"
+	"DeleteMessage": "Are you sure you want to delete the user?",
+	"Create": "Create",
+	"Accept": "Accept",
+	"Cancel": "Cancel"
 }
 

@@ -2,7 +2,12 @@ import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useUserContext from '../context/userContext/userContext';
 import loginService from '../services/loginService';
-import getUsers from '../services/userService';
+import {
+	getUsers,
+	postUser,
+	putUser,
+	deleteUser,
+} from '../services/userService';
 
 export default function useUser() {
 	const { jwt, setJWT, setUser, user } = useUserContext();
@@ -76,6 +81,81 @@ export default function useUser() {
 			});
 	}, []);
 
+	const newUser = useCallback(async user => {
+		setState({ loading: true, error: false });
+		return await postUser(user)
+			.then(user => {
+				console.log('created user ', user);
+				setState({
+					loading: false,
+					error: false,
+					errorCode: null,
+					errorMessage: null,
+				});
+				return user;
+			})
+			.catch(error => {
+				console.log('created user Errror --- > ', error.message);
+				setState({
+					loading: false,
+					hasError: true,
+					errorCode: null,
+					errorMessage: error.message,
+				});
+				return false;
+			});
+	}, []);
+
+	const editUser = useCallback(async user => {
+		setState({ loading: true, error: false });
+		return await putUser(user)
+			.then(user => {
+				console.log('edited user ', user);
+				setState({
+					loading: false,
+					error: false,
+					errorCode: null,
+					errorMessage: null,
+				});
+				return true;
+			})
+			.catch(error => {
+				console.log('edited user Errror --- > ', error.message);
+				setState({
+					loading: false,
+					hasError: true,
+					errorCode: null,
+					errorMessage: error.message,
+				});
+				return error.message;
+			});
+	}, []);
+
+	const removeUser = useCallback(async id => {
+		setState({ loading: true, error: false });
+		return await deleteUser(id)
+			.then(user => {
+				console.log('deleted user ', user);
+				setState({
+					loading: false,
+					error: false,
+					errorCode: null,
+					errorMessage: null,
+				});
+				return user;
+			})
+			.catch(error => {
+				console.log('deleted user Errror --- > ', error.message);
+				setState({
+					loading: false,
+					hasError: true,
+					errorCode: null,
+					errorMessage: error.message,
+				});
+				return false;
+			});
+	}, []);
+
 	const logout = useCallback(() => {
 		removeUserSession();
 	}, []);
@@ -90,5 +170,8 @@ export default function useUser() {
 		login,
 		logout,
 		users,
+		newUser,
+		editUser,
+		removeUser,
 	};
 }

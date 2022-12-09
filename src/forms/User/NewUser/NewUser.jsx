@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import { Button, FloatingLabel, Form } from 'react-bootstrap';
-
 import { USERS_TYPES } from '../EditUser/EditUser';
-import styles from './NewUser.module.scss';
+import { useTranslation } from 'react-i18next';
+import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import Loader from '../../../components/Loader/Loader';
+import useUser from '../../../hooks/useUser';
+import styles from './NewUser.module.scss';
+import useToastContext from '../../../context/toastContext';
 
 const propTypes = {
 	className: PropTypes.string,
 	testId: PropTypes.string,
 	id: PropTypes.string,
 	onClose: PropTypes.func,
+	onSuccess: PropTypes.func,
 };
 
 const defaultProps = {
@@ -19,20 +22,30 @@ const defaultProps = {
 	testId: undefined,
 	id: undefined,
 	onClose: undefined,
+	onSuccess: undefined,
 };
 
 const EMAIL_REGEX =
 	/^[a-z0-9]+(.[_a-z0-9]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,15})$/;
 
-const NewUser = ({ className, testId, id, onClose }) => {
+const texts = {
+	Create: 'Create',
+	Cancel: 'Cancel',
+};
+
+const NewUser = ({ className, testId, id, onClose, onSuccess }) => {
 	const newUserClassNames = classnames(styles.NewUser, className);
 	const inputClassNames = classnames('form-control', styles.TextInput);
-	const [isLoading, setIsLoading] = useState(false);
-
+	const { newUser, errorMessage } = useUser();
+	const { addSuccessToast, addErrorToast } = useToastContext();
+	const [loading, setLoading] = useState(false);
 	const [fullName, setFullName] = useState('');
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [type, setType] = useState(USERS_TYPES.USER);
+
+	const { t } = useTranslation();
+
 	const [errors, setErrors] = useState({
 		fullname: false,
 		username: false,
@@ -56,7 +69,7 @@ const NewUser = ({ className, testId, id, onClose }) => {
 		}
 	};
 
-	const validateForm = (name, username, password, type) => {
+	const validateForm = user => {
 		let isValid = true;
 		const errorsObj = {
 			fullname: false,
@@ -64,23 +77,23 @@ const NewUser = ({ className, testId, id, onClose }) => {
 			password: false,
 			type: false,
 		};
-		if (!name) {
+		if (!user.name) {
 			errorsObj.fullname = true;
 			isValid = false;
 		}
-		if (!username) {
+		if (!user.username) {
 			errorsObj.username = true;
 			isValid = false;
 		}
-		if (!EMAIL_REGEX.exec(username)) {
+		if (!EMAIL_REGEX.exec(user.username)) {
 			errorsObj.username = true;
 			isValid = false;
 		}
-		if (!password) {
+		if (!user.password) {
 			errorsObj.password = true;
 			isValid = false;
 		}
-		if (!type) {
+		if (!user.type) {
 			errorsObj.type = true;
 			isValid = false;
 		}
@@ -88,16 +101,36 @@ const NewUser = ({ className, testId, id, onClose }) => {
 		return isValid;
 	};
 
-	const submitForm = e => {
-		e.preventDefault();
-		setIsLoading(true);
-		const name = e.target.idFormNewUserName.value;
-		const username = e.target.idFormNewUserUserName.value;
-		const password = e.target.idFormNewUserPassword.value;
-		const type = e.target.idFormNewUserType.value;
-		const isValid = validateForm(name, username, password, type);
-		console.log('isValid', isValid);
-		setIsLoading(false);
+	const submitForm = async e => {
+		try {
+			console.log('--- submitForm ---');
+			e.preventDefault();
+			setLoading(true);
+			const name = e.target.idFormNewUserName.value;
+			const username = e.target.idFormNewUserUserName.value;
+			const password = e.target.idFormNewUserPassword.value;
+			const type = e.target.idFormNewUserType.value;
+			const user = { name, username, password, type };
+			const isValid = validateForm(user);
+			if (isValid) {
+				const userStored = await newUser(user);
+				if (userStored) {
+					console.log('userStored', userStored);
+					if (onClose) {
+						addSuccessToast(`User ${username} created successfully!`);
+						onSuccess();
+						onClose();
+					}
+				} else {
+					addErrorToast(t(errorMessage));
+					console.log('error service out ', t(errorMessage));
+				}
+			}
+			setLoading(false);
+		} catch (error) {
+			console.log('error submitForm ', error);
+			setLoading(false);
+		}
 	};
 
 	const hasErrors = Object.keys(errors).some(key => errors[key] === true);
@@ -115,7 +148,7 @@ const NewUser = ({ className, testId, id, onClose }) => {
 						defaultValue={fullName}
 						autoComplete='new-password'
 						onChange={handleChange}
-						disabled={isLoading}
+						disabled={loading}
 					/>
 				</FloatingLabel>
 
@@ -129,7 +162,7 @@ const NewUser = ({ className, testId, id, onClose }) => {
 						value={username}
 						autoComplete='new-password'
 						onChange={handleChange}
-						disabled={isLoading}
+						disabled={loading}
 					/>
 					<Form.Control.Feedback type='invalid'>
 						Please provide a valid email.
@@ -146,7 +179,7 @@ const NewUser = ({ className, testId, id, onClose }) => {
 						value={password}
 						autoComplete='new-password'
 						onChange={handleChange}
-						disabled={isLoading}
+						disabled={loading}
 					/>
 				</FloatingLabel>
 
@@ -157,15 +190,15 @@ const NewUser = ({ className, testId, id, onClose }) => {
 						defaultValue={type}
 						name='type'
 						onChange={handleChange}
-						disabled={isLoading}
+						disabled={loading}
 					>
 						<option value={USERS_TYPES.USER}>{USERS_TYPES.USER}</option>
 						<option value={USERS_TYPES.ADMIN}>{USERS_TYPES.ADMIN}</option>
 					</Form.Select>
 				</FloatingLabel>
 
-				{isLoading && <Loader animation='border' variant='primary' />}
-				{!isLoading && (
+				{loading && <Loader animation='border' variant='primary' />}
+				{!loading && (
 					<div className={styles.Footer}>
 						<Button
 							variant='primary'
@@ -173,10 +206,10 @@ const NewUser = ({ className, testId, id, onClose }) => {
 							className='w-100'
 							disabled={hasErrors}
 						>
-							Create
+							{t(texts.Create)}
 						</Button>
 						<Button variant='danger' className='w-100' onClick={onClose}>
-							Cancel
+							{t(texts.Cancel)}
 						</Button>
 					</div>
 				)}
