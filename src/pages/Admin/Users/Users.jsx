@@ -38,16 +38,23 @@ const Users = ({ className, testId, id }) => {
 	const usersClassNames = classnames(styles.Users, className);
 	const { t } = useTranslation();
 	const { users, isLoading } = useUser();
+	const [userIdDelete, setUserIdDelete] = useState();
 	const [dataTable, setDataTable] = useState([]);
+	const { removeUser } = useUser();
 
 	const [user, setUser] = useState(undefined);
 
+	const updateUsersTable = async () => {
+		const usersOut = await users();
+		setDataTable(usersOut);
+	};
+
 	useEffect(() => {
-		const aa = async () => {
+		const retrieveUsers = async () => {
 			const usersOut = await users();
 			setDataTable(usersOut);
 		};
-		aa();
+		retrieveUsers();
 	}, []);
 
 	const {
@@ -71,6 +78,19 @@ const Users = ({ className, testId, id }) => {
 	const handleEditeUser = user => {
 		setUser(user);
 		openEditUser();
+	};
+
+	const handleDeleteUser = id => {
+		openConfirmDeleteUser();
+		setUserIdDelete(id);
+	};
+
+	const onDeleteUser = async () => {
+		const removed = await removeUser(userIdDelete);
+		if (removed) {
+			updateUsersTable();
+			closeConfirmDeleteUser();
+		}
 	};
 
 	return (
@@ -112,7 +132,7 @@ const Users = ({ className, testId, id }) => {
 									</Button>
 									<Button
 										className={styles.ButtonActions}
-										onClick={openConfirmDeleteUser}
+										onClick={() => handleDeleteUser(user.id)}
 									>
 										<MdDeleteForever />
 									</Button>
@@ -129,7 +149,7 @@ const Users = ({ className, testId, id }) => {
 				onHide={closeConfirmDeleteUser}
 				onClose={closeConfirmDeleteUser}
 				onReject={closeConfirmDeleteUser}
-				onAccept={closeConfirmDeleteUser}
+				onAccept={onDeleteUser}
 				header={t(texts.DeleteHeader)}
 			>
 				<span>{t(texts.DeleteMessage)}</span>
@@ -143,7 +163,11 @@ const Users = ({ className, testId, id }) => {
 				onClose={closeEditUser}
 				header={t(texts.EditUser)}
 			>
-				<EditUser data={user} onClose={closeEditUser} />
+				<EditUser
+					data={user}
+					onClose={closeEditUser}
+					onSuccess={updateUsersTable}
+				/>
 			</Modal>
 
 			<Modal
@@ -154,7 +178,11 @@ const Users = ({ className, testId, id }) => {
 				onClose={closeNewUser}
 				header={t(texts.NewUser)}
 			>
-				<NewUser data={user} onClose={closeNewUser} />
+				<NewUser
+					data={user}
+					onClose={closeNewUser}
+					onSuccess={updateUsersTable}
+				/>
 			</Modal>
 		</div>
 	);

@@ -5,12 +5,16 @@
 	"RecoveryForm.Title": "Recuperar contraseña",
 	"LoginForm.Title": "Iniciar sesión",
 	"Errors.401": "Usuario o contraseña incorrectos",
+	"Errors.406": "Insuficientes permisos",
 	"Errors.500": "Error del servidor",
 	"Users.Title": "Usuarios",
-	"ActionModal.AcceptButton": "Aceptar",
+	"ActionModal.AcceptButton": "Acceptar",
 	"ActionModal.RejectButton": "Cancelar",
 	"EditUser.Title": "EDITAR USUARIO",
 	"NewUser.Title": "NUEVO USUARIO",
 	"DeleteHeader": "ELIMINAR USUARIO",
 	"DeleteMessage": "¿Está seguro de que desea eliminar este usuario?",
+	"Create": "Crear",
+	"Accept": "Acceptar",
+	"Cancel": "Cancelar"
 }

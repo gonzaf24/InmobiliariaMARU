@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import styles from './EditUser.module.scss';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import Loader from '../../../components/Loader/Loader';
+import { useTranslation } from 'react-i18next';
+import useToastContext from '../../../context/toastContext';
+import useUser from '../../../hooks/useUser';
 
 export const USERS_TYPES = {
 	USER: 'user',
@@ -22,6 +25,7 @@ const propTypes = {
 		type: PropTypes.string,
 	}),
 	onClose: PropTypes.func,
+	onSuccess: PropTypes.func,
 };
 
 const defaultProps = {
@@ -35,13 +39,22 @@ const defaultProps = {
 		type: USERS_TYPES.USER,
 	},
 	onClose: undefined,
+	onSuccess: undefined,
 };
 
-const EditUser = ({ className, testId, id, data, onClose }) => {
+const texts = {
+	Accept: 'Accept',
+	Cancel: 'Cancel',
+};
+
+const EditUser = ({ className, testId, id, data, onClose, onSuccess }) => {
 	const editUserClassNames = classnames(styles.EditUser, className);
+	const { editUser, errorMessage } = useUser();
+	const { addSuccessToast, addErrorToast } = useToastContext();
 	const [type, setType] = useState(data.type);
 	const [name, setName] = useState(data.name);
-	const [isLoading, setIsLoading] = useState(false);
+	const [loading, setLoading] = useState(false);
+	const { t } = useTranslation();
 	const [errors, setErrors] = useState({
 		name: false,
 		type: false,
@@ -57,17 +70,17 @@ const EditUser = ({ className, testId, id, data, onClose }) => {
 		}
 	};
 
-	const validateForm = (name, type) => {
+	const validateForm = user => {
 		let isValid = true;
 		const errorsObj = {
 			name: false,
 			type: false,
 		};
-		if (!name) {
+		if (!user.name) {
 			errorsObj.name = true;
 			isValid = false;
 		}
-		if (!type) {
+		if (!user.type) {
 			errorsObj.type = true;
 			isValid = false;
 		}
@@ -77,12 +90,27 @@ const EditUser = ({ className, testId, id, data, onClose }) => {
 
 	const submitForm = async e => {
 		e.preventDefault();
-		setIsLoading(true);
+		setLoading(true);
+		const id = e.target.idFormEditId.value;
 		const name = e.target.idFormEditName.value;
 		const type = e.target.idFormType.value;
-		const isValid = validateForm(name, type);
-		console.log('isValid', isValid);
-		setIsLoading(false);
+		const user = { id, name, type };
+		const isValid = validateForm(user);
+		if (isValid) {
+			const userOut = await editUser(user);
+			console.log('userOut', userOut);
+			if (userOut === true) {
+				if (onClose) {
+					addSuccessToast(`User ${name} edited successfully!`);
+					onSuccess();
+					onClose();
+				}
+			} else {
+				addErrorToast(t(userOut));
+				console.log('error service out ', t(errorMessage));
+			}
+		}
+		setLoading(false);
 	};
 
 	const hasErrors = Object.keys(errors).some(key => errors[key] === true);
@@ -110,6 +138,7 @@ const EditUser = ({ className, testId, id, data, onClose }) => {
 						required
 						value={name}
 						onChange={handleChange}
+						disabled={loading}
 					/>
 				</FloatingLabel>
 				<FloatingLabel controlId='idFormType' label='Type'>
@@ -120,13 +149,14 @@ const EditUser = ({ className, testId, id, data, onClose }) => {
 						isInvalid={errors.type}
 						required
 						onChange={handleChange}
+						disabled={loading}
 					>
 						<option value={USERS_TYPES.USER}>{USERS_TYPES.USER}</option>
 						<option value={USERS_TYPES.ADMIN}>{USERS_TYPES.ADMIN}</option>
 					</Form.Select>
 				</FloatingLabel>
-				{isLoading && <Loader animation='border' variant='primary' />}
-				{!isLoading && (
+				{loading && <Loader animation='border' variant='primary' />}
+				{!loading && (
 					<div className={styles.Footer}>
 						<Button
 							variant='primary'
@@ -134,10 +164,10 @@ const EditUser = ({ className, testId, id, data, onClose }) => {
 							className='w-100'
 							disabled={hasErrors}
 						>
-							Accept
+							{t(texts.Accept)}
 						</Button>
 						<Button variant='danger' className='w-100' onClick={onClose}>
-							Cancel
+							{t(texts.Cancel)}
 						</Button>
 					</div>
 				)}
