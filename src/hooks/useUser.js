@@ -31,7 +31,7 @@ export default function useUser() {
 	const login = useCallback(
 		async ({ username, password }) => {
 			setState({ loading: true, error: false });
-			await loginService({ username, password })
+			return await loginService({ username, password })
 				.then(user => {
 					window.sessionStorage.setItem('user', JSON.stringify(user));
 					window.sessionStorage.setItem('jwt', user.token);
@@ -44,6 +44,7 @@ export default function useUser() {
 						errorMessage: null,
 					});
 					navigate('/', { replace: true });
+					return user;
 				})
 				.catch(error => {
 					setState({
@@ -53,10 +54,16 @@ export default function useUser() {
 						errorMessage: error.message,
 					});
 					removeUserSession();
+					return error.message;
 				});
 		},
 		[setJWT]
 	);
+
+	const logout = useCallback(() => {
+		removeUserSession();
+		navigate('/', { replace: true });
+	}, []);
 
 	const users = useCallback(async () => {
 		setState({ loading: true, error: false });
@@ -154,10 +161,6 @@ export default function useUser() {
 				});
 				return false;
 			});
-	}, []);
-
-	const logout = useCallback(() => {
-		removeUserSession();
 	}, []);
 
 	return {

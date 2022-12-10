@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import { USERS_TYPES } from '../EditUser/EditUser';
 import { useTranslation } from 'react-i18next';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import Loader from '../../../components/Loader/Loader';
 import useUser from '../../../hooks/useUser';
 import styles from './NewUser.module.scss';
 import useToastContext from '../../../context/toastContext';
+import { USERS_TYPES } from '../../../utils/constants';
 
 const propTypes = {
 	className: PropTypes.string,

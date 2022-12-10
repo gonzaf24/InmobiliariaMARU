@@ -7,7 +7,7 @@ import styles from './Home.module.scss';
 import { useTranslation } from 'react-i18next';
 import useToastContext from '../../context/toastContext';
 import useUserContext from '../../context/userContext';
-import useUser from '../../hooks/useUser';
+import { LANGUAGES } from '../../utils/constants';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -31,10 +31,9 @@ const Home = ({ className, testId, id }) => {
 	const { t, i18n } = useTranslation();
 	const { addToast } = useToastContext();
 	const { user } = useUserContext();
-	const { logout } = useUser();
 
 	const changeLanguage = () => {
-		const lang = i18n.language === 'en' ? 'es' : 'en';
+		const lang = i18n.language === LANGUAGES.ENGLISH ? LANGUAGES.SPANISH : LANGUAGES.ENGLISH;
 		i18n.changeLanguage(lang);
 	};
 
@@ -85,13 +84,6 @@ const Home = ({ className, testId, id }) => {
 			<span>{`Type:  ${user?.type}`}</span>
 			<br />
 			<span>{`Token:  ${user?.token}`}</span>
-			<br />
-			<br />
-			<br />
-			<Button onClick={logout}>Logout</Button>
-			<br />
-			<br />
-			<br />
 		</div>
 	);
 };

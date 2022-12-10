@@ -8,11 +8,8 @@ import Loader from '../../../components/Loader/Loader';
 import { useTranslation } from 'react-i18next';
 import useToastContext from '../../../context/toastContext';
 import useUser from '../../../hooks/useUser';
-
-export const USERS_TYPES = {
-	USER: 'user',
-	ADMIN: 'admin',
-};
+import { USERS_TYPES } from '../../../utils/constants';
+import useUserContext from '../../../context/userContext/userContext';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -54,11 +51,13 @@ const EditUser = ({ className, testId, id, data, onClose, onSuccess }) => {
 	const [type, setType] = useState(data.type);
 	const [name, setName] = useState(data.name);
 	const [loading, setLoading] = useState(false);
+	const { user } = useUserContext();
 	const { t } = useTranslation();
 	const [errors, setErrors] = useState({
 		name: false,
 		type: false,
 	});
+	const isSameUser = user.id === data.id;
 
 	const handleChange = event => {
 		if (event.target.name === 'name') {
@@ -122,12 +121,7 @@ const EditUser = ({ className, testId, id, data, onClose, onSuccess }) => {
 					<Form.Control type='text' placeholder='' disabled value={data.id} />
 				</FloatingLabel>
 				<FloatingLabel controlId='idFormEditUserName' label='Username'>
-					<Form.Control
-						type='text'
-						placeholder='Username'
-						disabled
-						value={data.username}
-					/>
+					<Form.Control type='text' placeholder='Username' disabled value={data.username} />
 				</FloatingLabel>
 				<FloatingLabel controlId='idFormEditName' label='Name'>
 					<Form.Control
@@ -149,7 +143,7 @@ const EditUser = ({ className, testId, id, data, onClose, onSuccess }) => {
 						isInvalid={errors.type}
 						required
 						onChange={handleChange}
-						disabled={loading}
+						disabled={loading || isSameUser}
 					>
 						<option value={USERS_TYPES.USER}>{USERS_TYPES.USER}</option>
 						<option value={USERS_TYPES.ADMIN}>{USERS_TYPES.ADMIN}</option>
@@ -158,12 +152,7 @@ const EditUser = ({ className, testId, id, data, onClose, onSuccess }) => {
 				{loading && <Loader animation='border' variant='primary' />}
 				{!loading && (
 					<div className={styles.Footer}>
-						<Button
-							variant='primary'
-							type='submit'
-							className='w-100'
-							disabled={hasErrors}
-						>
+						<Button variant='primary' type='submit' className='w-100' disabled={hasErrors}>
 							{t(texts.Accept)}
 						</Button>
 						<Button variant='danger' className='w-100' onClick={onClose}>
