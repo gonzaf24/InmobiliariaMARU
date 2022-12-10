@@ -40,9 +40,13 @@ const NavigationBar = ({ className, testId, id }) => {
 						id={`offcanvasNavbar-expand-${expand}`}
 						aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
 						placement='start'
+						className={styles.Offcanvas}
 					>
 						<Offcanvas.Header closeButton>
-							<Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>Offcanvas mobile menu</Offcanvas.Title>
+							<Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+								<span>Offcanvas mobile menu </span>
+								<Logo className={styles.LogoMobile} />
+							</Offcanvas.Title>
 						</Offcanvas.Header>
 						<Offcanvas.Body>
 							<Nav className='d-flex justify-content-start flex-grow-1'>

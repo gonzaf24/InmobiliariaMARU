@@ -63,17 +63,9 @@ const Users = ({ className, testId, id }) => {
 		close: closeConfirmDeleteUser,
 	} = useOpenToggle(false);
 
-	const {
-		isOpen: isOpenEditUser,
-		open: openEditUser,
-		close: closeEditUser,
-	} = useOpenToggle(false);
+	const { isOpen: isOpenEditUser, open: openEditUser, close: closeEditUser } = useOpenToggle(false);
 
-	const {
-		isOpen: isOpenNewUser,
-		open: openNewUser,
-		close: closeNewUser,
-	} = useOpenToggle(false);
+	const { isOpen: isOpenNewUser, open: openNewUser, close: closeNewUser } = useOpenToggle(false);
 
 	const handleEditeUser = user => {
 		setUser(user);
@@ -95,53 +87,51 @@ const Users = ({ className, testId, id }) => {
 
 	return (
 		<div className={usersClassNames} data-testid={testId} id={id}>
-			<span>{t(texts.Title)}</span>
-			<Button className={styles.NewUserButton} onClick={openNewUser}>
-				<ImUserPlus />
-			</Button>
-			<Table striped bordered hover responsive>
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>Username</th>
-						<th>Name</th>
-						<th>Type</th>
-						<th>Acciones</th>
-					</tr>
-				</thead>
-				<tbody>
-					{isLoading ? (
+			<div className={styles.HeaderWrapper}>
+				<span>{t(texts.Title)}</span>
+				<Button className={styles.NewUserButton} onClick={openNewUser}>
+					<ImUserPlus />
+				</Button>
+			</div>
+			<div>
+				<Table striped bordered hover responsive='sm'>
+					<thead>
 						<tr>
-							<td colSpan='5' className='text-center'>
-								Cargando...
-							</td>
+							<th>#</th>
+							<th>Username</th>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Acciones</th>
 						</tr>
-					) : (
-						dataTable.map((user, index) => (
-							<tr key={index}>
-								<td>{index}</td>
-								<td>{user.username}</td>
-								<td>{user.name}</td>
-								<td>{user.type}</td>
-								<td className={styles.Actions}>
-									<Button
-										className={styles.ButtonActions}
-										onClick={() => handleEditeUser(user)}
-									>
-										<MdEdit />
-									</Button>
-									<Button
-										className={styles.ButtonActions}
-										onClick={() => handleDeleteUser(user.id)}
-									>
-										<MdDeleteForever />
-									</Button>
+					</thead>
+					<tbody>
+						{isLoading ? (
+							<tr>
+								<td colSpan='5' className='text-center'>
+									Cargando...
 								</td>
 							</tr>
-						))
-					)}
-				</tbody>
-			</Table>
+						) : (
+							dataTable.map((user, index) => (
+								<tr key={index}>
+									<td>{index}</td>
+									<td>{user.username}</td>
+									<td>{user.name}</td>
+									<td>{user.type}</td>
+									<td className={styles.Actions}>
+										<Button className={styles.ButtonActions} onClick={() => handleEditeUser(user)}>
+											<MdEdit />
+										</Button>
+										<Button className={styles.ButtonActions} onClick={() => handleDeleteUser(user.id)}>
+											<MdDeleteForever />
+										</Button>
+									</td>
+								</tr>
+							))
+						)}
+					</tbody>
+				</Table>
+			</div>
 
 			<ActionModal
 				id={id}
@@ -163,26 +153,11 @@ const Users = ({ className, testId, id }) => {
 				onClose={closeEditUser}
 				header={t(texts.EditUser)}
 			>
-				<EditUser
-					data={user}
-					onClose={closeEditUser}
-					onSuccess={updateUsersTable}
-				/>
+				<EditUser data={user} onClose={closeEditUser} onSuccess={updateUsersTable} />
 			</Modal>
 
-			<Modal
-				id={id}
-				size='xs'
-				isOpen={isOpenNewUser}
-				onHide={closeNewUser}
-				onClose={closeNewUser}
-				header={t(texts.NewUser)}
-			>
-				<NewUser
-					data={user}
-					onClose={closeNewUser}
-					onSuccess={updateUsersTable}
-				/>
+			<Modal id={id} size='xs' isOpen={isOpenNewUser} onHide={closeNewUser} onClose={closeNewUser} header={t(texts.NewUser)}>
+				<NewUser data={user} onClose={closeNewUser} onSuccess={updateUsersTable} />
 			</Modal>
 		</div>
 	);
