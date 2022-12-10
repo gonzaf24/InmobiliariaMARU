@@ -84,6 +84,41 @@ const Home = ({ className, testId, id }) => {
 			<span>{`Type:  ${user?.type}`}</span>
 			<br />
 			<span>{`Token:  ${user?.token}`}</span>
+			<br />
+			<br />
+			<br />
+			<span>{t(texts.TestText)}</span>
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<span>{t(texts.TestText)}</span>
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<span>{t(texts.TestText)}</span>
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<span>{t(texts.TestText)}</span>
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<span>{t(texts.TestText)}</span>
+			<br />
+			<br />
+			<br />
 		</div>
 	);
 };
