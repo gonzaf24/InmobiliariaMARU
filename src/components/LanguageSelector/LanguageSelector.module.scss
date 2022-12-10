@@ -2,12 +2,28 @@
 
 .LanguageSelector {
 	position: relative;
-	width: 25px;
+	display: flex;
+	align-items: center;
 
-	.Language {
-		width: 25px;
-		height: 25px;
-		cursor: pointer;
+	.LanguageWrapper {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: row;
+
+		.Language {
+			width: 25px;
+			height: 25px;
+			cursor: pointer;
+		}
+
+		.LanguageLabel {
+			color: var(--bs-dark-secondary);
+			text-align: center;
+			transition: all 2s ease-in-out;
+			text-transform: capitalize;
+			font-size: var(--bs-font-small);
+		}
 	}
 
 	.FlagIcon {
@@ -26,17 +42,14 @@
 		justify-content: center;
 		align-items: center;
 		flex-direction: column;
-		gap: 5px;
+		gap: 10px;
 		display: none;
-		transition: all 2s ease-in-out;
 	}
 
 	.ShowFlagWrapper {
 		position: absolute;
 		display: flex;
-		top: 30px;
-		left: 50%;
-		right: 50%;
-		transition: all 2s ease-in-out;
+		top: 40px;
+		left: 2.5px;
 	}
 }

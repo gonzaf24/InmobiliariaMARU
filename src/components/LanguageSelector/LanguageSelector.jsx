@@ -60,8 +60,9 @@ const LanguageSelector = ({ className, testId, id }) => {
 
 	return (
 		<div className={languageSelectorClassNames} data-testid={testId} id={id}>
-			<div onClick={() => setShowFlags(!showFlags)} ref={refLanguage}>
+			<div onClick={() => setShowFlags(!showFlags)} ref={refLanguage} className={styles.LanguageWrapper}>
 				<MdLanguage className={styles.Language} />
+				<span className={styles.LanguageLabel}>{language}</span>
 			</div>
 			<div className={showFlagWrapper} ref={refSowFlags}>
 				<EnFlag className={engClassNames} onClick={() => handleLanguageChange(LANGUAGES.ENGLISH)} />
