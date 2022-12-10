@@ -1,11 +1,22 @@
 @import '/src/styles/mixins.scss';
 
 .Users {
+	padding: 0px 20px 20px 20px;
+	overflow: hidden;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	display: flex;
-	justify-content: center;
-	align-items: center;
 	flex-direction: column;
-	gap: 15px;
+	gap: 25px;
+
+	.HeaderWrapper {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 10px;
+	}
 
 	.NewUserButton {
 		display: flex;

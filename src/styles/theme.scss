@@ -61,13 +61,8 @@
 	--bs-body-color-rgb: 255, 255, 255;
 	--bs-body-bg-rgb: 0, 0, 0;
 	--bs-font-sans-serif: 'Roboto';
-	--bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
-		'Liberation Mono', 'Courier New', monospace;
-	--bs-gradient: linear-gradient(
-		180deg,
-		rgba(255, 255, 255, 0.15),
-		rgba(255, 255, 255, 0)
-	);
+	--bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+	--bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
 	--bs-body-font-family: var(--bs-font-sans-serif);
 	--bs-body-font-size: 1rem;
 	--bs-body-font-weight: 400;
@@ -81,4 +76,5 @@
 	--bs-font-medium: 12pt;
 	--bs-font-large: 14pt;
 	--bs-font-extra-large: 16pt;
+	--bs-offcanvas-width: 300px;
 }
