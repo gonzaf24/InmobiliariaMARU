@@ -53,6 +53,7 @@ const NavigationBar = ({ className, testId, id }) => {
 								<Nav.Link href='/'>Home</Nav.Link>
 								<Nav.Link href='/about'>About</Nav.Link>
 								{isUserAdmin && <Nav.Link href='/users'>Users</Nav.Link>}
+								{isUserAdmin && <Nav.Link href='/images'>Images</Nav.Link>}
 							</Nav>
 							<Nav className={styles.LoginWrapper}>
 								{isLogged && <Nav.Link onClick={logout}>Logout</Nav.Link>}

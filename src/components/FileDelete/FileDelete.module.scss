@@ -1,0 +1,12 @@
+@import '/src/styles/mixins.scss';
+
+.FileDelete {
+	.DeleteButton {
+		display: flex !important;
+		justify-content: center !important;
+		align-items: center !important;
+		border-radius: 100% !important;
+		width: 50px !important;
+		height: 50px !important;
+	}
+}
