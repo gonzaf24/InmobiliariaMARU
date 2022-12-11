@@ -6,10 +6,7 @@ const _URL = dataApi.BASE_URL;
 const _ENDPOINT = 'api/users';
 
 export async function getUsers() {
-	const response = await fetch(
-		`${_URL}${_ENDPOINT}`,
-		customFetch(dataApi.METHOD.GET)
-	);
+	const response = await fetch(`${_URL}${_ENDPOINT}`, customFetch(dataApi.METHOD.GET));
 	if (!response.ok) {
 		const errorMessage = getError(response.status);
 		throw new Error(errorMessage);
@@ -19,10 +16,7 @@ export async function getUsers() {
 }
 
 export async function postUser(user) {
-	const response = await fetch(
-		`${_URL}${_ENDPOINT}`,
-		protectedFetch(dataApi.METHOD.POST, user)
-	);
+	const response = await fetch(`${_URL}${_ENDPOINT}`, protectedFetch(dataApi.METHOD.POST, user));
 	if (!response.ok) {
 		const errorMessage = getError(response.status);
 		throw new Error(errorMessage);
@@ -32,10 +26,7 @@ export async function postUser(user) {
 }
 
 export async function putUser(user) {
-	const response = await fetch(
-		`${_URL}${_ENDPOINT}/${user.id}`,
-		protectedFetch(dataApi.METHOD.PUT, user)
-	);
+	const response = await fetch(`${_URL}${_ENDPOINT}/${user.id}`, protectedFetch(dataApi.METHOD.PUT, user));
 	if (!response.ok) {
 		const errorMessage = getError(response.status);
 		throw new Error(errorMessage);
@@ -45,10 +36,7 @@ export async function putUser(user) {
 }
 
 export async function deleteUser(id) {
-	const response = await fetch(
-		`${_URL}${_ENDPOINT}/${id}`,
-		protectedFetch(dataApi.METHOD.DELETE)
-	);
+	const response = await fetch(`${_URL}${_ENDPOINT}/${id}`, protectedFetch(dataApi.METHOD.DELETE));
 	if (!response.ok) {
 		const errorMessage = getError(response.status);
 		throw new Error(errorMessage);

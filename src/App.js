@@ -1,15 +1,11 @@
 import React, { Suspense } from 'react';
-import './styles/theme.scss';
-import './App.scss';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
-import Home from './pages/Home/Home';
-import About from './pages/About/About';
+import { About, Home, Images, Login, Users } from './pages';
 import { ToastProvider } from './context/toastContext';
 import { UserProvider } from './context/userContext';
-import Login from './pages/Login/Login';
-import Users from './pages/Admin/Users';
 import { NavigationBar } from './components';
+import './styles/theme.scss';
+import './App.scss';
 
 function App() {
 	return (
@@ -22,6 +18,7 @@ function App() {
 							<Route path='/' element={<Home />} />
 							<Route path='/about' element={<About />} />
 							<Route path='/login' element={<Login />} />
+							<Route path='/images' element={<Images />} />
 							<Route path='/users' element={<Users />} />
 						</Routes>
 					</Router>

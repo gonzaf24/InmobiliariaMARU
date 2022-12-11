@@ -25,8 +25,7 @@ const defaultProps = {
 	onSuccess: undefined,
 };
 
-const EMAIL_REGEX =
-	/^[a-z0-9]+(.[_a-z0-9]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,15})$/;
+const EMAIL_REGEX = /^[a-z0-9]+(.[_a-z0-9]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,15})$/;
 
 const texts = {
 	Create: 'Create',
@@ -103,7 +102,6 @@ const NewUser = ({ className, testId, id, onClose, onSuccess }) => {
 
 	const submitForm = async e => {
 		try {
-			console.log('--- submitForm ---');
 			e.preventDefault();
 			setLoading(true);
 			const name = e.target.idFormNewUserName.value;
@@ -115,7 +113,6 @@ const NewUser = ({ className, testId, id, onClose, onSuccess }) => {
 			if (isValid) {
 				const userStored = await newUser(user);
 				if (userStored) {
-					console.log('userStored', userStored);
 					if (onClose) {
 						addSuccessToast(`User ${username} created successfully!`);
 						onSuccess();
@@ -123,12 +120,10 @@ const NewUser = ({ className, testId, id, onClose, onSuccess }) => {
 					}
 				} else {
 					addErrorToast(t(errorMessage));
-					console.log('error service out ', t(errorMessage));
 				}
 			}
 			setLoading(false);
 		} catch (error) {
-			console.log('error submitForm ', error);
 			setLoading(false);
 		}
 	};
@@ -164,9 +159,7 @@ const NewUser = ({ className, testId, id, onClose, onSuccess }) => {
 						onChange={handleChange}
 						disabled={loading}
 					/>
-					<Form.Control.Feedback type='invalid'>
-						Please provide a valid email.
-					</Form.Control.Feedback>
+					<Form.Control.Feedback type='invalid'>Please provide a valid email.</Form.Control.Feedback>
 				</FloatingLabel>
 
 				<FloatingLabel controlId='idFormNewUserPassword' label='Password'>
@@ -200,12 +193,7 @@ const NewUser = ({ className, testId, id, onClose, onSuccess }) => {
 				{loading && <Loader animation='border' variant='primary' />}
 				{!loading && (
 					<div className={styles.Footer}>
-						<Button
-							variant='primary'
-							type='submit'
-							className='w-100'
-							disabled={hasErrors}
-						>
+						<Button variant='primary' type='submit' className='w-100' disabled={hasErrors}>
 							{t(texts.Create)}
 						</Button>
 						<Button variant='danger' className='w-100' onClick={onClose}>
