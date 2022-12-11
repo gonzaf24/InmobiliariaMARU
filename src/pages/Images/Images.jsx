@@ -41,9 +41,10 @@ const Images = ({ className, testId, id }) => {
 			{t(texts.Title)}
 			<FileUpload onSuccesUpload={onSuccesUpload} categoryName='DEFAULT-APP' />
 			{fileUploaded && (
-				<div>
+				<div className={styles.ImagesWrapper}>
 					<img src={fileUploaded} className={styles.Image} />
 					<FileDelete srcImage={fileUploaded} onSuccesDeleted={onSuccesDeleted} />
+					<img src={fileUploaded} className={styles.Image} />
 				</div>
 			)}
 		</div>
