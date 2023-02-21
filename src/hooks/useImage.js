@@ -56,7 +56,7 @@ export default function useImage() {
 	}, []);
 
 	return {
-		isLoginLoadinUpload: state.loading,
+		isLoading: state.loading,
 		hasUploadError: state.error,
 		errorCode: state.errorCode,
 		errorMessage: state.errorMessage,

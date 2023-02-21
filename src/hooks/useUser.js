@@ -2,12 +2,7 @@ import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useUserContext from '../context/userContext/userContext';
 import loginService from '../services/loginService';
-import {
-	getUsers,
-	postUser,
-	putUser,
-	deleteUser,
-} from '../services/userService';
+import { getUsers, postUser, putUser, deleteUser } from '../services/userService';
 
 export default function useUser() {
 	const { jwt, setJWT, setUser, user } = useUserContext();
@@ -31,6 +26,7 @@ export default function useUser() {
 	const login = useCallback(
 		async ({ username, password }) => {
 			setState({ loading: true, error: false });
+			console.log('login', username, password);
 			return await loginService({ username, password })
 				.then(user => {
 					window.sessionStorage.setItem('user', JSON.stringify(user));
@@ -47,6 +43,7 @@ export default function useUser() {
 					return user;
 				})
 				.catch(error => {
+					console.log('login error', error);
 					setState({
 						loading: false,
 						hasError: true,

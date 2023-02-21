@@ -1,0 +1,39 @@
+@import '/src/styles/mixins.scss';
+
+.FileSorteableList {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	.FileInput {
+	}
+
+	.FileList {
+		width: 100%;
+
+		.NewProductPhotosInfoWrapper {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			gap: 15px;
+			font-size: 8pt;
+
+			.NewProductArrows {
+				cursor: pointer;
+			}
+
+			.EditProductArrows {
+				cursor: pointer;
+			}
+		}
+
+		.NewProductDeleteItem {
+			margin-left: 10px;
+			cursor: pointer;
+			width: 20px;
+			height: 20px;
+		}
+	}
+}

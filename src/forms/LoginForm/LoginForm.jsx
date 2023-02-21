@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 import styles from './LoginForm.module.scss';
 import useUser from '../../hooks/useUser';
+import { Loader } from '../../components';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -55,10 +56,13 @@ const LoginForm = ({ className, testId, id }) => {
 					</p>
 				</Form.Group>
 				<span>{t(errorMessage)}</span>
-				<div className='d-grid'>
-					<Button disabled={isLoading} variant='primary' type='submit'>
-						Login
-					</Button>
+				<div className={styles.Wrapper}>
+					{isLoading && <Loader className={styles.Loader} />}
+					{!isLoading && (
+						<Button disabled={isLoading} variant='primary' type='submit'>
+							Login
+						</Button>
+					)}
 				</div>
 			</Form>
 		</div>

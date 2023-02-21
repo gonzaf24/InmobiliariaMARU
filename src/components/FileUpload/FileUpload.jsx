@@ -9,12 +9,12 @@ import styles from './FileUpload.module.scss';
 import Loader from '../Loader';
 
 const propTypes = {
+	onSuccesUpload: PropTypes.func.isRequired,
 	className: PropTypes.string,
 	testId: PropTypes.string,
 	id: PropTypes.string,
 	categoryName: PropTypes.string,
 	disabled: PropTypes.bool,
-	onSuccesUpload: PropTypes.func,
 };
 
 const defaultProps = {
@@ -23,7 +23,6 @@ const defaultProps = {
 	id: undefined,
 	disabled: false,
 	categoryName: '',
-	onSuccesUpload: undefined,
 };
 
 const FileUpload = ({ className, testId, id, disabled, categoryName, onSuccesUpload }) => {

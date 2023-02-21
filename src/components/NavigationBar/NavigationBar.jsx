@@ -2,12 +2,12 @@ import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { Navbar, Container, Nav, Offcanvas } from 'react-bootstrap';
-import { ReactComponent as Logo } from '../../assets/icons/logo.svg';
 import { USERS_TYPES } from '../../utils/constants';
 import useUser from '../../hooks/useUser';
 import UserContext from '../../context/userContext';
 import LanguageSelector from '../LanguageSelector';
 import styles from './NavigationBar.module.scss';
+import {  BlueLogo } from '../../assets/images';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -34,7 +34,7 @@ const NavigationBar = ({ className, testId, id }) => {
 				<Container fluid>
 					<Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} className={styles.ButtonMenu}></Navbar.Toggle>
 					<Navbar.Brand href='/'>
-						<Logo className={styles.Logo} />
+						<img src={BlueLogo} className={styles.Logo} />
 					</Navbar.Brand>
 					<Navbar.Offcanvas
 						id={`offcanvasNavbar-expand-${expand}`}
@@ -44,8 +44,7 @@ const NavigationBar = ({ className, testId, id }) => {
 					>
 						<Offcanvas.Header closeButton>
 							<Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-								<span>Offcanvas mobile menu </span>
-								<Logo className={styles.LogoMobile} />
+								<img src={BlueLogo} className={styles.LogoMobile} /> 
 							</Offcanvas.Title>
 						</Offcanvas.Header>
 						<Offcanvas.Body>
@@ -54,6 +53,7 @@ const NavigationBar = ({ className, testId, id }) => {
 								<Nav.Link href='/about'>About</Nav.Link>
 								{isUserAdmin && <Nav.Link href='/users'>Users</Nav.Link>}
 								{isUserAdmin && <Nav.Link href='/images'>Images</Nav.Link>}
+								{isUserAdmin && <Nav.Link href='/newFlat'>Nuevo Piso</Nav.Link>}
 							</Nav>
 							<Nav className={styles.LoginWrapper}>
 								{isLogged && <Nav.Link onClick={logout}>Logout</Nav.Link>}

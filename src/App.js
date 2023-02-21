@@ -6,6 +6,7 @@ import { UserProvider } from './context/userContext';
 import { NavigationBar } from './components';
 import './styles/theme.scss';
 import './App.scss';
+import NewFlat from './pages/Admin/NewFlat/NewFlat';
 
 function App() {
 	return (
@@ -20,6 +21,7 @@ function App() {
 							<Route path='/login' element={<Login />} />
 							<Route path='/images' element={<Images />} />
 							<Route path='/users' element={<Users />} />
+							<Route path='/newFlat' element={<NewFlat />} />
 						</Routes>
 					</Router>
 				</Suspense>

@@ -15,7 +15,7 @@ const propTypes = {
 	className: PropTypes.string,
 	testId: PropTypes.string,
 	id: PropTypes.string,
-	srcImage: PropTypes.string,
+	src: PropTypes.string,
 	onSuccesDeleted: PropTypes.func,
 };
 
@@ -23,7 +23,7 @@ const defaultProps = {
 	className: '',
 	testId: undefined,
 	id: undefined,
-	srcImage: '',
+	src: '',
 	onSuccesDeleted: undefined,
 };
 
@@ -34,7 +34,7 @@ const texts = {
 	ErrorMessage: 'FileDelete.ErrorMessage',
 };
 
-const FileDelete = ({ className, testId, id, srcImage, onSuccesDeleted }) => {
+const FileDelete = ({ className, testId, id, src, onSuccesDeleted }) => {
 	const fileDeleteClassNames = classnames(styles.FileDelete, className);
 	const { t } = useTranslation();
 	const [isDeleting, setIsDeleting] = useState(false);
@@ -49,9 +49,9 @@ const FileDelete = ({ className, testId, id, srcImage, onSuccesDeleted }) => {
 
 	const onDeleteImage = async () => {
 		try {
-			const result = await deleteImage(formatFileNameToShow(srcImage));
+			const result = await deleteImage(formatFileNameToShow(src));
 			if (result === true) {
-				onSuccesDeleted(srcImage);
+				onSuccesDeleted(src);
 				addSuccessToast(t(texts.SuccessDeleted));
 				closeConfirmDeleteImage();
 			} else {

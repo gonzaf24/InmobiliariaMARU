@@ -9,4 +9,14 @@
 	border: 1px solid gray;
 	padding: 20px;
 	border-radius: var(--bs-radius-medium);
+
+	.Wrapper {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		.Loader {
+			margin: 20px;
+		}
+	}
 }

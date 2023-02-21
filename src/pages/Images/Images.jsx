@@ -28,8 +28,8 @@ const Images = ({ className, testId, id }) => {
 	const { t } = useTranslation();
 	const [fileUploaded, setFileUploaded] = useState();
 
-	const onSuccesUpload = srcImage => {
-		setFileUploaded(srcImage);
+	const onSuccesUpload = src => {
+		setFileUploaded(src);
 	};
 
 	const onSuccesDeleted = () => {
@@ -43,7 +43,7 @@ const Images = ({ className, testId, id }) => {
 			{fileUploaded && (
 				<div className={styles.ImagesWrapper}>
 					<img src={fileUploaded} className={styles.Image} />
-					<FileDelete srcImage={fileUploaded} onSuccesDeleted={onSuccesDeleted} />
+					<FileDelete src={fileUploaded} onSuccesDeleted={onSuccesDeleted} />
 					<img src={fileUploaded} className={styles.Image} />
 				</div>
 			)}
