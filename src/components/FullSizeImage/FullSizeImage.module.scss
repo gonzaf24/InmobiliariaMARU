@@ -1,0 +1,46 @@
+@import '/src/styles/mixins.scss';
+
+.FullSizeImage {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background-color: #00000066;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 2;
+
+	.FullSizeImageOverlay {
+		max-width: 300px;
+		width: 100%;
+		background-color: #ffff;
+		padding: 45px;
+		position: relative;
+		text-align: center;
+		z-index: 3;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.FullSizeImageCloseButton {
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			color: #ec625fcc;
+			cursor: pointer;
+			z-index: 3;
+		}
+
+		.FullSizeImageFullImage {
+			width: inherit;
+			border: 1px solid black;
+			z-index: 3;
+		}
+	}
+}

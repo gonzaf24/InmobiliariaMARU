@@ -10,53 +10,46 @@ export default function useImage() {
 	});
 
 	const uploadImage = useCallback(async formData => {
-		setState({ loading: true, error: false });
-		return await postImg(formData)
-			.then(imageResult => {
-				setState({
-					loading: false,
-					error: false,
-					errorCode: null,
-					errorMessage: null,
-				});
-				return imageResult;
-			})
-			.catch(error => {
-				setState({
-					loading: false,
-					hasError: true,
-					errorCode: null,
-					errorMessage: error.message,
-				});
-				return error.message;
-			});
+		setState(prevState => ({ ...prevState, loading: true }));
+		try {
+			const imageResult = await postImg(formData);
+			setState(prevState => ({
+				...prevState,
+				loading: false,
+				hasError: false,
+				errorMessage: null,
+				errorCode: null,
+			}));
+			return imageResult;
+		} catch (error) {
+			setState(prevState => ({
+				...prevState,
+				loading: false,
+				hasError: true,
+				errorMessage: error.message,
+				errorCode: null,
+			}));
+			return error.message;
+		}
 	}, []);
 
-	const deleteImage = useCallback(async id => {
-		setState({ loading: true, error: false });
-		return await deleteImg(id)
-			.then(isDeleted => {
-				setState({
-					loading: false,
-					error: false,
-					errorCode: null,
-					errorMessage: null,
-				});
+	const deleteImage = useCallback(
+		async id => {
+			setState({ ...state, loading: true });
+			try {
+				const isDeleted = await deleteImg(id);
+				setState({ ...state, loading: false, hasError: false });
 				return isDeleted;
-			})
-			.catch(error => {
-				setState({
-					loading: false,
-					hasError: true,
-					errorCode: null,
-					errorMessage: error.message,
-				});
+			} catch (error) {
+				setState({ ...state, loading: false, hasError: true, errorMessage: error.message });
 				return error.message;
-			});
-	}, []);
+			}
+		},
+		[state]
+	);
 
 	return {
-		isLoginLoadinUpload: state.loading,
+		isLoading: state.loading,
 		hasUploadError: state.error,
 		errorCode: state.errorCode,
 		errorMessage: state.errorMessage,
