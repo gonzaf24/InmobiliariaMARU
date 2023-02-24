@@ -16,6 +16,7 @@ const propTypes = {
 	testId: PropTypes.string,
 	id: PropTypes.string,
 	categoryName: PropTypes.string,
+	useName: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -23,9 +24,10 @@ const defaultProps = {
 	testId: undefined,
 	id: undefined,
 	categoryName: 'INMUEBLE',
+	useName: false,
 };
 
-const FileSorteableList = ({ className, testId, id, categoryName }) => {
+const FileSorteableList = ({ className, testId, id, categoryName , useName}) => {
 	const fileSorteableListClassNames = classnames(styles.FileSorteableList, className);
 	const [files, setFiles] = useState([]);
 	const [showFullSizeImage, setShowFullSizeImage] = useState(false);
@@ -90,7 +92,7 @@ const FileSorteableList = ({ className, testId, id, categoryName }) => {
 					<Form.Control type='text' placeholder='' />
 				</FloatingLabel>
 				<InputGroup.Text id='basic-addon2'>
-					<FileUpload categoryName={categoryName} onSuccesUpload={onSuccesUpload} />
+					<FileUpload categoryName={categoryName} onSuccesUpload={onSuccesUpload} useName={useName} />
 				</InputGroup.Text>
 			</InputGroup>
 			<ListGroup className={styles.FileList}>

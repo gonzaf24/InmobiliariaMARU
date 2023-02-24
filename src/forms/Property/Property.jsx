@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 import styles from './Property.module.scss';
 import { Col, FloatingLabel, Form, InputGroup, Row } from 'react-bootstrap';
-import FileUpload from '../../components/FileUpload';
 import { FileSorteableList } from '../../components';
 
 const propTypes = {
@@ -122,16 +121,6 @@ const Property = ({ className, testId, id }) => {
 							<Form.Control type='text' placeholder='' />
 						</FloatingLabel>
 					</Form.Group>
-					<Form.Group as={Col} md='2' controlId='validationCustomUsername'>
-						<InputGroup className='mb-3'>
-							<FloatingLabel controlId='floatingInputGrid' label='Contrato'>
-								<Form.Control type='text' placeholder='' />
-							</FloatingLabel>
-							<InputGroup.Text id='basic-ads'>
-								<FileUpload></FileUpload>
-							</InputGroup.Text>
-						</InputGroup>
-					</Form.Group>
 					<Form.Group as={Col} md='2' className='mb-3' controlId='validationCustom01'>
 						<FloatingLabel controlId='floatingInputGrid' label='Fecha Contruccion'>
 							<Form.Control type='date' placeholder='' />
@@ -142,17 +131,17 @@ const Property = ({ className, testId, id }) => {
 							<Form.Control type='date' placeholder='' />
 						</FloatingLabel>
 					</Form.Group>
-					<Form.Group as={Col} md='2' className='mb-3' controlId='validationCustom01'>
+					<Form.Group as={Col} md='4' className='mb-3' controlId='validationCustom01'>
 						<FloatingLabel controlId='floatingInputGrid' label='Observaciones'>
 							<Form.Control type='text' placeholder='' />
 						</FloatingLabel>
 					</Form.Group>
 				</Row>
 				<Row className='mb-3'>
-					<FileSorteableList categoryName={'CONTRATO'} />
+					<FileSorteableList categoryName={'CONTRATOS-DOCUMENTOS'} useName/>
 				</Row>
 				<Row className='mb-3'>
-					<FileSorteableList categoryName={'FOTOS'} />
+					<FileSorteableList categoryName={'FOTOS-INMUEBLE'} />
 				</Row>
 			</Form>
 		</div>

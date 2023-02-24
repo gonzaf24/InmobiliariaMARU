@@ -25,34 +25,25 @@ export default function useUser() {
 
 	const login = useCallback(
 		async ({ username, password }) => {
-			setState({ loading: true, error: false });
+			setState({ loading: true, error: null });
 			console.log('login', username, password);
-			return await loginService({ username, password })
-				.then(user => {
-					window.sessionStorage.setItem('user', JSON.stringify(user));
-					window.sessionStorage.setItem('jwt', user.token);
-					setUser(user);
-					setJWT(user.token);
-					setState({
-						loading: false,
-						error: false,
-						errorCode: null,
-						errorMessage: null,
-					});
-					navigate('/', { replace: true });
-					return user;
-				})
-				.catch(error => {
-					console.log('login error', error);
-					setState({
-						loading: false,
-						hasError: true,
-						errorCode: null,
-						errorMessage: error.message,
-					});
-					removeUserSession();
-					return error.message;
+			try {
+				const user = await loginService({ username, password });
+				window.sessionStorage.setItem('user', JSON.stringify(user));
+				window.sessionStorage.setItem('jwt', user.token);
+				setUser(user);
+				setJWT(user.token);
+				navigate('/', { replace: true });
+				return user;
+			} catch (error) {
+				console.log('login error', error);
+				setState({
+					loading: false,
+					error: error.message,
 				});
+				removeUserSession();
+				return error.message;
+			}
 		},
 		[setJWT]
 	);
@@ -63,101 +54,71 @@ export default function useUser() {
 	}, []);
 
 	const users = useCallback(async () => {
-		setState({ loading: true, error: false });
-		return await getUsers()
-			.then(users => {
-				setState({
-					loading: false,
-					error: false,
-					errorCode: null,
-					errorMessage: null,
-				});
-				return users;
-			})
-			.catch(error => {
-				setState({
-					loading: false,
-					hasError: true,
-					errorCode: null,
-					errorMessage: error.message,
-				});
-				return [];
-			});
+		try {
+			setState(prevState => ({ ...prevState, loading: true, hasError: false }));
+			const users = await getUsers();
+			setState(prevState => ({ ...prevState, loading: false }));
+			return users;
+		} catch (error) {
+			setState(prevState => ({
+				...prevState,
+				loading: false,
+				hasError: true,
+				errorMessage: error.message,
+			}));
+			return [];
+		}
 	}, []);
 
 	const newUser = useCallback(async user => {
-		setState({ loading: true, error: false });
-		return await postUser(user)
-			.then(user => {
-				console.log('created user ', user);
-				setState({
-					loading: false,
-					error: false,
-					errorCode: null,
-					errorMessage: null,
-				});
-				return user;
-			})
-			.catch(error => {
-				console.log('created user Errror --- > ', error.message);
-				setState({
-					loading: false,
-					hasError: true,
-					errorCode: null,
-					errorMessage: error.message,
-				});
-				return false;
-			});
+		try {
+			setState(prevState => ({ ...prevState, loading: true, hasError: false }));
+			const newUser = await postUser(user);
+			setState(prevState => ({ ...prevState, loading: false }));
+			return newUser;
+		} catch (error) {
+			console.log('Error creating user: ', error);
+			setState(prevState => ({ ...prevState, loading: false, hasError: true, errorMessage: error.message }));
+			return false;
+		}
 	}, []);
 
 	const editUser = useCallback(async user => {
-		setState({ loading: true, error: false });
-		return await putUser(user)
-			.then(user => {
-				console.log('edited user ', user);
-				setState({
-					loading: false,
-					error: false,
-					errorCode: null,
-					errorMessage: null,
-				});
-				return true;
-			})
-			.catch(error => {
-				console.log('edited user Errror --- > ', error.message);
-				setState({
-					loading: false,
-					hasError: true,
-					errorCode: null,
-					errorMessage: error.message,
-				});
-				return error.message;
-			});
+		try {
+			setState({ loading: true, hasError: false, errorCode: null, errorMessage: null });
+			const editedUser = await putUser(user);
+			console.log('edited user ', editedUser);
+			setState({ loading: false, hasError: false, errorCode: null, errorMessage: null });
+			return true;
+		} catch (error) {
+			console.log('edited user Error --->', error.message);
+			setState({ loading: false, hasError: true, errorCode: null, errorMessage: error.message });
+			return error.message;
+		}
 	}, []);
 
 	const removeUser = useCallback(async id => {
-		setState({ loading: true, error: false });
-		return await deleteUser(id)
-			.then(user => {
-				console.log('deleted user ', user);
-				setState({
-					loading: false,
-					error: false,
-					errorCode: null,
-					errorMessage: null,
-				});
-				return user;
-			})
-			.catch(error => {
-				console.log('deleted user Errror --- > ', error.message);
-				setState({
-					loading: false,
-					hasError: true,
-					errorCode: null,
-					errorMessage: error.message,
-				});
-				return false;
+		try {
+			setState({ loading: true, error: false });
+			const user = await deleteUser(id);
+			console.log('deleted user ', user);
+			setState({
+				loading: false,
+				error: false,
+				errorCode: null,
+				errorMessage: null,
 			});
+			return user;
+		} catch (error) {
+			console.log('deleted user Errror --- > ', error.message);
+			setState({
+				loading: false,
+				hasError: true,
+				errorCode: null,
+				errorMessage: error.message,
+			});
+			return false;
+		}
 	}, []);
 
 	return {
