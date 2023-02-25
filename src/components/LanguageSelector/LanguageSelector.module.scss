@@ -15,12 +15,19 @@
 			width: 25px;
 			height: 25px;
 			cursor: pointer;
+
+			&:hover {
+				fill: var(--bs-white);
+
+				& + .LanguageLabel {
+					color: var(--bs-white);
+				}
+			}
 		}
 
 		.LanguageLabel {
 			color: var(--bs-dark-secondary);
 			text-align: center;
-			transition: all 2s ease-in-out;
 			text-transform: capitalize;
 			font-size: var(--bs-font-small);
 		}

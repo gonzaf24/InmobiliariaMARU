@@ -9,10 +9,7 @@ const defaultState = {
 	addErrorToast: () => {},
 };
 
-const { Context: ToastContext, useContext: useToastContext } = createContext(
-	CONTEXT_NAME,
-	defaultState
-);
+const { Context: ToastContext, useContext: useToastContext } = createContext(CONTEXT_NAME, defaultState);
 
 export default useToastContext;
 export { ToastContext };

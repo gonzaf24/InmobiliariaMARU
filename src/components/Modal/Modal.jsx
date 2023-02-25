@@ -89,9 +89,7 @@ const Modal = ({
 			{children && (
 				<ModalBoostrap.Body className={styles.Body}>
 					{isLoading && (
-						<div className={styles.LoaderContainer}>
 							<Loader className={styles.Loader} />
-						</div>
 					)}
 					{!isLoading && children}
 				</ModalBoostrap.Body>

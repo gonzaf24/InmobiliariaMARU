@@ -7,6 +7,10 @@
 		overflow: auto;
 	}
 
+	[class~='modal-body'] {
+		align-items: center !important;
+	}
+
 	.Header {
 		gap: 25px;
 		display: flex;
@@ -48,8 +52,7 @@
 		align-items: center;
 
 		.Loader {
-			width: 45px;
-			height: 45px;
+			font-size: 4px;
 		}
 	}
 
