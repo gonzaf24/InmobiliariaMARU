@@ -27,29 +27,40 @@ const defaultProps = {
   useName: false,
 };
 
+const MAX_LENGTH_FILE_NAME = 15;
+
 const FileUpload = ({ className, testId, id, disabled, categoryName, onSuccesUpload, useName }) => {
   const fileUploadClassNames = classnames(styles.FileUpload, className);
   const hiddenFileInput = useRef(null);
   const { uploadImage } = useImage();
   const [isUploading, setIsUploading] = useState(false);
 
+
+  const buildFileName = useCallback((fileName, categoryName, useName) => {
+    const ext = fileName.split('.').pop();
+    const nameWithoutSpaces = fileName.split('.').slice(0, -1).join('.').replace(/ /g, "-").slice(0, MAX_LENGTH_FILE_NAME);
+    return useName ? `${categoryName}-${nameWithoutSpaces}.${ext}` : `${categoryName}-${Date.now()}.${ext}`;
+  }, [categoryName, useName]);
+  
   const handleFileInputChange = useCallback(async (e) => {
-	try {
-	  e.preventDefault();
-	  setIsUploading(true);
-	  const file = e.target.files[0];
-	  const ext = file.name.split('.').pop();
-	  const fileName = useName ? `${categoryName}-${file.name}` : `${categoryName}-${Date.now()}.${ext}`;
-	  const formData = new FormData();
-	  formData.append('image', file);
-	  formData.append('fileName', fileName);
-	  const result = await uploadImage(formData);
-	  onSuccesUpload(result.imagePath);
-	} catch (error) {
-	  console.error('Error uploading file: ', error);
-	} finally {
-	  setIsUploading(false);
-	}
+    try {
+      e.preventDefault();
+      setIsUploading(true);
+      const file = e.target.files[0];
+      if (!file) {
+        return;
+      }
+      const fileName = buildFileName(file.name, categoryName, useName);
+      const formData = new FormData();
+      formData.append('image', file);
+      formData.append('fileName', fileName);
+      const result = await uploadImage(formData);
+      onSuccesUpload(result.imagePath);
+    } catch (error) {
+      console.error('Error uploading file: ', error);
+    } finally {
+      setIsUploading(false);
+    }
   }, [categoryName, onSuccesUpload, setIsUploading, uploadImage, useName]);
   
   const handleClick = useCallback(() => {
@@ -71,7 +82,7 @@ const FileUpload = ({ className, testId, id, disabled, categoryName, onSuccesUpl
           <BiImageAdd />
           <input
             ref={hiddenFileInput}
-            accept='image/*'
+            accept="image/*, application/msword, application/pdf"
             id='file-upload'
             style={{ display: 'none' }}
             type='file'

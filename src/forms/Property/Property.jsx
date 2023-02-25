@@ -104,23 +104,9 @@ const Property = ({ className, testId, id }) => {
 					</Form.Group>
 					<Form.Group as={Col} md='2' controlId='validationCustomUsername'>
 						<Form.Check type={'checkbox'} id={`default-checkbox}`} label={`Prop. Horizontal`} />
-						<Form.Check type={'checkbox'} id={`default-checkbox}`} label={`Mortgage Approval Clause`} />
 					</Form.Group>
 				</Row>
 				<Row className='mb-3'>
-					<Form.Group as={Col} md='2' className='mb-3' controlId='validationCustomUsername'>
-						<FloatingLabel controlId='floatingSelect' label='Operacion'>
-							<Form.Select aria-label='Floating label select example'>
-								<option value='1'>Alquiler</option>
-								<option value='2'>Venta</option>
-							</Form.Select>
-						</FloatingLabel>
-					</Form.Group>
-					<Form.Group as={Col} md='2' className='mb-3' controlId='validationCustom01'>
-						<FloatingLabel controlId='floatingInputGrid' label='Precio'>
-							<Form.Control type='text' placeholder='' />
-						</FloatingLabel>
-					</Form.Group>
 					<Form.Group as={Col} md='2' className='mb-3' controlId='validationCustom01'>
 						<FloatingLabel controlId='floatingInputGrid' label='Fecha Contruccion'>
 							<Form.Control type='date' placeholder='' />

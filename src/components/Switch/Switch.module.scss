@@ -1,0 +1,92 @@
+$RadiusActive: 4px;
+$TransitionMaskEffect: 0.25s ease-in-out;
+$TransitionActiveEffect: 0.75s ease-in-out;
+
+.Switch {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	height: 40px;
+	border-radius: var(--bs-radius-medium);
+	position: relative;
+
+	.Mask {
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		background: var(--bs-white-10);
+		transition: $TransitionMaskEffect;
+		pointer-events: none;
+	}
+
+	.Button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+		font-weight: 700;
+		line-height: 14px;
+		font-size: var(--bs-font-medium);
+		border-radius: var(--bs-radius-medium);
+		padding: 0px 20px;
+
+		.Wrapper {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 5px;
+			padding: 5px;
+			white-space: nowrap;
+
+			.Icon {
+				width: 10px;
+				height: 10px;
+				fill: var(--bs-white-40);
+			}
+		}
+	}
+
+	.Active {
+		color: var(--bs-white);
+		background: var(--bs-white-10);
+		transition: $TransitionActiveEffect;
+	}
+
+	.Button.Active {
+		.Icon {
+			fill: var(--bs-white);
+			transition: $TransitionActiveEffect;
+		}
+	}
+
+	.RadiusActive {
+		border-radius: $RadiusActive;
+	}
+
+	.RadiusRightActive {
+		border-top-left-radius: $RadiusActive;
+		border-bottom-left-radius: $RadiusActive;
+		border-bottom-right-radius: 0px;
+	}
+
+	.RadiusLeftActive {
+		border-top-right-radius: $RadiusActive;
+		border-bottom-right-radius: $RadiusActive;
+		border-bottom-left-radius: 0px;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.Switch {
+		flex-direction: column;
+		align-items: center;
+		height: max-content;
+		width: 100%;
+
+		.Button {
+			min-height: 60px;
+		}
+	}
+}

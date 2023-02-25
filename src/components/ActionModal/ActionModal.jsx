@@ -75,6 +75,7 @@ const ActionModal = ({
 							variant='primary'
 							className={styles.AcceptButton}
 							onClick={onAccept}
+							disabled={isLoading}
 						>
 							{t(texts.Accept)}
 						</Button>

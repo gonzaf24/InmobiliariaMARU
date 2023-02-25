@@ -3,7 +3,6 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import styles from './FullSizeImage.module.scss';
-import { useTranslation } from 'react-i18next';
 import { BiX } from 'react-icons/bi';
 
 const propTypes = {
@@ -24,13 +23,9 @@ const defaultProps = {
 	show: false,
 };
 
-const texts = {
-	Title: 'FullSizeImage.Title',
-};
 
 const FullSizeImage = ({ className, testId, id, show, imgSrc, setShowFullSizeImage }) => {
 	const fullSizeImageClassNames = classnames(styles.FullSizeImage, className);
-	const { t } = useTranslation();
 
 	return (
 		show && (
