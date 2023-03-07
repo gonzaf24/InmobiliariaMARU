@@ -1,0 +1,12 @@
+@import '/src/styles/mixins.scss';
+
+.SearchAddressForm {
+	input {
+		width: 100%;
+	}
+
+	[id='-google-places-suggestions-container'] {
+		background-color: white;
+		cursor: pointer;
+	}
+}
