@@ -9,9 +9,10 @@
 	text-overflow: ellipsis;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	gap: 25px;
+	min-height: 100vh;
 
 	.ImagesWrapper {
 		display: flex;
@@ -28,5 +29,11 @@
 			margin-bottom: 20px;
 			max-width: 90vw;
 		}
+	}
+
+	.Container {
+		height: 250px;
+		width: 500px;
+		background-color: rgba(217, 1, 1, 0.571);
 	}
 }

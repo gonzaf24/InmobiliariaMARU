@@ -6,6 +6,7 @@ import styles from './Images.module.scss';
 import { useTranslation } from 'react-i18next';
 import FileUpload from '../../components/FileUpload';
 import FileDelete from '../../components/FileDelete/FileDelete';
+import { SearchAddressForm } from '../../forms';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -47,6 +48,9 @@ const Images = ({ className, testId, id }) => {
 					<img src={fileUploaded} className={styles.Image} />
 				</div>
 			)}
+			<div className={styles.Container}>
+				<SearchAddressForm />
+			</div>
 		</div>
 	);
 };
