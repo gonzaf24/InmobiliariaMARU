@@ -22,6 +22,16 @@
 	"FileDelete.SuccessDeleted": "File deleted successfully",
 	"FileDelete.DeleteHeader": "DELETE FILE",
 	"FileDelete.ErrorMessage": "Error deleting file, try again later ... ",
-	"Images.Title": "Upload and Delete Images"
+	"Images.Title": "Upload and Delete Images",
+	"NewFlat.Title": "Register new flat",
+	"AppNavbar.Home": "Home",
+	"AppNavbar.Rent": "Rent",
+	"AppNavbar.Sale": "Sale",
+	"AppNavbar.About": "About",
+	"AppNavbar.Admin": "Admin",
+	"AppNavbar.Logout": "Logout",
+	"AppNavbar.Login": "Login",
+	"AppNavbar.MyAccount": "My account",
+	"Admin.AdminUsers": "Admin Users",
+	"Admin.RegisterNewFlat": "Register New Flat"
 }
-

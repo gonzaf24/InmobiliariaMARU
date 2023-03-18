@@ -48,7 +48,7 @@ const Home = ({ className, testId, id }) => {
 
 	return (
 		<div className={homeClassNames} data-testid={testId} id={id}>
-			<h1>HOME</h1>
+			<h1>Search Properties</h1>
 			<br />
 			<br />
 			<br />
@@ -72,7 +72,7 @@ const Home = ({ className, testId, id }) => {
 			<br />
 			<br />
 			<br />
-			<span>Moked User context</span>
+			<span>User logged in context  :</span>
 			<br />
 			<br />
 			<span>{`Id:  ${user?.id}`}</span>

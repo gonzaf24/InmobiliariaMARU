@@ -1,12 +1,35 @@
 @import '/src/styles/mixins.scss';
 
 .SearchAddressForm {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+
 	input {
-		width: 100%;
+		width: 100% !important;
 	}
 
 	[id='-google-places-suggestions-container'] {
 		background-color: white;
 		cursor: pointer;
+	}
+
+	[id^='-google-places-autocomplete-suggestion']:hover {
+		background-color: var(--bs-primary-hover) !important;
+	}
+
+	.LatLngWrapper {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 50px;
+	}
+
+	.Address {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 50px;
+		margin-bottom: 10px;
 	}
 }

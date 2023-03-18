@@ -35,9 +35,8 @@ const Switch = ({
   const activeButtonRef = useRef(null);
 
   const handleChange = useCallback(option => () => {
-    if (value !== option.value) {
+    console.log('handleChange', option);
       onChange(option.value);
-    }
   }, [value, onChange]);
 
 

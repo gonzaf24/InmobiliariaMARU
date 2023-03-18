@@ -141,8 +141,8 @@ const AddressForm = ({ className, testId, id }) => {
 	return (
 		<div className={addressFormClassNames} data-testid={testId} id={id}>
 			<Form noValidate onSubmit={handleSubmit}>
-				<Row className='mb-3'>
-					<Form.Group as={Col} md='3' className='mb-3' controlId='validationCustomUsername'>
+				<Row className={styles.Margins}>
+					<Form.Group as={Col} md='3' className={styles.Margins} controlId='validationCustomUsername'>
 						<FloatingLabel controlId='floatingSelect' label='Pais'>
 							<Form.Control as='select' value={paisSeleccionado} onChange={handlePaisSeleccionado}>
 								<option value={DEFUALT_SELECTED}>Seleccione</option>
@@ -154,7 +154,7 @@ const AddressForm = ({ className, testId, id }) => {
 							</Form.Control>
 						</FloatingLabel>
 					</Form.Group>
-					<Form.Group as={Col} md='3' className='mb-3' controlId='validationCustomUsername'>
+					<Form.Group as={Col} md='3' className={styles.Margins} controlId='validationCustomUsername'>
 						<FloatingLabel controlId='floatingSelect' label='Comunidad'>
 							<Form.Control
 								as='select'
@@ -171,7 +171,7 @@ const AddressForm = ({ className, testId, id }) => {
 							</Form.Control>
 						</FloatingLabel>
 					</Form.Group>
-					<Form.Group as={Col} md='2' className='mb-3' controlId='validationCustomUsername'>
+					<Form.Group as={Col} md='2' className={styles.Margins} controlId='validationCustomUsername'>
 						<FloatingLabel controlId='floatingSelect' label='Ciudad'>
 							<Form.Control
 								as='select'
@@ -188,7 +188,7 @@ const AddressForm = ({ className, testId, id }) => {
 							</Form.Control>
 						</FloatingLabel>
 					</Form.Group>
-					<Form.Group as={Col} md='2' className='mb-3' controlId='validationCustomUsername'>
+					<Form.Group as={Col} md='2' className={styles.Margins} controlId='validationCustomUsername'>
 						<FloatingLabel controlId='floatingSelect' label='Barrio'>
 							<Form.Control
 								as='select'
@@ -211,28 +211,28 @@ const AddressForm = ({ className, testId, id }) => {
 						</FloatingLabel>
 					</Form.Group>
 				</Row>
-				<Row className='mb-3'>
-					<Form.Group as={Col} md='3' className='mb-3' controlId='validationCustom01'>
+				<Row className={styles.Margins}>
+					<Form.Group as={Col} md='3' className={styles.Margins} controlId='validationCustom01'>
 						<FloatingLabel controlId='floatingInputGrid' label='Calle'>
 							<Form.Control type='text' placeholder='' value={calle} onChange={handleCalle} />
 						</FloatingLabel>
 					</Form.Group>
-					<Form.Group as={Col} md='3' controlId='validationCustom02'>
+					<Form.Group as={Col} md='3' className={styles.Margins} controlId='validationCustom02'>
 						<FloatingLabel controlId='floatingInputGrid' label='Numero'>
 							<Form.Control type='text' placeholder='' value={numero} onChange={handleNumero} />
 						</FloatingLabel>
 					</Form.Group>
-					<Form.Group as={Col} md='2' controlId='validationCustom02'>
+					<Form.Group as={Col} md='2' className={styles.Margins} controlId='validationCustom02'>
 						<FloatingLabel controlId='floatingInputGrid' label='Piso'>
 							<Form.Control type='text' placeholder='' value={piso} onChange={handlePiso} />
 						</FloatingLabel>
 					</Form.Group>
-					<Form.Group as={Col} md='2' controlId='validationCustom02'>
+					<Form.Group as={Col} md='2' className={styles.Margins} controlId='validationCustom02'>
 						<FloatingLabel controlId='floatingInputGrid' label='Puerta'>
 							<Form.Control type='text' placeholder='' value={puerta} onChange={handlePuerta} />
 						</FloatingLabel>
 					</Form.Group>
-					<Form.Group as={Col} md='2' controlId='validationCustom02'>
+					<Form.Group as={Col} md='2' className={styles.Margins} controlId='validationCustom02'>
 						<FloatingLabel controlId='floatingInputGrid' label='Escalera'>
 							<Form.Control type='text' placeholder='' value={escalera} onChange={handleEscalera} />
 						</FloatingLabel>

@@ -22,5 +22,16 @@
 	"FileDelete.SuccessDeleted": "Archivo eliminado correctamente",
 	"FileDelete.DeleteHeader": "ELIMINAR ARCHIVO",
 	"FileDelete.ErrorMessage": "Error al eliminar el archivo, inténtelo de nuevo más tarde",
-	"Images.Title": "Subir imagenes y eliminarlas"
+	"Images.Title": "Subir imagenes y eliminarlas",
+	"NewFlat.Title": "Registro de piso",
+	"AppNavbar.Home": "Home",
+	"AppNavbar.Rent": "Alquiler",
+	"AppNavbar.Sale": "Venta",
+	"AppNavbar.About": "About",
+	"AppNavbar.Admin": "Admin",
+	"AppNavbar.Logout": "Salir",
+	"AppNavbar.Login": "Login",
+	"AppNavbar.MyAccount": "Mi cuenta",
+	"Admin.AdminUsers": "Administrar usuarios",
+	"Admin.RegisterNewFlat": "Registrar piso nuevo"
 }

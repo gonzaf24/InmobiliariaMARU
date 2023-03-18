@@ -2,7 +2,9 @@ import About from './About';
 import Home from './Home';
 import Images from './Images';
 import Login from './Login';
-import Users from './Admin/Users';
-import GoogleMap from './GoogleMap/GoogleMap';
+import Rent from './Rent';
+import Sale from './Sale';
 
-export { About, Home, Images, Login, Users, GoogleMap };
+export * from './admin';
+
+export { About, Home, Images, Login, Rent, Sale };

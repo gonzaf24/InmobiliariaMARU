@@ -1,0 +1,32 @@
+:global {
+	::-webkit-scrollbar {
+		width: 5px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: #151516;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: #242226;
+		border-radius: 5px;
+	}
+
+	::-webkit-scrollbar:horizontal {
+		height: 5px;
+	}
+
+	::-webkit-scrollbar-thumb:horizontal {
+		background: #242226;
+		border-radius: 5px;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background: #5d5a60;
+		border-radius: 5px;
+	}
+
+	::-webkit-scrollbar-corner {
+		background: #151516;
+	}
+}

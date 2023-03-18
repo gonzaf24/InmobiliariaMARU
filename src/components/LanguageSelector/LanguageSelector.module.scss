@@ -14,12 +14,15 @@
 		.Language {
 			width: 25px;
 			height: 25px;
+			color: var(--bs-dark-secondary);
 			cursor: pointer;
 
 			&:hover {
+				transition: var(--bs-transition);
 				fill: var(--bs-white);
 
 				& + .LanguageLabel {
+					transition: var(--bs-transition);
 					color: var(--bs-white);
 				}
 			}

@@ -37,8 +37,8 @@ const TypeOperationForm=({ className, testId, id }) => {
       id={ id }
     >
       <Form noValidate onSubmit={handleSubmit}>
-        <Row className='mb-3'>
-          <Form.Group as={Col} md='2' className='mb-3' controlId='validationCustomUsername'>
+        <Row className={styles.Margins}>
+          <Form.Group as={Col} md='2' className={styles.Margins} controlId='validationCustomUsername'>
             <FloatingLabel controlId='floatingSelect' label='Operacion'>
               <Form.Select aria-label='Floating label select example'>
                 <option value='1'>Alquiler</option>
@@ -46,7 +46,7 @@ const TypeOperationForm=({ className, testId, id }) => {
               </Form.Select>
           </FloatingLabel>
           </Form.Group>
-          <Form.Group as={Col} md='2' className='mb-3' controlId='validationCustom01'>
+          <Form.Group as={Col} md='2' className={styles.Margins} controlId='validationCustom01'>
               <FloatingLabel controlId='floatingInputGrid' label='Precio'>
                 <Form.Control type='text' placeholder='' />
               </FloatingLabel>
