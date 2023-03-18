@@ -7,9 +7,9 @@ import { formatFileNameToShow } from '../../../utils/formatters';
 import styles from './FileSorteableList.module.scss';
 import { FloatingLabel, Form, InputGroup, ListGroup } from 'react-bootstrap';
 import { BiDownArrowAlt, BiUpArrowAlt } from 'react-icons/bi';
-import FileUpload from '../../FileUpload/FileUpload';
 import FullSizeImage from '../../FullSizeImage/FullSizeImage';
-import FileDelete from '../../FileDelete';
+import FileUpload from '../FileUpload';
+import FileDelete from '../FileDelete';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -33,7 +33,7 @@ const FileSorteableList = ({ className, testId, id, categoryName , useName}) => 
 	const [showFullSizeImage, setShowFullSizeImage] = useState(false);
 	const [imgSrcFullSize, setImgSrcFullSize] = useState();
 
-	const swapDownPhotos = useCallback(
+	const swapDown = useCallback(
 		(files, index) => {
 			const filesAux = [...files];
 			[filesAux[index], filesAux[index + 1]] = [filesAux[index + 1], filesAux[index]];
@@ -42,7 +42,7 @@ const FileSorteableList = ({ className, testId, id, categoryName , useName}) => 
 		[setFiles]
 	);
 
-	const swapUpPhotos = useCallback(
+	const swapUp = useCallback(
 		(files, index) => {
 			const filesAux = [...files];
 			[filesAux[index - 1], filesAux[index]] = [filesAux[index], filesAux[index - 1]];
@@ -55,12 +55,12 @@ const FileSorteableList = ({ className, testId, id, categoryName , useName}) => 
 		(files, index) => event => {
 			event.preventDefault();
 			if (index === files.length - 1) {
-				swapUpPhotos(files, index);
+				swapUp(files, index);
 			} else {
-				swapDownPhotos(files, index);
+				swapDown(files, index);
 			}
 		},
-		[swapDownPhotos, swapUpPhotos]
+		[swapDown, swapUp]
 	);
 
 	const onShowImageFullSize = useCallback(
@@ -87,7 +87,7 @@ const FileSorteableList = ({ className, testId, id, categoryName , useName}) => 
 
 	return (
 		<div className={fileSorteableListClassNames} data-testid={testId} id={id}>
-			<InputGroup className='mb-3'>
+			<InputGroup className={styles.Margins}>
 				<FloatingLabel controlId='floatingInputGrid' label={categoryName}>
 					<Form.Control type='text' placeholder='' />
 				</FloatingLabel>

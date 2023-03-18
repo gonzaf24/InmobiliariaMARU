@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 
 import styles from './Images.module.scss';
 import { useTranslation } from 'react-i18next';
-import FileUpload from '../../components/FileUpload';
-import FileDelete from '../../components/FileDelete/FileDelete';
 import { SearchAddressForm } from '../../forms';
+import { FileDelete, FileUpload } from '../../components';
 
 const propTypes = {
 	className: PropTypes.string,

@@ -33,8 +33,8 @@ const Property = ({ className, testId, id }) => {
 	return (
 		<div className={propertyClassNames} data-testid={testId} id={id}>
 			<Form noValidate onSubmit={handleSubmit}>
-				<Row className='mb-3'>
-					<Form.Group as={Col} md='2' className='mb-3' controlId='validationCustomUsername'>
+				<Row className={styles.Margins}>
+					<Form.Group as={Col} md='2' className={styles.Margins} controlId='validationCustomUsername'>
 						<FloatingLabel controlId='floatingSelect' label='Propiedad'>
 							<Form.Select aria-label='Floating label select example'>
 								<option value='1'>Casa</option>
@@ -44,35 +44,35 @@ const Property = ({ className, testId, id }) => {
 							</Form.Select>
 						</FloatingLabel>
 					</Form.Group>
-					<Form.Group as={Col} md='1' controlId='validationCustomUsername'>
+					<Form.Group as={Col} md='1'  className={styles.Margins} controlId='validationCustomUsername'>
 						<FloatingLabel controlId='floatingInputGrid' label='Habitaciones'>
 							<Form.Control type='text' placeholder='' />
 						</FloatingLabel>
 					</Form.Group>
-					<Form.Group as={Col} md='1' controlId='validationCustomUsername'>
+					<Form.Group as={Col} md='1' className={styles.Margins} controlId='validationCustomUsername'>
 						<FloatingLabel controlId='floatingInputGrid' label='Baños'>
 							<Form.Control type='text' placeholder='' />
 						</FloatingLabel>
 					</Form.Group>
-					<Form.Group as={Col} md='2' controlId='validationCustomUsername'>
-						<InputGroup className='mb-3'>
+					<Form.Group as={Col} md='2' className={styles.Margins} controlId='validationCustomUsername'>
+						<InputGroup className={styles.Margins}>
 							<FloatingLabel controlId='floatingInputGrid' label='Tamaño'>
 								<Form.Control type='text' placeholder='' />
 							</FloatingLabel>
 							<InputGroup.Text id='basic-addon2'>m2</InputGroup.Text>
 						</InputGroup>
 					</Form.Group>
-					<Form.Group as={Col} md='2' controlId='validationCustomUsername'>
+					<Form.Group as={Col} md='2' className={styles.Margins} controlId='validationCustomUsername'>
 						<FloatingLabel controlId='floatingInputGrid' label='Nro. Plantas'>
 							<Form.Control type='number' placeholder='' />
 						</FloatingLabel>
 					</Form.Group>
-					<Form.Group as={Col} md='2' controlId='validationCustomUsername'>
+					<Form.Group as={Col} md='2' className={styles.Margins} controlId='validationCustomUsername'>
 						<FloatingLabel controlId='floatingInputGrid' label='Antiguedad (años)'>
 							<Form.Control type='number' placeholder='' />
 						</FloatingLabel>
 					</Form.Group>
-					<Form.Group as={Col} md='2' className='mb-3' controlId='validationCustom01'>
+					<Form.Group as={Col} md='2' className={styles.Margins} controlId='validationCustom01'>
 						<FloatingLabel controlId='floatingSelect' label='Calefaccion'>
 							<Form.Select aria-label='Floating label select example'>
 								<option value='1'>Central</option>
@@ -81,7 +81,7 @@ const Property = ({ className, testId, id }) => {
 						</FloatingLabel>
 					</Form.Group>
 				</Row>
-				<Row className='mb-3'>
+				<Row className={styles.Margins}>
 					<Form.Group as={Col} md='2' controlId='validationCustomUsername'>
 						<Form.Check type={'checkbox'} id={`default-checkbox}`} label={`Agua`} />
 						<Form.Check type={'checkbox'} id={`default-checkbox}`} label={`Luz`} />
@@ -106,27 +106,27 @@ const Property = ({ className, testId, id }) => {
 						<Form.Check type={'checkbox'} id={`default-checkbox}`} label={`Prop. Horizontal`} />
 					</Form.Group>
 				</Row>
-				<Row className='mb-3'>
-					<Form.Group as={Col} md='2' className='mb-3' controlId='validationCustom01'>
+				<Row className={styles.Margins}>
+					<Form.Group as={Col} md='2' className={styles.Margins} controlId='validationCustom01'>
 						<FloatingLabel controlId='floatingInputGrid' label='Fecha Contruccion'>
 							<Form.Control type='date' placeholder='' />
 						</FloatingLabel>
 					</Form.Group>
-					<Form.Group as={Col} md='2' className='mb-3' controlId='validationCustom01'>
+					<Form.Group as={Col} md='2' className={styles.Margins} controlId='validationCustom01'>
 						<FloatingLabel controlId='floatingInputGrid' label='Fecha ult. renovacion '>
 							<Form.Control type='date' placeholder='' />
 						</FloatingLabel>
 					</Form.Group>
-					<Form.Group as={Col} md='4' className='mb-3' controlId='validationCustom01'>
+					<Form.Group as={Col} md='4' className={styles.Margins} controlId='validationCustom01'>
 						<FloatingLabel controlId='floatingInputGrid' label='Observaciones'>
 							<Form.Control type='text' placeholder='' />
 						</FloatingLabel>
 					</Form.Group>
 				</Row>
-				<Row className='mb-3'>
+				<Row className={styles.Margins}>
 					<FileSorteableList categoryName={'CONTRATOS-DOCUMENTOS'} useName/>
 				</Row>
-				<Row className='mb-3'>
+				<Row className={styles.Margins}>
 					<FileSorteableList categoryName={'FOTOS-INMUEBLE'} />
 				</Row>
 			</Form>

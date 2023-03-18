@@ -7,12 +7,11 @@ import { useTranslation } from 'react-i18next';
 import useUser from '../../../hooks/useUser';
 import { Button, Table } from 'react-bootstrap';
 import useOpenToggle from '../../../hooks/useOpenToggle';
-import ActionModal from '../../../components/ActionModal';
 import { MdDeleteForever, MdEdit } from 'react-icons/md';
 import { ImUserPlus } from 'react-icons/im';
 
-import Modal from '../../../components/Modal';
 import { EditUser, NewUser } from '../../../forms';
+import { ActionModal, Modal } from '../../../components';
 
 const propTypes = {
 	className: PropTypes.string,

@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 
 import styles from './NewFlat.module.scss';
 import { useTranslation } from 'react-i18next';
-import { NewFlatForm } from '../../../forms';
+import { OwnerContactForm, SearchAddressForm } from '../../../forms';
 import AddressForm from '../../../forms/AddressForm/AddressForm';
 import Property from '../../../forms/Property/Property';
 import TypeOperationForm from '../../../forms/TypeOperationForm/TypeOperationForm';
+import { Button } from 'react-bootstrap';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -31,11 +32,20 @@ const NewFlat = ({ className, testId, id }) => {
 
 	return (
 		<div className={newFlatClassNames} data-testid={testId} id={id}>
-			{t(texts.Title)}
+			<span className={styles.Title}>{t(texts.Title)}</span>
 			<TypeOperationForm />
 			<AddressForm />
 			<Property />
-			<NewFlatForm />
+			<SearchAddressForm />
+			<OwnerContactForm />
+			<div className={styles.Footer}>
+				<Button variant="secondary" onClick={()=>{}} className={styles.Button}>
+					Cancelar
+				</Button>
+				<Button variant="primary" type="submit" className={styles.Button}>
+					Crear
+				</Button>
+			</div>
 		</div>
 	);
 };

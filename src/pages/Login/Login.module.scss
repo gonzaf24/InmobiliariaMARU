@@ -3,5 +3,6 @@
 .Login {
 	display: flex;
 	justify-content: center;
-	gap: 35px;
+	align-items: center;
+	height: calc(100vh - var(--bs-navbar-height));
 }

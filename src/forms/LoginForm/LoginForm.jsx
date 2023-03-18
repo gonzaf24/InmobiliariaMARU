@@ -40,15 +40,15 @@ const LoginForm = ({ className, testId, id }) => {
 		<div className={loginFormClassNames} data-testid={testId} id={id}>
 			<span>{t(texts.Title)}</span>
 			<Form onSubmit={submitForm}>
-				<Form.Group className='mb-3' controlId='Email'>
+				<Form.Group className={styles.Margins} controlId='Email'>
 					<Form.Label className='text-center'>Email address</Form.Label>
 					<Form.Control type='text' placeholder='Enter email' required />
 				</Form.Group>
-				<Form.Group className='mb-3' controlId='Password'>
+				<Form.Group className={styles.Margins} controlId='Password'>
 					<Form.Label>Password</Form.Label>
 					<Form.Control type='password' placeholder='Password' required />
 				</Form.Group>
-				<Form.Group className='mb-3' controlId='formBasicCheckbox'>
+				<Form.Group className={styles.Margins} controlId='formBasicCheckbox'>
 					<p className='small'>
 						<a className='text-primary' href='#!'>
 							Forgot password?
