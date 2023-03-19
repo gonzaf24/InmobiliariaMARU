@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import GoogleMapReact from 'google-map-react';
@@ -13,7 +13,7 @@ const propTypes = {
 	id: PropTypes.string,
 	lat: PropTypes.number,
 	lng: PropTypes.number,
-	markerText: PropTypes.string,
+	showExactPosition: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -22,7 +22,7 @@ const defaultProps = {
 	id: undefined,
 	lat: 41.4129159,
 	lng: 2.1865888,
-	markerText: 'ES AQUI',
+	showExactPosition: true,
 };
 
 const mapProps = {
@@ -36,36 +36,55 @@ const mapProps = {
 	},
 };
 
-// eslint-disable-next-line react/prop-types
-const AnyReactComponent = ({ text, radius }) => (
-	<div
-		style={{
-			position: 'absolute',
-			width: `${radius * 2}px`,
-			height: `${radius * 2}px`,
-			left: `${-radius}px`,
-			top: `${-radius}px`,
-			borderRadius: '50%',
-			border: '2px solid red',
-			backgroundColor: 'rgba(255, 0, 0, 0.3)',
-			textAlign: 'center',
-			color: 'black',
-			fontSize: 16,
-			fontWeight: 'bold',
-			padding: 4,
-		}}
-	>
-		{text}
-	</div>
-);
+const POSITION_RADIUS = 0;
+const POSITION_RADIUS_ZONE = 5;
 
-const GoogleMap = ({ className, testId, id, lat, lng, markerText }) => {
-	const [radiusMap, setRadiusMap] = useState(100);
+const GoogleMap = ({ className, testId, id, lat, lng, showExactPosition }) => {
+	const [radiusMap, setRadiusMap] = useState(POSITION_RADIUS);
 
-	const handleMapChange = value => {
-		const calculatedRadius = 5 * value.zoom;
-		setRadiusMap(calculatedRadius);
-	};
+	const defaultValue = useMemo(
+		() => (showExactPosition ? POSITION_RADIUS : POSITION_RADIUS_ZONE),
+		[showExactPosition, radiusMap]
+	);
+
+	const AnyReactComponent = useMemo(() => {
+		// eslint-disable-next-line react/display-name
+		return () => (
+			<div
+				style={{
+					position: 'absolute',
+					width: `${radiusMap * 2}px`,
+					height: `${radiusMap * 2}px`,
+					left: `${-radiusMap}px`,
+					top: `${-radiusMap}px`,
+					borderRadius: '50%',
+					border: '2px solid red',
+					backgroundColor: showExactPosition ? 'red' : 'rgba(255, 0, 0, 0.3)',
+					textAlign: 'center',
+					color: 'black',
+					fontSize: 16,
+					fontWeight: 'bold',
+					padding: 4,
+				}}
+			/>
+		);
+	}, [radiusMap, showExactPosition]);
+
+	const handleMapChange = useCallback(
+		value => {
+			const calculatedRadius = defaultValue * value.zoom;
+			setRadiusMap(calculatedRadius);
+		},
+		[showExactPosition, defaultValue]
+	);
+
+	useEffect(() => {
+		if (showExactPosition) {
+			setRadiusMap(POSITION_RADIUS);
+		} else {
+			setRadiusMap(POSITION_RADIUS_ZONE);
+		}
+	}, [showExactPosition]);
 
 	const defaultCenter = lat && lng ? { lat, lng } : mapProps.center;
 	const googleMapClassNames = classnames(styles.GoogleMap, className);
@@ -80,7 +99,7 @@ const GoogleMap = ({ className, testId, id, lat, lng, markerText }) => {
 				onChange={handleMapChange}
 				options={mapProps.options}
 			>
-				<AnyReactComponent lat={lat} lng={lng} markerText={markerText} radius={radiusMap} />
+				<AnyReactComponent lat={lat} lng={lng} />
 			</GoogleMapReact>
 		</div>
 	);

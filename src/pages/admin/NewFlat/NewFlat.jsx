@@ -4,10 +4,9 @@ import PropTypes from 'prop-types';
 
 import styles from './NewFlat.module.scss';
 import { useTranslation } from 'react-i18next';
-import { OwnerContactForm, SearchAddressForm } from '../../../forms';
+import { OwnerContactForm, SearchAddressForm, TitleDescriptionForm, TypeOperationForm } from '../../../forms';
 import AddressForm from '../../../forms/AddressForm/AddressForm';
 import Property from '../../../forms/Property/Property';
-import TypeOperationForm from '../../../forms/TypeOperationForm/TypeOperationForm';
 import { Button } from 'react-bootstrap';
 
 const propTypes = {
@@ -38,6 +37,7 @@ const NewFlat = ({ className, testId, id }) => {
 			<Property />
 			<SearchAddressForm />
 			<OwnerContactForm />
+			<TitleDescriptionForm />
 			<div className={styles.Footer}>
 				<Button variant='secondary' onClick={() => {}} className={styles.Button}>
 					Cancelar

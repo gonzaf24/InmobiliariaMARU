@@ -28,7 +28,6 @@ const defaultProps = {
 };
 
 const FileSorteableList = ({ className, testId, id, categoryName, useName }) => {
-	const fileSorteableListClassNames = classnames(styles.FileSorteableList, className);
 	const [files, setFiles] = useState([]);
 	const [showFullSizeImage, setShowFullSizeImage] = useState(false);
 	const [imgSrcFullSize, setImgSrcFullSize] = useState();
@@ -85,11 +84,14 @@ const FileSorteableList = ({ className, testId, id, categoryName, useName }) => 
 		[setFiles]
 	);
 
+	const hasFiles = files.length > 0;
+	const fileSorteableListClassNames = classnames(styles.FileSorteableList, { [styles.Border]: hasFiles }, className);
+
 	return (
 		<div className={fileSorteableListClassNames} data-testid={testId} id={id}>
-			<InputGroup className={styles.Margins}>
+			<InputGroup>
 				<FloatingLabel controlId='floatingInputGrid' label={categoryName}>
-					<Form.Control type='text' placeholder='' />
+					<Form.Control type='text' placeholder='' className={styles.Input} />
 				</FloatingLabel>
 				<InputGroup.Text id='basic-addon2'>
 					<FileUpload categoryName={categoryName} onSuccesUpload={onSuccesUpload} useName={useName} />
@@ -111,7 +113,6 @@ const FileSorteableList = ({ className, testId, id, categoryName, useName }) => 
 									{index}
 								</>
 							)}
-
 							<ImImage className={styles.NewProductDeleteItem} onClick={onShowImageFullSize(el)} />
 							<div>{formatFileNameToShow(el)}</div>
 							<FileDelete src={el} onSuccesDeleted={handleSuccesDeleted(el)} className={styles.FileDelete} />

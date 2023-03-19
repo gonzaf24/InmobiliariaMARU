@@ -116,9 +116,9 @@ const Property = ({ className, testId, id }) => {
 							<Form.Control type='date' placeholder='' />
 						</FloatingLabel>
 					</Form.Group>
-					<Form.Group as={Col} md='4' className={styles.Margins} controlId='validationCustom01'>
-						<FloatingLabel controlId='floatingInputGrid' label='Observaciones'>
-							<Form.Control type='text' placeholder='' />
+					<Form.Group as={Col} md='12' className={styles.Margins} controlId='validationCustom01'>
+						<FloatingLabel controlId='floatingInputGrid' label='Observaciones de la propiedad'>
+							<Form.Control as='textarea' placeholder='' className={styles.TextArea} />
 						</FloatingLabel>
 					</Form.Group>
 				</Row>

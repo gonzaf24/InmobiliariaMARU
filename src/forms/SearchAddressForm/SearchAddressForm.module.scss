@@ -4,9 +4,70 @@
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
+	border: 1px solid var(--bs-gray-400);
+	padding: 20px;
+	border-radius: 8px;
+	margin-bottom: 20px;
+
+	.ChecksWrapper {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		gap: 10px;
+		flex-wrap: wrap;
+
+		.Switch {
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			gap: 25px;
+
+			input {
+				width: 50px !important;
+			}
+
+			label {
+				white-space: nowrap;
+				font-size: var(--bs-font-large);
+				font-weight: 700;
+			}
+		}
+
+		.Check {
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			gap: 25px;
+
+			input {
+				border: 1px solid var(--bs-gray-400);
+				width: 20px;
+				height: 20px;
+			}
+
+			label {
+				white-space: nowrap;
+				font-size: var(--bs-font-large);
+				font-weight: 500;
+			}
+		}
+	}
 
 	input {
 		width: 100% !important;
+		border-radius: var(--bs-radius-medium);
+		border: 1px solid var(--bs-gray-400);
+		padding: 5px 10px;
+
+		&:focus {
+			box-shadow: 0 0 0 0.15rem #6340a680;
+			border: 1px solid #b3a1c1;
+			border-radius: var(--bs-radius-medium);
+		}
+
+		&:focus-visible {
+			outline: #b3a1c1;
+		}
 	}
 
 	[id='-google-places-suggestions-container'] {
@@ -23,6 +84,11 @@
 		justify-content: center;
 		align-items: center;
 		gap: 50px;
+
+		.Label {
+			font-size: var(--bs-font-large);
+			font-weight: 700;
+		}
 	}
 
 	.Address {
@@ -30,6 +96,10 @@
 		justify-content: center;
 		align-items: center;
 		gap: 50px;
+		margin-bottom: 30px;
+	}
+
+	.Margins {
 		margin-bottom: 10px;
 	}
 }
