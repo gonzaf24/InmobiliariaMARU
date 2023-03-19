@@ -8,16 +8,10 @@ import { useTranslation } from 'react-i18next';
 import styles from './ActionModal.module.scss';
 
 const propTypes = {
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]),
+	children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 	className: PropTypes.string,
 	dataTestId: PropTypes.string,
-	header: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]),
+	header: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 	id: PropTypes.string,
 	isLoading: PropTypes.bool,
 	isOpen: PropTypes.bool,
@@ -71,21 +65,12 @@ const ActionModal = ({
 			footer={
 				<>
 					{onAccept && (
-						<Button
-							variant='primary'
-							className={styles.AcceptButton}
-							onClick={onAccept}
-							disabled={isLoading}
-						>
+						<Button variant='primary' className={styles.AcceptButton} onClick={onAccept} disabled={isLoading}>
 							{t(texts.Accept)}
 						</Button>
 					)}
 					{onReject && (
-						<Button
-							variant='danger'
-							className={styles.RejectButton}
-							onClick={onReject}
-						>
+						<Button variant='danger' className={styles.RejectButton} onClick={onReject}>
 							{t(texts.Cancel)}
 						</Button>
 					)}

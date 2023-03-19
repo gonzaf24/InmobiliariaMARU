@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { MdDeleteForever } from 'react-icons/md';
@@ -37,7 +37,7 @@ const texts = {
 const FileDelete = ({ className, testId, id, src, onSuccesDeleted }) => {
 	const fileDeleteClassNames = classnames(styles.FileDelete, className);
 	const { t } = useTranslation();
-	const { isLoading , deleteImage } = useImage();
+	const { isLoading, deleteImage } = useImage();
 	const { addSuccessToast, addErrorToast } = useToastContext();
 
 	const {
@@ -57,14 +57,14 @@ const FileDelete = ({ className, testId, id, src, onSuccesDeleted }) => {
 				addErrorToast(t(texts.ErrorMessage));
 			}
 		} catch (error) {
-			addErrorToast("Error al eliminar la imagen");
+			addErrorToast('Error al eliminar la imagen');
 		}
 	};
 
 	return (
 		<div className={fileDeleteClassNames} data-testid={testId} id={id}>
-			{isLoading && <Loader className={styles.Loader} /> }
-			{!isLoading && 	<MdDeleteForever className={styles.DeleteButton} onClick={openConfirmDeleteImage} />}
+			{isLoading && <Loader className={styles.Loader} />}
+			{!isLoading && <MdDeleteForever className={styles.DeleteButton} onClick={openConfirmDeleteImage} />}
 			<ActionModal
 				id={id}
 				isOpen={isOpenConfirmDeleteImage}

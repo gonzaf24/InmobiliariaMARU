@@ -44,7 +44,7 @@ const Property = ({ className, testId, id }) => {
 							</Form.Select>
 						</FloatingLabel>
 					</Form.Group>
-					<Form.Group as={Col} md='1'  className={styles.Margins} controlId='validationCustomUsername'>
+					<Form.Group as={Col} md='1' className={styles.Margins} controlId='validationCustomUsername'>
 						<FloatingLabel controlId='floatingInputGrid' label='Habitaciones'>
 							<Form.Control type='text' placeholder='' />
 						</FloatingLabel>
@@ -124,7 +124,7 @@ const Property = ({ className, testId, id }) => {
 					</Form.Group>
 				</Row>
 				<Row className={styles.Margins}>
-					<FileSorteableList categoryName={'CONTRATOS-DOCUMENTOS'} useName/>
+					<FileSorteableList categoryName={'CONTRATOS-DOCUMENTOS'} useName />
 				</Row>
 				<Row className={styles.Margins}>
 					<FileSorteableList categoryName={'FOTOS-INMUEBLE'} />

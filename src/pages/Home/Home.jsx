@@ -72,7 +72,7 @@ const Home = ({ className, testId, id }) => {
 			<br />
 			<br />
 			<br />
-			<span>User logged in context  :</span>
+			<span>User logged in context :</span>
 			<br />
 			<br />
 			<span>{`Id:  ${user?.id}`}</span>

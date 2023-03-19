@@ -23,7 +23,6 @@ const defaultProps = {
 	show: false,
 };
 
-
 const FullSizeImage = ({ className, testId, id, show, imgSrc, setShowFullSizeImage }) => {
 	const fullSizeImageClassNames = classnames(styles.FullSizeImage, className);
 

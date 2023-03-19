@@ -27,7 +27,7 @@ const defaultProps = {
 	useName: false,
 };
 
-const FileSorteableList = ({ className, testId, id, categoryName , useName}) => {
+const FileSorteableList = ({ className, testId, id, categoryName, useName }) => {
 	const fileSorteableListClassNames = classnames(styles.FileSorteableList, className);
 	const [files, setFiles] = useState([]);
 	const [showFullSizeImage, setShowFullSizeImage] = useState(false);

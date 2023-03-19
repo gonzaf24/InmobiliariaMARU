@@ -39,10 +39,10 @@ const NewFlat = ({ className, testId, id }) => {
 			<SearchAddressForm />
 			<OwnerContactForm />
 			<div className={styles.Footer}>
-				<Button variant="secondary" onClick={()=>{}} className={styles.Button}>
+				<Button variant='secondary' onClick={() => {}} className={styles.Button}>
 					Cancelar
 				</Button>
-				<Button variant="primary" type="submit" className={styles.Button}>
+				<Button variant='primary' type='submit' className={styles.Button}>
 					Crear
 				</Button>
 			</div>

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
@@ -40,10 +40,14 @@ const LanguageSelector = ({ className, testId, id }) => {
 		[styles.ShowFlagWrapper]: showFlags,
 	});
 
-	const handleLanguageChange = language => {
-		i18n.changeLanguage(language);
-		setShowFlags(false);
-	};
+	const handleLanguageChange = useCallback(
+		_language => () => {
+			console.log('handleLanguageChange', _language);
+			i18n.changeLanguage(_language);
+			setShowFlags(false);
+		},
+		[i18n, setShowFlags]
+	);
 
 	const onClickOutside = event => {
 		if (!refSowFlags.current?.contains(event.target) && !refLanguage.current?.contains(event.target)) {
@@ -65,8 +69,8 @@ const LanguageSelector = ({ className, testId, id }) => {
 				<span className={styles.LanguageLabel}>{language}</span>
 			</div>
 			<div className={showFlagWrapper} ref={refSowFlags}>
-				<EnFlag className={engClassNames} onClick={() => handleLanguageChange(LANGUAGES.ENGLISH)} />
-				<EsFlag className={espClassNames} onClick={() => handleLanguageChange(LANGUAGES.SPANISH)} />
+				<EnFlag className={engClassNames} onClick={handleLanguageChange(LANGUAGES.ENGLISH)} />
+				<EsFlag className={espClassNames} onClick={handleLanguageChange(LANGUAGES.SPANISH)} />
 			</div>
 		</div>
 	);

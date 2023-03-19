@@ -6,40 +6,33 @@ import styles from './AppLayout.module.scss';
 import AppNavbar from '../AppNavbar/AppNavbar';
 import { BrowserRouter } from 'react-router-dom';
 
-const propTypes={
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-  testId: PropTypes.string,
-  id: PropTypes.string,
+const propTypes = {
+	children: PropTypes.node.isRequired,
+	className: PropTypes.string,
+	testId: PropTypes.string,
+	id: PropTypes.string,
 };
 
-const defaultProps={
-  className: '',
-  testId: undefined,
-  id: undefined,
+const defaultProps = {
+	className: '',
+	testId: undefined,
+	id: undefined,
 };
 
-const AppLayout=({ className, testId, id ,children}) => {
+const AppLayout = ({ className, testId, id, children }) => {
+	const appLayoutClassNames = classnames(styles.AppLayout, className);
 
-  const appLayoutClassNames = classnames(styles.AppLayout, className);
-
-  return (
-    <div
-      className={ appLayoutClassNames }
-      data-testid={ testId }
-      id={ id }
-    >
-      <BrowserRouter>
-        <AppNavbar />
-        <div className={styles.Container}>
-          {children}
-        </div>
-      </BrowserRouter>
-    </div>
-  );
+	return (
+		<div className={appLayoutClassNames} data-testid={testId} id={id}>
+			<BrowserRouter>
+				<AppNavbar />
+				<div className={styles.Container}>{children}</div>
+			</BrowserRouter>
+		</div>
+	);
 };
 
-AppLayout.propTypes=propTypes;
-AppLayout.defaultProps=defaultProps;
+AppLayout.propTypes = propTypes;
+AppLayout.defaultProps = defaultProps;
 
 export default AppLayout;

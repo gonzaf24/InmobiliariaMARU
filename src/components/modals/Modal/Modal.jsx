@@ -8,20 +8,11 @@ import styles from './Modal.module.scss';
 import Loader from '../../Loader';
 
 const propTypes = {
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]),
+	children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 	className: PropTypes.string,
 	dataTestId: PropTypes.string,
-	footer: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]),
-	header: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]),
+	footer: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+	header: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 	id: PropTypes.string,
 	isLoading: PropTypes.bool,
 	isOpen: PropTypes.bool,
@@ -44,19 +35,7 @@ const defaultProps = {
 	onHide: undefined,
 };
 
-const Modal = ({
-	children,
-	className,
-	dataTestId,
-	id,
-	isOpen,
-	onHide,
-	onClose,
-	footer,
-	isLoading,
-	header,
-	size,
-}) => {
+const Modal = ({ children, className, dataTestId, id, isOpen, onHide, onClose, footer, isLoading, header, size }) => {
 	const modalClassNames = classnames(styles.Modal, className);
 	const headerClassNames = classnames(styles.Header, {
 		[styles.Empty]: !header,
@@ -77,28 +56,16 @@ const Modal = ({
 				<ModalBoostrap.Header className={headerClassNames}>
 					<span />
 					{header}
-					{onClose && (
-						<MdClose
-							className={styles.CloseIcon}
-							onClick={onClose}
-							onKeyPress={onClose}
-						/>
-					)}
+					{onClose && <MdClose className={styles.CloseIcon} onClick={onClose} onKeyPress={onClose} />}
 				</ModalBoostrap.Header>
 			)}
 			{children && (
 				<ModalBoostrap.Body className={styles.Body}>
-					{isLoading && (
-							<Loader className={styles.Loader} />
-					)}
+					{isLoading && <Loader className={styles.Loader} />}
 					{!isLoading && children}
 				</ModalBoostrap.Body>
 			)}
-			{footer && (
-				<ModalBoostrap.Footer className={styles.Footer}>
-					{footer}
-				</ModalBoostrap.Footer>
-			)}
+			{footer && <ModalBoostrap.Footer className={styles.Footer}>{footer}</ModalBoostrap.Footer>}
 		</ModalBoostrap>
 	);
 };

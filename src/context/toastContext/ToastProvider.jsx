@@ -6,10 +6,7 @@ import ToastMessages from '../../containers/ToastMessages';
 import { DEFAULT_CLOSE_TIME_DELAY, TOASTS_TYPES } from '../../utils/constants';
 
 const propTypes = {
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]).isRequired,
+	children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 	containerPosition: PropTypes.string,
 	dataTestId: PropTypes.string,
 };

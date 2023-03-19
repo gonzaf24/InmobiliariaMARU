@@ -1,7 +1,4 @@
-import {
-	createContext as createReactContext,
-	useContext as useReactContext,
-} from 'react';
+import { createContext as createReactContext, useContext as useReactContext } from 'react';
 
 const createContext = (contextName, defaultState, displayName = undefined) => {
 	const Context = createReactContext(defaultState);
@@ -10,9 +7,7 @@ const createContext = (contextName, defaultState, displayName = undefined) => {
 	const useContext = () => {
 		const context = useReactContext(Context);
 		if (context === undefined) {
-			throw new Error(
-				`use${contextName}Context must be used within related ${contextName}Provider`
-			);
+			throw new Error(`use${contextName}Context must be used within related ${contextName}Provider`);
 		}
 		return context;
 	};
