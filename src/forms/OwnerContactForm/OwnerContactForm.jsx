@@ -50,6 +50,11 @@ const OwnerContactForm = ({ className, testId, id }) => {
 							<Form.Control type='text' placeholder='' />
 						</FloatingLabel>
 					</Form.Group>
+					<Form.Group as={Col} md='12' className={styles.Margins} controlId='validationCustom01'>
+						<FloatingLabel controlId='floatingInputGrid' label='Notas propietario'>
+							<Form.Control as='textarea' placeholder='' className={styles.TextArea} />
+						</FloatingLabel>
+					</Form.Group>
 				</Row>
 			</Form>
 		</div>

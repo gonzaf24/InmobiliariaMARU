@@ -33,5 +33,7 @@
 	"AppNavbar.Login": "Login",
 	"AppNavbar.MyAccount": "My account",
 	"Admin.AdminUsers": "Admin Users",
-	"Admin.RegisterNewFlat": "Register New Flat"
+	"Admin.RegisterNewFlat": "Register New Flat",
+	"SearchAddressForm.WithAddress": "Search Address",
+	"SearchAddressForm.WithLatLng": "Search Latitud, Longitude"
 }

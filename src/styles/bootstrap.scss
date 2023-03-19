@@ -606,3 +606,10 @@ $web-font-path: 'https://fonts.googleapis.com/css?family=Lato:300,400,700' !defa
 	background-color: var(--bs-primary);
 	border-color: var(--bs-primary);
 }
+
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus {
+	border-color: #b3a1c1;
+	box-shadow: 0 0 0 0.15rem #6340a680;
+}

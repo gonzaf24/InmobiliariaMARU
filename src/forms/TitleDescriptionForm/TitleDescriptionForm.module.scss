@@ -1,0 +1,11 @@
+@import '/src/styles/mixins.scss';
+
+.TitleDescriptionForm {
+	.Margins {
+		margin-bottom: 20px;
+
+		.TextArea {
+			min-height: 200px;
+		}
+	}
+}
