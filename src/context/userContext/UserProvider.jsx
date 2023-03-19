@@ -4,10 +4,7 @@ import PropTypes from 'prop-types';
 import { UserContext } from './userContext';
 
 const propTypes = {
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]).isRequired,
+	children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
 
 const defaultProps = {};
@@ -29,9 +26,7 @@ const UserProvider = ({ children }) => {
 		[user, setUser, jwt, setJWT]
 	);
 
-	return (
-		<UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
-	);
+	return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>;
 };
 
 UserProvider.propTypes = propTypes;

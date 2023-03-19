@@ -9,10 +9,7 @@ const defaultState = {
 	setUser: () => {},
 };
 
-const { Context: UserContext, useContext: useUserContext } = createContext(
-	CONTEXT_NAME,
-	defaultState
-);
+const { Context: UserContext, useContext: useUserContext } = createContext(CONTEXT_NAME, defaultState);
 
 export default useUserContext;
 export { UserContext };

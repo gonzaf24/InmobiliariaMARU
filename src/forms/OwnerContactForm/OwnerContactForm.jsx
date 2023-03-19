@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import styles from './OwnerContactForm.module.scss';
-import {  Col, FloatingLabel, Form, Row } from 'react-bootstrap';
+import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 
 const propTypes = {
 	className: PropTypes.string,

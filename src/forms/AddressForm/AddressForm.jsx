@@ -129,7 +129,6 @@ const AddressForm = ({ className, testId, id }) => {
 		setEscalera(escalera);
 	}, []);
 
-
 	const handleSubmit = useCallback(event => {
 		console.log('submit', event);
 		event.preventDefault();
@@ -237,7 +236,6 @@ const AddressForm = ({ className, testId, id }) => {
 							<Form.Control type='text' placeholder='' value={escalera} onChange={handleEscalera} />
 						</FloatingLabel>
 					</Form.Group>
-					
 				</Row>
 			</Form>
 		</div>

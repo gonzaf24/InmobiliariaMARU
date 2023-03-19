@@ -44,23 +44,14 @@ const defaultProps = {
 	],
 };
 
-const ToastMessages = ({
-	className,
-	containerPosition,
-	id,
-	toasts,
-	dataTestId,
-}) => {
+const ToastMessages = ({ className, containerPosition, id, toasts, dataTestId }) => {
 	const toastMessagesClassNames = classnames(styles.ToastMessages, className);
 
 	const { removeToast } = useToastContext();
 
 	const renderCloseButton = toastMessage =>
 		!toastMessage.useAutoHide && (
-			<Button
-				className={styles.ButtonClose}
-				onClick={removeToast(toastMessage.id)}
-			>
+			<Button className={styles.ButtonClose} onClick={removeToast(toastMessage.id)}>
 				<MdClose className={styles.CloseIcon} />
 			</Button>
 		);
@@ -81,17 +72,13 @@ const ToastMessages = ({
 		</Toast.Body>
 	);
 
-	const getInfoBody = toastMessage =>
-		renderBody(toastMessage, styles.ToastBodyInfo);
+	const getInfoBody = toastMessage => renderBody(toastMessage, styles.ToastBodyInfo);
 
-	const getSuccessBody = toastMessage =>
-		renderBody(toastMessage, styles.ToastBodySuccess);
+	const getSuccessBody = toastMessage => renderBody(toastMessage, styles.ToastBodySuccess);
 
-	const getWarningBody = toastMessage =>
-		renderBody(toastMessage, styles.ToastBodyWarning);
+	const getWarningBody = toastMessage => renderBody(toastMessage, styles.ToastBodyWarning);
 
-	const getErrorBody = toastMessage =>
-		renderBody(toastMessage, styles.ToastBodyError);
+	const getErrorBody = toastMessage => renderBody(toastMessage, styles.ToastBodyError);
 
 	const getBodyToast = toastMessage => {
 		const getErrorFuncSwitch = {
@@ -101,19 +88,13 @@ const ToastMessages = ({
 			[TOASTS_TYPES.WARNING]: getWarningBody,
 			[TOASTS_TYPES.ERROR]: getErrorBody,
 		};
-		const getErrorFunc =
-			getErrorFuncSwitch[toastMessage.type] || getDefaultBody;
+		const getErrorFunc = getErrorFuncSwitch[toastMessage.type] || getDefaultBody;
 
 		return getErrorFunc(toastMessage);
 	};
 
 	return (
-		<ToastContainer
-			className={toastMessagesClassNames}
-			data-testid={dataTestId}
-			id={id}
-			position={containerPosition}
-		>
+		<ToastContainer className={toastMessagesClassNames} data-testid={dataTestId} id={id} position={containerPosition}>
 			{toasts.map(toastMessage => (
 				<Toast
 					key={toastMessage.id}

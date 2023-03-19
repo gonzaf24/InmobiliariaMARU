@@ -9,29 +9,25 @@ import '../../styles/bootstrap.scss';
 import AppLayout from '../AppLayout';
 import AppRoutes from '../AppRoutes';
 
+const propTypes = {};
 
-const propTypes={
+const defaultProps = {};
+
+const App = () => {
+	return (
+		<UserProvider>
+			<ToastProvider>
+				<Suspense fallback={null}>
+					<AppLayout>
+						<AppRoutes />
+					</AppLayout>
+				</Suspense>
+			</ToastProvider>
+		</UserProvider>
+	);
 };
 
-const defaultProps={
-};
-
-const App=() => {
-
-  return (
-      	<UserProvider>
-          <ToastProvider>
-            <Suspense fallback={null}>
-              <AppLayout>
-                <AppRoutes />
-              </AppLayout>
-            </Suspense>
-          </ToastProvider>
-		    </UserProvider>
-  );
-};
-
-App.propTypes=propTypes;
-App.defaultProps=defaultProps;
+App.propTypes = propTypes;
+App.defaultProps = defaultProps;
 
 export default App;

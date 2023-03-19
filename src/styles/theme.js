@@ -47,9 +47,7 @@ const theme = {
 	light: style.getPropertyValue('--bs-light').trim(),
 	dark: style.getPropertyValue('--bs-dark').trim(),
 	darkSecondary: style.getPropertyValue('--bs-dark-secondary').trim(),
-	darkSecondaryHover: style
-		.getPropertyValue('--bs-dark-secondary-hover')
-		.trim(),
+	darkSecondaryHover: style.getPropertyValue('--bs-dark-secondary-hover').trim(),
 	primaryRgb: style.getPropertyValue('--bs-primary-rgb').trim(),
 	secondaryRgb: style.getPropertyValue('--bs-secondary-rgb').trim(),
 	successRgb: style.getPropertyValue('--bs-success-rgb').trim(),
