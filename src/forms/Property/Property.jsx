@@ -23,7 +23,6 @@ const handleSubmit = event => {
 	if (form.checkValidity() === false) {
 		event.preventDefault();
 		event.stopPropagation();
-		console.log(event);
 	}
 };
 

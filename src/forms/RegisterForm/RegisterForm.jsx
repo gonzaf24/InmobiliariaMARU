@@ -28,7 +28,6 @@ const RegisterForm = ({ className, testId, id }) => {
 
 	const submitForm = e => {
 		e.preventDefault();
-		console.log('submitting form');
 	};
 
 	return (

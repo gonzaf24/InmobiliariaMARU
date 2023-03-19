@@ -26,7 +26,6 @@ export default function useUser() {
 	const login = useCallback(
 		async ({ username, password }) => {
 			setState({ loading: true, error: null });
-			console.log('login', username, password);
 			try {
 				const user = await loginService({ username, password });
 				window.sessionStorage.setItem('user', JSON.stringify(user));
@@ -36,7 +35,6 @@ export default function useUser() {
 				navigate('/', { replace: true });
 				return user;
 			} catch (error) {
-				console.log('login error', error);
 				setState({
 					loading: false,
 					error: error.message,
