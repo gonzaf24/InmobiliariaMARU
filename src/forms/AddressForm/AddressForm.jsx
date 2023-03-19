@@ -130,12 +130,9 @@ const AddressForm = ({ className, testId, id }) => {
 	}, []);
 
 	const handleSubmit = useCallback(event => {
-		console.log('submit', event);
 		event.preventDefault();
 		event.stopPropagation();
 	}, []);
-
-	console.log('regiones : ', regiones);
 
 	return (
 		<div className={addressFormClassNames} data-testid={testId} id={id}>

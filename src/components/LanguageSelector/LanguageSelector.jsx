@@ -42,7 +42,6 @@ const LanguageSelector = ({ className, testId, id }) => {
 
 	const handleLanguageChange = useCallback(
 		_language => () => {
-			console.log('handleLanguageChange', _language);
 			i18n.changeLanguage(_language);
 			setShowFlags(false);
 		},

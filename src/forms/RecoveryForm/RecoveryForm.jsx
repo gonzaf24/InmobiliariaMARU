@@ -28,7 +28,6 @@ const RecoveryForm = ({ className, testId, id }) => {
 
 	const submitForm = e => {
 		e.preventDefault();
-		console.log('submitting form');
 	};
 
 	return (

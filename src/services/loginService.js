@@ -6,8 +6,6 @@ const _URL = dataApi.BASE_URL;
 const _ENDPOINT = 'api/login';
 
 export default async function loginService({ username, password }) {
-	console.log('loginService', `${_URL}${_ENDPOINT}`);
-
 	const response = await fetch(`${_URL}${_ENDPOINT}`, customFetch(dataApi.METHOD.POST, { username, password }));
 	if (!response.ok) {
 		const errorMessage = getError(response.status);

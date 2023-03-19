@@ -35,9 +35,8 @@ const Switch = ({ className, dataTestId, id, onChange, options, value, activeCla
 	const activeButtonRef = useRef(null);
 
 	const handleChange = useCallback(
-		option => () => {
-			console.log('handleChange', option);
-			onChange(option.value);
+		_option => () => {
+			onChange(_option.value);
 		},
 		[value, onChange]
 	);

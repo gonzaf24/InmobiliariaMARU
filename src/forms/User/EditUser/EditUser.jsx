@@ -97,7 +97,6 @@ const EditUser = ({ className, testId, id, data, onClose, onSuccess }) => {
 		const isValid = validateForm(user);
 		if (isValid) {
 			const userOut = await editUser(user);
-			console.log('userOut', userOut);
 			if (userOut === true) {
 				if (onClose) {
 					addSuccessToast(`User ${name} edited successfully!`);
@@ -106,7 +105,7 @@ const EditUser = ({ className, testId, id, data, onClose, onSuccess }) => {
 				}
 			} else {
 				addErrorToast(t(userOut));
-				console.log('error service out ', t(errorMessage));
+				addErrorToast(t(errorMessage));
 			}
 		}
 		setLoading(false);
