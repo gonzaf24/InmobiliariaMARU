@@ -8,10 +8,11 @@ import { useNavigate } from 'react-router-dom';
 import { BlueLogo } from '../../assets/images';
 import { Navbar, Container, Nav, Offcanvas } from 'react-bootstrap';
 
-import styles from './AppNavbar.module.scss';
 import { useTranslation } from 'react-i18next';
 import { USERS_TYPES } from '../../utils/constants';
 import { LanguageSelector, Switch } from '../../components';
+
+import styles from './AppNavbar.module.scss';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -46,44 +47,48 @@ const options = [
 
 const LOGIN_PATH = '/login';
 
+const expand = 'lg';
+
 const AppNavbar = ({ className, testId, id }) => {
 	const { t } = useTranslation();
-	const navigationBarClassNames = classnames(styles.AppNavbar, className);
-	const expand = 'lg';
-
-	/* 	const options = [
-		{ label: t(texts.Home), value: '/' },
-		{ label: t(texts.Rent), value: '/rent' },
-		{ label: t(texts.Sale), value: '/sale' },
-		{ label: t(texts.About), value: '/about' },
-		{ label: t(texts.Admin), value: '/admin', adminOnly: true },
-	]; */
+	const navigate = useNavigate();
 
 	const [currentState, setCurrentState] = useState(options[0].value);
 	const { isLogged, logout } = useUser();
 	const { user } = UserContext();
+	const [showMenu, setShowMenu] = useState(false);
 
 	const isUserAdmin = useMemo(() => user?.type === USERS_TYPES.ADMIN || false, [user]);
-
-	const navigate = useNavigate();
+	const filteredOptions = useMemo(() => options.filter(option => !option.adminOnly || isUserAdmin), [isUserAdmin]);
 
 	const handleLogout = () => {
 		setCurrentState(options[0].value);
 		logout();
 	};
 
-	const filteredOptions = useMemo(() => options.filter(option => !option.adminOnly || isUserAdmin), [isUserAdmin]);
+	const handleCloseMenu = () => {
+		setShowMenu(false);
+	};
 
 	const handleSwitchChange = value => {
 		navigate(value);
 		setCurrentState(value);
+		setTimeout(() => {
+			setShowMenu(false);
+		}, 400);
 	};
+
+	const navigationBarClassNames = classnames(styles.AppNavbar, className);
 
 	return (
 		<div className={navigationBarClassNames} data-testid={testId} id={id}>
-			<Navbar key={expand} bg='light' expand={expand} sticky='top'>
+			<Navbar key={expand} bg='light' expand={expand}>
 				<Container fluid className={styles.Container}>
-					<Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} className={styles.ButtonMenu} />
+					<Navbar.Toggle
+						aria-controls={`offcanvasNavbar-expand-${expand}`}
+						className={styles.ButtonMenu}
+						onClick={() => setShowMenu(true)}
+					/>
 					<Navbar.Brand href='/'>
 						<img src={BlueLogo} className={styles.Logo} alt='logo' />
 					</Navbar.Brand>
@@ -92,6 +97,8 @@ const AppNavbar = ({ className, testId, id }) => {
 						aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
 						placement='start'
 						className={styles.Offcanvas}
+						show={showMenu}
+						onHide={handleCloseMenu}
 					>
 						<Offcanvas.Body>
 							<Nav className={styles.BodyOffcanvas}>

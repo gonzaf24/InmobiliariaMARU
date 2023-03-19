@@ -22,7 +22,7 @@ const About = ({ className, testId, id }) => {
 	return (
 		<div className={aboutClassNames} id={id}>
 			<h1>ABOUT</h1>
-			<span>Text About </span>
+			<span>Under construction </span>
 		</div>
 	);
 };

@@ -1,4 +1,10 @@
 @import '/src/styles/mixins.scss';
 
 .Rent {
+	padding: 50px;
+	overflow: hidden;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	user-select: none;
 }

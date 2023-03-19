@@ -48,7 +48,8 @@ const Home = ({ className, testId, id }) => {
 
 	return (
 		<div className={homeClassNames} data-testid={testId} id={id}>
-			<h1>Search Properties</h1>
+			<h1>Find your home</h1>
+			<span>Under construction </span>
 			<br />
 			<br />
 			<br />

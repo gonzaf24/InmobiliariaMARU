@@ -3,7 +3,6 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import styles from './Rent.module.scss';
-import { useTranslation } from 'react-i18next';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -17,18 +16,13 @@ const defaultProps = {
 	id: undefined,
 };
 
-const texts = {
-	Title: 'Rent.Title',
-};
-
 const Rent = ({ className, testId, id }) => {
 	const rentClassNames = classnames(styles.Rent, className);
-	const { t } = useTranslation();
 
 	return (
 		<div className={rentClassNames} data-testid={testId} id={id}>
-			Rent component
-			{t(texts.Title)}
+			<h1>RENT</h1>
+			<span>Under construction </span>
 		</div>
 	);
 };
