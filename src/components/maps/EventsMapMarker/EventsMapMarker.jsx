@@ -24,11 +24,12 @@ const defaultProps = {
 
 const EventsMapMarker = ({ className, testId, id, hover, text, link }) => {
 	const eventsMapMarkerClassNames = classnames(styles.EventsMapMarker, className, { [styles.Hovered]: hover });
-	console.log('link', link);
+
 	return (
 		<div className={eventsMapMarkerClassNames} data-testid={testId} id={id}>
 			<div>{text}</div>
 			<div className={styles.Overlay}>
+				<div className={styles.Triangle} />
 				<span>{`Home - ${text}`}</span>
 				<a rel='noreferrer' href={link} target={'_blank'}>
 					view rental

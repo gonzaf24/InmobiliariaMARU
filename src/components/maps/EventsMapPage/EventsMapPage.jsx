@@ -4,6 +4,8 @@ import GoogleMap from 'google-map-react';
 import classNames from 'classnames';
 import styles from './EventsMapPage.module.scss';
 import EventsMapMarker from '../EventsMapMarker/EventsMapMarker';
+import useOpenToggle from '../../../hooks/useOpenToggle';
+import { CloseButton } from 'react-bootstrap';
 const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 const propTypes = {
@@ -34,6 +36,9 @@ const EventsMapPage = ({ className, center: centerProp, zoom: zoomProp, greatPla
 	const [center, setCenter] = useState(centerProp);
 	const [zoom, setZoom] = useState(zoomProp);
 	const [hoverKey, setHoverKey] = useState(null);
+	const [selectedPlace, setSelectedPlace] = useState(defaultProps.greatPlaces[0]);
+
+	const { isOpen: isOpenMarkerInfo, open: openMarkerInfo, close: closeMarkerIndo } = useOpenToggle(false);
 
 	const onBoundsChange = useCallback((newCenter, newZoom) => {
 		console.log('onBoundsChange', newCenter, newZoom);
@@ -44,6 +49,8 @@ const EventsMapPage = ({ className, center: centerProp, zoom: zoomProp, greatPla
 	const onChildClick = useCallback((key, childProps) => {
 		console.log('onChildClick', key, childProps);
 		setCenter([childProps.lat, childProps.lng]);
+		setSelectedPlace(childProps);
+		openMarkerInfo();
 	}, []);
 
 	const onChildMouseEnter = useCallback(key => {
@@ -55,6 +62,8 @@ const EventsMapPage = ({ className, center: centerProp, zoom: zoomProp, greatPla
 		console.log('onChildMouseLeave');
 		setHoverKey(null);
 	}, []);
+
+	console.log('selectedPlace', selectedPlace);
 
 	const places = useMemo(
 		() =>
@@ -75,7 +84,9 @@ const EventsMapPage = ({ className, center: centerProp, zoom: zoomProp, greatPla
 		[greatPlaces, hoverKey]
 	);
 
+	const markerInfoClassNames = classNames(styles.MarkerInfo, { [styles.Open]: isOpenMarkerInfo });
 	const googleMapClassNames = classNames(styles.EventsMapPage, className);
+
 	return (
 		<div className={googleMapClassNames}>
 			<GoogleMap
@@ -91,6 +102,13 @@ const EventsMapPage = ({ className, center: centerProp, zoom: zoomProp, greatPla
 			>
 				{places}
 			</GoogleMap>
+			<div className={markerInfoClassNames}>
+				<CloseButton onClick={closeMarkerIndo} />
+				<span>{`Home ${selectedPlace.text}`}</span>
+				<a href={selectedPlace.link} target={'_blank'} rel='noreferrer'>
+					aqui el link
+				</a>
+			</div>
 		</div>
 	);
 };
