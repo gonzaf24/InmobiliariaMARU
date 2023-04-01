@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import GoogleMap from 'google-map-react';
 import classNames from 'classnames';
 import styles from './EventsMapPage.module.scss';
-import { K_SIZE } from './aux.js';
-import MyGreatPlaceWithControllableHover from './MyGreatPlaceWithControllableHover';
+import EventsMapMarker from '../EventsMapMarker/EventsMapMarker';
 const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 const propTypes = {
@@ -23,8 +22,8 @@ const defaultProps = {
 	center: [41.3873974, 2.168568],
 	zoom: 13,
 	greatPlaces: [
-		{ id: 'Home A', lat: 41.4129159, lng: 2.1865888 },
-		{ id: 'Home B', lat: 41.4074918, lng: 2.1872825 },
+		{ id: 'A', lat: 41.4129159, lng: 2.1865888, link: 'https://www.idealista.com/en/inmueble/100999676/' },
+		{ id: 'B', lat: 41.4074918, lng: 2.1872825, link: 'https://www.idealista.com/en/inmueble/100999586/' },
 	],
 	options: {
 		maxZoom: 16,
@@ -60,13 +59,14 @@ const EventsMapPage = ({ className, center: centerProp, zoom: zoomProp, greatPla
 	const places = useMemo(
 		() =>
 			greatPlaces.map(place => {
-				const { id, ...coords } = place;
-
+				const { id, link, ...coords } = place;
+				console.log('coords', coords);
 				return (
-					<MyGreatPlaceWithControllableHover
+					<EventsMapMarker
 						key={id}
 						{...coords}
 						text={id}
+						link={link}
 						// use your hover state (from store, react-controllables etc...)
 						hover={hoverKey === id}
 					/>
@@ -82,7 +82,7 @@ const EventsMapPage = ({ className, center: centerProp, zoom: zoomProp, greatPla
 				apiKey={API_KEY}
 				center={center}
 				zoom={zoom}
-				hoverDistance={K_SIZE / 2}
+				hoverDistance={40 / 2}
 				onBoundsChange={onBoundsChange}
 				onChildClick={onChildClick}
 				onChildMouseEnter={onChildMouseEnter}

@@ -52,7 +52,12 @@ const Home = ({ className, testId, id }) => {
 		<div className={homeClassNames} data-testid={testId} id={id}>
 			{/* <HomeMap /> */}
 			<EventsMapPage />
-
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
 			<h1>Find your home</h1>
 			<span>Under construction </span>
 			<br />
