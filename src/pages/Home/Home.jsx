@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import useToastContext from '../../context/toastContext';
 import useUserContext from '../../context/userContext';
 import { LANGUAGES } from '../../utils/constants';
+import { HomeMap } from '../../components/maps';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -48,6 +49,9 @@ const Home = ({ className, testId, id }) => {
 
 	return (
 		<div className={homeClassNames} data-testid={testId} id={id}>
+
+			<HomeMap />
+
 			<h1>Find your home</h1>
 			<span>Under construction </span>
 			<br />
