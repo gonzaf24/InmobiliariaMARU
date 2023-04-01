@@ -2,12 +2,12 @@
 $K_SIZE: 40px;
 
 .EventsMapMarker {
-	position: absolute;
+	position: relative;
 	width: $K_SIZE;
 	height: $K_SIZE;
 	left: -$K_SIZE / 2;
 	top: -$K_SIZE / 2;
-	border: 5px solid #f44336;
+	border: 5px solid green;
 	border-radius: $K_SIZE;
 	background-color: white;
 	text-align: center;
@@ -35,9 +35,20 @@ $K_SIZE: 40px;
 		border-radius: 8px;
 		border: 1px solid black;
 		z-index: 2;
+		pointer-events: none;
 
 		&:hover {
 			opacity: 1 !important;
+		}
+
+		.Triangle {
+			position: absolute;
+			left: -15px;
+			top: 10px;
+			rotate: 270deg;
+			border-left: 10px solid transparent;
+			border-right: 10px solid transparent;
+			border-bottom: 10px solid;
 		}
 	}
 
@@ -47,6 +58,25 @@ $K_SIZE: 40px;
 
 		.Overlay {
 			opacity: 1;
+			pointer-events: initial;
+		}
+	}
+}
+
+.Modal {
+	[class~='modal-dialog'] {
+		position: absolute;
+		width: 100%;
+		max-width: 100%;
+		height: 157px;
+		right: 0px;
+		bottom: 0px;
+
+		[class~='modal-content'] {
+			position: absolute;
+			bottom: 80px;
+			right: 50px;
+			width: 447px;
 		}
 	}
 }

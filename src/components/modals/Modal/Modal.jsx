@@ -19,6 +19,7 @@ const propTypes = {
 	size: PropTypes.string,
 	onClose: PropTypes.func,
 	onHide: PropTypes.func,
+	backdrop: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['static'])]),
 };
 
 const defaultProps = {
@@ -33,9 +34,23 @@ const defaultProps = {
 	size: 'md',
 	onClose: undefined,
 	onHide: undefined,
+	backdrop: true,
 };
 
-const Modal = ({ children, className, dataTestId, id, isOpen, onHide, onClose, footer, isLoading, header, size }) => {
+const Modal = ({
+	children,
+	className,
+	dataTestId,
+	id,
+	isOpen,
+	onHide,
+	onClose,
+	footer,
+	isLoading,
+	header,
+	size,
+	backdrop,
+}) => {
 	const modalClassNames = classnames(styles.Modal, className);
 	const headerClassNames = classnames(styles.Header, {
 		[styles.Empty]: !header,
@@ -51,6 +66,7 @@ const Modal = ({ children, className, dataTestId, id, isOpen, onHide, onClose, f
 			show={isOpen}
 			size={size}
 			onHide={onHide}
+			backdrop={backdrop}
 		>
 			{(header || onClose) && (
 				<ModalBoostrap.Header className={headerClassNames}>
