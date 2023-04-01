@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import GoogleMapReact, { Marker } from 'google-map-react';
+import GoogleMapReact from 'google-map-react';
+import HomeMarker from '../HomeMarker/HomeMarker';
 
 import styles from './HomeMap.module.scss';
 
@@ -15,7 +16,6 @@ const propTypes = {
 	lng: PropTypes.number,
 	showExactPosition: PropTypes.bool,
 };
-
 
 const defaultProps = {
 	className: '',
@@ -37,95 +37,74 @@ const mapProps = {
 	},
 };
 
-
+function createMapOptions(maps) {
+	// next props are exposed at maps
+	// "Animation", "ControlPosition", "MapTypeControlStyle", "MapTypeId",
+	// "NavigationControlStyle", "ScaleControlStyle", "StrokePosition", "SymbolPath", "ZoomControlStyle",
+	// "DirectionsStatus", "DirectionsTravelMode", "DirectionsUnitSystem", "DistanceMatrixStatus",
+	// "DistanceMatrixElementStatus", "ElevationStatus", "GeocoderLocationType", "GeocoderStatus", "KmlLayerStatus",
+	// "MaxZoomStatus", "StreetViewStatus", "TransitMode", "TransitRoutePreference", "TravelMode", "UnitSystem"
+	return {
+		zoomControlOptions: {
+			position: maps.ControlPosition.RIGHT_CENTER,
+			style: maps.ZoomControlStyle.SMALL,
+		},
+		mapTypeControlOptions: {
+			position: maps.ControlPosition.TOP_RIGHT,
+		},
+		mapTypeControl: true,
+	};
+}
 
 const POSITION_RADIUS_EXACT = 0;
 const POSITION_RADIUS_ZONE = 5;
 
-
-const HomeMap= ({ className, testId, id, lat, lng, showExactPosition }) => {
+const HomeMap = ({ className, testId, id, lat, lng, showExactPosition }) => {
 	const [radiusMap, setRadiusMap] = useState(POSITION_RADIUS_EXACT);
 
-	const AnyReactComponent = useMemo(() => {
-		// eslint-disable-next-line react/display-name
-		return () => (
-			<div
-				style={{
-					position: 'absolute',
-					width: `${radiusMap * 2}px`,
-					height: `${radiusMap * 2}px`,
-					left: `${-radiusMap}px`,
-					top: `${-radiusMap}px`,
-					borderRadius: '50%',
-					border: '2px solid red',
-					backgroundColor: showExactPosition ? 'red' : 'rgba(255, 0, 0, 0.3)',
-					textAlign: 'center',
-					color: 'black',
-					fontSize: 16,
-					fontWeight: 'bold',
-					padding: 4,
-				}}
-			/>
-		);
-	}, [radiusMap, showExactPosition, lat, lng]);
+	const radiusValue = useMemo(
+		() => (showExactPosition ? POSITION_RADIUS_EXACT : POSITION_RADIUS_ZONE),
+		[showExactPosition, radiusMap]
+	);
 
-  const radiusValue = useMemo(
-    () => (showExactPosition ? POSITION_RADIUS_EXACT : POSITION_RADIUS_ZONE),
-    [showExactPosition, radiusMap]
-  );
-  
-  const handleMapChange = useCallback(
-    value => {
-      const calculatedRadius = radiusValue * value.zoom;
-      setRadiusMap(calculatedRadius);
-    },
-    [showExactPosition, radiusValue]
-  );
-  
-  useEffect(() => {
-    if (showExactPosition) {
-      setRadiusMap(POSITION_RADIUS_EXACT);
-    } else {
-      setRadiusMap(POSITION_RADIUS_ZONE);
-    }
-  }, [showExactPosition]);
+	const handleMapChange = useCallback(
+		value => {
+			const calculatedRadius = radiusValue * value.zoom;
+			setRadiusMap(calculatedRadius);
+		},
+		[showExactPosition, radiusValue]
+	);
+
+	useEffect(() => {
+		if (showExactPosition) {
+			setRadiusMap(POSITION_RADIUS_EXACT);
+		} else {
+			setRadiusMap(POSITION_RADIUS_ZONE);
+		}
+	}, [showExactPosition]);
 
 	const defaultCenter = lat && lng ? { lat, lng } : mapProps.center;
 
-  const homeMapClassNames = classnames(styles.HomeMap, className);
+	const homeMapClassNames = classnames(styles.HomeMap, className);
 
-  return (
-    <div
-      className={ homeMapClassNames }
-      data-testid={ testId }
-      id={ id }
-    >
-      <GoogleMapReact
+	return (
+		<div className={homeMapClassNames} data-testid={testId} id={id}>
+			<GoogleMapReact
 				bootstrapURLKeys={{ key: API_KEY }}
 				defaultCenter={defaultCenter}
 				defaultZoom={mapProps.zoom}
 				center={{ lat, lng }}
 				onChange={handleMapChange}
-				options={mapProps.options}
+				/* options={mapProps.options} */
+				options={createMapOptions}
 			>
-        <Marker
-						lat={lat}
-						lng={lng}
-						draggable={false}
-						icon={{
-							url: showExactPosition ? 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png' : 'https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png',
-							scaledSize: new window.google.maps.Size(50, 50),
-							anchor: new window.google.maps.Point(25, 25),
-						}}
-					/>
-{/* 				<AnyReactComponent lat={lat} lng={lng} />
- */}        <AnyReactComponent lat={41.4074918} lng={2.1872825} />
+				<HomeMarker lat={lat} lng={lng} />
 			</GoogleMapReact>
-    </div>
-  );
+		</div>
+	);
 };
 
-HomeMap.propTypes=propTypes;
-HomeMap.defaultProps=defaultProps;
+HomeMap.propTypes = propTypes;
+HomeMap.defaultProps = defaultProps;
 
 export default HomeMap;
