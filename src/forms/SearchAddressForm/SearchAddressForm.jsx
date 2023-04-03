@@ -1,12 +1,13 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import Geocode from 'react-geocode';
 import styles from './SearchAddressForm.module.scss';
 import classNames from 'classnames';
-import { GoogleMap } from '../../components';
-import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { GoogleMap } from '../../components';
+import { InputCheckbox, InputNumber } from '../../components/inputs';
 
 const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 Geocode.setApiKey(API_KEY);
@@ -15,12 +16,36 @@ const propTypes = {
 	className: PropTypes.string,
 	testId: PropTypes.string,
 	id: PropTypes.string,
+	address: PropTypes.string,
+	onAddressChange: PropTypes.func,
+	lat: PropTypes.number,
+	onLatChange: PropTypes.func,
+	lng: PropTypes.number,
+	onLngChange: PropTypes.func,
+	isAddress: PropTypes.bool,
+	onIsAddressChange: PropTypes.func,
+	exactPosition: PropTypes.bool,
+	onExactPostionChange: PropTypes.func,
+	showInMap: PropTypes.bool,
+	onShowOnMapChange: PropTypes.func,
 };
 
 const defaultProps = {
 	className: '',
 	testId: undefined,
 	id: undefined,
+	address: '',
+	onAddressChange: () => {},
+	lat: undefined,
+	onLatChange: () => {},
+	lng: undefined,
+	onLngChange: () => {},
+	isAddress: true,
+	onIsAddressChange: () => {},
+	exactPosition: false,
+	onExactPostionChange: () => {},
+	showInMap: true,
+	onShowOnMapChange: () => {},
 };
 
 const texts = {
@@ -28,65 +53,49 @@ const texts = {
 	WithLatLng: 'SearchAddressForm.WithLatLng',
 };
 
-const SearchAddressForm = ({ className, testId, id }) => {
+const SearchAddressForm = ({
+	className,
+	testId,
+	id,
+	address,
+	onAddressChange,
+	lat,
+	onLatChange,
+	lng,
+	onLngChange,
+	isAddress,
+	onIsAddressChange,
+	exactPosition,
+	onExactPostionChange,
+	showInMap,
+	onShowOnMapChange,
+}) => {
 	const { t } = useTranslation();
-	const [address, setAddress] = useState('');
-	const [lat, setLat] = useState();
-	const [lng, setLng] = useState();
-	const [isAddress, setIsAddress] = useState(true);
-	const [validated, setValidated] = useState(false);
-	const [exactPosition, setExactPosition] = useState(false);
-	const [showInMap, setShowInMap] = useState(true);
 
 	const handleSelect = useCallback(async result => {
-		console.log('handleSelect  result ', result);
-
 		const { description } = result;
-		console.log('handleSelect description ', description);
-
-		setAddress(description);
+		onAddressChange(description);
 		try {
 			const response = await Geocode.fromAddress(description);
-			console.log('handleSelect dopo await ', response);
 			const { lat, lng } = response.results[0].geometry.location;
-			console.log(' aca son lat, lng ', lat, lng);
-			setLat(Number(lat));
-			setLng(Number(lng));
+			onLatChange(Number(lat));
+			onLngChange(Number(lng));
 		} catch (error) {
 			console.error(error);
 		}
 	}, []);
 
 	const onSearchTypeChange = e => {
-		setIsAddress(!isAddress);
+		onIsAddressChange(!isAddress);
 	};
 
-	const onExactPostionChange = e => {
-		setExactPosition(!exactPosition);
+	const handleExactPostionChange = e => {
+		console.log('handleExactPostionChange', !exactPosition);
+		onExactPostionChange(!exactPosition);
 	};
 
-	const onShowOnMapChange = e => {
-		setShowInMap(!showInMap);
-	};
-
-	const onLatitudeChange = e => {
-		const { value } = e.target;
-		setLat(Number(value));
-	};
-
-	const onLongitudeChange = e => {
-		const { value } = e.target;
-		setLng(Number(value));
-	};
-
-	const handleSubmit = event => {
-		const form = event.currentTarget;
-		if (form.checkValidity() === false) {
-			event.preventDefault();
-			event.stopPropagation();
-		}
-
-		setValidated(true);
+	const handleShowOnMapChange = e => {
+		onShowOnMapChange(!showInMap);
 	};
 
 	const latValue = lat || '';
@@ -97,29 +106,25 @@ const SearchAddressForm = ({ className, testId, id }) => {
 	return (
 		<div className={searchAddressFormClassNames} data-testid={testId} id={id}>
 			<div className={styles.ChecksWrapper}>
-				<Form.Check
+				<InputCheckbox
 					type='switch'
-					label={t(label)}
 					className={styles.Switch}
+					label={t(label)}
 					onChange={onSearchTypeChange}
 					checked={isAddress}
 				/>
 
-				<Form.Check
-					onChange={onExactPostionChange}
-					label='Posicion extacta'
-					type={'checkbox'}
-					id={`inline-checks-2`}
+				<InputCheckbox
 					className={styles.Check}
+					label='Posicion extacta'
+					onChange={handleExactPostionChange}
 					checked={exactPosition}
 				/>
 
-				<Form.Check
-					onChange={onShowOnMapChange}
-					label='Mostrar en mapa principal'
-					type={'checkbox'}
-					id={`inline-checks-3`}
+				<InputCheckbox
 					className={styles.Check}
+					label='Mostrar en mapa principal'
+					onChange={handleShowOnMapChange}
 					checked={showInMap}
 				/>
 			</div>
@@ -138,23 +143,13 @@ const SearchAddressForm = ({ className, testId, id }) => {
 				/>
 			)}
 			{!isAddress && (
-				<Form noValidate validated={validated} onSubmit={handleSubmit}>
-					<Row className={styles.Margins}>
-						<Form.Group as={Col} md='4' className={styles.Margins} controlId='validationCustom01'>
-							<FloatingLabel controlId='validationCustom01' label='Latitud'>
-								<Form.Control type='number' placeholder='' value={lat} onChange={onLatitudeChange} />
-							</FloatingLabel>
-						</Form.Group>
-						<Form.Group as={Col} md='4' className={styles.Margins} controlId='validationCustom02'>
-							<FloatingLabel controlId='validationCustom02' label='Longitud'>
-								<Form.Control type='number' placeholder='' value={lng} onChange={onLongitudeChange} />
-							</FloatingLabel>
-						</Form.Group>
-					</Row>
-				</Form>
+				<Row className={styles.Margins}>
+					<InputNumber colsWidth={4} label='Latitud' value={lat} onChange={onLatChange} />
+					<InputNumber colsWidth={4} label='Longitud' value={lng} onChange={onLngChange} />
+				</Row>
 			)}
 
-			<GoogleMap lat={lat} lng={lng} showExactPosition={exactPosition} />
+			{lat && lng && <GoogleMap lat={lat} lng={lng} showExactPosition={exactPosition} />}
 
 			<div className={styles.LatLngWrapper}>
 				<span className={styles.Label}>{`Lat : ${latValue}`}</span>

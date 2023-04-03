@@ -10,17 +10,17 @@
 	margin-bottom: 20px;
 
 	.ChecksWrapper {
-		display: flex;
-		justify-content: flex-start;
-		align-items: center;
-		gap: 10px;
-		flex-wrap: wrap;
+		display: flex !important;
+		justify-content: flex-start !important;
+		align-items: center !important;
+		gap: 10px !important;
+		flex-wrap: wrap !important;
 
 		.Switch {
-			display: flex;
-			justify-content: flex-start;
-			align-items: center;
-			gap: 25px;
+			display: flex !important;
+			justify-content: flex-start !important;
+			align-items: center !important;
+			gap: 25px !important;
 
 			input {
 				width: 50px !important;
@@ -34,21 +34,21 @@
 		}
 
 		.Check {
-			display: flex;
-			justify-content: flex-start;
-			align-items: center;
-			gap: 25px;
+			display: flex !important;
+			justify-content: flex-start !important;
+			align-items: center !important;
+			gap: 25px !important;
 
 			input {
-				border: 1px solid var(--bs-gray-400);
-				width: 20px;
-				height: 20px;
+				border: 1px solid var(--bs-gray-400) !important;
+				width: 20px !important;
+				height: 20px !important;
 			}
 
 			label {
-				white-space: nowrap;
-				font-size: var(--bs-font-large);
-				font-weight: 500;
+				white-space: nowrap !important;
+				font-size: var(--bs-font-large) !important;
+				font-weight: 500 !important;
 			}
 		}
 	}

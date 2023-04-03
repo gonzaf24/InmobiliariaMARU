@@ -1,0 +1,11 @@
+@import '/src/styles/mixins.scss';
+
+.PropertyForm {
+	.Margins {
+		margin-bottom: 10px;
+	}
+
+	.TextArea {
+		min-height: 100px;
+	}
+}
