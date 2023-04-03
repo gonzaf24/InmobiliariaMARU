@@ -3,238 +3,205 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import styles from './AddressForm.module.scss';
-import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import geografia from './geografia.json';
+import { InputSelectGeography, InputText } from '../../components/inputs';
 
 const propTypes = {
 	className: PropTypes.string,
 	testId: PropTypes.string,
 	id: PropTypes.string,
+	country: PropTypes.string,
+	onCountryChange: PropTypes.func,
+	region: PropTypes.string,
+	onRegionChange: PropTypes.func,
+	city: PropTypes.string,
+	onCityChange: PropTypes.func,
+	neighborhood: PropTypes.string,
+	onNeighborhoodChange: PropTypes.func,
+	postalCode: PropTypes.string,
+	onPostalCodeChange: PropTypes.func,
+	street: PropTypes.string,
+	onStreetChange: PropTypes.func,
+	number: PropTypes.string,
+	onNumberChange: PropTypes.func,
+	floor: PropTypes.string,
+	onFloorChange: PropTypes.func,
+	door: PropTypes.string,
+	onDoorChange: PropTypes.func,
+	stair: PropTypes.string,
+	onStairChange: PropTypes.func,
 };
 
 const defaultProps = {
 	className: '',
 	testId: undefined,
 	id: undefined,
+	country: '',
+	onCountryChange: () => {},
+	region: '',
+	onRegionChange: () => {},
+	city: '',
+	onCityChange: () => {},
+	neighborhood: '',
+	onNeighborhoodChange: () => {},
+	postalCode: '',
+	onPostalCodeChange: () => {},
+	street: '',
+	onStreetChange: () => {},
+	number: '',
+	onNumberChange: () => {},
+	floor: '',
+	onFloorChange: () => {},
+	door: '',
+	onDoorChange: () => {},
+	stair: '',
+	onStairChange: () => {},
 };
 
-const DEFUALT_SELECTED = 'choose-one';
+const DEFUALT_SELECTOR = 'Seleccione';
 
-const AddressForm = ({ className, testId, id }) => {
+const AddressForm = ({
+	className,
+	testId,
+	id,
+	country,
+	onCountryChange,
+	region,
+	onRegionChange,
+	city,
+	onCityChange,
+	neighborhood,
+	onNeighborhoodChange,
+	postalCode,
+	onPostalCodeChange,
+	street,
+	onStreetChange,
+	number,
+	onNumberChange,
+	floor,
+	onFloorChange,
+	door,
+	onDoorChange,
+	stair,
+	onStairChange,
+}) => {
 	const addressFormClassNames = classnames(styles.AddressForm, className);
-	const [paisSeleccionado, setPaisSeleccionado] = useState('');
-	const [regionSeleccionada, setRegionSeleccionada] = useState('');
-	const [ciudadSeleccionada, setCiudadSeleccionada] = useState('');
-	const [barrioSeleccionado, setBarrioSeleccionado] = useState('');
 	const [regiones, setRegiones] = useState([]);
 	const [ciudades, setCiudades] = useState([]);
 	const [barrios, setBarrios] = useState([]);
-	const [codigoPostal, setCodigoPostal] = useState('');
-	const [calle, setCalle] = useState('');
-	const [numero, setNumero] = useState('');
-	const [piso, setPiso] = useState('');
-	const [puerta, setPuerta] = useState('');
-	const [escalera, setEscalera] = useState('');
-
-	const paises = Object.keys(geografia);
+	const paisesMap = Object.keys(geografia);
+	const regionesMap = Object.keys(regiones);
+	const ciudadesMap = Object.keys(ciudades);
 
 	const resetValues = useCallback(() => {
-		setPaisSeleccionado('');
+		onCountryChange('');
 		setRegiones([]);
 		setCiudades([]);
 		setBarrios([]);
-		setRegionSeleccionada('');
-		setCiudadSeleccionada('');
-		setBarrioSeleccionado('');
+		onRegionChange('');
+		onCityChange('');
+		onNeighborhoodChange('');
 	}, []);
 
 	const handlePaisSeleccionado = useCallback(event => {
 		const pais = event.target.value;
-		if (pais === DEFUALT_SELECTED) {
+		if (pais === DEFUALT_SELECTOR) {
 			resetValues();
 			return;
 		}
-		setPaisSeleccionado(pais);
+		onCountryChange(pais);
 		setRegiones(geografia[pais]);
 		setCiudades([]);
 		setBarrios([]);
-		setRegionSeleccionada('');
-		setCiudadSeleccionada('');
-		setBarrioSeleccionado('');
+		onRegionChange('');
+		onCityChange('');
+		onNeighborhoodChange('');
 	}, []);
 
 	const handleRegionSeleccionada = useCallback(
 		event => {
-			const region = event.target.value;
-			if (region === DEFUALT_SELECTED) {
+			const _region = event.target.value;
+			if (_region === DEFUALT_SELECTOR) {
 				return;
 			}
-			setRegionSeleccionada(region);
-			setCiudades(geografia[paisSeleccionado][region]);
+			onRegionChange(_region);
+			setCiudades(geografia[country][_region]);
 			setBarrios([]);
-			setCiudadSeleccionada('');
-			setBarrioSeleccionado('');
+			onCityChange('');
+			onNeighborhoodChange('');
 		},
-		[paisSeleccionado]
+		[country]
 	);
 
 	const handleCiudadSeleccionada = useCallback(
 		event => {
 			const ciudad = event.target.value;
-			if (ciudad === DEFUALT_SELECTED) {
+			if (ciudad === DEFUALT_SELECTOR) {
 				return;
 			}
-			setCiudadSeleccionada(ciudad);
-			setBarrios(geografia[paisSeleccionado][regionSeleccionada][ciudad]);
-			setBarrioSeleccionado('');
+			onCityChange(ciudad);
+			setBarrios(geografia[country][region][ciudad]);
+			onNeighborhoodChange('');
 		},
-		[paisSeleccionado, regionSeleccionada]
+		[country, region]
 	);
 
 	const handleBarrioSeleccionado = useCallback(event => {
 		const barrio = event.target.value;
-		if (barrio === DEFUALT_SELECTED) {
+		if (barrio === DEFUALT_SELECTOR) {
 			return;
 		}
-		setBarrioSeleccionado(barrio);
-	}, []);
-
-	const handleCodigoPostal = useCallback(event => {
-		const codigoPostal = event.target.value;
-		setCodigoPostal(codigoPostal);
-	}, []);
-
-	const handleCalle = useCallback(event => {
-		const calle = event.target.value;
-		setCalle(calle);
-	}, []);
-
-	const handleNumero = useCallback(event => {
-		const numero = event.target.value;
-		setNumero(numero);
-	}, []);
-
-	const handlePiso = useCallback(event => {
-		const piso = event.target.value;
-		setPiso(piso);
-	}, []);
-
-	const handlePuerta = useCallback(event => {
-		const puerta = event.target.value;
-		setPuerta(puerta);
-	}, []);
-
-	const handleEscalera = useCallback(event => {
-		const escalera = event.target.value;
-		setEscalera(escalera);
-	}, []);
-
-	const handleSubmit = useCallback(event => {
-		event.preventDefault();
-		event.stopPropagation();
+		onNeighborhoodChange(barrio);
 	}, []);
 
 	return (
 		<div className={addressFormClassNames} data-testid={testId} id={id}>
-			<Form noValidate onSubmit={handleSubmit}>
-				<Row className={styles.Margins}>
-					<Form.Group as={Col} md='3' className={styles.Margins} controlId='validationCustomUsername'>
-						<FloatingLabel controlId='floatingSelect' label='Pais'>
-							<Form.Control as='select' value={paisSeleccionado} onChange={handlePaisSeleccionado}>
-								<option value={DEFUALT_SELECTED}>Seleccione</option>
-								{paises.map(pais => (
-									<option key={pais} value={pais}>
-										{pais}
-									</option>
-								))}
-							</Form.Control>
-						</FloatingLabel>
-					</Form.Group>
-					<Form.Group as={Col} md='3' className={styles.Margins} controlId='validationCustomUsername'>
-						<FloatingLabel controlId='floatingSelect' label='Comunidad'>
-							<Form.Control
-								as='select'
-								value={regionSeleccionada}
-								onChange={handleRegionSeleccionada}
-								disabled={!paisSeleccionado}
-							>
-								<option value={DEFUALT_SELECTED}>Seleccione</option>
-								{Object.keys(regiones).map(region => (
-									<option key={region} value={region}>
-										{region}
-									</option>
-								))}
-							</Form.Control>
-						</FloatingLabel>
-					</Form.Group>
-					<Form.Group as={Col} md='2' className={styles.Margins} controlId='validationCustomUsername'>
-						<FloatingLabel controlId='floatingSelect' label='Ciudad'>
-							<Form.Control
-								as='select'
-								value={ciudadSeleccionada}
-								onChange={handleCiudadSeleccionada}
-								disabled={!regionSeleccionada}
-							>
-								<option value={DEFUALT_SELECTED}>Seleccione</option>
-								{Object.keys(ciudades).map(ciudad => (
-									<option key={ciudad} value={ciudad}>
-										{ciudad}
-									</option>
-								))}
-							</Form.Control>
-						</FloatingLabel>
-					</Form.Group>
-					<Form.Group as={Col} md='2' className={styles.Margins} controlId='validationCustomUsername'>
-						<FloatingLabel controlId='floatingSelect' label='Barrio'>
-							<Form.Control
-								as='select'
-								value={barrioSeleccionado}
-								onChange={handleBarrioSeleccionado}
-								disabled={!ciudadSeleccionada}
-							>
-								<option value={DEFUALT_SELECTED}>Seleccione</option>
-								{barrios.map(barrio => (
-									<option key={barrio} value={barrio}>
-										{barrio}
-									</option>
-								))}
-							</Form.Control>
-						</FloatingLabel>
-					</Form.Group>
-					<Form.Group as={Col} md='2' controlId='validationCustomUsername'>
-						<FloatingLabel controlId='floatingInputGrid' label='Codigo Postal'>
-							<Form.Control type='text' placeholder='' value={codigoPostal} onChange={handleCodigoPostal} />
-						</FloatingLabel>
-					</Form.Group>
-				</Row>
-				<Row className={styles.Margins}>
-					<Form.Group as={Col} md='3' className={styles.Margins} controlId='validationCustom01'>
-						<FloatingLabel controlId='floatingInputGrid' label='Calle'>
-							<Form.Control type='text' placeholder='' value={calle} onChange={handleCalle} />
-						</FloatingLabel>
-					</Form.Group>
-					<Form.Group as={Col} md='3' className={styles.Margins} controlId='validationCustom02'>
-						<FloatingLabel controlId='floatingInputGrid' label='Numero'>
-							<Form.Control type='text' placeholder='' value={numero} onChange={handleNumero} />
-						</FloatingLabel>
-					</Form.Group>
-					<Form.Group as={Col} md='2' className={styles.Margins} controlId='validationCustom02'>
-						<FloatingLabel controlId='floatingInputGrid' label='Piso'>
-							<Form.Control type='text' placeholder='' value={piso} onChange={handlePiso} />
-						</FloatingLabel>
-					</Form.Group>
-					<Form.Group as={Col} md='2' className={styles.Margins} controlId='validationCustom02'>
-						<FloatingLabel controlId='floatingInputGrid' label='Puerta'>
-							<Form.Control type='text' placeholder='' value={puerta} onChange={handlePuerta} />
-						</FloatingLabel>
-					</Form.Group>
-					<Form.Group as={Col} md='2' className={styles.Margins} controlId='validationCustom02'>
-						<FloatingLabel controlId='floatingInputGrid' label='Escalera'>
-							<Form.Control type='text' placeholder='' value={escalera} onChange={handleEscalera} />
-						</FloatingLabel>
-					</Form.Group>
-				</Row>
-			</Form>
+			<Row className={styles.Margins}>
+				<InputSelectGeography
+					options={paisesMap}
+					defaultValue={DEFUALT_SELECTOR}
+					colsWidth={3}
+					label='Pais'
+					value={country}
+					onChange={handlePaisSeleccionado}
+				/>
+				<InputSelectGeography
+					options={regionesMap}
+					defaultValue={DEFUALT_SELECTOR}
+					colsWidth={3}
+					label='Comunidad'
+					value={region}
+					onChange={handleRegionSeleccionada}
+					isDisabled={!country}
+				/>
+				<InputSelectGeography
+					options={ciudadesMap}
+					defaultValue={DEFUALT_SELECTOR}
+					colsWidth={2}
+					label='Ciudad'
+					value={city}
+					onChange={handleCiudadSeleccionada}
+					isDisabled={!region}
+				/>
+				<InputSelectGeography
+					options={barrios}
+					defaultValue={DEFUALT_SELECTOR}
+					colsWidth={2}
+					label='Barrio'
+					value={neighborhood}
+					onChange={handleBarrioSeleccionado}
+					isDisabled={!city}
+				/>
+				<InputText colsWidth={2} label='Codigo Postal' value={postalCode} onChange={onPostalCodeChange} />
+			</Row>
+			<Row className={styles.Margins}>
+				<InputText colsWidth={5} label='Calle' value={street} onChange={onStreetChange} />
+				<InputText colsWidth={2} label='Numero' value={number} onChange={onNumberChange} />
+				<InputText colsWidth={1} label='Piso' value={floor} onChange={onFloorChange} />
+				<InputText colsWidth={2} label='Puerta' value={door} onChange={onDoorChange} />
+				<InputText colsWidth={2} label='Escalera' value={stair} onChange={onStairChange} />
+			</Row>
 		</div>
 	);
 };

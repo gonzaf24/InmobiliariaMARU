@@ -7,6 +7,8 @@ import OwnerContactForm from './OwnerContactForm';
 import SearchAddressForm from './SearchAddressForm';
 import TypeOperationForm from './TypeOperationForm';
 import TitleDescriptionForm from './TitleDescriptionForm';
+import PropertyForm from './PropertyForm/PropertyForm';
+import AddressForm from './AddressForm';
 
 export {
 	LoginForm,
@@ -18,4 +20,6 @@ export {
 	SearchAddressForm,
 	TypeOperationForm,
 	TitleDescriptionForm,
+	PropertyForm,
+	AddressForm,
 };

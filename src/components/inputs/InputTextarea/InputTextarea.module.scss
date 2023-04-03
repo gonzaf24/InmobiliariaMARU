@@ -1,10 +1,6 @@
 @import '/src/styles/mixins.scss';
 
-.Property {
-	.Margins {
-		margin-bottom: 10px;
-	}
-
+.InputTextarea {
 	.TextArea {
 		min-height: 100px;
 	}

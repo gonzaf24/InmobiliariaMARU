@@ -17,3 +17,28 @@ export const LANGUAGES = {
 	ENGLISH: 'en',
 	SPANISH: 'es',
 };
+
+export const PROPERTY_ACQUISITION_OPTIONS = {
+	RENT: { label: 'Alquiler', value: 'rent' },
+	SALE: { label: 'Venta', value: 'sale' },
+};
+
+export const PROPERTY_TYPES = {
+	APARTMENT: { label: 'Apartamento', value: 'apartment' },
+	HOUSE: { label: 'Casa', value: 'house' },
+	STORE: { label: 'Local', value: 'store' },
+	OFFICE: { label: 'Oficina', value: 'office' },
+	LAND: { label: 'Terreno', value: 'land' },
+};
+
+export const PROPERTY_HEATING_COOLING_OPTIONS = {
+	NO_HEATING_COOLING: { label: 'Sin calefacción', value: 'no_heating_cooling' },
+	CENTRAL: { label: 'Central', value: 'central' },
+	INDIVIDUAL: { label: 'Individual', value: 'individual' },
+};
+
+export const SELECTORS = {
+	PROPERTY_HEATING_COOLING_OPTIONS,
+	PROPERTY_ACQUISITION_OPTIONS,
+	PROPERTY_TYPES,
+};
