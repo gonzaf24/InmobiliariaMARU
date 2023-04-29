@@ -17,6 +17,8 @@ const propTypes = {
 	id: PropTypes.string,
 	categoryName: PropTypes.string,
 	useName: PropTypes.bool,
+	files: PropTypes.arrayOf(PropTypes.string),
+	setFiles: PropTypes.func,
 };
 
 const defaultProps = {
@@ -25,10 +27,11 @@ const defaultProps = {
 	id: undefined,
 	categoryName: 'INMUEBLE',
 	useName: false,
+	files: [],
+	setFiles: () => {},
 };
 
-const FileSorteableList = ({ className, testId, id, categoryName, useName }) => {
-	const [files, setFiles] = useState([]);
+const FileSorteableList = ({ className, testId, id, categoryName, useName, files, setFiles }) => {
 	const [showFullSizeImage, setShowFullSizeImage] = useState(false);
 	const [imgSrcFullSize, setImgSrcFullSize] = useState();
 
@@ -91,7 +94,7 @@ const FileSorteableList = ({ className, testId, id, categoryName, useName }) => 
 		<div className={fileSorteableListClassNames} data-testid={testId} id={id}>
 			<InputGroup>
 				<FloatingLabel controlId='floatingInputGrid' label={categoryName}>
-					<Form.Control type='text' placeholder='' className={styles.Input} />
+					<Form.Control type='text' placeholder='' className={styles.Input} disabled />
 				</FloatingLabel>
 				<InputGroup.Text id='basic-addon2'>
 					<FileUpload categoryName={categoryName} onSuccesUpload={onSuccesUpload} useName={useName} />
