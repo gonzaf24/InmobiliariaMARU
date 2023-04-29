@@ -2,34 +2,34 @@ import React, { useEffect, useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-import styles from './Properties.module.scss';
+import NewHouseModal from '../../../forms/NewHouseModal/NewHouseModal';
 import { Button, Table } from 'react-bootstrap';
-import { MdDeleteForever, MdEdit } from 'react-icons/md';
-import { useHouse } from '../../../hooks';
+import { MdAddHomeWork, MdDeleteForever, MdEdit } from 'react-icons/md';
+import { useHouse, useOpenToggle } from '../../../hooks';
+import { PROPERTY_ACQUISITION_OPTIONS } from '../../../utils/constants';
+import styles from './Properties.module.scss';
 
 const propTypes = {
 	className: PropTypes.string,
 	testId: PropTypes.string,
 	id: PropTypes.string,
-	isLoading: PropTypes.bool,
 };
 
 const defaultProps = {
 	className: '',
 	testId: undefined,
 	id: undefined,
-	isLoading: false,
 };
 
-const Properties = ({ className, testId, id, isLoading }) => {
+const getOperation = operation => {
+	return Object.entries(PROPERTY_ACQUISITION_OPTIONS).find(([key, valueObj]) => valueObj.value === operation)[0];
+};
+
+const Properties = ({ className, testId, id }) => {
 	const [dataTable, setDataTable] = useState([]);
+	const { getHousesList, isLoading } = useHouse();
 
-	const { getHousesList } = useHouse();
-	const propertiesClassNames = classnames(styles.Properties, className);
-
-	useEffect(() => {
-		console.log('houseee ', getHousesList());
-	}, []);
+	const { isOpen: isOpenNewHouse, open: openNewHouse, close: closeNewHouse } = useOpenToggle(false);
 
 	useEffect(() => {
 		const retrieveHouses = async () => {
@@ -39,17 +39,27 @@ const Properties = ({ className, testId, id, isLoading }) => {
 		retrieveHouses();
 	}, []);
 
+	const propertiesClassNames = classnames(styles.Properties, className);
+
 	return (
 		<div className={propertiesClassNames} data-testid={testId} id={id}>
+			<div className={styles.HeaderWrapper}>
+				<span>{'Lista de Propiedades'}</span>
+				<Button className={styles.NewUserButton} onClick={openNewHouse}>
+					<MdAddHomeWork />
+				</Button>
+			</div>
 			<Table striped bordered hover responsive='sm'>
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>Country</th>
+						<th>Operation</th>
 						<th>City</th>
 						<th>Neighborhood</th>
+						<th>Address</th>
 						<th>Description</th>
 						<th>Owner</th>
+						<th>Photos</th>
 						<th>Acciones</th>
 					</tr>
 				</thead>
@@ -64,11 +74,13 @@ const Properties = ({ className, testId, id, isLoading }) => {
 						dataTable.map((propertie, index) => (
 							<tr key={index}>
 								<td>{index}</td>
-								<td>{propertie.country}</td>
+								<td>{getOperation(propertie.operation)}</td>
 								<td>{propertie.city}</td>
 								<td>{propertie.neighborhood}</td>
+								<td>{propertie.address}</td>
 								<td>{propertie.description.substr(0, 40)}</td>
 								<td>{propertie.ownerName}</td>
+								<td>{propertie.photos.length}</td>
 								<td className={styles.Actions}>
 									<Button className={styles.ButtonActions}>
 										<MdEdit />
@@ -82,6 +94,8 @@ const Properties = ({ className, testId, id, isLoading }) => {
 					)}
 				</tbody>
 			</Table>
+
+			<NewHouseModal isOpen={isOpenNewHouse} onClose={closeNewHouse} />
 		</div>
 	);
 };
