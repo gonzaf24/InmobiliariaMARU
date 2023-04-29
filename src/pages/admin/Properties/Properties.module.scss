@@ -1,6 +1,18 @@
 @import '/src/styles/mixins.scss';
 
 .Properties {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	justify-content: center;
+
+	.HeaderWrapper {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+		gap: 20px;
+	}
 	.Actions {
 		display: flex;
 		justify-content: center;
