@@ -27,7 +27,9 @@ export default function useUser() {
 		async ({ username, password }) => {
 			setState({ loading: true, error: null });
 			try {
+				console.log('login');
 				const user = await loginService({ username, password });
+				console.log('user', user);
 				window.sessionStorage.setItem('user', JSON.stringify(user));
 				window.sessionStorage.setItem('jwt', user.token);
 				setUser(user);

@@ -23,8 +23,8 @@ const propTypes = {
 	onPostalCodeChange: PropTypes.func,
 	street: PropTypes.string,
 	onStreetChange: PropTypes.func,
-	number: PropTypes.string,
-	onNumberChange: PropTypes.func,
+	addressNumber: PropTypes.string,
+	onAddressNumberChange: PropTypes.func,
 	floor: PropTypes.string,
 	onFloorChange: PropTypes.func,
 	door: PropTypes.string,
@@ -49,8 +49,8 @@ const defaultProps = {
 	onPostalCodeChange: () => {},
 	street: '',
 	onStreetChange: () => {},
-	number: '',
-	onNumberChange: () => {},
+	addressNumber: '',
+	onAddressNumberChange: () => {},
 	floor: '',
 	onFloorChange: () => {},
 	door: '',
@@ -77,8 +77,8 @@ const AddressForm = ({
 	onPostalCodeChange,
 	street,
 	onStreetChange,
-	number,
-	onNumberChange,
+	addressNumber,
+	onAddressNumberChange,
 	floor,
 	onFloorChange,
 	door,
@@ -157,7 +157,7 @@ const AddressForm = ({
 
 	return (
 		<div className={addressFormClassNames} data-testid={testId} id={id}>
-			<Row className={styles.Margins}>
+			<Row  >
 				<InputSelectGeography
 					options={paisesMap}
 					defaultValue={DEFUALT_SELECTOR}
@@ -195,9 +195,9 @@ const AddressForm = ({
 				/>
 				<InputText colsWidth={2} label='Codigo Postal' value={postalCode} onChange={onPostalCodeChange} />
 			</Row>
-			<Row className={styles.Margins}>
+			<Row  >
 				<InputText colsWidth={5} label='Calle' value={street} onChange={onStreetChange} />
-				<InputText colsWidth={2} label='Numero' value={number} onChange={onNumberChange} />
+				<InputText colsWidth={2} label='Numero' value={addressNumber} onChange={onAddressNumberChange} />
 				<InputText colsWidth={1} label='Piso' value={floor} onChange={onFloorChange} />
 				<InputText colsWidth={2} label='Puerta' value={door} onChange={onDoorChange} />
 				<InputText colsWidth={2} label='Escalera' value={stair} onChange={onStairChange} />

@@ -4,7 +4,7 @@ import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import Geocode from 'react-geocode';
 import styles from './SearchAddressForm.module.scss';
 import classNames from 'classnames';
-import { Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { GoogleMap } from '../../components';
 import { InputCheckbox, InputNumber } from '../../components/inputs';
@@ -36,9 +36,9 @@ const defaultProps = {
 	id: undefined,
 	address: '',
 	onAddressChange: () => {},
-	lat: undefined,
+	lat: 41.3850639,
 	onLatChange: () => {},
-	lng: undefined,
+	lng: 2.1734035,
 	onLngChange: () => {},
 	isAddress: true,
 	onIsAddressChange: () => {},
@@ -105,7 +105,7 @@ const SearchAddressForm = ({
 
 	return (
 		<div className={searchAddressFormClassNames} data-testid={testId} id={id}>
-			<div className={styles.ChecksWrapper}>
+			<Col>
 				<InputCheckbox
 					type='switch'
 					className={styles.Switch}
@@ -113,21 +113,19 @@ const SearchAddressForm = ({
 					onChange={onSearchTypeChange}
 					checked={isAddress}
 				/>
-
 				<InputCheckbox
 					className={styles.Check}
 					label='Posicion extacta'
 					onChange={handleExactPostionChange}
 					checked={exactPosition}
 				/>
-
 				<InputCheckbox
 					className={styles.Check}
 					label='Mostrar en mapa principal'
 					onChange={handleShowOnMapChange}
 					checked={showInMap}
 				/>
-			</div>
+			</Col>
 			{isAddress && (
 				<GooglePlacesAutocomplete
 					className={styles.InputText}
@@ -143,7 +141,7 @@ const SearchAddressForm = ({
 				/>
 			)}
 			{!isAddress && (
-				<Row className={styles.Margins}>
+				<Row>
 					<InputNumber colsWidth={4} label='Latitud' value={lat} onChange={onLatChange} />
 					<InputNumber colsWidth={4} label='Longitud' value={lng} onChange={onLngChange} />
 				</Row>

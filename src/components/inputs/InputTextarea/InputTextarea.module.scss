@@ -1,6 +1,10 @@
 @import '/src/styles/mixins.scss';
 
 .InputTextarea {
+	textArea {
+		margin-bottom: 10px;
+	}
+
 	.TextArea {
 		min-height: 100px;
 	}

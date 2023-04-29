@@ -1,5 +1,6 @@
 import Admin from './Admin';
-import NewFlat from './NewFlat';
+import NewHouse from './NewHouse';
 import Users from './Users';
+import Properties from './Properties';
 
-export { Admin, NewFlat, Users };
+export { Admin, NewHouse, Users, Properties };

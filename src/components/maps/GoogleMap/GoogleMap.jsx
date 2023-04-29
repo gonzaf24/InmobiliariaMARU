@@ -99,7 +99,7 @@ const GoogleMap = ({ className, testId, id, lat, lng, showExactPosition }) => {
 				onChange={handleMapChange}
 				options={mapProps.options}
 			>
-				<AnyReactComponent lat={lat} lng={lng} />
+				<AnyReactComponent />
 			</GoogleMapReact>
 		</div>
 	);

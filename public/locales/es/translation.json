@@ -23,7 +23,7 @@
 	"FileDelete.DeleteHeader": "ELIMINAR ARCHIVO",
 	"FileDelete.ErrorMessage": "Error al eliminar el archivo, inténtelo de nuevo más tarde",
 	"Images.Title": "Subir imagenes y eliminarlas",
-	"NewFlat.Title": "Registro de piso",
+	"NewHouse.Title": "Registro de piso",
 	"AppNavbar.Home": "Home",
 	"AppNavbar.Rent": "Alquiler",
 	"AppNavbar.Sale": "Venta",
@@ -33,7 +33,8 @@
 	"AppNavbar.Login": "Login",
 	"AppNavbar.MyAccount": "Mi cuenta",
 	"Admin.AdminUsers": "Administrar usuarios",
-	"Admin.RegisterNewFlat": "Registrar piso nuevo",
+	"Admin.RegisterNewHouse": "Registrar piso nuevo",
+	"Admin.Properties": "Propiedades",
 	"SearchAddressForm.WithAddress": "Buscar dirección",
 	"SearchAddressForm.WithLatLng": "Buscar Latitud, Longitud"
 }

@@ -2,10 +2,10 @@ import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-import styles from './PropertyForm.module.scss';
 import { Row } from 'react-bootstrap';
 import { SELECTORS } from '../../utils/constants';
 import { InputCheckbox, InputDate, InputNumber, InputSelect, InputTextarea, InputTextLabel } from '../../components/inputs';
+import styles from './PropertyForm.module.scss';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -157,7 +157,7 @@ const PropertyForm = ({
 
 	return (
 		<div className={propertyClassNames} data-testid={testId} id={id}>
-			<Row className={styles.Margins}>
+			<Row>
 				<InputSelect
 					colsWidth={2}
 					label='Propiedad'
@@ -177,20 +177,20 @@ const PropertyForm = ({
 					onChange={onHeatingCoolingChange}
 				/>
 			</Row>
-			<Row className={styles.Margins}>
-				<InputCheckbox colsWidth={1} label='Agua' value={water} onChange={onWaterChange} />
-				<InputCheckbox colsWidth={1} label='Luz' value={electricity} onChange={onElectricityChange} />
-				<InputCheckbox colsWidth={1} label='Gas' value={gas} onChange={onGasChange} />
-				<InputCheckbox colsWidth={1} label='Amueblado' value={furnished} onChange={onFurnishedChange} />
-				<InputCheckbox colsWidth={1} label='Mascotas' value={pets} onChange={onPetsChange} />
-				<InputCheckbox colsWidth={1} label='Parking' value={parking} onChange={onParkingChange} />
-				<InputCheckbox colsWidth={1} label='Piscina' value={pool} onChange={onPoolChange} />
-				<InputCheckbox colsWidth={1} label='Jacuzzi' value={jacuzzi} onChange={onJacuzziChange} />
-				<InputCheckbox colsWidth={1} label='Jardin' value={garden} onChange={onGardenChange} />
-				<InputCheckbox colsWidth={1} label='Terraza' value={terrace} onChange={onTerraceChange} />
-				<InputCheckbox colsWidth={1} label='Horizontal' value={horizontal} onChange={onHorizontalChange} />
+			<Row>
+				<InputCheckbox colsWidth={2} label='Agua' value={water} onChange={onWaterChange} />
+				<InputCheckbox colsWidth={2} label='Luz' value={electricity} onChange={onElectricityChange} />
+				<InputCheckbox colsWidth={2} label='Gas' value={gas} onChange={onGasChange} />
+				<InputCheckbox colsWidth={2} label='Amueblado' value={furnished} onChange={onFurnishedChange} />
+				<InputCheckbox colsWidth={2} label='Mascotas' value={pets} onChange={onPetsChange} />
+				<InputCheckbox colsWidth={2} label='Parking' value={parking} onChange={onParkingChange} />
+				<InputCheckbox colsWidth={2} label='Piscina' value={pool} onChange={onPoolChange} />
+				<InputCheckbox colsWidth={2} label='Jacuzzi' value={jacuzzi} onChange={onJacuzziChange} />
+				<InputCheckbox colsWidth={2} label='Jardin' value={garden} onChange={onGardenChange} />
+				<InputCheckbox colsWidth={2} label='Terraza' value={terrace} onChange={onTerraceChange} />
+				<InputCheckbox colsWidth={2} label='Horizontal' value={horizontal} onChange={onHorizontalChange} />
 			</Row>
-			<Row className={styles.Margins}>
+			<Row>
 				<InputDate
 					colsWidth={3}
 					label='Fecha de construccion'
@@ -200,7 +200,7 @@ const PropertyForm = ({
 				<InputDate colsWidth={3} label='Fecha ult. renovacion' value={renovationYear} onChange={onRenovationYearChange} />
 				<InputNumber colsWidth={3} label='Antiguedad (años)' value={antiquity} onChange={onAntiquityChange} />
 			</Row>
-			<Row className={styles.Margins}>
+			<Row>
 				<InputTextarea
 					colsWidth={12}
 					label='Observaciones de la propiedad'

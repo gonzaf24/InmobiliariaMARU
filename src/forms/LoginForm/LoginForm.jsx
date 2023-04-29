@@ -33,6 +33,8 @@ const LoginForm = ({ className, testId, id }) => {
 		e.preventDefault();
 		const username = e.target[0].value;
 		const password = e.target[1].value;
+		console.log('username', username);
+		console.log('password', password);
 		await login({ username, password });
 	};
 
@@ -40,15 +42,15 @@ const LoginForm = ({ className, testId, id }) => {
 		<div className={loginFormClassNames} data-testid={testId} id={id}>
 			<span>{t(texts.Title)}</span>
 			<Form onSubmit={submitForm}>
-				<Form.Group className={styles.Margins} controlId='Email'>
+				<Form.Group controlId='Email'>
 					<Form.Label className='text-center'>Email address</Form.Label>
 					<Form.Control type='text' placeholder='Enter email' required />
 				</Form.Group>
-				<Form.Group className={styles.Margins} controlId='Password'>
+				<Form.Group controlId='Password'>
 					<Form.Label>Password</Form.Label>
 					<Form.Control type='password' placeholder='Password' required />
 				</Form.Group>
-				<Form.Group className={styles.Margins} controlId='formBasicCheckbox'>
+				<Form.Group controlId='formBasicCheckbox'>
 					<p className='small'>
 						<a className='text-primary' href='#!'>
 							Forgot password?

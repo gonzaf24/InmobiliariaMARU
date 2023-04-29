@@ -1,0 +1,9 @@
+@import '/src/styles/mixins.scss';
+
+.Properties {
+	.Actions {
+		display: flex;
+		justify-content: center;
+		gap: 10px;
+	}
+}
