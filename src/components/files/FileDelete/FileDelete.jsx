@@ -8,8 +8,8 @@ import useOpenToggle from '../../../hooks/useOpenToggle';
 import { formatFileNameToShow } from '../../../utils/formatters';
 import styles from './FileDelete.module.scss';
 import Loader from '../../Loader';
-import useImage from '../../../hooks/useImage';
 import useToastContext from '../../../context/toastContext';
+import { useImage } from '../../../hooks';
 
 const propTypes = {
 	className: PropTypes.string,

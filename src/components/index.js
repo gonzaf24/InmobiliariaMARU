@@ -6,5 +6,6 @@ import Switch from './Switch/Switch';
 export * from './files';
 export * from './modals';
 export * from './maps';
+export * from './utils';
 
 export { Loader, LanguageSelector, FullSizeImage, Switch };

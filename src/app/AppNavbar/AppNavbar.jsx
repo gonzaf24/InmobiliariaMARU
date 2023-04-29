@@ -2,7 +2,6 @@ import React, { useMemo, useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-import useUser from '../../hooks/useUser';
 import UserContext from '../../context/userContext';
 import { useNavigate } from 'react-router-dom';
 import { BlueLogo } from '../../assets/images';
@@ -13,6 +12,7 @@ import { USERS_TYPES } from '../../utils/constants';
 import { LanguageSelector, Switch } from '../../components';
 
 import styles from './AppNavbar.module.scss';
+import { useUser } from '../../hooks';
 
 const propTypes = {
 	className: PropTypes.string,

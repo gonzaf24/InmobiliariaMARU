@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import { BiImageAdd } from 'react-icons/bi';
 
-import useImage from '../../../hooks/useImage';
 import styles from './FileUpload.module.scss';
 import Loader from '../../Loader';
+import { useImage } from '../../../hooks';
 
 const propTypes = {
 	onSuccesUpload: PropTypes.func.isRequired,

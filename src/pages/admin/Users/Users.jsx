@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 import styles from './Users.module.scss';
 import { useTranslation } from 'react-i18next';
-import useUser from '../../../hooks/useUser';
 import { Button, Table } from 'react-bootstrap';
 import useOpenToggle from '../../../hooks/useOpenToggle';
 import { MdDeleteForever, MdEdit } from 'react-icons/md';
@@ -12,6 +11,7 @@ import { ImUserPlus } from 'react-icons/im';
 
 import { EditUser, NewUser } from '../../../forms';
 import { ActionModal, Modal } from '../../../components';
+import { useUser } from '../../../hooks';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -36,10 +36,9 @@ const texts = {
 const Users = ({ className, testId, id }) => {
 	const usersClassNames = classnames(styles.Users, className);
 	const { t } = useTranslation();
-	const { users, isLoading } = useUser();
+	const { users, isLoading, removeUser } = useUser();
 	const [userIdDelete, setUserIdDelete] = useState();
 	const [dataTable, setDataTable] = useState([]);
-	const { removeUser } = useUser();
 
 	const [user, setUser] = useState(undefined);
 
