@@ -17,6 +17,7 @@ import { Button, Form } from 'react-bootstrap';
 import useHouse from '../../../hooks/useHouse';
 import { useNavigate } from 'react-router-dom';
 import useToastContext from '../../../context/toastContext';
+import { FileSorteableList, VideoUpload } from '../../../components';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -86,6 +87,10 @@ const NewHouse = ({ className, testId, id }) => {
 	const [exactPosition, setExactPosition] = useState(false);
 	const [showInMap, setShowInMap] = useState(false);
 
+	const [photos, setPhotos] = useState([]);
+	const [videos, setVideos] = useState([]);
+	const [documents, setDocuments] = useState([]);
+
 	const { newHouse, isLoading, hasError, errorMessage } = useHouse();
 	const navigate = useNavigate();
 
@@ -136,6 +141,9 @@ const NewHouse = ({ className, testId, id }) => {
 		setIsAddress(true);
 		setExactPosition(false);
 		setShowInMap(false);
+		setPhotos([]);
+		setVideos([]);
+		setDocuments([]);
 	};
 
 	const submitForm = async e => {
@@ -187,6 +195,9 @@ const NewHouse = ({ className, testId, id }) => {
 				isAddress,
 				exactPosition,
 				showInMap,
+				photos,
+				videos,
+				documents,
 			};
 			const response = await newHouse(data);
 			if (response) {
@@ -274,6 +285,9 @@ const NewHouse = ({ className, testId, id }) => {
 					observations={observations}
 					onObservationsChange={setObservations}
 				/>
+				<FileSorteableList categoryName={'Images'} files={photos} setFiles={setPhotos} />
+				<VideoUpload files={videos} setFiles={setVideos} />
+				<FileSorteableList categoryName={'Documents'} useName files={documents} setFiles={setDocuments} />
 				<SearchAddressForm
 					address={address}
 					onAddressChange={setAddress}
