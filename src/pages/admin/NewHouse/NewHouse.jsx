@@ -6,6 +6,7 @@ import styles from './NewHouse.module.scss';
 import { useTranslation } from 'react-i18next';
 import {
 	AddressForm,
+	FileUploadForm,
 	OwnerContactForm,
 	PropertyForm,
 	SearchAddressForm,
@@ -17,7 +18,7 @@ import { Button, Form } from 'react-bootstrap';
 import useHouse from '../../../hooks/useHouse';
 import { useNavigate } from 'react-router-dom';
 import useToastContext from '../../../context/toastContext';
-import { FileSorteableList, VideoUpload } from '../../../components';
+import { UPLOAD_TYPE } from '../../../forms/FileUploadForm/FileUploadForm';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -285,9 +286,7 @@ const NewHouse = ({ className, testId, id }) => {
 					observations={observations}
 					onObservationsChange={setObservations}
 				/>
-				<FileSorteableList categoryName={'Images'} files={photos} setFiles={setPhotos} />
-				<VideoUpload files={videos} setFiles={setVideos} />
-				<FileSorteableList categoryName={'Documents'} useName files={documents} setFiles={setDocuments} />
+
 				<SearchAddressForm
 					address={address}
 					onAddressChange={setAddress}
@@ -316,6 +315,10 @@ const NewHouse = ({ className, testId, id }) => {
 					description={description}
 					onDescriptionChange={setDescription}
 				/>
+
+				<FileUploadForm files={photos} onFileChange={setPhotos} uploadType={UPLOAD_TYPE.IMAGE} />
+				<FileUploadForm files={videos} onFileChange={setVideos} uploadType={UPLOAD_TYPE.VIDEO} />
+				<FileUploadForm files={documents} onFileChange={setDocuments} uploadType={UPLOAD_TYPE.DOCUMENT} />
 				<div className={styles.Footer}>
 					<Button variant='secondary' onClick={() => {}} className={styles.Button}>
 						Cancelar

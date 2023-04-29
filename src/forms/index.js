@@ -9,6 +9,7 @@ import TypeOperationForm from './TypeOperationForm';
 import TitleDescriptionForm from './TitleDescriptionForm';
 import PropertyForm from './PropertyForm/PropertyForm';
 import AddressForm from './AddressForm';
+import FileUploadForm from './FileUploadForm';
 
 export {
 	LoginForm,
@@ -22,4 +23,5 @@ export {
 	TitleDescriptionForm,
 	PropertyForm,
 	AddressForm,
+	FileUploadForm,
 };

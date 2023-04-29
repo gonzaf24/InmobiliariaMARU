@@ -13,14 +13,11 @@
 		}
 	}
 
-	.FileInput {
-	}
-
 	.FileList {
 		border: 0px;
 		width: 100%;
 
-		.NewProductPhotosInfoWrapper {
+		.FileWrapper {
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
@@ -29,16 +26,16 @@
 			font-size: var(--bs-font-small);
 			border: 0px;
 
-			.NewProductArrows {
+			.New {
 				cursor: pointer;
 			}
 
-			.EditProductArrows {
+			.Edit {
 				cursor: pointer;
 			}
 		}
 
-		.NewProductDeleteItem {
+		.Delete {
 			margin-left: 10px;
 			cursor: pointer;
 			width: 20px;
