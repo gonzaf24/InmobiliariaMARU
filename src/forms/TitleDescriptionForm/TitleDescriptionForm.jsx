@@ -31,8 +31,10 @@ const TitleDescriptionForm = ({ className, testId, id, title, onTitleChange, des
 
 	return (
 		<div className={titleDescriptionFormClassNames} data-testid={testId} id={id}>
-			<Row className={styles.Margins}>
+			<Row>
 				<InputText colsWidth={12} label='Titulo' value={title} onChange={onTitleChange} />
+			</Row>
+			<Row>
 				<InputTextarea colsWidth={12} label='Descripción' value={description} onChange={onDescriptionChange} />
 			</Row>
 		</div>

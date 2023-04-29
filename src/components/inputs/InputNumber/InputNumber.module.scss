@@ -1,4 +1,7 @@
 @import '/src/styles/mixins.scss';
 
 .InputNumber {
+	input {
+		margin-bottom: 10px;
+	}
 }

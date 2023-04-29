@@ -3,9 +3,9 @@ import { getError } from './utils/errors';
 import { customFetch, protectedFetch } from './utils/request';
 
 const _URL = dataApi.BASE_URL_LOCAL;
-const _ENDPOINT = 'api/users';
+const _ENDPOINT = 'api/houses';
 
-export async function getUsers() {
+export async function getHouses() {
 	const response = await fetch(`${_URL}${_ENDPOINT}`, customFetch(dataApi.METHOD.GET));
 	if (!response.ok) {
 		const errorMessage = getError(response.status);
@@ -15,8 +15,8 @@ export async function getUsers() {
 	return data;
 }
 
-export async function postUser(user) {
-	const response = await fetch(`${_URL}${_ENDPOINT}`, protectedFetch(dataApi.METHOD.POST, user));
+export async function postHouse(house) {
+	const response = await fetch(`${_URL}${_ENDPOINT}`, protectedFetch(dataApi.METHOD.POST, house));
 	if (!response.ok) {
 		const errorMessage = getError(response.status);
 		throw new Error(errorMessage);
@@ -25,8 +25,8 @@ export async function postUser(user) {
 	return data;
 }
 
-export async function putUser(user) {
-	const response = await fetch(`${_URL}${_ENDPOINT}/${user.id}`, protectedFetch(dataApi.METHOD.PUT, user));
+export async function putHouse(house) {
+	const response = await fetch(`${_URL}${_ENDPOINT}/${house.id}`, protectedFetch(dataApi.METHOD.PUT, house));
 	if (!response.ok) {
 		const errorMessage = getError(response.status);
 		throw new Error(errorMessage);
@@ -35,7 +35,7 @@ export async function putUser(user) {
 	return data;
 }
 
-export async function deleteUser(id) {
+export async function deleteHouse(id) {
 	const response = await fetch(`${_URL}${_ENDPOINT}/${id}`, protectedFetch(dataApi.METHOD.DELETE));
 	if (!response.ok) {
 		const errorMessage = getError(response.status);

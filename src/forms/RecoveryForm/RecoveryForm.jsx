@@ -34,7 +34,7 @@ const RecoveryForm = ({ className, testId, id }) => {
 		<div className={recoveryFormClassNames} data-testid={testId} id={id}>
 			<span>{t(texts.Title)}</span>
 			<Form onSubmit={submitForm}>
-				<Form.Group className={styles.Margins} controlId='idRecoveryEmail'>
+				<Form.Group   controlId='idRecoveryEmail'>
 					<Form.Label className='text-center'>Email address</Form.Label>
 					<Form.Control type='email' placeholder='Enter email' required />
 				</Form.Group>

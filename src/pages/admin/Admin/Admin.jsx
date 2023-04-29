@@ -20,7 +20,8 @@ const defaultProps = {
 
 const texts = {
 	AdminUsers: 'Admin.AdminUsers',
-	RegisterNewFlat: 'Admin.RegisterNewFlat',
+	RegisterNewHouse: 'Admin.RegisterNewHouse',
+	Properties: 'Admin.Properties',
 };
 
 const Admin = ({ className, testId, id }) => {
@@ -33,8 +34,11 @@ const Admin = ({ className, testId, id }) => {
 			<NavLink to='/admin/users' className={styles.ItemLink}>
 				{t(texts.AdminUsers)}
 			</NavLink>
-			<NavLink to='/admin/newFlat' className={styles.ItemLink}>
-				{t(texts.RegisterNewFlat)}
+			<NavLink to='/admin/newHouse' className={styles.ItemLink}>
+				{t(texts.RegisterNewHouse)}
+			</NavLink>
+			<NavLink to='/admin/properties' className={styles.ItemLink}>
+				{t(texts.Properties)}
 			</NavLink>
 		</div>
 	);
