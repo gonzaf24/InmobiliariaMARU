@@ -7,9 +7,9 @@ import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import Loader from '../../../components/Loader/Loader';
 import { useTranslation } from 'react-i18next';
 import useToastContext from '../../../context/toastContext';
-import useUser from '../../../hooks/useUser';
 import { USERS_TYPES } from '../../../utils/constants';
 import useUserContext from '../../../context/userContext/userContext';
+import { useUser } from '../../../hooks';
 
 const propTypes = {
 	className: PropTypes.string,

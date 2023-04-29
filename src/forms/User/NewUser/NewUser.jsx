@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import Loader from '../../../components/Loader/Loader';
-import useUser from '../../../hooks/useUser';
 import styles from './NewUser.module.scss';
 import useToastContext from '../../../context/toastContext';
 import { USERS_TYPES } from '../../../utils/constants';
+import { useUser } from '../../../hooks';
 
 const propTypes = {
 	className: PropTypes.string,

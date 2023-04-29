@@ -5,8 +5,8 @@ import { Button, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
 import styles from './LoginForm.module.scss';
-import useUser from '../../hooks/useUser';
 import { Loader } from '../../components';
+import { useUser } from '../../hooks';
 
 const propTypes = {
 	className: PropTypes.string,

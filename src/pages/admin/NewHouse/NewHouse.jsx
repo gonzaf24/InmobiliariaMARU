@@ -15,10 +15,10 @@ import {
 } from '../../../forms';
 
 import { Button, Form } from 'react-bootstrap';
-import useHouse from '../../../hooks/useHouse';
 import { useNavigate } from 'react-router-dom';
 import useToastContext from '../../../context/toastContext';
 import { UPLOAD_TYPE } from '../../../forms/FileUploadForm/FileUploadForm';
+import { useHouse } from '../../../hooks';
 
 const propTypes = {
 	className: PropTypes.string,

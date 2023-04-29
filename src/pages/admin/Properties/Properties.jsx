@@ -3,9 +3,9 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import styles from './Properties.module.scss';
-import useHouse from '../../../hooks/useHouse';
 import { Button, Table } from 'react-bootstrap';
 import { MdDeleteForever, MdEdit } from 'react-icons/md';
+import { useHouse } from '../../../hooks';
 
 const propTypes = {
 	className: PropTypes.string,
