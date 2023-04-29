@@ -103,20 +103,20 @@ const FileSorteableList = ({ className, testId, id, categoryName, useName, files
 			<ListGroup className={styles.FileList}>
 				{files.map((el, index) => {
 					return (
-						<ListGroup.Item key={index} className={styles.NewProductPhotosInfoWrapper}>
+						<ListGroup.Item key={index} className={styles.FileWrapper}>
 							{files.length > 1 && (
 								<>
 									<div title='Mover foto arriba/abajo' onClick={handleSwap(files, index)}>
 										{index === files.length - 1 ? (
-											<BiUpArrowAlt className={styles.NewProductArrows} />
+											<BiUpArrowAlt className={styles.New} />
 										) : (
-											<BiDownArrowAlt className={styles.EditProductArrows} />
+											<BiDownArrowAlt className={styles.Edit} />
 										)}
 									</div>
 									{index}
 								</>
 							)}
-							<ImImage className={styles.NewProductDeleteItem} onClick={onShowImageFullSize(el)} />
+							<ImImage className={styles.Delete} onClick={onShowImageFullSize(el)} />
 							<div>{formatFileNameToShow(el)}</div>
 							<FileDelete src={el} onSuccesDeleted={handleSuccesDeleted(el)} className={styles.FileDelete} />
 						</ListGroup.Item>

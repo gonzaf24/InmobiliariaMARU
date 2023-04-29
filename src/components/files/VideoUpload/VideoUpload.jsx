@@ -39,12 +39,8 @@ const VideoUpload = ({ className, testId, id, files, setFiles }) => {
 	const handleDelete = useCallback(
 		fileToDelete => event => {
 			event.preventDefault();
-			const index = files.findIndex(file => file === fileToDelete);
-			if (index !== -1) {
-				const filesAux = [...files];
-				filesAux.splice(index, 1);
-				setFiles(filesAux);
-			}
+			const filesAux = files.filter(file => file !== fileToDelete);
+			setFiles(filesAux);
 		},
 		[setFiles, files]
 	);
@@ -104,20 +100,20 @@ const VideoUpload = ({ className, testId, id, files, setFiles }) => {
 			<ListGroup className={styles.FileList}>
 				{files.map((el, index) => {
 					return (
-						<ListGroup.Item key={index} className={styles.NewProductPhotosInfoWrapper}>
+						<ListGroup.Item key={index} className={styles.FileWrapper}>
 							{files.length > 1 && (
 								<>
 									<div title='Mover foto arriba/abajo' onClick={handleSwap(files, index)}>
 										{index === files.length - 1 ? (
-											<BiUpArrowAlt className={styles.NewProductArrows} />
+											<BiUpArrowAlt className={styles.New} />
 										) : (
-											<BiDownArrowAlt className={styles.EditProductArrows} />
+											<BiDownArrowAlt className={styles.Edit} />
 										)}
 									</div>
 									{index}
 								</>
 							)}
-							<ImImage className={styles.NewProductDeleteItem} /* onClick={onShowImageFullSize(el)} */ />
+							<ImImage className={styles.Delete} /* onClick={onShowImageFullSize(el)} */ />
 							<div>{el}</div>
 							<MdDeleteForever onClick={handleDelete(el)} className={styles.FileDelete} />
 						</ListGroup.Item>
