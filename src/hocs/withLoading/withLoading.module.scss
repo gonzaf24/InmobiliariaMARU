@@ -1,0 +1,12 @@
+@import "src/styles/mixins";
+
+.LoaderContainer {
+  position: relative;
+
+  .Loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

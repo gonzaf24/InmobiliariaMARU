@@ -286,7 +286,6 @@ const NewHouse = ({ className, testId, id }) => {
 					observations={observations}
 					onObservationsChange={setObservations}
 				/>
-
 				<SearchAddressForm
 					address={address}
 					onAddressChange={setAddress}
