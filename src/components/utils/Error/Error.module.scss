@@ -1,12 +1,12 @@
-@import "src/styles/mixins";
+@import 'src/styles/mixins';
 
 .Error {
-  padding: 20px;
+	padding: 20px;
 
-  .ErrorMsg {
-    margin-top: 10px;
-    font-size: var(--bs-font-small);
-    font-family: monospace;
-    color: var(--bs-danger);
-  }
+	.ErrorMsg {
+		margin-top: 10px;
+		font-size: var(--bs-font-small);
+		font-family: monospace;
+		color: var(--bs-danger);
+	}
 }

@@ -53,7 +53,9 @@ const InputTextLabel = ({ className, testId, id, colsWidth, value, onChange, lab
 				<FloatingLabel controlId={`text_${inputId}`} label={label}>
 					<Form.Control type='text' placeholder={placeholder} value={value} onChange={handleChange} />
 				</FloatingLabel>
-				<InputGroup.Text className={styles.Label} id={`text_${inputId}`}>{text}</InputGroup.Text>
+				<InputGroup.Text className={styles.Label} id={`text_${inputId}`}>
+					{text}
+				</InputGroup.Text>
 			</InputGroup>
 		</Form.Group>
 	);

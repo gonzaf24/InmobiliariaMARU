@@ -1,18 +1,18 @@
-@import "src/styles/mixins";
+@import 'src/styles/mixins';
 
 .LanguageSelector {
-    button {
-        border: none;
-        background: none;
-        width: fit-content;
-        color: var(--bs-primary);
-        font-size: 16pt;
-        font-weight: 800;
-        cursor: pointer;
+	button {
+		border: none;
+		background: none;
+		width: fit-content;
+		color: var(--bs-primary);
+		font-size: 16pt;
+		font-weight: 800;
+		cursor: pointer;
 
-        .LanguageIcon {
-            width: 20px;
-            padding-bottom: 10px;
-        }
-    }
+		.LanguageIcon {
+			width: 20px;
+			padding-bottom: 10px;
+		}
+	}
 }

@@ -29,7 +29,7 @@ const OwnerContactForm = ({ className, testId, id, name, onNameChange, phone, on
 
 	return (
 		<div className={OwnerContactFormClassNames} data-testid={testId} id={id}>
-			<Row  >
+			<Row>
 				<InputText colsWidth={4} label='Nombre propietario' value={name} onChange={onNameChange} />
 				<InputText colsWidth={4} label='Telefono propietario' value={phone} onChange={onPhoneChange} />
 				<InputText colsWidth={4} label='Email propietario' value={email} onChange={onEmailChange} />
