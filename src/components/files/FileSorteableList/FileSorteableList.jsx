@@ -19,6 +19,7 @@ const propTypes = {
 	useName: PropTypes.bool,
 	files: PropTypes.arrayOf(PropTypes.string),
 	setFiles: PropTypes.func,
+	name: PropTypes.string,
 };
 
 const defaultProps = {
@@ -29,9 +30,10 @@ const defaultProps = {
 	useName: false,
 	files: [],
 	setFiles: () => {},
+	name: '',
 };
 
-const FileSorteableList = ({ className, testId, id, categoryName, useName, files, setFiles }) => {
+const FileSorteableList = ({ className, testId, id, name, categoryName, useName, files, setFiles }) => {
 	const [showFullSizeImage, setShowFullSizeImage] = useState(false);
 	const [imgSrcFullSize, setImgSrcFullSize] = useState();
 
@@ -93,7 +95,7 @@ const FileSorteableList = ({ className, testId, id, categoryName, useName, files
 	return (
 		<div className={fileSorteableListClassNames} data-testid={testId} id={id}>
 			<InputGroup>
-				<FloatingLabel controlId='floatingInputGrid' label={categoryName}>
+				<FloatingLabel controlId='floatingInputGrid' label={name}>
 					<Form.Control type='text' placeholder='' className={styles.Input} disabled />
 				</FloatingLabel>
 				<InputGroup.Text id='basic-addon2'>

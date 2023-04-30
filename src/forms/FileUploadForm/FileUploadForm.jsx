@@ -36,21 +36,21 @@ const defaultProps = {
 export const UPLOAD_TYPE = {
 	VIDEO: {
 		id: 0,
-		name: 'VIDEO',
+		name: 'VIDEOS',
 		useName: false,
 		categoryName: 'VIDEO',
 	},
 	IMAGE: {
 		id: 1,
-		name: 'IMAGE',
+		name: 'IMAGES',
 		useName: false,
-		categoryName: 'IMAGES',
+		categoryName: 'IMAGE',
 	},
 	DOCUMENT: {
 		id: 2,
-		name: 'DOCUMENT',
+		name: 'DOCUMENTS',
 		useName: true,
-		categoryName: 'DOCUMENTS',
+		categoryName: 'DOCUMENT',
 	},
 };
 
@@ -69,6 +69,7 @@ const FileUploadForm = ({ className, testId, id, files, onFileChange, uploadType
 			<FileUploadComponent
 				files={files}
 				setFiles={onFileChange}
+				name={uploadType.name}
 				useName={uploadType.useName}
 				categoryName={uploadType.categoryName}
 			/>

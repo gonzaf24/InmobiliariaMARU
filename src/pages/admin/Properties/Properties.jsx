@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-import NewHouseModal from '../../../forms/NewHouseModal/NewHouseModal';
 import { Button, Table } from 'react-bootstrap';
-import { MdAddHomeWork, MdDeleteForever, MdEdit } from 'react-icons/md';
+import { MdDeleteForever, MdEdit } from 'react-icons/md';
 import { useHouse, useOpenToggle } from '../../../hooks';
 import { PROPERTY_ACQUISITION_OPTIONS } from '../../../utils/constants';
 import styles from './Properties.module.scss';
+import { NewHouseModal } from '../../../forms';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -45,8 +45,8 @@ const Properties = ({ className, testId, id }) => {
 		<div className={propertiesClassNames} data-testid={testId} id={id}>
 			<div className={styles.HeaderWrapper}>
 				<span>{'Lista de Propiedades'}</span>
-				<Button className={styles.NewUserButton} onClick={openNewHouse}>
-					<MdAddHomeWork />
+				<Button onClick={openNewHouse} className={styles.ButtonNewHouse}>
+					<MdEdit />
 				</Button>
 			</div>
 			<Table striped bordered hover responsive='sm'>

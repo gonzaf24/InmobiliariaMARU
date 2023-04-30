@@ -34,17 +34,17 @@ const RegisterForm = ({ className, testId, id }) => {
 		<div className={registerFormClassNames} data-testid={testId} id={id}>
 			<span>{t(texts.Title)}</span>
 			<Form onSubmit={submitForm}>
-				<Form.Group   controlId='idFormName'>
+				<Form.Group controlId='idFormName'>
 					<Form.Label className='text-center'>Name</Form.Label>
 					<Form.Control type='text' placeholder='Name' required />
 				</Form.Group>
 
-				<Form.Group   controlId='idRegisterEmail'>
+				<Form.Group controlId='idRegisterEmail'>
 					<Form.Label className='text-center'>Email address</Form.Label>
 					<Form.Control type='email' placeholder='Enter email' required />
 				</Form.Group>
 
-				<Form.Group   controlId='idRegisterPassword'>
+				<Form.Group controlId='idRegisterPassword'>
 					<Form.Label>Password</Form.Label>
 					<Form.Control type='password' placeholder='Password' required />
 				</Form.Group>

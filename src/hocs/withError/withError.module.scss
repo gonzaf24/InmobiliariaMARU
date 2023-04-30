@@ -1,12 +1,12 @@
-@import "src/styles/mixins";
+@import 'src/styles/mixins';
 
 .ErrorContainer {
-  position: relative;
+	position: relative;
 
-  .Error {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+	.Error {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
 }

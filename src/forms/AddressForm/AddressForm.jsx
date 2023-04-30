@@ -157,7 +157,7 @@ const AddressForm = ({
 
 	return (
 		<div className={addressFormClassNames} data-testid={testId} id={id}>
-			<Row  >
+			<Row>
 				<InputSelectGeography
 					options={paisesMap}
 					defaultValue={DEFUALT_SELECTOR}
@@ -195,7 +195,7 @@ const AddressForm = ({
 				/>
 				<InputText colsWidth={2} label='Codigo Postal' value={postalCode} onChange={onPostalCodeChange} />
 			</Row>
-			<Row  >
+			<Row>
 				<InputText colsWidth={5} label='Calle' value={street} onChange={onStreetChange} />
 				<InputText colsWidth={2} label='Numero' value={addressNumber} onChange={onAddressNumberChange} />
 				<InputText colsWidth={1} label='Piso' value={floor} onChange={onFloorChange} />

@@ -1,12 +1,12 @@
-@import "src/styles/mixins";
+@import 'src/styles/mixins';
 
 .EmptyContainer {
-  position: relative;
+	position: relative;
 
-  .Empty {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+	.Empty {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
 }

@@ -34,7 +34,7 @@ const TypeOperationForm = ({ className, testId, id, operation, onOperationChange
 
 	return (
 		<div className={typeOperationFormClassNames} data-testid={testId} id={id}>
-			<Row  >
+			<Row>
 				<InputSelect
 					colsWidth={2}
 					label='Operacion'

@@ -2,42 +2,45 @@ import React, { useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-import styles from './NewHouse.module.scss';
 import { useTranslation } from 'react-i18next';
-import {
-	AddressForm,
-	FileUploadForm,
-	OwnerContactForm,
-	PropertyForm,
-	SearchAddressForm,
-	TitleDescriptionForm,
-	TypeOperationForm,
-} from '../../../forms';
 
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import useToastContext from '../../../context/toastContext';
-import { UPLOAD_TYPE } from '../../../forms/FileUploadForm/FileUploadForm';
+
+import styles from './NewHouseModal.module.scss';
+import { Modal } from '../../../components';
+import TypeOperationForm from '../../TypeOperationForm';
+import AddressForm from '../../AddressForm';
+import PropertyForm from '../../PropertyForm/PropertyForm';
+import SearchAddressForm from '../../SearchAddressForm';
+import TitleDescriptionForm from '../../TitleDescriptionForm';
+import FileUploadForm from '../../FileUploadForm';
+import { UPLOAD_TYPE } from '../../FileUploadForm/FileUploadForm';
+import OwnerContactForm from '../../OwnerContactForm';
 import { useHouse } from '../../../hooks';
+import useToastContext from '../../../context/toastContext';
 
 const propTypes = {
 	className: PropTypes.string,
 	testId: PropTypes.string,
 	id: PropTypes.string,
+	isOpen: PropTypes.bool,
+	onClose: PropTypes.func,
 };
 
 const defaultProps = {
 	className: '',
 	testId: undefined,
 	id: undefined,
+	isOpen: false,
+	onClose: () => {},
 };
 
 const texts = {
-	Title: 'NewHouse.Title',
+	Title: 'NewHouseModal.Title',
 };
 
-const NewHouse = ({ className, testId, id }) => {
-	const NewHouseClassNames = classnames(styles.NewHouse, className);
+const NewHouseModal = ({ className, testId, id, isOpen, onClose }) => {
 	const { t } = useTranslation();
 	const [operation, setOperation] = useState();
 	const [price, setPrice] = useState();
@@ -215,123 +218,140 @@ const NewHouse = ({ className, testId, id }) => {
 		}
 	};
 
-	return (
-		<Form onSubmit={submitForm} noValidate>
-			<div className={NewHouseClassNames} data-testid={testId} id={id}>
-				<span className={styles.Title}>{t(texts.Title)}</span>
-				<TypeOperationForm operation={operation} onOperationChange={setOperation} price={price} onPriceChange={setPrice} />
-				<AddressForm
-					country={country}
-					onCountryChange={setCountry}
-					region={region}
-					onRegionChange={setRegion}
-					city={city}
-					onCityChange={setCity}
-					neighborhood={neighborhood}
-					onNeighborhoodChange={setNeighborhood}
-					postalCode={postalCode}
-					onPostalCodeChange={setPostalCode}
-					street={street}
-					onStreetChange={setStreet}
-					addressNumber={addressNumber}
-					onAddressNumberChange={setAddressNumber}
-					floor={floor}
-					onFloorChange={setFloor}
-					door={door}
-					onDoorChange={setDoor}
-					stair={stair}
-					onStairChange={setStair}
-				/>
-				<PropertyForm
-					propertyType={propertyType}
-					onPropertyTypeChange={setPropertyType}
-					rooms={rooms}
-					onRoomsChange={setRooms}
-					bathrooms={bathrooms}
-					onBathroomsChange={setBathrooms}
-					size={size}
-					onSizeChange={setSize}
-					floors={floors}
-					onFloorsChange={setFloors}
-					heatingCooling={heatingCooling}
-					onHeatingCoolingChange={setHeatingCooling}
-					water={water}
-					onWaterChange={setWater}
-					electricity={electricity}
-					onElectricityChange={setElectricity}
-					gas={gas}
-					onGasChange={setGas}
-					furnished={furnished}
-					onFurnishedChange={setFurnished}
-					pets={pets}
-					onPetsChange={setPets}
-					parking={parking}
-					onParkingChange={setParking}
-					pool={pool}
-					onPoolChange={setPool}
-					jacuzzi={jacuzzi}
-					onJacuzziChange={setJacuzzi}
-					garden={garden}
-					onGardenChange={setGarden}
-					terrace={terrace}
-					onTerraceChange={setTerrace}
-					horizontal={horizontal}
-					onHorizontalChange={setHorizontal}
-					constructionYear={constructionYear}
-					onConstructionYearChange={setConstructionYear}
-					renovationYear={renovationYear}
-					onRenovationYearChange={setRenovationYear}
-					antiquity={antiquity}
-					onAntiquityChange={setAntiquity}
-					observations={observations}
-					onObservationsChange={setObservations}
-				/>
-				<SearchAddressForm
-					address={address}
-					onAddressChange={setAddress}
-					lat={lat}
-					onLatChange={setLat}
-					lng={lng}
-					onLngChange={setLng}
-					isAddress={isAddress}
-					onIsAddressChange={setIsAddress}
-					exactPosition={exactPosition}
-					onExactPositionChange={setExactPosition}
-					showInMap={showInMap}
-					onShowInMapChange={setShowInMap}
-				/>
-				<OwnerContactForm
-					name={ownerName}
-					onNameChange={setOwnerName}
-					phone={ownerPhone}
-					onPhoneChange={setOwnerPhone}
-					email={ownerEmail}
-					onEmailChange={setOwnerEmail}
-				/>
-				<TitleDescriptionForm
-					title={title}
-					onTitleChange={setTitle}
-					description={description}
-					onDescriptionChange={setDescription}
-				/>
+	const handleClose = () => {
+		resetInputs();
+		onClose();
+	};
 
-				<FileUploadForm files={photos} onFileChange={setPhotos} uploadType={UPLOAD_TYPE.IMAGE} />
-				<FileUploadForm files={videos} onFileChange={setVideos} uploadType={UPLOAD_TYPE.VIDEO} />
-				<FileUploadForm files={documents} onFileChange={setDocuments} uploadType={UPLOAD_TYPE.DOCUMENT} />
-				<div className={styles.Footer}>
-					<Button variant='secondary' onClick={() => {}} className={styles.Button}>
-						Cancelar
-					</Button>
-					<Button variant='primary' type='submit' className={styles.Button}>
-						Crear
-					</Button>
+	const newHouseModalClassNames = classnames(styles.NewHouseModal, className);
+
+	return (
+		<Modal
+			className={styles.Modal}
+			id={id}
+			size='xl'
+			header={t(texts.Title)}
+			isOpen={isOpen}
+			onHide={onClose}
+			onClose={onClose}
+			backdrop='static'
+		>
+			<Form onSubmit={submitForm} noValidate>
+				<div className={newHouseModalClassNames} data-testid={testId} id={id}>
+					<TypeOperationForm operation={operation} onOperationChange={setOperation} price={price} onPriceChange={setPrice} />
+					<AddressForm
+						country={country}
+						onCountryChange={setCountry}
+						region={region}
+						onRegionChange={setRegion}
+						city={city}
+						onCityChange={setCity}
+						neighborhood={neighborhood}
+						onNeighborhoodChange={setNeighborhood}
+						postalCode={postalCode}
+						onPostalCodeChange={setPostalCode}
+						street={street}
+						onStreetChange={setStreet}
+						addressNumber={addressNumber}
+						onAddressNumberChange={setAddressNumber}
+						floor={floor}
+						onFloorChange={setFloor}
+						door={door}
+						onDoorChange={setDoor}
+						stair={stair}
+						onStairChange={setStair}
+					/>
+					<PropertyForm
+						propertyType={propertyType}
+						onPropertyTypeChange={setPropertyType}
+						rooms={rooms}
+						onRoomsChange={setRooms}
+						bathrooms={bathrooms}
+						onBathroomsChange={setBathrooms}
+						size={size}
+						onSizeChange={setSize}
+						floors={floors}
+						onFloorsChange={setFloors}
+						heatingCooling={heatingCooling}
+						onHeatingCoolingChange={setHeatingCooling}
+						water={water}
+						onWaterChange={setWater}
+						electricity={electricity}
+						onElectricityChange={setElectricity}
+						gas={gas}
+						onGasChange={setGas}
+						furnished={furnished}
+						onFurnishedChange={setFurnished}
+						pets={pets}
+						onPetsChange={setPets}
+						parking={parking}
+						onParkingChange={setParking}
+						pool={pool}
+						onPoolChange={setPool}
+						jacuzzi={jacuzzi}
+						onJacuzziChange={setJacuzzi}
+						garden={garden}
+						onGardenChange={setGarden}
+						terrace={terrace}
+						onTerraceChange={setTerrace}
+						horizontal={horizontal}
+						onHorizontalChange={setHorizontal}
+						constructionYear={constructionYear}
+						onConstructionYearChange={setConstructionYear}
+						renovationYear={renovationYear}
+						onRenovationYearChange={setRenovationYear}
+						antiquity={antiquity}
+						onAntiquityChange={setAntiquity}
+						observations={observations}
+						onObservationsChange={setObservations}
+					/>
+					<SearchAddressForm
+						address={address}
+						onAddressChange={setAddress}
+						lat={lat}
+						onLatChange={setLat}
+						lng={lng}
+						onLngChange={setLng}
+						isAddress={isAddress}
+						onIsAddressChange={setIsAddress}
+						exactPosition={exactPosition}
+						onExactPositionChange={setExactPosition}
+						showInMap={showInMap}
+						onShowInMapChange={setShowInMap}
+					/>
+					<OwnerContactForm
+						name={ownerName}
+						onNameChange={setOwnerName}
+						phone={ownerPhone}
+						onPhoneChange={setOwnerPhone}
+						email={ownerEmail}
+						onEmailChange={setOwnerEmail}
+					/>
+					<TitleDescriptionForm
+						title={title}
+						onTitleChange={setTitle}
+						description={description}
+						onDescriptionChange={setDescription}
+					/>
+
+					<FileUploadForm files={photos} onFileChange={setPhotos} uploadType={UPLOAD_TYPE.IMAGE} />
+					<FileUploadForm files={videos} onFileChange={setVideos} uploadType={UPLOAD_TYPE.VIDEO} />
+					<FileUploadForm files={documents} onFileChange={setDocuments} uploadType={UPLOAD_TYPE.DOCUMENT} />
+					<div className={styles.Footer}>
+						<Button variant='secondary' onClick={handleClose} className={styles.Button}>
+							Cancelar
+						</Button>
+						<Button variant='primary' type='submit' className={styles.Button}>
+							Crear
+						</Button>
+					</div>
 				</div>
-			</div>
-		</Form>
+			</Form>
+		</Modal>
 	);
 };
 
-NewHouse.propTypes = propTypes;
-NewHouse.defaultProps = defaultProps;
+NewHouseModal.propTypes = propTypes;
+NewHouseModal.defaultProps = defaultProps;
 
-export default NewHouse;
+export default NewHouseModal;

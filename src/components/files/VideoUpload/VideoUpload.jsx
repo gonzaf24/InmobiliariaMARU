@@ -14,6 +14,7 @@ const propTypes = {
 	id: PropTypes.string,
 	files: PropTypes.arrayOf(PropTypes.string),
 	setFiles: PropTypes.func,
+	name: PropTypes.string,
 };
 
 const defaultProps = {
@@ -22,9 +23,10 @@ const defaultProps = {
 	id: undefined,
 	files: [],
 	setFiles: () => {},
+	name: 'VIDEOS',
 };
 
-const VideoUpload = ({ className, testId, id, files, setFiles }) => {
+const VideoUpload = ({ className, testId, id, files, setFiles, name }) => {
 	const [urlVideo, setUrlVideo] = useState('');
 
 	const handleAddVideo = useCallback(
@@ -88,7 +90,7 @@ const VideoUpload = ({ className, testId, id, files, setFiles }) => {
 	return (
 		<div className={videoUploadClassNames} data-testid={testId} id={id}>
 			<InputGroup>
-				<FloatingLabel controlId='floatingInputGrid' label={'Videos'}>
+				<FloatingLabel controlId='floatingInputGrid' label={name}>
 					<Form.Control type='text' placeholder='' className={styles.Input} value={urlVideo} onChange={handleChange} />
 				</FloatingLabel>
 				<InputGroup.Text id='basic-addon2'>
