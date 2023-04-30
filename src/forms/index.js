@@ -9,7 +9,7 @@ import PropertyForm from './PropertyForm/PropertyForm';
 import AddressForm from './AddressForm';
 import FileUploadForm from './FileUploadForm';
 
-export * from './user';
+export * from './users';
 export * from './modals';
 
 export {
