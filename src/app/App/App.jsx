@@ -8,6 +8,7 @@ import '../../styles/theme.scss';
 import '../../styles/bootstrap.scss';
 import AppLayout from '../AppLayout';
 import AppRoutes from '../AppRoutes';
+import AppProvider from '../../context/appContext/AppProvider';
 
 const propTypes = {};
 
@@ -15,15 +16,17 @@ const defaultProps = {};
 
 const App = () => {
 	return (
-		<UserProvider>
-			<ToastProvider>
-				<Suspense fallback={null}>
-					<AppLayout>
-						<AppRoutes />
-					</AppLayout>
-				</Suspense>
-			</ToastProvider>
-		</UserProvider>
+		<AppProvider>
+			<UserProvider>
+				<ToastProvider>
+					<Suspense fallback={null}>
+						<AppLayout>
+							<AppRoutes />
+						</AppLayout>
+					</Suspense>
+				</ToastProvider>
+			</UserProvider>
+		</AppProvider>
 	);
 };
 

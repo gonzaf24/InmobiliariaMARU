@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Route, Routes } from 'react-router-dom';
 
 import styles from './AppRoutes.module.scss';
-import { Home, About, Login, Users, NewHouse, Rent, Sale, Admin, Properties } from '../../pages';
+import { Home, About, Login, Users, Rent, Sale, Admin, Properties } from '../../pages';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -31,7 +31,6 @@ const AppRoutes = ({ className, testId, id }) => {
 				<Route path='/login' element={<Login />} />
 				<Route path='/admin' element={<Admin />} end />
 				<Route path='/admin/users' element={<Users />} />
-				<Route path='/admin/newHouse' element={<NewHouse />} />
 				<Route path='/admin/properties' element={<Properties />} />
 			</Routes>
 		</div>

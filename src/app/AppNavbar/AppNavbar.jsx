@@ -2,8 +2,7 @@ import React, { useMemo, useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-import UserContext from '../../context/userContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { BlueLogo } from '../../assets/images';
 import { Navbar, Container, Nav, Offcanvas } from 'react-bootstrap';
 
@@ -37,13 +36,18 @@ const texts = {
 	MyAcoount: 'AppNavbar.MyAccount',
 };
 
-const options = [
+export const ROUTING_OPTIONS = [
 	{ label: texts.Home, value: '/' },
 	{ label: texts.Rent, value: '/rent' },
 	{ label: texts.Sale, value: '/sale' },
 	{ label: texts.About, value: '/about' },
 	{ label: texts.Admin, value: '/admin', adminOnly: true },
 ];
+
+function getFirstSegment(path) {
+	const segments = path.split('/');
+	return '/' + segments[1];
+}
 
 const LOGIN_PATH = '/login';
 
@@ -52,17 +56,17 @@ const expand = 'lg';
 const AppNavbar = ({ className, testId, id }) => {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
-
-	const [currentState, setCurrentState] = useState(options[0].value);
-	const { isLogged, logout } = useUser();
-	const { user } = UserContext();
+	const location = useLocation();
+	const pathname = getFirstSegment(location.pathname);
+	const [currentState, setCurrentState] = useState(pathname);
+	const { isLogged, logout, user } = useUser();
 	const [showMenu, setShowMenu] = useState(false);
 
 	const isUserAdmin = useMemo(() => user?.type === USERS_TYPES.ADMIN || false, [user]);
-	const filteredOptions = useMemo(() => options.filter(option => !option.adminOnly || isUserAdmin), [isUserAdmin]);
+	const filteredOptions = useMemo(() => ROUTING_OPTIONS.filter(option => !option.adminOnly || isUserAdmin), [isUserAdmin]);
 
 	const handleLogout = () => {
-		setCurrentState(options[0].value);
+		setCurrentState(ROUTING_OPTIONS[0].value);
 		logout();
 	};
 

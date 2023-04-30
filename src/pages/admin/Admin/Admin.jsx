@@ -34,9 +34,6 @@ const Admin = ({ className, testId, id }) => {
 			<NavLink to='/admin/users' className={styles.ItemLink}>
 				{t(texts.AdminUsers)}
 			</NavLink>
-			<NavLink to='/admin/newHouse' className={styles.ItemLink}>
-				{t(texts.RegisterNewHouse)}
-			</NavLink>
 			<NavLink to='/admin/properties' className={styles.ItemLink}>
 				{t(texts.Properties)}
 			</NavLink>
