@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import { Button, Table } from 'react-bootstrap';
-import { MdAddHomeWork, MdDeleteForever, MdEdit } from 'react-icons/md';
+import { MdDeleteForever, MdEdit, MdOutlineAddHomeWork } from 'react-icons/md';
 import { useHouse, useOpenToggle } from '../../../hooks';
 import { PROPERTY_ACQUISITION_OPTIONS } from '../../../utils/constants';
 import styles from './Properties.module.scss';
@@ -46,7 +46,7 @@ const Properties = ({ className, testId, id }) => {
 			<div className={styles.HeaderWrapper}>
 				<span>{'Lista de Propiedades'}</span>
 				<Button onClick={openNewHouse} className={styles.ButtonNewHouse}>
-					<MdAddHomeWork />
+					<MdOutlineAddHomeWork />
 				</Button>
 			</div>
 			<Table striped bordered hover responsive='sm'>
