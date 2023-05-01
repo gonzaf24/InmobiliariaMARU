@@ -90,7 +90,6 @@ const SearchAddressForm = ({
 	};
 
 	const handleExactPostionChange = e => {
-		console.log('handleExactPostionChange', !exactPosition);
 		onExactPostionChange(!exactPosition);
 	};
 
@@ -138,6 +137,7 @@ const SearchAddressForm = ({
 						componentRestrictions: { country: ['es', 'do'] },
 					}}
 					fetchDetails={true}
+					required
 				/>
 			)}
 			{!isAddress && (

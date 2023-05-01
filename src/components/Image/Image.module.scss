@@ -1,0 +1,31 @@
+@import '/src/styles/mixins.scss';
+
+.Image {
+	max-width: 100%;
+	max-height: 100%;
+	border-radius: var(--bs-radius-medium);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0px;
+
+	.FigureImage {
+		height: 100%;
+		width: 100%;
+		max-width: 100%;
+		max-height: 100%;
+		background-color: transparent;
+		border-radius: inherit;
+		margin: 0px;
+	}
+
+	.Invalid {
+		height: inherit;
+		width: inherit;
+		border-radius: inherit;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: linear-gradient(180deg, rgba(48, 48, 57, 0.63) 12.94%, #161618 81.02%);
+	}
+}

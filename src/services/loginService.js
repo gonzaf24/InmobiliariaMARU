@@ -2,7 +2,7 @@ import dataApi from './utils/dataApi';
 import { getError } from './utils/errors';
 import { customFetch } from './utils/request';
 
-const _URL = dataApi.BASE_URL;
+const _URL = dataApi.BASE_URL_LOCAL;
 const _ENDPOINT = 'api/login';
 
 export default async function loginService({ username, password }) {

@@ -7,9 +7,10 @@ import { formatFileNameToShow } from '../../../utils/formatters';
 import styles from './FileSorteableList.module.scss';
 import { FloatingLabel, Form, InputGroup, ListGroup } from 'react-bootstrap';
 import { BiDownArrowAlt, BiUpArrowAlt } from 'react-icons/bi';
-import FullSizeImage from '../../FullSizeImage/FullSizeImage';
 import FileUpload from '../FileUpload';
 import FileDelete from '../FileDelete';
+import ImagePreviewModal from '../../modals/ImagePreviewModal/ImagePreviewModal';
+import { useOpenToggle } from '../../../hooks';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -34,8 +35,9 @@ const defaultProps = {
 };
 
 const FileSorteableList = ({ className, testId, id, name, categoryName, useName, files, setFiles }) => {
-	const [showFullSizeImage, setShowFullSizeImage] = useState(false);
-	const [imgSrcFullSize, setImgSrcFullSize] = useState();
+	const { isOpen: isOpenImagePreview, open: openImagePreview, close: closeImagePreview } = useOpenToggle(false);
+
+	const [imgPreviewURL, setImgPreviewURL] = useState();
 
 	const swapDown = useCallback(
 		(files, index) => {
@@ -68,11 +70,12 @@ const FileSorteableList = ({ className, testId, id, name, categoryName, useName,
 	);
 
 	const onShowImageFullSize = useCallback(
-		fileSrc => () => {
-			setImgSrcFullSize(fileSrc);
-			setShowFullSizeImage(true);
+		imgURL => () => {
+			console.log('imgURL', imgURL);
+			setImgPreviewURL(imgURL);
+			openImagePreview();
 		},
-		[setImgSrcFullSize, setShowFullSizeImage]
+		[openImagePreview, setImgPreviewURL]
 	);
 
 	const onSuccesUpload = useCallback(
@@ -83,8 +86,8 @@ const FileSorteableList = ({ className, testId, id, name, categoryName, useName,
 	);
 
 	const handleSuccesDeleted = useCallback(
-		fileSrc => async () => {
-			setFiles(files => files.filter(el => el !== fileSrc));
+		imgURL => async () => {
+			setFiles(files => files.filter(el => el !== imgURL));
 		},
 		[setFiles]
 	);
@@ -125,7 +128,7 @@ const FileSorteableList = ({ className, testId, id, name, categoryName, useName,
 					);
 				})}
 			</ListGroup>
-			<FullSizeImage imgSrc={imgSrcFullSize} setShowFullSizeImage={setShowFullSizeImage} show={showFullSizeImage} />
+			<ImagePreviewModal isOpen={isOpenImagePreview} onClose={closeImagePreview} imgURL={imgPreviewURL} />
 		</div>
 	);
 };

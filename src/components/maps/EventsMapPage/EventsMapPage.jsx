@@ -41,35 +41,28 @@ const EventsMapPage = ({ className, center: centerProp, zoom: zoomProp, greatPla
 	const { isOpen: isOpenMarkerInfo, open: openMarkerInfo, close: closeMarkerIndo } = useOpenToggle(false);
 
 	const onBoundsChange = useCallback((newCenter, newZoom) => {
-		console.log('onBoundsChange', newCenter, newZoom);
 		setCenter(newCenter);
 		setZoom(newZoom);
 	}, []);
 
 	const onChildClick = useCallback((key, childProps) => {
-		console.log('onChildClick', key, childProps);
 		setCenter([childProps.lat, childProps.lng]);
 		setSelectedPlace(childProps);
 		openMarkerInfo();
 	}, []);
 
 	const onChildMouseEnter = useCallback(key => {
-		console.log('onChildMouseEnter', key);
 		setHoverKey(key);
 	}, []);
 
 	const onChildMouseLeave = useCallback(() => {
-		console.log('onChildMouseLeave');
 		setHoverKey(null);
 	}, []);
-
-	console.log('selectedPlace', selectedPlace);
 
 	const places = useMemo(
 		() =>
 			greatPlaces.map(place => {
 				const { id, link, ...coords } = place;
-				console.log('coords', coords);
 				return (
 					<EventsMapMarker
 						key={id}

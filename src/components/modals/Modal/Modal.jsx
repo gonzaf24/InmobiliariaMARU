@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Modal as ModalBoostrap } from 'react-bootstrap';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
@@ -6,6 +6,7 @@ import { MdClose } from 'react-icons/md';
 
 import styles from './Modal.module.scss';
 import Loader from '../../Loader';
+import { MODAL_TRANSITION_EFFECT } from '../../../utils/constants';
 
 const propTypes = {
 	children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
@@ -20,6 +21,8 @@ const propTypes = {
 	onClose: PropTypes.func,
 	onHide: PropTypes.func,
 	backdrop: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['static'])]),
+	backdropClassName: PropTypes.string,
+	effect: PropTypes.string,
 };
 
 const defaultProps = {
@@ -35,6 +38,8 @@ const defaultProps = {
 	onClose: undefined,
 	onHide: undefined,
 	backdrop: true,
+	backdropClassName: undefined,
+	effect: undefined,
 };
 
 const Modal = ({
@@ -50,29 +55,67 @@ const Modal = ({
 	header,
 	size,
 	backdrop,
+	backdropClassName,
+	effect,
 }) => {
-	const modalClassNames = classnames(styles.Modal, className);
-	const headerClassNames = classnames(styles.Header, {
-		[styles.Empty]: !header,
-	});
+	const modalRef = useRef(null);
+
+	const timedClose = isOnHide => {
+		setTimeout(() => {
+			if (isOnHide) {
+				onHide();
+			} else {
+				onClose();
+			}
+		}, 200);
+	};
+
+	const handleClose = isOnHide => () => {
+		const { dialog } = modalRef.current;
+		if (effect === MODAL_TRANSITION_EFFECT.up) {
+			dialog.classList.remove(styles.UpEffect);
+			dialog.classList.add(styles.CloseUpEffect);
+			timedClose(isOnHide);
+		} else if (effect === MODAL_TRANSITION_EFFECT.down) {
+			dialog.classList.remove(styles.DownEffect);
+			dialog.classList.add(styles.CloseDownEffect);
+			timedClose(isOnHide);
+		} else if (isOnHide) {
+			onHide();
+		} else {
+			onClose();
+		}
+	};
+
+	const modalClassNames = classnames(
+		styles.Modal,
+		className,
+		{ [styles.UpEffect]: effect === MODAL_TRANSITION_EFFECT.up },
+		{ [styles.DownEffect]: effect === MODAL_TRANSITION_EFFECT.down }
+	);
+
+	const headerClassNames = classnames(styles.Header, { [styles.Empty]: !header });
+	const backdropClassNames = classnames(styles.Backdrop, backdropClassName);
 
 	return (
 		<ModalBoostrap
+			ref={modalRef}
 			aria-labelledby='modal-center'
 			centered
 			className={modalClassNames}
 			data-testid={dataTestId}
+			backdrop={backdrop}
+			backdropClassName={backdropClassNames}
 			id={id}
 			show={isOpen}
 			size={size}
-			onHide={onHide}
-			backdrop={backdrop}
+			onHide={handleClose(true)}
 		>
 			{(header || onClose) && (
 				<ModalBoostrap.Header className={headerClassNames}>
 					<span />
 					{header}
-					{onClose && <MdClose className={styles.CloseIcon} onClick={onClose} onKeyPress={onClose} />}
+					{onClose && <MdClose className={styles.CloseIcon} onClick={handleClose(false)} onKeyPress={handleClose(false)} />}
 				</ModalBoostrap.Header>
 			)}
 			{children && (

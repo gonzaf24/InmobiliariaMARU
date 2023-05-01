@@ -1,0 +1,27 @@
+@import '/src/styles/mixins.scss';
+
+.NewHouseForm {
+	padding: 50px 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	user-select: none;
+
+	.Title {
+		text-align: center;
+		font-size: var(--bs-font-extra-large);
+		margin-bottom: 20px;
+	}
+
+	.Footer {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 20px;
+		margin-top: 20px;
+
+		.Button {
+			width: 100%;
+		}
+	}
+}

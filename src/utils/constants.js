@@ -37,6 +37,8 @@ export const PROPERTY_HEATING_COOLING_OPTIONS = {
 	INDIVIDUAL: { label: 'Individual', value: 'individual' },
 };
 
+export const DEFUALT_SELECTOR = 'Seleccione';
+
 export const SELECTORS = {
 	PROPERTY_HEATING_COOLING_OPTIONS,
 	PROPERTY_ACQUISITION_OPTIONS,
@@ -49,4 +51,9 @@ export const BREAKPOINTS_DEVICES = {
 	SMALL_TABLET: 744,
 	TABLET: 990,
 	BIG_DESKTOP: 1920,
+};
+
+export const MODAL_TRANSITION_EFFECT = {
+	up: 'up',
+	down: 'down',
 };
