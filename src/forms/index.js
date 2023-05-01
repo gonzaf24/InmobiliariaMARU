@@ -10,7 +10,7 @@ import AddressForm from './AddressForm';
 import FileUploadForm from './FileUploadForm';
 
 export * from './users';
-export * from './modals';
+export * from './houses';
 
 export {
 	LoginForm,

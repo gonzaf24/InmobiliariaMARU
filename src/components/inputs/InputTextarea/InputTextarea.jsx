@@ -14,6 +14,7 @@ const propTypes = {
 	label: PropTypes.string,
 	placeholder: PropTypes.string,
 	colsWidth: PropTypes.number,
+	isRequired: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -25,9 +26,10 @@ const defaultProps = {
 	label: '',
 	placeholder: '',
 	colsWidth: 12,
+	isRequired: false,
 };
 
-const InputTextarea = ({ className, testId, id, colsWidth, value, onChange, label, placeholder }) => {
+const InputTextarea = ({ className, testId, id, colsWidth, value, onChange, label, placeholder, isRequired }) => {
 	const handleChange = useCallback(
 		event => {
 			onChange(event.target.value);
@@ -47,6 +49,7 @@ const InputTextarea = ({ className, testId, id, colsWidth, value, onChange, labe
 					value={value}
 					onChange={handleChange}
 					className={styles.TextArea}
+					required={isRequired}
 				/>
 			</FloatingLabel>
 		</Form.Group>

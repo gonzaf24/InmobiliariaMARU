@@ -16,6 +16,7 @@ const propTypes = {
 	isDisabled: PropTypes.bool,
 	options: PropTypes.arrayOf(PropTypes.string),
 	defaultValue: PropTypes.string,
+	isRequired: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -29,6 +30,7 @@ const defaultProps = {
 	options: [],
 	isDisabled: false,
 	defaultValue: undefined,
+	isRequired: false,
 };
 
 const InputSelectGeography = ({
@@ -42,6 +44,7 @@ const InputSelectGeography = ({
 	options,
 	isDisabled,
 	defaultValue,
+	isRequired,
 }) => {
 	const [inputId] = useState(`input_${Math.random().toString(36).substr(2, 9)}`);
 	const inputSelectGeographyClassNames = classnames(styles.InputSelectGeography, className);
@@ -56,8 +59,8 @@ const InputSelectGeography = ({
 			controlId={inputId}
 		>
 			<FloatingLabel controlId={`text_${inputId}`} label={label}>
-				<Form.Select aria-label='Select' value={value} onChange={onChange} disabled={isDisabled}>
-					{defaultValue && <option value={defaultValue}>{defaultValue}</option>}
+				<Form.Select aria-label='Select' value={value} onChange={onChange} disabled={isDisabled} required={isRequired}>
+					{defaultValue && <option value=''>{defaultValue}</option>}
 					{options.map((value, index) => {
 						return (
 							<option key={index} value={value}>

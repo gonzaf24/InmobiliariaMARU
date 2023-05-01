@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import styles from './AddressForm.module.scss';
 import { Row } from 'react-bootstrap';
 import geografia from './geografia.json';
-import { InputSelectGeography, InputText } from '../../components/inputs';
+import { InputNumber, InputSelectGeography, InputText } from '../../components/inputs';
+import { DEFUALT_SELECTOR } from '../../utils/constants';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -58,8 +59,6 @@ const defaultProps = {
 	stair: '',
 	onStairChange: () => {},
 };
-
-const DEFUALT_SELECTOR = 'Seleccione';
 
 const AddressForm = ({
 	className,
@@ -165,15 +164,17 @@ const AddressForm = ({
 					label='Pais'
 					value={country}
 					onChange={handlePaisSeleccionado}
+					isRequired
 				/>
 				<InputSelectGeography
 					options={regionesMap}
 					defaultValue={DEFUALT_SELECTOR}
 					colsWidth={3}
-					label='Comunidad'
+					label='Region'
 					value={region}
 					onChange={handleRegionSeleccionada}
 					isDisabled={!country}
+					isRequired
 				/>
 				<InputSelectGeography
 					options={ciudadesMap}
@@ -183,6 +184,7 @@ const AddressForm = ({
 					value={city}
 					onChange={handleCiudadSeleccionada}
 					isDisabled={!region}
+					isRequired
 				/>
 				<InputSelectGeography
 					options={barrios}
@@ -192,13 +194,14 @@ const AddressForm = ({
 					value={neighborhood}
 					onChange={handleBarrioSeleccionado}
 					isDisabled={!city}
+					isRequired
 				/>
-				<InputText colsWidth={2} label='Codigo Postal' value={postalCode} onChange={onPostalCodeChange} />
+				<InputNumber colsWidth={2} label='Codigo Postal' value={postalCode} onChange={onPostalCodeChange} isRequired />
 			</Row>
 			<Row>
-				<InputText colsWidth={5} label='Calle' value={street} onChange={onStreetChange} />
-				<InputText colsWidth={2} label='Numero' value={addressNumber} onChange={onAddressNumberChange} />
-				<InputText colsWidth={1} label='Piso' value={floor} onChange={onFloorChange} />
+				<InputText colsWidth={5} label='Calle' value={street} onChange={onStreetChange} isRequired />
+				<InputNumber colsWidth={2} label='Numero' value={addressNumber} onChange={onAddressNumberChange} isRequired />
+				<InputNumber colsWidth={1} label='Piso' value={floor} onChange={onFloorChange} />
 				<InputText colsWidth={2} label='Puerta' value={door} onChange={onDoorChange} />
 				<InputText colsWidth={2} label='Escalera' value={stair} onChange={onStairChange} />
 			</Row>

@@ -30,6 +30,7 @@ export default function useHouse() {
 	const newHouse = useCallback(async house => {
 		try {
 			setState(prevState => ({ ...prevState, loading: true, hasError: false }));
+			console.log('house ', house);
 			const newHouse = await postHouse(house);
 			setState(prevState => ({ ...prevState, loading: false }));
 			return newHouse;

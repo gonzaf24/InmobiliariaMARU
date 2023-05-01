@@ -20,9 +20,9 @@ const defaultProps = {
 	className: '',
 	testId: undefined,
 	id: undefined,
-	title: '',
+	title: undefined,
 	onTitleChange: () => {},
-	description: '',
+	description: undefined,
 	onDescriptionChange: () => {},
 };
 
@@ -32,10 +32,10 @@ const TitleDescriptionForm = ({ className, testId, id, title, onTitleChange, des
 	return (
 		<div className={titleDescriptionFormClassNames} data-testid={testId} id={id}>
 			<Row>
-				<InputText colsWidth={12} label='Titulo' value={title} onChange={onTitleChange} />
+				<InputText colsWidth={12} label='Titulo' value={title} onChange={onTitleChange} isRequired />
 			</Row>
 			<Row>
-				<InputTextarea colsWidth={12} label='Descripción' value={description} onChange={onDescriptionChange} />
+				<InputTextarea colsWidth={12} label='Descripción' value={description} onChange={onDescriptionChange} isRequired />
 			</Row>
 		</div>
 	);

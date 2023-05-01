@@ -14,6 +14,8 @@ const propTypes = {
 	label: PropTypes.string,
 	colsWidth: PropTypes.number,
 	options: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string, label: PropTypes.string })),
+	defaultValue: PropTypes.string,
+	isRequired: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -25,9 +27,11 @@ const defaultProps = {
 	label: '',
 	colsWidth: 12,
 	options: [],
+	defaultValue: undefined,
+	isRequired: false,
 };
 
-const InputSelect = ({ className, testId, id, colsWidth, value, onChange, label, options }) => {
+const InputSelect = ({ className, testId, id, colsWidth, value, onChange, label, options, isRequired, defaultValue }) => {
 	const handleChange = useCallback(
 		event => {
 			onChange(event.target.value);
@@ -41,7 +45,8 @@ const InputSelect = ({ className, testId, id, colsWidth, value, onChange, label,
 	return (
 		<Form.Group className={inputSelectClassNames} data-testid={testId} id={id} as={Col} md={colsWidth} controlId={inputId}>
 			<FloatingLabel controlId={`text_${inputId}`} label={label}>
-				<Form.Select aria-label='Select' value={value} onChange={handleChange}>
+				<Form.Select aria-label='Select' value={value} onChange={handleChange} required={isRequired}>
+					{defaultValue && <option value=''>{defaultValue}</option>}
 					{options.map((option, index) => {
 						return (
 							<option key={index} value={option.value}>

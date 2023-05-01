@@ -13,6 +13,10 @@
 		align-items: center !important;
 	}
 
+	&::-webkit-scrollbar {
+		display: none !important;
+	}
+
 	.Header {
 		gap: 25px;
 		display: flex;
@@ -75,4 +79,21 @@
 			flex: 1;
 		}
 	}
+
+	&.UpEffect {
+		@include slide-up-animation();
+	}
+	&.CloseUpEffect {
+		@include slide-up-close-animation();
+	}
+	&.DownEffect {
+		@include slide-down-animation();
+	}
+	&.CloseDownEffect {
+		@include slide-down-close-animation();
+	}
+}
+
+.Backdrop {
+	opacity: 0.85;
 }

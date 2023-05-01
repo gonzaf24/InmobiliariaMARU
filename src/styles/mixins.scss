@@ -26,6 +26,60 @@
 	white-space: nowrap;
 }
 
+// Shared properties and keyframes for modals animations
+@mixin modal-animation($direction, $duration) {
+	$bezier: cubic-bezier(0.36, 0.07, 0.19, 0.97);
+	$start: if($direction == 'up', 100%, -100%);
+	$end: 0;
+
+	animation: slide-#{$direction} $duration $bezier both;
+
+	@keyframes slide-#{$direction} {
+		0% {
+			transform: translateY($start);
+		}
+		100% {
+			transform: translateY($end);
+		}
+	}
+}
+
+// Specific modals animation slide up from bottom
+@mixin slide-up-animation($duration: 0.5s) {
+	@include modal-animation('up', $duration);
+}
+
+// Specific modals animation to close when cames from bottom as a slide up
+@mixin slide-up-close-animation($duration: 0.5s) {
+	@include modal-animation('up-close', $duration);
+	@keyframes slide-up-close {
+		0% {
+			transform: translateY(0);
+		}
+		100% {
+			transform: translateY(100%);
+		}
+	}
+}
+
+// Specific modals animation slide down from top
+@mixin slide-down-animation($duration: 0.5s) {
+	@include modal-animation('down', $duration);
+}
+
+// Specific modals animation to close when cames from top as a slide down
+@mixin slide-down-close-animation($duration: 0.5s) {
+	@include modal-animation('down-close', $duration);
+	@keyframes slide-down-close {
+		0% {
+			transform: translateY(0);
+		}
+		100% {
+			transform: translateY(-100%);
+		}
+	}
+}
+
 $small-mobile-min-width: 0px;
 $small-mobile-max-width: 320px;
 $big-mobile-min-width: 321px;

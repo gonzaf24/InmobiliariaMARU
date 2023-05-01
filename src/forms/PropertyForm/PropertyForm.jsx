@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import { Row } from 'react-bootstrap';
-import { SELECTORS } from '../../utils/constants';
+import { DEFUALT_SELECTOR, SELECTORS } from '../../utils/constants';
 import { InputCheckbox, InputDate, InputNumber, InputSelect, InputTextarea, InputTextLabel } from '../../components/inputs';
 import styles from './PropertyForm.module.scss';
 
@@ -13,13 +13,13 @@ const propTypes = {
 	id: PropTypes.string,
 	propertyType: PropTypes.string,
 	onPropertyTypeChange: PropTypes.func,
-	rooms: PropTypes.number,
+	rooms: PropTypes.string,
 	onRoomsChange: PropTypes.func,
-	bathrooms: PropTypes.number,
+	bathrooms: PropTypes.string,
 	onBathroomsChange: PropTypes.func,
 	size: PropTypes.string,
 	onSizeChange: PropTypes.func,
-	floors: PropTypes.number,
+	floors: PropTypes.string,
 	onFloorsChange: PropTypes.func,
 	heatingCooling: PropTypes.string,
 	onHeatingCoolingChange: PropTypes.func,
@@ -49,7 +49,7 @@ const propTypes = {
 	onConstructionYearChange: PropTypes.func,
 	renovationYear: PropTypes.string,
 	onRenovationYearChange: PropTypes.func,
-	antiquity: PropTypes.number,
+	antiquity: PropTypes.string,
 	onAntiquityChange: PropTypes.func,
 	observations: PropTypes.string,
 	onObservationsChange: PropTypes.func,
@@ -164,6 +164,7 @@ const PropertyForm = ({
 					options={PROPERTY_TYPES}
 					value={propertyType}
 					onChange={onPropertyTypeChange}
+					defaultValue={DEFUALT_SELECTOR}
 				/>
 				<InputNumber colsWidth={2} label='Habitaciones' value={rooms} onChange={onRoomsChange} />
 				<InputNumber colsWidth={2} label='Baños' value={bathrooms} onChange={onBathroomsChange} />
@@ -175,6 +176,7 @@ const PropertyForm = ({
 					options={PROPERTY_HEATING_COOLING_OPTIONS}
 					value={heatingCooling}
 					onChange={onHeatingCoolingChange}
+					defaultValue={DEFUALT_SELECTOR}
 				/>
 			</Row>
 			<Row>
