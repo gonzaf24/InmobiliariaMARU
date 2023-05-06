@@ -24,8 +24,8 @@ const defaultProps = {
 	center: [41.3873974, 2.168568],
 	zoom: 13,
 	greatPlaces: [
-		{ id: 'A', lat: 41.4129159, lng: 2.1865888, link: 'https://www.idealista.com/en/inmueble/100999676/' },
-		{ id: 'B', lat: 41.4074918, lng: 2.1872825, link: 'https://www.idealista.com/en/inmueble/100999586/' },
+		{ id: 'A', lat: 41.4129159, lng: 2.1865888, link: 'https://www.idealista.com/en/inmueble/100999676/', price: 1500 },
+		{ id: 'B', lat: 41.4074918, lng: 2.1872825, link: 'https://www.idealista.com/en/inmueble/100999586/', price: 500 },
 	],
 	options: {
 		maxZoom: 16,
@@ -36,7 +36,7 @@ const EventsMapPage = ({ className, center: centerProp, zoom: zoomProp, greatPla
 	const [center, setCenter] = useState(centerProp);
 	const [zoom, setZoom] = useState(zoomProp);
 	const [hoverKey, setHoverKey] = useState(null);
-	const [selectedPlace, setSelectedPlace] = useState(defaultProps.greatPlaces[0]);
+	const [selectedPlace, setSelectedPlace] = useState();
 
 	const { isOpen: isOpenMarkerInfo, open: openMarkerInfo, close: closeMarkerIndo } = useOpenToggle(false);
 
@@ -62,12 +62,13 @@ const EventsMapPage = ({ className, center: centerProp, zoom: zoomProp, greatPla
 	const places = useMemo(
 		() =>
 			greatPlaces.map(place => {
-				const { id, link, ...coords } = place;
+				const { id, price, link, ...coords } = place;
+				const formattedPrice = `${price}€`;
 				return (
 					<EventsMapMarker
 						key={id}
 						{...coords}
-						text={id}
+						text={formattedPrice}
 						link={link}
 						// use your hover state (from store, react-controllables etc...)
 						hover={hoverKey === id}
@@ -86,7 +87,7 @@ const EventsMapPage = ({ className, center: centerProp, zoom: zoomProp, greatPla
 				apiKey={API_KEY}
 				center={center}
 				zoom={zoom}
-				hoverDistance={40 / 2}
+				hoverDistance={75}
 				onBoundsChange={onBoundsChange}
 				onChildClick={onChildClick}
 				onChildMouseEnter={onChildMouseEnter}
@@ -97,8 +98,8 @@ const EventsMapPage = ({ className, center: centerProp, zoom: zoomProp, greatPla
 			</GoogleMap>
 			<div className={markerInfoClassNames}>
 				<CloseButton onClick={closeMarkerIndo} />
-				<span>{`Home ${selectedPlace.text}`}</span>
-				<a href={selectedPlace.link} target={'_blank'} rel='noreferrer'>
+				<span>{`Home ${selectedPlace?.text}`}</span>
+				<a href={selectedPlace?.link} target={'_blank'} rel='noreferrer'>
 					aqui el link
 				</a>
 			</div>
