@@ -26,7 +26,7 @@ const AppLayout = ({ className, testId, id, children }) => {
 		<div className={appLayoutClassNames} data-testid={testId} id={id}>
 			<BrowserRouter>
 				<AppNavbar />
-				<div className={styles.Container}>{children}</div>
+				{children}
 			</BrowserRouter>
 		</div>
 	);
