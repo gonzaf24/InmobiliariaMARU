@@ -300,20 +300,6 @@ const NewHouseForm = ({ className, testId, id, onClose }) => {
 					observations={observations}
 					onObservationsChange={setObservations}
 				/>
-				<SearchAddressForm
-					address={address}
-					onAddressChange={setAddress}
-					lat={lat}
-					onLatChange={setLat}
-					lng={lng}
-					onLngChange={setLng}
-					isAddress={isAddress}
-					onIsAddressChange={setIsAddress}
-					exactPosition={exactPosition}
-					onExactPositionChange={setExactPosition}
-					showInMap={showInMap}
-					onShowInMapChange={setShowInMap}
-				/>
 				<OwnerContactForm
 					name={ownerName}
 					onNameChange={setOwnerName}
@@ -331,6 +317,20 @@ const NewHouseForm = ({ className, testId, id, onClose }) => {
 				<FileUploadForm files={photos} onFileChange={setPhotos} uploadType={UPLOAD_TYPE.IMAGE} />
 				<FileUploadForm files={videos} onFileChange={setVideos} uploadType={UPLOAD_TYPE.VIDEO} />
 				<FileUploadForm files={documents} onFileChange={setDocuments} uploadType={UPLOAD_TYPE.DOCUMENT} />
+				<SearchAddressForm
+					address={address}
+					onAddressChange={setAddress}
+					lat={lat}
+					onLatChange={setLat}
+					lng={lng}
+					onLngChange={setLng}
+					isAddress={isAddress}
+					onIsAddressChange={setIsAddress}
+					exactPosition={exactPosition}
+					onExactPositionChange={setExactPosition}
+					showInMap={showInMap}
+					onShowInMapChange={setShowInMap}
+				/>
 				<div className={styles.Footer}>
 					<Button variant='secondary' onClick={handleClose} className={styles.Button}>
 						Cancelar

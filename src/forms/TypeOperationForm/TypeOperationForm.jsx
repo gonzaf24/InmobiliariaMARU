@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import styles from './TypeOperationForm.module.scss';
 import { Row } from 'react-bootstrap';
 import { DEFUALT_SELECTOR, SELECTORS } from '../../utils/constants';
-import { InputNumber, InputSelect } from '../../components/inputs';
+import { InputNumberLabel, InputSelect } from '../../components/inputs';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -44,7 +44,7 @@ const TypeOperationForm = ({ className, testId, id, operation, onOperationChange
 					isRequired
 					defaultValue={DEFUALT_SELECTOR}
 				/>
-				<InputNumber colsWidth={2} label='Precio' value={price} onChange={onPriceChange} isRequired />
+				<InputNumberLabel colsWidth={2} label='Precio' text={'€'} value={price} onChange={onPriceChange} isRequired />
 			</Row>
 		</div>
 	);

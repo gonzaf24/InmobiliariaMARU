@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import styles from './InputSelect.module.scss';
 import { Col, FloatingLabel, Form } from 'react-bootstrap';
+import { DEFUALT_SELECTOR } from '../../../utils/constants';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -34,6 +35,11 @@ const defaultProps = {
 const InputSelect = ({ className, testId, id, colsWidth, value, onChange, label, options, isRequired, defaultValue }) => {
 	const handleChange = useCallback(
 		event => {
+			const _value = event.target.value;
+			console.log(_value);
+			if (_value === DEFUALT_SELECTOR) {
+				return;
+			}
 			onChange(event.target.value);
 		},
 		[onChange]
@@ -46,7 +52,7 @@ const InputSelect = ({ className, testId, id, colsWidth, value, onChange, label,
 		<Form.Group className={inputSelectClassNames} data-testid={testId} id={id} as={Col} md={colsWidth} controlId={inputId}>
 			<FloatingLabel controlId={`text_${inputId}`} label={label}>
 				<Form.Select aria-label='Select' value={value} onChange={handleChange} required={isRequired}>
-					{defaultValue && <option value=''>{defaultValue}</option>}
+					{defaultValue && <option value={defaultValue}>{defaultValue}</option>}
 					{options.map((option, index) => {
 						return (
 							<option key={index} value={option.value}>

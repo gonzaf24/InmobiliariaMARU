@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-import styles from './InputTextLabel.module.scss';
+import styles from './InputNumberLabel.module.scss';
 import { Col, FloatingLabel, Form, InputGroup } from 'react-bootstrap';
 
 const propTypes = {
@@ -31,20 +31,23 @@ const defaultProps = {
 	isRequired: false,
 };
 
-const InputTextLabel = ({ className, testId, id, colsWidth, value, onChange, label, text, placeholder, isRequired }) => {
+const InputNumberLabel = ({ className, testId, id, colsWidth, value, onChange, label, text, placeholder, isRequired }) => {
 	const handleChange = useCallback(
 		event => {
-			onChange(event.target.value);
+			const _value = event.target.value;
+			if (_value === '') onChange('');
+			if (/^\d+$/.test(_value)) onChange(event.target.value);
 		},
 		[onChange]
 	);
 
 	const [inputId] = useState(`input_${Math.random().toString(36).substr(2, 9)}`);
-	const inputTextlabelClassNames = classnames(styles.InputTextLabel, className);
+
+	const inputNumberLabelClassNames = classnames(styles.InputNumberLabel, className);
 
 	return (
 		<Form.Group
-			className={inputTextlabelClassNames}
+			className={inputNumberLabelClassNames}
 			data-testid={testId}
 			id={id}
 			as={Col}
@@ -63,7 +66,7 @@ const InputTextLabel = ({ className, testId, id, colsWidth, value, onChange, lab
 	);
 };
 
-InputTextLabel.propTypes = propTypes;
-InputTextLabel.defaultProps = defaultProps;
+InputNumberLabel.propTypes = propTypes;
+InputNumberLabel.defaultProps = defaultProps;
 
-export default InputTextLabel;
+export default InputNumberLabel;

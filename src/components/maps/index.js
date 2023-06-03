@@ -1,4 +1,5 @@
-import HomeMap from './HomeMap';
 import GoogleMap from './GoogleMap';
+import EventsMapMarker from './EventsMapMarker';
+import EventsMap from './EventsMap';
 
-export { HomeMap, GoogleMap };
+export { GoogleMap, EventsMapMarker, EventsMap };
