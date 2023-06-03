@@ -2,7 +2,7 @@ import React, { useMemo, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import GoogleMap from 'google-map-react';
 import classNames from 'classnames';
-import styles from './EventsMapPage.module.scss';
+import styles from './EventsMap.module.scss';
 import EventsMapMarker from '../EventsMapMarker/EventsMapMarker';
 import useOpenToggle from '../../../hooks/useOpenToggle';
 import { CloseButton } from 'react-bootstrap';
@@ -20,19 +20,15 @@ const propTypes = {
 const defaultProps = {
 	testId: undefined,
 	id: undefined,
-
 	center: [41.3873974, 2.168568],
 	zoom: 13,
-	greatPlaces: [
-		{ id: 'A', lat: 41.4129159, lng: 2.1865888, link: 'https://www.idealista.com/en/inmueble/100999676/', price: 1500 },
-		{ id: 'B', lat: 41.4074918, lng: 2.1872825, link: 'https://www.idealista.com/en/inmueble/100999586/', price: 500 },
-	],
+	greatPlaces: [],
 	options: {
 		maxZoom: 16,
 	},
 };
 
-const EventsMapPage = ({ className, center: centerProp, zoom: zoomProp, greatPlaces }) => {
+const EventsMap = ({ className, center: centerProp, zoom: zoomProp, greatPlaces }) => {
 	const [center, setCenter] = useState(centerProp);
 	const [zoom, setZoom] = useState(zoomProp);
 	const [hoverKey, setHoverKey] = useState(null);
@@ -47,6 +43,7 @@ const EventsMapPage = ({ className, center: centerProp, zoom: zoomProp, greatPla
 
 	const onChildClick = useCallback((key, childProps) => {
 		setCenter([childProps.lat, childProps.lng]);
+		console.log('childProps ', childProps);
 		setSelectedPlace(childProps);
 		openMarkerInfo();
 	}, []);
@@ -63,6 +60,7 @@ const EventsMapPage = ({ className, center: centerProp, zoom: zoomProp, greatPla
 		() =>
 			greatPlaces.map(place => {
 				const { id, price, link, ...coords } = place;
+				console.log('place  ', place);
 				const formattedPrice = `${price}€`;
 				return (
 					<EventsMapMarker
@@ -78,8 +76,9 @@ const EventsMapPage = ({ className, center: centerProp, zoom: zoomProp, greatPla
 		[greatPlaces, hoverKey]
 	);
 
+	console.log('selectedPlace ', selectedPlace);
 	const markerInfoClassNames = classNames(styles.MarkerInfo, { [styles.Open]: isOpenMarkerInfo });
-	const googleMapClassNames = classNames(styles.EventsMapPage, className);
+	const googleMapClassNames = classNames(styles.EventsMap, className);
 
 	return (
 		<div className={googleMapClassNames}>
@@ -107,7 +106,7 @@ const EventsMapPage = ({ className, center: centerProp, zoom: zoomProp, greatPla
 	);
 };
 
-EventsMapPage.propTypes = propTypes;
-EventsMapPage.defaultProps = defaultProps;
+EventsMap.propTypes = propTypes;
+EventsMap.defaultProps = defaultProps;
 
-export default EventsMapPage;
+export default EventsMap;

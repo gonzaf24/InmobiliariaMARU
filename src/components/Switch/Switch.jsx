@@ -42,15 +42,17 @@ const Switch = ({ className, dataTestId, id, onChange, options, value, activeCla
 	);
 
 	const updateActiveButtonStyles = useCallback(() => {
-		const activeButtonRect = activeButtonRef.current.getBoundingClientRect();
-		const switchRect = activeButtonRef.current.parentNode.getBoundingClientRect();
-		const activeButtonStyle = window.getComputedStyle(activeButtonRef.current);
-		const activeButtonRadius = activeButtonStyle.borderRadius;
-		maskRef.current.style.top = `${activeButtonRect.top - switchRect.top}px`;
-		maskRef.current.style.left = `${activeButtonRect.left - switchRect.left}px`;
-		maskRef.current.style.width = `${activeButtonRect.width}px`;
-		maskRef.current.style.height = `${activeButtonRect.height}px`;
-		maskRef.current.style.borderRadius = activeButtonRadius;
+		if(activeButtonRef.current){
+			const activeButtonRect = activeButtonRef.current.getBoundingClientRect();
+			const switchRect = activeButtonRef.current.parentNode.getBoundingClientRect();
+			const activeButtonStyle = window.getComputedStyle(activeButtonRef.current);
+			const activeButtonRadius = activeButtonStyle.borderRadius;
+			maskRef.current.style.top = `${activeButtonRect.top - switchRect.top}px`;
+			maskRef.current.style.left = `${activeButtonRect.left - switchRect.left}px`;
+			maskRef.current.style.width = `${activeButtonRect.width}px`;
+			maskRef.current.style.height = `${activeButtonRect.height}px`;
+			maskRef.current.style.borderRadius = activeButtonRadius;
+		}
 	}, [activeButtonRef, maskRef, options]);
 
 	useEffect(() => {

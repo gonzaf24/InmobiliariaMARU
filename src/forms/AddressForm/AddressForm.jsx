@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
@@ -93,6 +93,14 @@ const AddressForm = ({
 	const regionesMap = Object.keys(regiones);
 	const ciudadesMap = Object.keys(ciudades);
 
+	useEffect(() => {
+		if (!!country && !!region && !!city) {
+			setRegiones(geografia[country]);
+			setCiudades(geografia[country][region]);
+			setBarrios(geografia[country][region][city]);
+		}
+	}, [country, region, city]);
+
 	const resetValues = useCallback(() => {
 		onCountryChange('');
 		setRegiones([]);
@@ -104,13 +112,13 @@ const AddressForm = ({
 	}, []);
 
 	const handlePaisSeleccionado = useCallback(event => {
-		const pais = event.target.value;
-		if (pais === DEFUALT_SELECTOR) {
+		const _country = event.target.value;
+		if (_country === DEFUALT_SELECTOR) {
 			resetValues();
 			return;
 		}
-		onCountryChange(pais);
-		setRegiones(geografia[pais]);
+		onCountryChange(_country);
+		setRegiones(geografia[_country]);
 		setCiudades([]);
 		setBarrios([]);
 		onRegionChange('');
@@ -135,23 +143,23 @@ const AddressForm = ({
 
 	const handleCiudadSeleccionada = useCallback(
 		event => {
-			const ciudad = event.target.value;
-			if (ciudad === DEFUALT_SELECTOR) {
+			const _city = event.target.value;
+			if (_city === DEFUALT_SELECTOR) {
 				return;
 			}
-			onCityChange(ciudad);
-			setBarrios(geografia[country][region][ciudad]);
+			onCityChange(_city);
+			setBarrios(geografia[country][region][_city]);
 			onNeighborhoodChange('');
 		},
 		[country, region]
 	);
 
 	const handleBarrioSeleccionado = useCallback(event => {
-		const barrio = event.target.value;
-		if (barrio === DEFUALT_SELECTOR) {
+		const _neighborhood = event.target.value;
+		if (_neighborhood === DEFUALT_SELECTOR) {
 			return;
 		}
-		onNeighborhoodChange(barrio);
+		onNeighborhoodChange(_neighborhood);
 	}, []);
 
 	return (

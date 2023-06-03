@@ -60,7 +60,7 @@ const InputSelectGeography = ({
 		>
 			<FloatingLabel controlId={`text_${inputId}`} label={label}>
 				<Form.Select aria-label='Select' value={value} onChange={onChange} disabled={isDisabled} required={isRequired}>
-					{defaultValue && <option value=''>{defaultValue}</option>}
+					{defaultValue && <option value={defaultValue}>{defaultValue}</option>}
 					{options.map((value, index) => {
 						return (
 							<option key={index} value={value}>

@@ -6,6 +6,7 @@ import InputSelect from './InputSelect';
 import InputTextLabel from './InputTextLabel';
 import InputSelectGeography from './InputSelectGeography';
 import InputCheckbox from './InputCheckbox';
+import InputNumberLabel from './InputNumberLabel';
 
 export {
 	InputText,
@@ -16,4 +17,5 @@ export {
 	InputTextLabel,
 	InputSelectGeography,
 	InputCheckbox,
+	InputNumberLabel,
 };
