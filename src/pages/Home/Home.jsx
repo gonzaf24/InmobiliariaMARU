@@ -33,6 +33,13 @@ const Home = ({ className, testId, id }) => {
 					id: house.id,
 					price: house.price,
 					photos: house.photos,
+					city: house.city,
+					neighborhood: house.neighborhood,
+					rooms: house.rooms,
+					bathrooms: house.bathrooms,
+					size: house.size,
+					createdAt: house.createdAt,
+					operation: house.operation,
 				};
 			});
 			setGreatPlaces(greatPlace);

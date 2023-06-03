@@ -6,6 +6,9 @@ import styles from './EventsMap.module.scss';
 import EventsMapMarker from '../EventsMapMarker/EventsMapMarker';
 import useOpenToggle from '../../../hooks/useOpenToggle';
 import { CloseButton } from 'react-bootstrap';
+import Slider from '../../Slider';
+import Image from '../../Image/Image';
+import { NoImageAvailable } from '../../../assets/images';
 const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 const propTypes = {
@@ -70,6 +73,7 @@ const EventsMap = ({ className, center: centerProp, zoom: zoomProp, greatPlaces 
 						link={link}
 						// use your hover state (from store, react-controllables etc...)
 						hover={hoverKey === id}
+						{...place}
 					/>
 				);
 			}),
@@ -96,10 +100,36 @@ const EventsMap = ({ className, center: centerProp, zoom: zoomProp, greatPlaces 
 				{places}
 			</GoogleMap>
 			<div className={markerInfoClassNames}>
-				<CloseButton onClick={closeMarkerIndo} />
-				<span>{`Home ${selectedPlace?.text}`}</span>
+				<CloseButton onClick={closeMarkerIndo} className={styles.CloseButton} />
+				<Slider className={styles.Slider}>
+					{selectedPlace?.photos.map((photo, index) => {
+						return (
+							<div key={index}>
+								<Image className={styles.Image} src={photo} />
+							</div>
+						);
+					})}
+					{selectedPlace?.photos.length === 0 && (
+						<div>
+							<Image className={styles.Image} src={NoImageAvailable} />
+						</div>
+					)}
+				</Slider>
+				<div className={styles.Wrapper}>
+					<span className={styles.City}> {selectedPlace?.city} </span>
+					<span className={styles.Neighborhood}>{selectedPlace?.neighborhood} </span>
+				</div>
+				<div className={styles.Wrapper}>
+					<span className={styles.Rooms}>{`Hab: ${selectedPlace?.rooms} `}</span>
+					<span className={styles.Bathrooms}>{`Baños: ${selectedPlace?.bathrooms} `}</span>
+					<span className={styles.Size}>{`${selectedPlace?.size} m2`}</span>
+				</div>
+				<div className={styles.Wrapper}>
+					<span className={styles.Operation}>{selectedPlace?.operation}</span>
+					<span className={styles.Price}> {`${selectedPlace?.price} €`}</span>
+				</div>
 				<a href={selectedPlace?.link} target={'_blank'} rel='noreferrer'>
-					aqui el link
+					link
 				</a>
 			</div>
 		</div>
