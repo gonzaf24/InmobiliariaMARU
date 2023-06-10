@@ -5,10 +5,14 @@ import classNames from 'classnames';
 import styles from './EventsMap.module.scss';
 import EventsMapMarker from '../EventsMapMarker/EventsMapMarker';
 import useOpenToggle from '../../../hooks/useOpenToggle';
-import { CloseButton } from 'react-bootstrap';
 import Slider from '../../Slider';
 import Image from '../../Image/Image';
 import { NoImageAvailable } from '../../../assets/images';
+import { CloseIcon } from '../../../assets/icons';
+import { BsChatLeftText } from 'react-icons/bs';
+import { Button } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
+import { PROPERTY_ACQUISITION_OPTIONS } from '../../../utils/constants';
 const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 const propTypes = {
@@ -28,10 +32,33 @@ const defaultProps = {
 	greatPlaces: [],
 	options: {
 		maxZoom: 16,
+		styles: [
+			{
+				featureType: 'transit.station',
+				elementType: 'labels',
+				stylers: [
+					{
+						visibility: 'off',
+					},
+				],
+			},
+			{
+				featureType: 'poi',
+				elementType: 'labels',
+				stylers: [
+					{
+						visibility: 'off',
+					},
+				],
+			},
+		],
 	},
 };
 
+const PROPERTY_ACQUISITION = Object.values(PROPERTY_ACQUISITION_OPTIONS);
+
 const EventsMap = ({ className, center: centerProp, zoom: zoomProp, greatPlaces }) => {
+	const { t } = useTranslation();
 	const [center, setCenter] = useState(centerProp);
 	const [zoom, setZoom] = useState(zoomProp);
 	const [hoverKey, setHoverKey] = useState(null);
@@ -46,7 +73,6 @@ const EventsMap = ({ className, center: centerProp, zoom: zoomProp, greatPlaces 
 
 	const onChildClick = useCallback((key, childProps) => {
 		setCenter([childProps.lat, childProps.lng]);
-		console.log('childProps ', childProps);
 		setSelectedPlace(childProps);
 		openMarkerInfo();
 	}, []);
@@ -63,7 +89,6 @@ const EventsMap = ({ className, center: centerProp, zoom: zoomProp, greatPlaces 
 		() =>
 			greatPlaces.map(place => {
 				const { id, price, link, ...coords } = place;
-				console.log('place  ', place);
 				const formattedPrice = `${price}€`;
 				return (
 					<EventsMapMarker
@@ -80,7 +105,11 @@ const EventsMap = ({ className, center: centerProp, zoom: zoomProp, greatPlaces 
 		[greatPlaces, hoverKey]
 	);
 
-	console.log('selectedPlace ', selectedPlace);
+	const operationLabel = useMemo(() => {
+		return PROPERTY_ACQUISITION.find(option => option.value === selectedPlace?.operation)?.label;
+	}, [selectedPlace?.operation]);
+	const isSale = selectedPlace?.operation === PROPERTY_ACQUISITION_OPTIONS.SALE.value;
+	const priceLabel = isSale ? `${selectedPlace?.price} €` : `${selectedPlace?.price} €/${t('Constants.Month')}`;
 	const markerInfoClassNames = classNames(styles.MarkerInfo, { [styles.Open]: isOpenMarkerInfo });
 	const googleMapClassNames = classNames(styles.EventsMap, className);
 
@@ -100,7 +129,7 @@ const EventsMap = ({ className, center: centerProp, zoom: zoomProp, greatPlaces 
 				{places}
 			</GoogleMap>
 			<div className={markerInfoClassNames}>
-				<CloseButton onClick={closeMarkerIndo} className={styles.CloseButton} />
+				<CloseIcon onClick={closeMarkerIndo} className={styles.CloseButton} />
 				<Slider className={styles.Slider}>
 					{selectedPlace?.photos.map((photo, index) => {
 						return (
@@ -115,22 +144,34 @@ const EventsMap = ({ className, center: centerProp, zoom: zoomProp, greatPlaces 
 						</div>
 					)}
 				</Slider>
-				<div className={styles.Wrapper}>
-					<span className={styles.City}> {selectedPlace?.city} </span>
-					<span className={styles.Neighborhood}>{selectedPlace?.neighborhood} </span>
+				<div className={styles.Container}>
+					<div className={styles.Wrapper}>
+						<span className={styles.Address}>{`${t('Constants.FlatInStreet')} ${selectedPlace?.street}`}</span>
+					</div>
+					<div className={styles.Wrapper}>
+						<span className={styles.City}>{selectedPlace?.city} </span>
+						<span className={styles.Neighborhood}>{selectedPlace?.neighborhood} </span>
+					</div>
+					<div className={styles.Wrapper}>
+						{selectedPlace?.rooms && (
+							<span className={styles.Rooms}>{`${selectedPlace?.rooms} ${t('Constants.Bedrooms')}.`}</span>
+						)}
+						{selectedPlace?.size && <span className={styles.Size}>{`${selectedPlace?.size} m²`}</span>}
+						{selectedPlace?.floor && (
+							<span className={styles.Floor}>{`${t('Constants.Floor')} ${selectedPlace?.floor}ª`}</span>
+						)}
+					</div>
+					<div className={styles.Wrapper}>
+						<span className={styles.Operation}>{t(operationLabel)}</span>
+						<span className={styles.Price}> {priceLabel}</span>
+					</div>
+					<div className={styles.Footer}>
+						<Button className={styles.Button}>
+							<span className={styles.Text}>contact</span>
+							<BsChatLeftText className={styles.Icon} />
+						</Button>
+					</div>
 				</div>
-				<div className={styles.Wrapper}>
-					<span className={styles.Rooms}>{`Hab: ${selectedPlace?.rooms} `}</span>
-					<span className={styles.Bathrooms}>{`Baños: ${selectedPlace?.bathrooms} `}</span>
-					<span className={styles.Size}>{`${selectedPlace?.size} m2`}</span>
-				</div>
-				<div className={styles.Wrapper}>
-					<span className={styles.Operation}>{selectedPlace?.operation}</span>
-					<span className={styles.Price}> {`${selectedPlace?.price} €`}</span>
-				</div>
-				<a href={selectedPlace?.link} target={'_blank'} rel='noreferrer'>
-					link
-				</a>
 			</div>
 		</div>
 	);

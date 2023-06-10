@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import styles from './Home.module.scss';
 import EventsMap from '../../components/maps/EventsMap';
 import useHouse from '../../hooks/useHouse';
+import { Button } from 'react-bootstrap';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -26,7 +27,6 @@ const Home = ({ className, testId, id }) => {
 		const retrieveHouses = async () => {
 			const housesOut = await getHousesList();
 			const greatPlace = housesOut.map(house => {
-				console.log('house ', house);
 				return {
 					lat: house.lat,
 					lng: house.lng,
@@ -40,6 +40,8 @@ const Home = ({ className, testId, id }) => {
 					size: house.size,
 					createdAt: house.createdAt,
 					operation: house.operation,
+					street: house.street,
+					floor: house.floor,
 				};
 			});
 			setGreatPlaces(greatPlace);
@@ -51,6 +53,14 @@ const Home = ({ className, testId, id }) => {
 
 	return (
 		<div className={homeClassNames} data-testid={testId} id={id}>
+			<div className={styles.Menu}>
+				<Button className={styles.Button} variant='primary'>
+					<span>Mapa</span>
+				</Button>
+				<Button className={styles.Button} variant='primary'>
+					<span>Lista</span>
+				</Button>
+			</div>
 			<EventsMap greatPlaces={greatPlaces} />
 		</div>
 	);

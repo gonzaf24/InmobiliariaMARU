@@ -33,8 +33,6 @@ const LoginForm = ({ className, testId, id }) => {
 		e.preventDefault();
 		const username = e.target[0].value;
 		const password = e.target[1].value;
-		console.log('username', username);
-		console.log('password', password);
 		await login({ username, password });
 	};
 

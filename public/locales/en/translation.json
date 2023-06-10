@@ -36,5 +36,11 @@
 	"Admin.RegisterNewHouse": "Register New Flat",
 	"Admin.Properties": "Properties",
 	"SearchAddressForm.WithAddress": "Search Address",
-	"SearchAddressForm.WithLatLng": "Search Latitud, Longitude"
+	"SearchAddressForm.WithLatLng": "Search Latitud, Longitude",
+	"Constants.Sale": "Sale",
+	"Constants.Rent": "Rent",
+	"Constants.Month": "month",
+	"Constants.Floor": "Floor",
+	"Constants.Bedrooms": "b/room",
+	"Constants.FlatInStreet": "Flat in street"
 }

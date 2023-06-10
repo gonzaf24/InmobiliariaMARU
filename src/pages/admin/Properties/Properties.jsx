@@ -37,8 +37,6 @@ const Properties = ({ className, testId, id }) => {
 	useEffect(() => {
 		const retrieveHouses = async () => {
 			const housesOut = await getHousesList();
-			console.log('housesOut', housesOut);
-
 			setDataTable(housesOut);
 		};
 		retrieveHouses();

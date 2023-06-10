@@ -168,7 +168,7 @@ const PropertyForm = ({
 				/>
 				<InputNumber colsWidth={2} label='Habitaciones' value={rooms} onChange={onRoomsChange} />
 				<InputNumber colsWidth={2} label='Baños' value={bathrooms} onChange={onBathroomsChange} />
-				<InputTextLabel colsWidth={2} label='Tamaño' text={'m2'} value={size} onChange={onSizeChange} />
+				<InputTextLabel colsWidth={2} label='Tamaño' text={'m²'} value={size} onChange={onSizeChange} />
 				<InputNumber colsWidth={2} label='Nro. Plantas' value={floors} onChange={onFloorsChange} />
 				<InputSelect
 					colsWidth={2}
