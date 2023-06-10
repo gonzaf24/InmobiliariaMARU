@@ -19,8 +19,8 @@ export const LANGUAGES = {
 };
 
 export const PROPERTY_ACQUISITION_OPTIONS = {
-	RENT: { label: 'Alquiler', value: 'rent', name: 'Rent' },
-	SALE: { label: 'Venta', value: 'sale', name: 'Sale' },
+	RENT: { label: 'Constants.Rent', value: 'rent', name: 'Rent' },
+	SALE: { label: 'Constants.Sale', value: 'sale', name: 'Sale' },
 };
 
 export const PROPERTY_TYPES = {

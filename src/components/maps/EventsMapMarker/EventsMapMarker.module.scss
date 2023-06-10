@@ -5,10 +5,10 @@ $K_SIZE: 40px;
 	position: relative;
 	width: fit-content;
 	height: fit-content;
-	border: 2px solid #3f51b5;
+	border: 2px solid #3664b3;
 	background-color: white;
 	text-align: center;
-	color: #3f51b5;
+	color: #3664b3;
 	font-size: 16px;
 	font-weight: bold;
 	padding: 5px;
@@ -25,9 +25,9 @@ $K_SIZE: 40px;
 		top: -5px;
 		left: -5px;
 		border-right: 5px solid transparent;
-		border-top: 5px solid #3f51b5;
-		border-left: 5px solid #3f51b5;
-		border-bottom: 5px solid #3f51b5;
+		border-top: 5px solid #3664b3;
+		border-left: 5px solid #3664b3;
+		border-bottom: 5px solid #3664b3;
 		border-top-left-radius: 5px;
 		border-top-right-radius: 5px;
 		border-bottom-left-radius: 5px;
@@ -36,7 +36,7 @@ $K_SIZE: 40px;
 	}
 
 	&:hover {
-		background-color: #3f51b5;
+		background-color: #3664b3;
 		color: var(--bs-white);
 
 		.Overlay {
@@ -61,7 +61,7 @@ $K_SIZE: 40px;
 		background-color: white;
 		color: black;
 		border-radius: 8px;
-		border: 1px solid #3f51b5;
+		border: 1px solid #3664b3;
 		z-index: 2;
 		pointer-events: none;
 
@@ -70,7 +70,7 @@ $K_SIZE: 40px;
 		}
 
 		.Triangle {
-			background-color: #3f51b5;
+			background-color: #3664b3;
 			position: absolute;
 			left: -15px;
 			top: 10px;

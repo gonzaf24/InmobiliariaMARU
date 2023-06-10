@@ -36,5 +36,11 @@
 	"Admin.RegisterNewHouse": "Registrar piso nuevo",
 	"Admin.Properties": "Propiedades",
 	"SearchAddressForm.WithAddress": "Buscar dirección",
-	"SearchAddressForm.WithLatLng": "Buscar Latitud, Longitud"
+	"SearchAddressForm.WithLatLng": "Buscar Latitud, Longitud",
+	"Constants.Rent": "Alquiler",
+	"Constants.Sale": "Venta",
+	"Constants.Month": "mes",
+	"Constants.Floor": "Planta",
+	"Constants.Bedrooms": "hab",
+	"Constants.FlatInStreet": "Piso en calle"
 }
