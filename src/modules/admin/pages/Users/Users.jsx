@@ -2,15 +2,13 @@ import React, { useEffect, useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-import styles from './Users.module.scss';
-import { useTranslation } from 'react-i18next';
 import { Button, Table } from 'react-bootstrap';
-import useOpenToggle from '../../../hooks/useOpenToggle';
+import { useTranslation } from 'react-i18next';
 import { MdDeleteForever, MdEdit } from 'react-icons/md';
 import { ImUserPlus } from 'react-icons/im';
+import { EditUser, NewUser, useOpenToggle, useUser, ActionModal, Modal } from '../../../common';
 
-import { useUser } from '../../../hooks';
-import { ActionModal, EditUser, Modal, NewUser } from '../../../modules';
+import styles from './Users.module.scss';
 
 const propTypes = {
 	className: PropTypes.string,

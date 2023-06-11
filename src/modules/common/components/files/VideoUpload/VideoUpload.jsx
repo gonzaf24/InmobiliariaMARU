@@ -2,11 +2,12 @@ import React, { useCallback, useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-import styles from './VideoUpload.module.scss';
 import { Button, FloatingLabel, Form, InputGroup, ListGroup } from 'react-bootstrap';
 import { BiDownArrowAlt, BiImageAdd, BiUpArrowAlt } from 'react-icons/bi';
 import { ImImage } from 'react-icons/im';
 import { MdDeleteForever } from 'react-icons/md';
+
+import styles from './VideoUpload.module.scss';
 
 const propTypes = {
 	className: PropTypes.string,

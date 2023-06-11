@@ -8,10 +8,10 @@ import { Navbar, Container, Nav, Offcanvas } from 'react-bootstrap';
 
 import { useTranslation } from 'react-i18next';
 import { USERS_TYPES } from '../../utils/constants';
-import { LanguageSelector, Switch } from '../../components';
 
 import styles from './AppNavbar.module.scss';
 import { useUser } from '../../hooks';
+import { LanguageSelector, Switch } from '../../modules';
 
 const propTypes = {
 	className: PropTypes.string,

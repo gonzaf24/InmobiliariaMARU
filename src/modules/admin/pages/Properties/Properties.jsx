@@ -4,11 +4,9 @@ import PropTypes from 'prop-types';
 
 import { Button, Table } from 'react-bootstrap';
 import { MdDeleteForever, MdEdit, MdHomeFilled } from 'react-icons/md';
-import { useHouse, useOpenToggle } from '../../../hooks';
-import { PROPERTY_ACQUISITION_OPTIONS } from '../../../utils/constants';
 
 import styles from './Properties.module.scss';
-import { EditHouseModal, NewHouseModal } from '../../../modules';
+import { EditHouseModal, NewHouseModal, PROPERTY_ACQUISITION_OPTIONS, useHouse, useOpenToggle } from '../../../common';
 
 const propTypes = {
 	className: PropTypes.string,

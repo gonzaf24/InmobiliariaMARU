@@ -8,7 +8,7 @@ import { Modal } from '../../../components';
 import { MODAL_TRANSITION_EFFECT } from '../../../utils/constants';
 
 import styles from './NewHouseModal.module.scss';
-import { NewHouseForm } from '../../../../../forms/houses';
+import { NewHouseForm } from '../../../forms';
 
 const propTypes = {
 	className: PropTypes.string,

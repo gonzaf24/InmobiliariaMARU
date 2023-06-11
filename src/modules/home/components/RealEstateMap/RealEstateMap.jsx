@@ -12,7 +12,7 @@ import { useDevice, useOpenToggle } from '../../../../hooks';
 import { PROPERTY_ACQUISITION_OPTIONS } from '../../../../utils/constants';
 import { CloseIcon } from '../../../../assets/icons';
 import { NoImageAvailable } from '../../../../assets/images';
-import { Image, Slider } from '../../../../components';
+import { Image, Slider } from '../../../../modules';
 
 import styles from './RealEstateMap.module.scss';
 

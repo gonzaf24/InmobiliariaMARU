@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import styles from './Login.module.scss';
-import LoginForm from '../../forms/LoginForm/LoginForm';
+import { LoginForm } from '../../modules';
 /* import { RecoveryForm, RegisterForm } from '../../forms';
  */
 const propTypes = {
