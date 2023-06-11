@@ -1,0 +1,65 @@
+@import '/src/styles/mixins.scss';
+
+.LanguageSelector {
+	position: relative;
+	display: flex;
+	align-items: center;
+
+	.LanguageWrapper {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: row;
+
+		.Language {
+			width: 25px;
+			height: 25px;
+			color: var(--bs-dark-secondary);
+			cursor: pointer;
+
+			&:hover {
+				transition: var(--bs-transition);
+				fill: var(--bs-white);
+
+				& + .LanguageLabel {
+					transition: var(--bs-transition);
+					color: var(--bs-white);
+				}
+			}
+		}
+
+		.LanguageLabel {
+			color: var(--bs-dark-secondary);
+			text-align: center;
+			text-transform: capitalize;
+			font-size: var(--bs-font-large);
+		}
+	}
+
+	.FlagIcon {
+		width: 20px;
+		height: 20px;
+		cursor: pointer;
+	}
+
+	.FlagActive {
+		border: 2px solid var(--bs-primary);
+		border-radius: 100%;
+	}
+
+	.FlagWrapper {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		gap: 10px;
+		display: none;
+	}
+
+	.ShowFlagWrapper {
+		position: absolute;
+		display: flex;
+		top: 40px;
+		left: 2.5px;
+	}
+}

@@ -7,7 +7,6 @@ import Slider from './Slider';
 
 export * from './files';
 export * from './modals';
-export * from './maps';
 export * from './utils';
 
 export { Loader, LanguageSelector, FullSizeImage, Switch, Image, Slider };

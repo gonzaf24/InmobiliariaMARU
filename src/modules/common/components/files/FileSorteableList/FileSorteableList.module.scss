@@ -1,0 +1,51 @@
+@import '/src/styles/mixins.scss';
+
+.FileSorteableList {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 10px;
+
+	.Input {
+		&:disabled {
+			background-color: transparent !important;
+		}
+	}
+
+	.FileList {
+		border: 0px;
+		width: 100%;
+
+		.FileWrapper {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			gap: 15px;
+			font-size: var(--bs-font-small);
+			border: 0px;
+
+			.New {
+				cursor: pointer;
+			}
+
+			.Edit {
+				cursor: pointer;
+			}
+		}
+
+		.Delete {
+			margin-left: 10px;
+			cursor: pointer;
+			width: 20px;
+			height: 20px;
+		}
+	}
+}
+
+.Border {
+	border: 1px solid var(--bs-gray-400);
+	border-radius: var(--bs-radius-medium);
+	padding: 10px;
+}

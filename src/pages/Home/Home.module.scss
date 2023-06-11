@@ -1,9 +1,0 @@
-@import '/src/styles/mixins.scss';
-
-.Home {
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	user-select: none;
-	height: calc(100vh - 50px);
-}

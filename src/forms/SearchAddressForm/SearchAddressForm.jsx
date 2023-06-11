@@ -6,8 +6,8 @@ import styles from './SearchAddressForm.module.scss';
 import classNames from 'classnames';
 import { Col, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { GoogleMap } from '../../components';
 import { InputCheckbox, InputNumber } from '../../components/inputs';
+import { GoogleMap } from '../../modules';
 
 const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 Geocode.setApiKey(API_KEY);

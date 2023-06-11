@@ -1,0 +1,211 @@
+@import '/src/styles/mixins.scss';
+
+.RealEstateMap {
+	height: 100%;
+
+	.MarkerInfo {
+		position: fixed;
+		opacity: 0;
+		top: 150px;
+		right: 10px;
+		width: 300px;
+		background-color: var(--bs-white);
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		flex-direction: column;
+		gap: 10px;
+		transition: opacity 0.5s;
+		pointer-events: none;
+		border: 2px solid #00000099;
+		border-radius: 5px;
+		box-shadow: 10px 10px 25px 20px rgba(0, 0, 0, 0.3);
+
+		@include mobile {
+			height: 100%;
+			width: unset;
+			flex: 1;
+			flex-direction: row;
+			align-items: flex-start;
+			justify-content: flex-start;
+			top: unset;
+			bottom: 1px;
+			left: 1px;
+			right: 1px;
+			height: 125px;
+			gap: 0px;
+			box-shadow: 0px -20px 25px 20px rgba(0, 0, 0, 0.3);
+		}
+
+		.CloseButton {
+			align-self: flex-end;
+			margin-right: 10px;
+			margin-top: 10px;
+			width: 30px;
+			height: 30px;
+			fill: #00000099 !important;
+			cursor: pointer;
+
+			&:hover {
+				fill: #000000 !important;
+			}
+
+			@include mobile {
+				margin: 0px !important;
+				position: absolute;
+				top: -40px;
+				right: 10px;
+			}
+		}
+
+		.Slider {
+			max-width: 300px;
+			min-height: 230px;
+			padding: 5px;
+
+			@include mobile {
+				max-width: 160px;
+				width: 160px;
+				min-height: unset;
+				height: 100%;
+
+				[class*='slick-list'] {
+					width: 150px;
+					height: 100%;
+					div {
+						width: 150px;
+						height: 100%;
+					}
+				}
+			}
+
+			.Image {
+				border-radius: unset !important;
+				height: 100%;
+			}
+		}
+
+		.Container {
+			height: 180px;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: flex-start;
+			width: 100%;
+			gap: 5px;
+			overflow-y: scroll;
+			overflow-x: hidden;
+			scrollbar-width: none;
+
+			&::-webkit-scrollbar {
+				display: none;
+			}
+
+			@include mobile {
+				gap: 0px;
+				height: 115px;
+			}
+
+			.Wrapper {
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				gap: 5px;
+				margin-left: 15px;
+				margin-right: 15px;
+
+				@include mobile {
+					margin-left: 0;
+					width: 100%;
+				}
+
+				.Address {
+					font-size: var(--bs-font-extra-large);
+					font-weight: 700;
+					white-space: initial;
+
+					@include mobile {
+						text-overflow: ellipsis;
+						overflow: hidden;
+						white-space: nowrap;
+					}
+				}
+
+				.City {
+					font-size: var(--bs-font-medium);
+					font-weight: 600;
+				}
+
+				.Neighborhood {
+					font-size: var(--bs-font-medium);
+					font-weight: 600;
+					text-overflow: ellipsis;
+					overflow: hidden;
+				}
+
+				.Rooms,
+				.Size {
+					font-size: var(--bs-font-medium);
+					font-weight: 600;
+				}
+
+				.Floor {
+					font-size: var(--bs-font-medium);
+					font-weight: 600;
+					text-overflow: ellipsis;
+					overflow: hidden;
+				}
+
+				.Operation,
+				.Price {
+					font-size: var(--bs-font-extra-large);
+					font-weight: 700;
+					text-overflow: ellipsis;
+					overflow: hidden;
+				}
+			}
+
+			.Footer {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 100%;
+				height: 100%;
+
+				@include mobile {
+					justify-content: flex-start;
+					align-items: flex-end;
+				}
+
+				.Button {
+					display: flex;
+					padding: 5px 10px;
+
+					.Text {
+						margin-right: 5px;
+						font-size: var(--bs-font-small);
+						cursor: pointer;
+					}
+
+					.Icon {
+						width: 10px;
+						height: 10px;
+						fill: var(--bs-white);
+						cursor: pointer;
+					}
+
+					&:focus {
+						outline: none;
+						box-shadow: none;
+					}
+				}
+			}
+		}
+	}
+
+	.Open {
+		opacity: 1;
+		transition: opacity 0.5s;
+		pointer-events: initial;
+	}
+}
