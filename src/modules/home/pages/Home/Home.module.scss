@@ -1,0 +1,54 @@
+@import '/src/styles/mixins.scss';
+
+.Home {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	user-select: none;
+	height: calc(100vh - 50px);
+
+	.Menu {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 10px;
+		padding: 5px 0px;
+		background-color: #3664b33b;
+
+		.Button {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
+			padding: 0px 10px;
+			background-color: white;
+			color: #3664b3;
+
+			.Text {
+				font-size: 16px;
+				font-weight: 600;
+				letter-spacing: 1.5px;
+			}
+
+			&:focus {
+				outline: none;
+				box-shadow: none;
+			}
+		}
+
+		.Active {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
+			padding: 0px 10px;
+			background-color: #3664b3;
+			color: white;
+		}
+	}
+
+	.Map,
+	.List {
+		height: calc(100vh - 85px);
+	}
+}

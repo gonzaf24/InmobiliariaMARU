@@ -5,13 +5,11 @@ import PropTypes from 'prop-types';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { BlueLogo } from '../../assets/images';
 import { Navbar, Container, Nav, Offcanvas } from 'react-bootstrap';
-
 import { useTranslation } from 'react-i18next';
 import { USERS_TYPES } from '../../utils/constants';
-import { LanguageSelector, Switch } from '../../components';
+import { LanguageSelector, Switch, useUser } from '../../modules';
 
 import styles from './AppNavbar.module.scss';
-import { useUser } from '../../hooks';
 
 const propTypes = {
 	className: PropTypes.string,
