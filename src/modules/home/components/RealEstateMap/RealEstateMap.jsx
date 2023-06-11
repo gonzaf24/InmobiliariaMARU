@@ -8,11 +8,11 @@ import { BsChatLeftText } from 'react-icons/bs';
 import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-import { useDevice, useOpenToggle } from '../../../../hooks';
 import { PROPERTY_ACQUISITION_OPTIONS } from '../../../../utils/constants';
 import { CloseIcon } from '../../../../assets/icons';
 import { NoImageAvailable } from '../../../../assets/images';
 import { Image, Slider } from '../../../../modules';
+import { useDevice, useOpenToggle } from '../../../common';
 
 import styles from './RealEstateMap.module.scss';
 

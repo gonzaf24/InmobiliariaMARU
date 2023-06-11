@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-import styles from './Home.module.scss';
-
 import { Button } from 'react-bootstrap';
 import { SiGooglemaps } from 'react-icons/si';
 import { BsListTask } from 'react-icons/bs';
-import { useHouse, useStep } from '../../../../hooks';
-import RealEstateMap from '../../components/RealEstateMap/RealEstateMap';
-import { RealEstateList } from '../../components';
+import { RealEstateList, RealEstateMap } from '../../components';
+
+import styles from './Home.module.scss';
+import { useHouse, useStep } from '../../../common';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -37,8 +36,8 @@ const INITIAL_STEP = HOME_STEPS.HOME_LIST;
 
 const Home = ({ className, testId, id }) => {
 	const { getHousesList } = useHouse();
-	const [greatPlaces, setGreatPlaces] = useState([]);
 	const { step, setStep } = useStep(INITIAL_STEP);
+	const [greatPlaces, setGreatPlaces] = useState([]);
 
 	useEffect(() => {
 		const retrieveHouses = async () => {

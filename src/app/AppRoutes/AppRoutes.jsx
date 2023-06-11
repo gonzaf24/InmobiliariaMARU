@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Routes } from 'react-router-dom';
 
-import { About, Login, Users, Properties } from '../../pages';
-import { Home, Admin, Rent, Sale } from '../../modules';
+import { Home, Admin, Rent, Sale, Users, Properties, About, Login } from '../../modules';
 
 const propTypes = {
 	className: PropTypes.string,

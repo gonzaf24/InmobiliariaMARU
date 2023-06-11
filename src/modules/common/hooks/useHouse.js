@@ -14,7 +14,6 @@ export default function useHouse() {
 			setState(prevState => ({ ...prevState, loading: true, hasError: false }));
 			const houses = await getHouses();
 			setState(prevState => ({ ...prevState, loading: false }));
-			console.log('houses ', houses);
 			return houses;
 		} catch (error) {
 			setState(prevState => ({
@@ -30,7 +29,6 @@ export default function useHouse() {
 	const newHouse = useCallback(async house => {
 		try {
 			setState(prevState => ({ ...prevState, loading: true, hasError: false }));
-			console.log('house ', house);
 			const newHouse = await postHouse(house);
 			setState(prevState => ({ ...prevState, loading: false }));
 			return newHouse;

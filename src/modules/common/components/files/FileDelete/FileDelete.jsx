@@ -5,11 +5,11 @@ import { MdDeleteForever } from 'react-icons/md';
 import { useTranslation } from 'react-i18next';
 import ActionModal from '../../modals/ActionModal';
 import { formatFileNameToShow } from '../../../utils/formatters';
-import styles from './FileDelete.module.scss';
 import Loader from '../../Loader';
-import { useImage } from '../../../hooks';
-import { useOpenToggle } from '../../../../../hooks';
 import useToastContext from '../../../../../context/toastContext';
+
+import styles from './FileDelete.module.scss';
+import { useImage, useOpenToggle } from '../../../hooks';
 
 const propTypes = {
 	className: PropTypes.string,
