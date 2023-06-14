@@ -1,5 +1,15 @@
 .Slider {
 	width: 100%;
+
+	[class*='slick-list'] {
+		width: inherit;
+		height: inherit;
+
+		div {
+			width: inherit;
+			height: inherit;
+		}
+	}
 }
 
 .NextArrow {
