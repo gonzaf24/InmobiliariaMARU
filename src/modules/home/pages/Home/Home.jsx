@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 
 import { Button } from 'react-bootstrap';
 import { SiGooglemaps } from 'react-icons/si';
-import { BsListTask } from 'react-icons/bs';
+import { BsListTask, BsFilter } from 'react-icons/bs';
 import { RealEstateList, RealEstateMap } from '../../components';
 
 import styles from './Home.module.scss';
-import { useHouse, useStep } from '../../../common';
+import { useDevice, useHouse, useStep } from '../../../common';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -38,6 +38,7 @@ const Home = ({ className, testId, id }) => {
 	const { getHousesList } = useHouse();
 	const { step, setStep } = useStep(INITIAL_STEP);
 	const [greatPlaces, setGreatPlaces] = useState([]);
+	const { isMobile } = useDevice();
 
 	useEffect(() => {
 		const retrieveHouses = async () => {
@@ -73,14 +74,22 @@ const Home = ({ className, testId, id }) => {
 	return (
 		<div className={homeClassNames} data-testid={testId} id={id}>
 			<div className={styles.Menu}>
-				<Button className={listButtonClassNames} variant='primary' onClick={() => setStep(HOME_STEPS.HOME_LIST)}>
-					<BsListTask />
-					<span className={styles.Text}>Lista</span>
-				</Button>
-				<Button className={mapButtonClassNames} variant='primary' onClick={() => setStep(HOME_STEPS.HOME_MAP)}>
-					<SiGooglemaps />
-					<span className={styles.Text}>Mapa</span>
-				</Button>
+				{!isMobile && (
+					<Button className={styles.Button} variant='primary' onClick={() => setStep(HOME_STEPS.HOME_LIST)}>
+						<span className={styles.Text}>Filtro</span>
+						<BsFilter />
+					</Button>
+				)}
+				<div className={styles.Wrapper}>
+					<Button className={listButtonClassNames} variant='primary' onClick={() => setStep(HOME_STEPS.HOME_LIST)}>
+						<BsListTask />
+						<span className={styles.Text}>Lista</span>
+					</Button>
+					<Button className={mapButtonClassNames} variant='primary' onClick={() => setStep(HOME_STEPS.HOME_MAP)}>
+						<SiGooglemaps />
+						<span className={styles.Text}>Mapa</span>
+					</Button>
+				</div>
 			</div>
 
 			<HomeStep greatPlaces={greatPlaces} className={styles.Map} />

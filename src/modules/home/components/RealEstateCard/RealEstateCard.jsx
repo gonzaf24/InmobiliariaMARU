@@ -2,11 +2,12 @@ import React, { useCallback, useMemo } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-import styles from './RealEstateCard.module.scss';
 import { useTranslation } from 'react-i18next';
 import { Image, Slider } from '../../../common/components';
 import { NoImageAvailable } from '../../../../assets/images';
 import { PROPERTY_ACQUISITION_OPTIONS } from '../../../common';
+
+import styles from './RealEstateCard.module.scss';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -21,7 +22,7 @@ const propTypes = {
 		price: PropTypes.number,
 		rooms: PropTypes.number,
 		size: PropTypes.number,
-		floor: PropTypes.number,
+		floor: PropTypes.string,
 	}),
 };
 
@@ -44,7 +45,6 @@ const RealEstateCard = ({ className, testId, id, place }) => {
 			return <Image className={styles.Image} src={NoImageAvailable} />;
 		}
 		return place?.photos.map((photo, index) => {
-			console.log('photo', photo);
 			return <Image className={styles.Image} src={photo} key={index} />;
 		});
 	}, [place?.photos]);

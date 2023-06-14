@@ -3,9 +3,9 @@ import { ErrorBoundary } from 'react-error-boundary';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import DefaultErrorFallback from '../../components/utils/ErrorFallback/ErrorFallback';
+import useToastContext from '../../../../context/toastContext';
 
 import styles from './withErrorBoundary.module.scss';
-import useToastContext from '../../context/toastContext';
 
 const propTypes = {
 	className: PropTypes.string,
