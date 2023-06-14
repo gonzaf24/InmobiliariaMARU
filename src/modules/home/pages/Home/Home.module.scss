@@ -9,11 +9,17 @@
 
 	.Menu {
 		display: flex;
-		justify-content: center;
+		justify-content: space-between;
 		align-items: center;
-		gap: 10px;
-		padding: 5px 0px;
+		gap: 100px;
+		padding: 5px 25px;
 		background-color: #3664b33b;
+		height: 50px;
+
+		@include mobile {
+			padding: 10px;
+			justify-content: flex-end;
+		}
 
 		.Button {
 			display: flex;
@@ -44,6 +50,13 @@
 			padding: 0px 10px;
 			background-color: #3664b3;
 			color: white;
+		}
+
+		.Wrapper {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 10px;
 		}
 	}
 

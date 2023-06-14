@@ -1,7 +1,6 @@
 import React, { forwardRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
-
-import { useDevice } from 'modules/common/hooks';
+import { useDevice } from '../../hooks';
 
 const propTypes = {
 	bigDesktopComponent: PropTypes.elementType,
