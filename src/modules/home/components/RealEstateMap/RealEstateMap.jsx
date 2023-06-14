@@ -67,7 +67,6 @@ const RealEstateMap = ({ className, center: centerProp, zoom: zoomProp, greatPla
 	const [hoverKey, setHoverKey] = useState(null);
 	const [selectedPlace, setSelectedPlace] = useState();
 	const { isMobile } = useDevice();
-
 	const { isOpen: isOpenMarkerInfo, open: openMarkerInfo, close: closeMarkerIndo } = useOpenToggle(false);
 
 	const onBoundsChange = useCallback((newCenter, newZoom) => {

@@ -1,4 +1,11 @@
 @import '/src/styles/mixins.scss';
 
 .RealEstateList {
+	gap: 20px;
+	padding: 25px;
+	overflow: scroll;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
