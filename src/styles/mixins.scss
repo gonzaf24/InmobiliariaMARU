@@ -145,3 +145,45 @@ $big-desktop-min-width: 1921px;
 		@content;
 	}
 }
+
+@mixin devices($keys...) {
+	@each $key in $keys {
+		@if $key == small-mobile {
+			@include small-mobile {
+				@content;
+			}
+		} @else if $key == big-mobile {
+			@include big-mobile {
+				@content;
+			}
+		} @else if $key == mobile {
+			@include mobile {
+				@content;
+			}
+		} @else if $key == small-tablet {
+			@include small-tablet {
+				@content;
+			}
+		} @else if $key == big-tablet {
+			@include big-tablet {
+				@content;
+			}
+		} @else if $key == tablet {
+			@include tablet {
+				@content;
+			}
+		} @else if $key == small-desktop {
+			@include small-desktop {
+				@content;
+			}
+		} @else if $key == big-desktop {
+			@include big-desktop {
+				@content;
+			}
+		} @else if $key == desktop {
+			@include desktop {
+				@content;
+			}
+		}
+	}
+}

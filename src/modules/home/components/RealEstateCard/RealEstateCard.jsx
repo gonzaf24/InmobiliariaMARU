@@ -32,7 +32,22 @@ const defaultProps = {
 	id: undefined,
 	place: {
 		photos: [],
+		street: '',
+		neighborhood: '',
+		city: '',
+		operation: '',
+		price: 0,
+		rooms: 0,
+		size: 0,
+		floor: '',
 	},
+};
+
+const texts = {
+	FlatText: 'Constants.FlatInStreet',
+	Month: 'Constants.Month',
+	Bedrooms: 'Constants.Bedrooms',
+	Floor: 'Constants.Floor',
 };
 
 const PROPERTY_ACQUISITION = Object.values(PROPERTY_ACQUISITION_OPTIONS);
@@ -42,7 +57,7 @@ const RealEstateCard = ({ className, testId, id, place }) => {
 
 	const renderSliderImages = useCallback(() => {
 		if (!place?.photos?.length) {
-			return <Image className={styles.Image} src={NoImageAvailable} />;
+			return <Image className={classnames(styles.Image, styles.NoAvailable)} src={NoImageAvailable} />;
 		}
 		return place?.photos.map((photo, index) => {
 			return <Image className={styles.Image} src={photo} key={index} />;
@@ -50,8 +65,8 @@ const RealEstateCard = ({ className, testId, id, place }) => {
 	}, [place?.photos]);
 
 	const addressLabel = useMemo(() => {
-		return `${t('Constants.FlatInStreet')} ${place?.street}, ${place?.neighborhood} - ${place?.city}`;
-	}, [place?.street, place?.neighborhood, place?.city]);
+		return `${t(texts.FlatText)} ${place?.street}, ${place?.neighborhood} - ${place?.city}`;
+	}, [place?.street, place?.neighborhood, place?.city, t]);
 
 	const operationLabel = useMemo(() => {
 		return PROPERTY_ACQUISITION.find(option => option.value === place?.operation)?.label;
@@ -59,7 +74,11 @@ const RealEstateCard = ({ className, testId, id, place }) => {
 
 	const isSale = place?.operation === PROPERTY_ACQUISITION_OPTIONS.SALE.value;
 
-	const priceLabel = isSale ? `${place?.price} €` : `${place?.price} €/${t('Constants.Month')}`;
+	const priceLabel = isSale ? `${place?.price} €` : `${place?.price} €/${t(texts.Month)}`;
+
+	const hasRooms = !!place?.rooms;
+	const hasSize = !!place?.size;
+	const hasFloor = !!place?.floor;
 
 	const realEstateCardClassNames = classnames(styles.RealEstateCard, className);
 
@@ -75,9 +94,9 @@ const RealEstateCard = ({ className, testId, id, place }) => {
 					<span className={styles.Price}> {priceLabel}</span>
 				</div>
 				<div className={styles.Wrapper}>
-					{place?.rooms && <span className={styles.Rooms}>{`${place?.rooms} ${t('Constants.Bedrooms')}.`}</span>}
-					{place?.size && <span className={styles.Size}>{`${place?.size} m²`}</span>}
-					{place?.floor && <span className={styles.Floor}>{`${t('Constants.Floor')} ${place?.floor}ª`}</span>}
+					{hasRooms && <span className={styles.Rooms}>{`${place?.rooms} ${t(texts.Bedrooms)}.`}</span>}
+					{hasSize && <span className={styles.Size}>{`${place?.size} m²`}</span>}
+					{hasFloor && <span className={styles.Floor}>{`${t(texts.Floor)} ${place?.floor}ª`}</span>}
 				</div>
 			</div>
 		</div>
