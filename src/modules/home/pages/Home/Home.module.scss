@@ -117,16 +117,8 @@
 			gap: 10px;
 			flex: 1 1;
 			margin-top: 25px;
-			height: calc(100vh - 120px);
-			padding: 0px 0px 150px 0px !important;
-
-			@include desktop {
-				padding: 0px 0px 50px 0px !important;
-			}
-
-			@include devices(tablet, mobile) {
-				padding: 0px;
-			}
+			height: calc(100vh - 80px);
+			padding: 0px 0px 150px 0px;
 		}
 	}
 }
