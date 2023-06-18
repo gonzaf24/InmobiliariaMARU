@@ -9,7 +9,7 @@
 
 	.Menu {
 		display: flex;
-		justify-content: space-between;
+		justify-content: center;
 		align-items: center;
 		gap: 100px;
 		padding: 5px 25px;
@@ -18,50 +18,115 @@
 
 		@include mobile {
 			padding: 10px;
-			justify-content: flex-end;
-		}
-
-		.Button {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			gap: 10px;
-			padding: 0px 10px;
-			background-color: white;
-			color: #3664b3;
-
-			.Text {
-				font-size: 16px;
-				font-weight: 600;
-				letter-spacing: 1.5px;
-			}
-
-			&:focus {
-				outline: none;
-				box-shadow: none;
-			}
-		}
-
-		.Active {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			gap: 10px;
-			padding: 0px 10px;
-			background-color: #3664b3;
-			color: white;
+			justify-content: space-between;
 		}
 
 		.Wrapper {
 			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			gap: 10px;
+
+			.Button {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 10px;
+				padding: 0px 10px;
+				background-color: white;
+				color: #3664b3;
+				height: 30px;
+
+				.Text {
+					font-size: 16px;
+					font-weight: 600;
+					letter-spacing: 1.5px;
+				}
+
+				&:focus {
+					outline: none;
+					box-shadow: none;
+				}
+			}
+
+			.Active {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 10px;
+				padding: 0px 10px;
+				background-color: #3664b3;
+				color: white;
+			}
+		}
+	}
+	.Wrapper {
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		flex: 1 1;
+		padding: 0px 150px;
+
+		@include big-tablet {
+			padding: 0px 50px;
+		}
+
+		@include devices(small-tablet, mobile) {
+			padding: 0px;
+		}
+
+		.Filter {
+			display: flex;
+			flex-direction: column;
 			justify-content: center;
 			align-items: center;
 			gap: 10px;
-		}
-	}
+			max-width: 300px;
+			flex: 1;
+			border: 2px solid #d4deee;
+			border-radius: 0px 0px 3px 3px;
+			height: 500px;
+			margin: 25px 15px 25px 25px;
+			position: relative;
 
-	.Map,
-	.List {
-		height: calc(100vh - 85px);
+			.Header {
+				content: 'Filtros';
+				position: absolute;
+				top: -50px;
+				left: -2px;
+				right: -2px;
+				height: 50px;
+				border-radius: 3px 3px 0px 0px;
+				background-color: #3664b3;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 16px;
+				font-weight: 600;
+				letter-spacing: 1.5px;
+				color: var(--bs-white);
+			}
+		}
+
+		.Map,
+		.List {
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: flex-start;
+			gap: 10px;
+			flex: 1 1;
+			margin-top: 25px;
+			height: calc(100vh - 120px);
+			padding: 0px 0px 150px 0px !important;
+
+			@include desktop {
+				padding: 0px 0px 50px 0px !important;
+			}
+
+			@include devices(tablet, mobile) {
+				padding: 0px;
+			}
+		}
 	}
 }

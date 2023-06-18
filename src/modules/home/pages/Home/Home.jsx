@@ -38,7 +38,7 @@ const Home = ({ className, testId, id }) => {
 	const { getHousesList } = useHouse();
 	const { step, setStep } = useStep(INITIAL_STEP);
 	const [greatPlaces, setGreatPlaces] = useState([]);
-	const { isMobile } = useDevice();
+	const { isMobile, isTablet } = useDevice();
 
 	useEffect(() => {
 		const retrieveHouses = async () => {
@@ -66,6 +66,7 @@ const Home = ({ className, testId, id }) => {
 		retrieveHouses();
 	}, []);
 
+	const isMobileOrTablet = isMobile || isTablet;
 	const HomeStep = HOME_COMPONENTS[step];
 	const mapButtonClassNames = classnames(styles.Button, { [styles.Active]: step === HOME_STEPS.HOME_MAP });
 	const listButtonClassNames = classnames(styles.Button, { [styles.Active]: step === HOME_STEPS.HOME_LIST });
@@ -74,9 +75,8 @@ const Home = ({ className, testId, id }) => {
 	return (
 		<div className={homeClassNames} data-testid={testId} id={id}>
 			<div className={styles.Menu}>
-				{!isMobile && (
-					<Button className={styles.Button} variant='primary' onClick={() => setStep(HOME_STEPS.HOME_LIST)}>
-						<span className={styles.Text}>Filtro</span>
+				{isMobileOrTablet && (
+					<Button className={styles.Button} variant='primary'>
 						<BsFilter />
 					</Button>
 				)}
@@ -91,8 +91,22 @@ const Home = ({ className, testId, id }) => {
 					</Button>
 				</div>
 			</div>
-
-			<HomeStep greatPlaces={greatPlaces} className={styles.Map} />
+			<div className={styles.Wrapper}>
+				{!isMobileOrTablet && (
+					<div className={styles.Filter}>
+						<div className={styles.Header}>
+							<span>Filtros</span>
+						</div>
+						<span className={styles.Title}>Aqui van los filtros</span>
+						<span className={styles.Subtitle}>ej: alquiler - venta</span>
+						<span className={styles.Subtitle}>precio</span>
+						<span className={styles.Subtitle}>ascensor</span>
+						<span className={styles.Subtitle}>interior</span>
+						<span className={styles.Subtitle}>exteriror</span>
+					</div>
+				)}
+				<HomeStep greatPlaces={greatPlaces} className={styles.Map} />
+			</div>
 		</div>
 	);
 };

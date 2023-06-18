@@ -80,7 +80,6 @@ const Slider = ({
 			slidesToShow={slidesToShow}
 			speed={speed}
 			slide={slide}
-			lazyLoad={true}
 			nextArrow={<SampleNextArrow />}
 			prevArrow={<SamplePrevArrow />}
 		>
