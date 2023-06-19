@@ -6,7 +6,7 @@ import { Button, Table } from 'react-bootstrap';
 import { MdDeleteForever, MdEdit, MdHomeFilled } from 'react-icons/md';
 
 import styles from './Properties.module.scss';
-import { EditHouseModal, NewHouseModal, PROPERTY_ACQUISITION_OPTIONS, useHouse, useOpenToggle } from '../../../common';
+import { EditHouseModal, NewHouseModal, SELECTORS, useHouse, useOpenToggle } from '../../../common';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -21,7 +21,7 @@ const defaultProps = {
 };
 
 const getOperation = operation => {
-	return Object.values(PROPERTY_ACQUISITION_OPTIONS).find(valueObj => valueObj.value === operation).label;
+	return Object.values(SELECTORS.PROPERTY_ACQUISITION_OPTIONS).find(valueObj => valueObj.value === operation).label;
 };
 
 const Properties = ({ className, testId, id }) => {

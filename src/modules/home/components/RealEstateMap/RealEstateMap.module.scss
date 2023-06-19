@@ -3,13 +3,13 @@
 .RealEstateMap {
 	height: 100%;
 
-	@include desktop {
-		padding: 0px 0px 50px 0px !important;
-	}
-
-	@include devices(tablet, mobile) {
+	@include devices(mobile, tablet) {
 		margin-top: 0px !important;
 		padding: 0px 0px 20px 0px !important;
+	}
+
+	@include desktop {
+		padding: 0px 0px 50px 0px !important;
 	}
 
 	.MarkerInfo {
@@ -164,7 +164,10 @@
 				}
 
 				.Rooms,
-				.Size {
+				.Size,
+				.Exterior,
+				.Elevator,
+				.Parking {
 					font-size: var(--bs-font-medium);
 					font-weight: 600;
 				}
@@ -178,7 +181,7 @@
 
 				.Operation,
 				.Price {
-					font-size: var(--bs-font-extra-large);
+					font-size: var(--bs-font-extra-extra-large);
 					font-weight: 700;
 					text-overflow: ellipsis;
 					overflow: hidden;

@@ -3,8 +3,8 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import { Row } from 'react-bootstrap';
-import { DEFUALT_SELECTOR, SELECTORS } from '../../utils/constants';
-import { InputCheckbox, InputDate, InputNumber, InputSelect, InputTextarea, InputTextLabel } from '../../components';
+import { SELECTORS } from '../../utils/constants';
+import { InputCheckbox, InputDate, InputNumber, InputNumberLabel, InputSelect, InputTextarea } from '../../components';
 import styles from './PropertyForm.module.scss';
 
 const propTypes = {
@@ -13,13 +13,13 @@ const propTypes = {
 	id: PropTypes.string,
 	propertyType: PropTypes.string,
 	onPropertyTypeChange: PropTypes.func,
-	rooms: PropTypes.string,
+	rooms: PropTypes.number,
 	onRoomsChange: PropTypes.func,
-	bathrooms: PropTypes.string,
+	bathrooms: PropTypes.number,
 	onBathroomsChange: PropTypes.func,
-	size: PropTypes.string,
+	size: PropTypes.number,
 	onSizeChange: PropTypes.func,
-	floors: PropTypes.string,
+	floors: PropTypes.number,
 	onFloorsChange: PropTypes.func,
 	heatingCooling: PropTypes.string,
 	onHeatingCoolingChange: PropTypes.func,
@@ -33,8 +33,12 @@ const propTypes = {
 	onFurnishedChange: PropTypes.func,
 	pets: PropTypes.bool,
 	onPetsChange: PropTypes.func,
-	parking: PropTypes.bool,
-	onParkingChange: PropTypes.func,
+	parkingIncluded: PropTypes.bool,
+	onParkingIncludedChange: PropTypes.func,
+	parkingOptional: PropTypes.bool,
+	onParkingOptionalChange: PropTypes.func,
+	parkingPrice: PropTypes.number,
+	onParkingPriceChange: PropTypes.func,
 	pool: PropTypes.bool,
 	onPoolChange: PropTypes.func,
 	jacuzzi: PropTypes.bool,
@@ -45,11 +49,15 @@ const propTypes = {
 	onTerraceChange: PropTypes.func,
 	horizontal: PropTypes.bool,
 	onHorizontalChange: PropTypes.func,
+	exterior: PropTypes.bool,
+	onExteriorChange: PropTypes.func,
+	elevator: PropTypes.bool,
+	onElevatorChange: PropTypes.func,
 	constructionYear: PropTypes.string,
 	onConstructionYearChange: PropTypes.func,
 	renovationYear: PropTypes.string,
 	onRenovationYearChange: PropTypes.func,
-	antiquity: PropTypes.string,
+	antiquity: PropTypes.number,
 	onAntiquityChange: PropTypes.func,
 	observations: PropTypes.string,
 	onObservationsChange: PropTypes.func,
@@ -61,13 +69,13 @@ const defaultProps = {
 	id: undefined,
 	propertyType: '',
 	onPropertyTypeChange: () => {},
-	rooms: '',
+	rooms: undefined,
 	onRoomsChange: () => {},
-	bathrooms: '',
+	bathrooms: undefined,
 	onBathroomsChange: () => {},
-	size: '',
+	size: undefined,
 	onSizeChange: () => {},
-	floors: '',
+	floors: undefined,
 	onFloorsChange: () => {},
 	heatingCooling: '',
 	onHeatingCoolingChange: () => {},
@@ -81,8 +89,12 @@ const defaultProps = {
 	onFurnishedChange: () => {},
 	pets: false,
 	onPetsChange: () => {},
-	parking: false,
-	onParkingChange: () => {},
+	parkingIncluded: false,
+	onParkingIncludedChange: () => {},
+	parkingOptional: false,
+	onParkingOptionalChange: () => {},
+	parkingPrice: undefined,
+	onParkingPriceChange: () => {},
 	pool: false,
 	onPoolChange: () => {},
 	jacuzzi: false,
@@ -93,11 +105,15 @@ const defaultProps = {
 	onTerraceChange: () => {},
 	horizontal: false,
 	onHorizontalChange: () => {},
+	exterior: false,
+	onExteriorChange: () => {},
+	elevator: false,
+	onElevatorChange: () => {},
 	constructionYear: '',
 	onConstructionYearChange: () => {},
 	renovationYear: '',
 	onRenovationYearChange: () => {},
-	antiquity: '',
+	antiquity: 0,
 	onAntiquityChange: () => {},
 	observations: '',
 	onObservationsChange: () => {},
@@ -105,6 +121,7 @@ const defaultProps = {
 
 const PROPERTY_TYPES = Object.values(SELECTORS.PROPERTY_TYPES);
 const PROPERTY_HEATING_COOLING_OPTIONS = Object.values(SELECTORS.PROPERTY_HEATING_COOLING_OPTIONS);
+const DEFUALT_SELECTOR = SELECTORS.DEFUALT_SELECTOR;
 
 const PropertyForm = ({
 	className,
@@ -132,8 +149,12 @@ const PropertyForm = ({
 	onFurnishedChange,
 	pets,
 	onPetsChange,
-	parking,
-	onParkingChange,
+	parkingIncluded,
+	onParkingIncludedChange,
+	parkingOptional,
+	onParkingOptionalChange,
+	parkingPrice,
+	onParkingPriceChange,
 	pool,
 	onPoolChange,
 	jacuzzi,
@@ -144,6 +165,10 @@ const PropertyForm = ({
 	onTerraceChange,
 	horizontal,
 	onHorizontalChange,
+	exterior,
+	onExteriorChange,
+	elevator,
+	onElevatorChange,
 	constructionYear,
 	onConstructionYearChange,
 	renovationYear,
@@ -168,7 +193,7 @@ const PropertyForm = ({
 				/>
 				<InputNumber colsWidth={2} label='Habitaciones' value={rooms} onChange={onRoomsChange} />
 				<InputNumber colsWidth={2} label='Baños' value={bathrooms} onChange={onBathroomsChange} />
-				<InputTextLabel colsWidth={2} label='Tamaño' text={'m²'} value={size} onChange={onSizeChange} />
+				<InputNumberLabel colsWidth={2} label='Tamaño' text={'m²'} value={size} onChange={onSizeChange} />
 				<InputNumber colsWidth={2} label='Nro. Plantas' value={floors} onChange={onFloorsChange} />
 				<InputSelect
 					colsWidth={2}
@@ -185,12 +210,38 @@ const PropertyForm = ({
 				<InputCheckbox colsWidth={2} label='Gas' value={gas} onChange={onGasChange} />
 				<InputCheckbox colsWidth={2} label='Amueblado' value={furnished} onChange={onFurnishedChange} />
 				<InputCheckbox colsWidth={2} label='Mascotas' value={pets} onChange={onPetsChange} />
-				<InputCheckbox colsWidth={2} label='Parking' value={parking} onChange={onParkingChange} />
 				<InputCheckbox colsWidth={2} label='Piscina' value={pool} onChange={onPoolChange} />
 				<InputCheckbox colsWidth={2} label='Jacuzzi' value={jacuzzi} onChange={onJacuzziChange} />
 				<InputCheckbox colsWidth={2} label='Jardin' value={garden} onChange={onGardenChange} />
 				<InputCheckbox colsWidth={2} label='Terraza' value={terrace} onChange={onTerraceChange} />
 				<InputCheckbox colsWidth={2} label='Horizontal' value={horizontal} onChange={onHorizontalChange} />
+				<InputCheckbox colsWidth={2} label='Exterior' value={exterior} onChange={onExteriorChange} />
+				<InputCheckbox colsWidth={2} label='Ascensor' value={elevator} onChange={onElevatorChange} />
+			</Row>
+			<Row className={styles.Row}>
+				<InputCheckbox
+					isDisabled={parkingOptional}
+					colsWidth={2}
+					label='Parking incluid'
+					value={parkingIncluded}
+					onChange={onParkingIncludedChange}
+				/>
+				<InputCheckbox
+					colsWidth={2}
+					label='Parking optional'
+					isDisabled={parkingIncluded}
+					value={parkingOptional}
+					onChange={onParkingOptionalChange}
+				/>
+
+				<InputNumberLabel
+					colsWidth={3}
+					isDisabled={parkingIncluded}
+					label='Parking price'
+					text={'€/month'}
+					value={parkingPrice}
+					onChange={onParkingPriceChange}
+				/>
 			</Row>
 			<Row>
 				<InputDate

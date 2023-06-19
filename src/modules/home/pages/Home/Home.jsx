@@ -8,7 +8,7 @@ import { BsListTask, BsFilter } from 'react-icons/bs';
 import { RealEstateList, RealEstateMap } from '../../components';
 
 import styles from './Home.module.scss';
-import { useDevice, useHouse, useStep } from '../../../common';
+import { FiltersForm, useDevice, useHouse, useStep } from '../../../common';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -44,6 +44,7 @@ const Home = ({ className, testId, id }) => {
 		const retrieveHouses = async () => {
 			const housesOut = await getHousesList();
 			const greatPlace = housesOut.map(house => {
+				console.log(house);
 				return {
 					lat: house.lat,
 					lng: house.lng,
@@ -59,6 +60,11 @@ const Home = ({ className, testId, id }) => {
 					operation: house.operation,
 					street: house.street,
 					floor: house.floor,
+					exterior: house.exterior,
+					elevator: house.elevator,
+					parkingIncluded: house.parkingIncluded,
+					parkingOptional: house.parkingOptional,
+					parkingPrice: house.parkingPrice,
 				};
 			});
 			setGreatPlaces(greatPlace);
@@ -97,12 +103,7 @@ const Home = ({ className, testId, id }) => {
 						<div className={styles.Header}>
 							<span>Filtros</span>
 						</div>
-						<span className={styles.Title}>Aqui van los filtros</span>
-						<span className={styles.Subtitle}>ej: alquiler - venta</span>
-						<span className={styles.Subtitle}>precio</span>
-						<span className={styles.Subtitle}>ascensor</span>
-						<span className={styles.Subtitle}>interior</span>
-						<span className={styles.Subtitle}>exteriror</span>
+						<FiltersForm />
 					</div>
 				)}
 				<HomeStep greatPlaces={greatPlaces} className={styles.Map} />

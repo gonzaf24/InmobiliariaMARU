@@ -26,13 +26,13 @@
 		padding: 5px 10px;
 
 		&:focus {
-			box-shadow: 0 0 0 0.15rem #6340a680;
-			border: 1px solid #b3a1c1;
+			box-shadow: 0 0 0 0.15rem #d1dbef;
+			border: 1px solid #d1dbef;
 			border-radius: var(--bs-radius-medium);
 		}
 
 		&:focus-visible {
-			outline: #b3a1c1;
+			outline: #d1dbef;
 		}
 	}
 

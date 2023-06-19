@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { Image, Slider } from '../../../common/components';
 import { NoImageAvailable } from '../../../../assets/images';
-import { PROPERTY_ACQUISITION_OPTIONS } from '../../../common';
+import { SELECTORS } from '../../../common';
 
 import styles from './RealEstateCard.module.scss';
 
@@ -23,6 +23,11 @@ const propTypes = {
 		rooms: PropTypes.number,
 		size: PropTypes.number,
 		floor: PropTypes.string,
+		exterior: PropTypes.bool,
+		elevator: PropTypes.bool,
+		parkingIncluded: PropTypes.bool,
+		parkingOptional: PropTypes.bool,
+		parkingPrice: PropTypes.bool,
 	}),
 };
 
@@ -40,6 +45,11 @@ const defaultProps = {
 		rooms: 0,
 		size: 0,
 		floor: '',
+		exterior: false,
+		elevator: false,
+		parkingIncluded: false,
+		parkingOptional: false,
+		parkingPrice: 0,
 	},
 };
 
@@ -48,9 +58,14 @@ const texts = {
 	Month: 'Constants.Month',
 	Bedrooms: 'Constants.Bedrooms',
 	Floor: 'Constants.Floor',
+	ParkingIncluded: 'Constants.ParkingIncluded',
+	ParkingOptional: 'Constants.ParkingOptional',
+	ParkingPrice: 'Constants.ParkingPrice',
+	Exterior: 'Constants.Exterior',
+	Elevator: 'Constants.Elevator',
 };
 
-const PROPERTY_ACQUISITION = Object.values(PROPERTY_ACQUISITION_OPTIONS);
+const PROPERTY_ACQUISITION = Object.values(SELECTORS.PROPERTY_ACQUISITION_OPTIONS);
 
 const RealEstateCard = ({ className, testId, id, place }) => {
 	const { t } = useTranslation();
@@ -72,13 +87,21 @@ const RealEstateCard = ({ className, testId, id, place }) => {
 		return PROPERTY_ACQUISITION.find(option => option.value === place?.operation)?.label;
 	}, [place?.operation]);
 
-	const isSale = place?.operation === PROPERTY_ACQUISITION_OPTIONS.SALE.value;
+	const isSale = place?.operation === SELECTORS.PROPERTY_ACQUISITION_OPTIONS.SALE.value;
 
 	const priceLabel = isSale ? `${place?.price} €` : `${place?.price} €/${t(texts.Month)}`;
 
 	const hasRooms = !!place?.rooms;
 	const hasSize = !!place?.size;
 	const hasFloor = !!place?.floor;
+	const isExterior = !!place?.exterior;
+	const hasElevator = !!place?.elevator;
+	const hasParkingIncluded = !!place?.parkingIncluded;
+	const hasParkingOptional = !!place?.parkingOptional;
+	const hasAnyParkingOption = hasParkingIncluded || hasParkingOptional;
+	const parkingLabel = hasParkingIncluded
+		? t(texts.ParkingIncluded)
+		: `${t(texts.ParkingOptional)} ${place?.parkingPrice} €/${t(texts.Month)}`;
 
 	const realEstateCardClassNames = classnames(styles.RealEstateCard, className);
 
@@ -92,11 +115,14 @@ const RealEstateCard = ({ className, testId, id, place }) => {
 				<div className={styles.Wrapper}>
 					<span className={styles.Operation}>{t(operationLabel)}</span>
 					<span className={styles.Price}> {priceLabel}</span>
+					{hasAnyParkingOption && <span className={styles.Parking}>{parkingLabel}</span>}
 				</div>
 				<div className={styles.Wrapper}>
 					{hasRooms && <span className={styles.Rooms}>{`${place?.rooms} ${t(texts.Bedrooms)}.`}</span>}
 					{hasSize && <span className={styles.Size}>{`${place?.size} m²`}</span>}
 					{hasFloor && <span className={styles.Floor}>{`${t(texts.Floor)} ${place?.floor}ª`}</span>}
+					{isExterior && <span className={styles.Exterior}>{t(texts.Exterior)}</span>}
+					{hasElevator && <span className={styles.Elevator}>{t(texts.Elevator)}</span>}
 				</div>
 			</div>
 		</div>

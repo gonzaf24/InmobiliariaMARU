@@ -14,6 +14,7 @@ const propTypes = {
 	label: PropTypes.string,
 	colsWidth: PropTypes.number,
 	type: PropTypes.string,
+	isDisabled: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -25,9 +26,10 @@ const defaultProps = {
 	label: '',
 	colsWidth: 12,
 	type: 'checkbox',
+	isDisabled: false,
 };
 
-const InputCheckbox = ({ className, testId, id, colsWidth, value, onChange, label, type }) => {
+const InputCheckbox = ({ className, testId, id, colsWidth, value, onChange, label, type, isDisabled }) => {
 	const handleChange = useCallback(
 		event => {
 			onChange(event.target.checked);
@@ -40,7 +42,15 @@ const InputCheckbox = ({ className, testId, id, colsWidth, value, onChange, labe
 
 	return (
 		<Form.Group className={inputCheckboxClassNames} data-testid={testId} id={id} as={Col} md={colsWidth} controlId={inputId}>
-			<Form.Check type={type} id={id} label={label} value={value} onChange={handleChange} />
+			<Form.Check
+				type={type}
+				id={id}
+				label={label}
+				checked={value}
+				value={value}
+				onChange={handleChange}
+				disabled={isDisabled}
+			/>
 		</Form.Group>
 	);
 };

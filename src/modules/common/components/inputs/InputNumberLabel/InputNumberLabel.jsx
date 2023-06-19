@@ -9,29 +9,43 @@ const propTypes = {
 	className: PropTypes.string,
 	testId: PropTypes.string,
 	id: PropTypes.string,
-	value: PropTypes.string,
+	value: PropTypes.number,
 	onChange: PropTypes.func,
 	label: PropTypes.string,
 	placeholder: PropTypes.string,
 	colsWidth: PropTypes.number,
 	text: PropTypes.string,
 	isRequired: PropTypes.bool,
+	isDisabled: PropTypes.bool,
 };
 
 const defaultProps = {
 	className: '',
 	testId: undefined,
 	id: undefined,
-	value: '',
+	value: 0,
 	onChange: () => {},
 	label: '',
 	placeholder: '',
 	colsWidth: 12,
 	text: '',
 	isRequired: false,
+	isDisabled: false,
 };
 
-const InputNumberLabel = ({ className, testId, id, colsWidth, value, onChange, label, text, placeholder, isRequired }) => {
+const InputNumberLabel = ({
+	className,
+	testId,
+	id,
+	colsWidth,
+	value,
+	onChange,
+	label,
+	text,
+	placeholder,
+	isRequired,
+	isDisabled,
+}) => {
 	const handleChange = useCallback(
 		event => {
 			const _value = event.target.value;
@@ -56,7 +70,14 @@ const InputNumberLabel = ({ className, testId, id, colsWidth, value, onChange, l
 		>
 			<InputGroup className={styles.Wrapper}>
 				<FloatingLabel controlId={`text_${inputId}`} label={label}>
-					<Form.Control type='text' placeholder={placeholder} value={value} onChange={handleChange} required={isRequired} />
+					<Form.Control
+						type='text'
+						placeholder={placeholder}
+						value={value}
+						onChange={handleChange}
+						required={isRequired}
+						disabled={isDisabled}
+					/>
 				</FloatingLabel>
 				<InputGroup.Text className={styles.Label} id={`text_${inputId}`}>
 					{text}

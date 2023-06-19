@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 
 import styles from './InputSelect.module.scss';
 import { Col, FloatingLabel, Form } from 'react-bootstrap';
-import { DEFUALT_SELECTOR } from '../../../utils/constants';
+import { SELECTORS } from '../../../utils';
+import { useTranslation } from 'react-i18next';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -33,11 +34,12 @@ const defaultProps = {
 };
 
 const InputSelect = ({ className, testId, id, colsWidth, value, onChange, label, options, isRequired, defaultValue }) => {
+	const { t } = useTranslation();
 	const handleChange = useCallback(
 		event => {
 			const _value = event.target.value;
 			console.log(_value);
-			if (_value === DEFUALT_SELECTOR) {
+			if (_value === SELECTORS.DEFUALT_SELECTOR) {
 				return;
 			}
 			onChange(event.target.value);
@@ -52,11 +54,11 @@ const InputSelect = ({ className, testId, id, colsWidth, value, onChange, label,
 		<Form.Group className={inputSelectClassNames} data-testid={testId} id={id} as={Col} md={colsWidth} controlId={inputId}>
 			<FloatingLabel controlId={`text_${inputId}`} label={label}>
 				<Form.Select aria-label='Select' value={value} onChange={handleChange} required={isRequired}>
-					{defaultValue && <option value={defaultValue}>{defaultValue}</option>}
-					{options.map((option, index) => {
+					{defaultValue && <option value={defaultValue}>{t(defaultValue)}</option>}
+					{options?.map((option, index) => {
 						return (
 							<option key={index} value={option.value}>
-								{option.label}
+								{t(option.label)}
 							</option>
 						);
 					})}

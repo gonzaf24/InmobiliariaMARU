@@ -21,7 +21,7 @@ $web-font-path: 'https://fonts.googleapis.com/css?family=Lato:300,400,700' !defa
 	color: #fff;
 	background-color: var(--bs-primary-hover);
 	border-color: var(--bs-primary-hover);
-	box-shadow: 0 0 0 0.25rem rgba(99, 64, 166, 0.5);
+	box-shadow: 0 0 0 0.25rem #d1dbef;
 }
 .btn-check:checked + .btn-primary,
 .btn-check:active + .btn-primary,
@@ -610,6 +610,6 @@ $web-font-path: 'https://fonts.googleapis.com/css?family=Lato:300,400,700' !defa
 .form-control:focus,
 .form-select:focus,
 .form-check-input:focus {
-	border-color: #b3a1c1;
-	box-shadow: 0 0 0 0.15rem #6340a680;
+	border-color: #d1dbef;
+	box-shadow: 0 0 0 0.15rem #d1dbef;
 }

@@ -39,6 +39,7 @@ const defaultProps = {
 const EditHouseForm = ({ className, testId, id, onClose, house }) => {
 	const [operation, setOperation] = useState();
 	const [price, setPrice] = useState();
+
 	const [country, setCountry] = useState();
 	const [region, setRegion] = useState();
 	const [city, setCity] = useState();
@@ -61,12 +62,16 @@ const EditHouseForm = ({ className, testId, id, onClose, house }) => {
 	const [gas, setGas] = useState();
 	const [furnished, setFurnished] = useState();
 	const [pets, setPets] = useState();
-	const [parking, setParking] = useState();
+	const [parkingIncluded, setParkingIncluded] = useState();
+	const [parkingOptional, setParkingOptional] = useState();
+	const [parkingPrice, setParkingPrice] = useState();
 	const [pool, setPool] = useState();
 	const [jacuzzi, setJacuzzi] = useState();
 	const [garden, setGarden] = useState();
 	const [terrace, setTerrace] = useState();
 	const [horizontal, setHorizontal] = useState();
+	const [exterior, setExterior] = useState();
+	const [elevator, setElevator] = useState();
 	const [constructionYear, setConstructionYear] = useState();
 	const [renovationYear, setRenovationYear] = useState();
 	const [antiquity, setAntiquity] = useState();
@@ -85,21 +90,18 @@ const EditHouseForm = ({ className, testId, id, onClose, house }) => {
 	const [isAddress, setIsAddress] = useState(true);
 	const [exactPosition, setExactPosition] = useState();
 	const [showInMap, setShowInMap] = useState();
-
 	const [photos, setPhotos] = useState();
 	const [videos, setVideos] = useState();
 	const [documents, setDocuments] = useState();
 
-	const { editHouse, isLoading, hasError, errorMessage } = useHouse();
 	const navigate = useNavigate();
-
-	const priceValue = house?.price ? String(house?.price) : '';
-
 	const { addSuccessToast, addErrorToast } = useToastContext();
+
+	const { editHouse, isLoading, hasError, errorMessage } = useHouse();
 
 	useEffect(() => {
 		setOperation(house?.operation);
-		setPrice(priceValue);
+		setPrice(house?.price);
 		setCountry(house?.country);
 		setRegion(house?.region);
 		setCity(house?.city);
@@ -122,12 +124,16 @@ const EditHouseForm = ({ className, testId, id, onClose, house }) => {
 		setGas(house?.gas);
 		setFurnished(house?.furnished);
 		setPets(house?.pets);
-		setParking(house?.parking);
+		setParkingIncluded(house?.parkingIncluded);
+		setParkingOptional(house?.parkingOptional);
+		setParkingPrice(house?.parkingPrice);
 		setPool(house?.pool);
 		setJacuzzi(house?.jacuzzi);
 		setGarden(house?.garden);
 		setTerrace(house?.terrace);
 		setHorizontal(house?.horizontal);
+		setExterior(house?.exterior);
+		setElevator(house?.elevator);
 		setConstructionYear(house?.constructionYear);
 		setRenovationYear(house?.renovationYear);
 		setAntiquity(house?.antiquity);
@@ -176,12 +182,16 @@ const EditHouseForm = ({ className, testId, id, onClose, house }) => {
 		setGas(false);
 		setFurnished(true);
 		setPets(false);
-		setParking(false);
+		setParkingIncluded(false);
+		setParkingOptional(false);
+		setParkingPrice(undefined);
 		setPool(false);
 		setJacuzzi(false);
 		setGarden(false);
 		setTerrace(false);
 		setHorizontal(false);
+		setExterior(false);
+		setElevator(false);
 		setConstructionYear(undefined);
 		setRenovationYear(undefined);
 		setAntiquity(undefined);
@@ -230,12 +240,16 @@ const EditHouseForm = ({ className, testId, id, onClose, house }) => {
 				gas,
 				furnished,
 				pets,
-				parking,
+				parkingIncluded,
+				parkingOptional,
+				parkingPrice,
 				pool,
 				jacuzzi,
 				garden,
 				terrace,
 				horizontal,
+				exterior,
+				elevator,
 				constructionYear,
 				renovationYear,
 				antiquity,
@@ -327,8 +341,12 @@ const EditHouseForm = ({ className, testId, id, onClose, house }) => {
 					onFurnishedChange={setFurnished}
 					pets={pets}
 					onPetsChange={setPets}
-					parking={parking}
-					onParkingChange={setParking}
+					parkingIncluded={parkingIncluded}
+					onParkingIncludedChange={setParkingIncluded}
+					parkingOptional={parkingOptional}
+					onParkingOptionalChange={setParkingOptional}
+					parkingPrice={parkingPrice}
+					onParkingPriceChange={setParkingPrice}
 					pool={pool}
 					onPoolChange={setPool}
 					jacuzzi={jacuzzi}
@@ -339,6 +357,10 @@ const EditHouseForm = ({ className, testId, id, onClose, house }) => {
 					onTerraceChange={setTerrace}
 					horizontal={horizontal}
 					onHorizontalChange={setHorizontal}
+					exterior={exterior}
+					onExteriorChange={setExterior}
+					elevator={elevator}
+					onElevatorChange={setElevator}
 					constructionYear={constructionYear}
 					onConstructionYearChange={setConstructionYear}
 					renovationYear={renovationYear}

@@ -89,8 +89,8 @@ $small-tablet-max-width: 744px;
 $big-tablet-min-width: 745px;
 $big-tablet-max-width: 990px;
 $small-desktop-min-width: 991px;
-$small-desktop-max-width: 1920px;
-$big-desktop-min-width: 1921px;
+$small-desktop-max-width: 1500px;
+$big-desktop-min-width: 1500px;
 
 @mixin small-mobile {
 	@media (min-width: $small-mobile-min-width) and (max-width: $small-mobile-max-width) {

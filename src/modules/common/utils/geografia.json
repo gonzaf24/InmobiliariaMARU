@@ -1,0 +1,23 @@
+{
+	"España": {
+		"Andalucía": {
+			"Sevilla": ["Casco Antiguo", "Santa Cruz", "Nervión", "Los Remedios"],
+			"Málaga": ["Centro", "Churriana", "Ciudad Jardín"]
+		},
+		"Cataluña": {
+			"Barcelona": [
+				"Ciutat Vella",
+				"Eixample",
+				"Gràcia",
+				"Horta-Guinardó",
+				"Les Corts",
+				"Nou Barris",
+				"Sant Andreu",
+				"Sant Martí",
+				"Sants-Montjuïc",
+				"Sarrià-Sant Gervasi"
+			],
+			"Girona": ["Barri Vell", "Eixample", "Fontajau", "La Devesa", "Montilivi"]
+		}
+	}
+}

@@ -59,14 +59,18 @@ const NewHouseForm = ({ className, testId, id, onClose }) => {
 	const [water, setWater] = useState(false);
 	const [electricity, setElectricity] = useState(false);
 	const [gas, setGas] = useState(false);
-	const [furnished, setFurnished] = useState(true);
+	const [furnished, setFurnished] = useState(false);
 	const [pets, setPets] = useState(false);
-	const [parking, setParking] = useState(false);
+	const [parkingIncluded, setParkingIncluded] = useState(false);
+	const [parkingOptional, setParkingOptional] = useState(false);
+	const [parkingPrice, setParkingPrice] = useState();
 	const [pool, setPool] = useState(false);
 	const [jacuzzi, setJacuzzi] = useState(false);
 	const [garden, setGarden] = useState(false);
 	const [terrace, setTerrace] = useState(false);
 	const [horizontal, setHorizontal] = useState(false);
+	const [exterior, setExterior] = useState(false);
+	const [elevator, setElevator] = useState(false);
 
 	const [constructionYear, setConstructionYear] = useState();
 	const [renovationYear, setRenovationYear] = useState();
@@ -122,12 +126,16 @@ const NewHouseForm = ({ className, testId, id, onClose }) => {
 		setGas(false);
 		setFurnished(true);
 		setPets(false);
-		setParking(false);
+		setParkingIncluded(false);
+		setParkingOptional(false);
+		setParkingPrice();
 		setPool(false);
 		setJacuzzi(false);
 		setGarden(false);
 		setTerrace(false);
 		setHorizontal(false);
+		setExterior(false);
+		setElevator(false);
 		setConstructionYear();
 		setRenovationYear();
 		setAntiquity();
@@ -180,12 +188,16 @@ const NewHouseForm = ({ className, testId, id, onClose }) => {
 				gas,
 				furnished,
 				pets,
-				parking,
+				parkingIncluded,
+				parkingOptional,
+				parkingPrice,
 				pool,
 				jacuzzi,
 				garden,
 				terrace,
 				horizontal,
+				exterior,
+				elevator,
 				constructionYear,
 				renovationYear,
 				antiquity,
@@ -279,8 +291,12 @@ const NewHouseForm = ({ className, testId, id, onClose }) => {
 					onFurnishedChange={setFurnished}
 					pets={pets}
 					onPetsChange={setPets}
-					parking={parking}
-					onParkingChange={setParking}
+					parkingIncluded={parkingIncluded}
+					onParkingIncludedChange={setParkingIncluded}
+					parkingOptional={parkingOptional}
+					onParkingOptionalChange={setParkingOptional}
+					parkingPrice={parkingPrice}
+					onParkingPriceChange={setParkingPrice}
 					pool={pool}
 					onPoolChange={setPool}
 					jacuzzi={jacuzzi}
@@ -291,6 +307,10 @@ const NewHouseForm = ({ className, testId, id, onClose }) => {
 					onTerraceChange={setTerrace}
 					horizontal={horizontal}
 					onHorizontalChange={setHorizontal}
+					exterior={exterior}
+					onExteriorChange={setExterior}
+					elevator={elevator}
+					onElevatorChange={setElevator}
 					constructionYear={constructionYear}
 					onConstructionYearChange={setConstructionYear}
 					renovationYear={renovationYear}
