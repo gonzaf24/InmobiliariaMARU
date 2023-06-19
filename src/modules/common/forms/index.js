@@ -8,6 +8,7 @@ import TitleDescriptionForm from './TitleDescriptionForm';
 import PropertyForm from './PropertyForm/PropertyForm';
 import AddressForm from './AddressForm';
 import FileUploadForm from './FileUploadForm';
+import FiltersForm from './FiltersForm';
 
 export * from './users';
 export * from './houses';
@@ -23,4 +24,5 @@ export {
 	PropertyForm,
 	AddressForm,
 	FileUploadForm,
+	FiltersForm,
 };

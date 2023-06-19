@@ -42,5 +42,12 @@
 	"Constants.Month": "mes",
 	"Constants.Floor": "Planta",
 	"Constants.Bedrooms": "hab",
-	"Constants.FlatInStreet": "Piso en calle"
+	"Constants.FlatInStreet": "Piso en calle",
+	"Constants.SelectOne": "Seleccionar",
+	"Constants.SelectMin": "Min",
+	"Constants.SelectMax": "Max",
+	"Constants.ParkingIncluded": "Garage incluido",
+	"Constants.ParkingOptional": "Garage opcional",
+	"Constants.Exterior": "exterior",
+	"Constants.Elevator": "con ascensor"
 }

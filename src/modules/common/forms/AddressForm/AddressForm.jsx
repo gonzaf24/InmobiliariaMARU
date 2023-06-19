@@ -2,11 +2,12 @@ import React, { useCallback, useEffect, useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-import styles from './AddressForm.module.scss';
+import geografia from '../../utils/geografia.json';
 import { Row } from 'react-bootstrap';
-import geografia from './geografia.json';
-import { DEFUALT_SELECTOR } from '../../utils/constants';
+import { SELECTORS } from '../../utils/constants';
 import { InputNumber, InputSelectGeography, InputText } from '../../components';
+
+import styles from './AddressForm.module.scss';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -20,7 +21,7 @@ const propTypes = {
 	onCityChange: PropTypes.func,
 	neighborhood: PropTypes.string,
 	onNeighborhoodChange: PropTypes.func,
-	postalCode: PropTypes.string,
+	postalCode: PropTypes.number,
 	onPostalCodeChange: PropTypes.func,
 	street: PropTypes.string,
 	onStreetChange: PropTypes.func,
@@ -46,7 +47,7 @@ const defaultProps = {
 	onCityChange: () => {},
 	neighborhood: '',
 	onNeighborhoodChange: () => {},
-	postalCode: '',
+	postalCode: undefined,
 	onPostalCodeChange: () => {},
 	street: '',
 	onStreetChange: () => {},
@@ -113,7 +114,7 @@ const AddressForm = ({
 
 	const handlePaisSeleccionado = useCallback(event => {
 		const _country = event.target.value;
-		if (_country === DEFUALT_SELECTOR) {
+		if (_country === SELECTORS.DEFUALT_SELECTOR) {
 			resetValues();
 			return;
 		}
@@ -129,7 +130,7 @@ const AddressForm = ({
 	const handleRegionSeleccionada = useCallback(
 		event => {
 			const _region = event.target.value;
-			if (_region === DEFUALT_SELECTOR) {
+			if (_region === SELECTORS.DEFUALT_SELECTOR) {
 				return;
 			}
 			onRegionChange(_region);
@@ -144,7 +145,7 @@ const AddressForm = ({
 	const handleCiudadSeleccionada = useCallback(
 		event => {
 			const _city = event.target.value;
-			if (_city === DEFUALT_SELECTOR) {
+			if (_city === SELECTORS.DEFUALT_SELECTOR) {
 				return;
 			}
 			onCityChange(_city);
@@ -156,7 +157,7 @@ const AddressForm = ({
 
 	const handleBarrioSeleccionado = useCallback(event => {
 		const _neighborhood = event.target.value;
-		if (_neighborhood === DEFUALT_SELECTOR) {
+		if (_neighborhood === SELECTORS.DEFUALT_SELECTOR) {
 			return;
 		}
 		onNeighborhoodChange(_neighborhood);
@@ -167,7 +168,7 @@ const AddressForm = ({
 			<Row>
 				<InputSelectGeography
 					options={paisesMap}
-					defaultValue={DEFUALT_SELECTOR}
+					defaultValue={SELECTORS.DEFUALT_SELECTOR}
 					colsWidth={3}
 					label='Pais'
 					value={country}
@@ -176,7 +177,7 @@ const AddressForm = ({
 				/>
 				<InputSelectGeography
 					options={regionesMap}
-					defaultValue={DEFUALT_SELECTOR}
+					defaultValue={SELECTORS.DEFUALT_SELECTOR}
 					colsWidth={3}
 					label='Region'
 					value={region}
@@ -186,7 +187,7 @@ const AddressForm = ({
 				/>
 				<InputSelectGeography
 					options={ciudadesMap}
-					defaultValue={DEFUALT_SELECTOR}
+					defaultValue={SELECTORS.DEFUALT_SELECTOR}
 					colsWidth={2}
 					label='Ciudad'
 					value={city}
@@ -196,7 +197,7 @@ const AddressForm = ({
 				/>
 				<InputSelectGeography
 					options={barrios}
-					defaultValue={DEFUALT_SELECTOR}
+					defaultValue={SELECTORS.DEFUALT_SELECTOR}
 					colsWidth={2}
 					label='Barrio'
 					value={neighborhood}
@@ -208,8 +209,8 @@ const AddressForm = ({
 			</Row>
 			<Row>
 				<InputText colsWidth={5} label='Calle' value={street} onChange={onStreetChange} isRequired />
-				<InputNumber colsWidth={2} label='Numero' value={addressNumber} onChange={onAddressNumberChange} isRequired />
-				<InputNumber colsWidth={1} label='Piso' value={floor} onChange={onFloorChange} />
+				<InputText colsWidth={2} label='Numero' value={addressNumber} onChange={onAddressNumberChange} isRequired />
+				<InputText colsWidth={1} label='Piso' value={floor} onChange={onFloorChange} />
 				<InputText colsWidth={2} label='Puerta' value={door} onChange={onDoorChange} />
 				<InputText colsWidth={2} label='Escalera' value={stair} onChange={onStairChange} />
 			</Row>

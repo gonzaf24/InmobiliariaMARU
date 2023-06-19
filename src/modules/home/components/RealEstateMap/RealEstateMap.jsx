@@ -58,6 +58,18 @@ const defaultProps = {
 	},
 };
 
+const texts = {
+	FlatText: 'Constants.FlatInStreet',
+	Month: 'Constants.Month',
+	Bedrooms: 'Constants.Bedrooms',
+	Floor: 'Constants.Floor',
+	ParkingIncluded: 'Constants.ParkingIncluded',
+	ParkingOptional: 'Constants.ParkingOptional',
+	ParkingPrice: 'Constants.ParkingPrice',
+	Exterior: 'Constants.Exterior',
+	Elevator: 'Constants.Elevator',
+};
+
 const PROPERTY_ACQUISITION = Object.values(PROPERTY_ACQUISITION_OPTIONS);
 
 const RealEstateMap = ({ className, center: centerProp, zoom: zoomProp, greatPlaces }) => {
@@ -137,6 +149,19 @@ const RealEstateMap = ({ className, center: centerProp, zoom: zoomProp, greatPla
 	const markerInfoClassNames = classNames(styles.MarkerInfo, {
 		[styles.Open]: isOpenMarkerInfo,
 	});
+
+	const hasRooms = !!selectedPlace?.rooms;
+	const hasSize = !!selectedPlace?.size;
+	const hasFloor = !!selectedPlace?.floor;
+	const isExterior = !!selectedPlace?.exterior;
+	const hasElevator = !!selectedPlace?.elevator;
+	const hasParkingIncluded = !!selectedPlace?.parkingIncluded;
+	const hasParkingOptional = !!selectedPlace?.parkingOptional;
+	const hasAnyParkingOption = hasParkingIncluded || hasParkingOptional;
+	const parkingLabel = hasParkingIncluded
+		? t('Constants.ParkingIncluded')
+		: `${t('Constants.ParkingOptional')} ${selectedPlace?.parkingPrice} €/${t(texts.Month)}`;
+
 	const googleMapClassNames = classNames(styles.RealEstateMap, className);
 
 	return (
@@ -168,17 +193,18 @@ const RealEstateMap = ({ className, center: centerProp, zoom: zoomProp, greatPla
 						</div>
 					)}
 					<div className={styles.Wrapper}>
-						{selectedPlace?.rooms && (
-							<span className={styles.Rooms}>{`${selectedPlace?.rooms} ${t('Constants.Bedrooms')}.`}</span>
-						)}
-						{selectedPlace?.size && <span className={styles.Size}>{`${selectedPlace?.size} m²`}</span>}
-						{selectedPlace?.floor && (
-							<span className={styles.Floor}>{`${t('Constants.Floor')} ${selectedPlace?.floor}ª`}</span>
-						)}
+						{hasRooms && <span className={styles.Rooms}>{`${selectedPlace?.rooms} ${t(texts.Bedrooms)}.`}</span>}
+						{hasSize && <span className={styles.Size}>{`${selectedPlace?.size} m²`}</span>}
+						{hasFloor && <span className={styles.Floor}>{`${t(texts.Floor)} ${selectedPlace?.floor}ª`}</span>}
+						{isExterior && <span className={styles.Exterior}>{t(texts.Exterior)}</span>}
+						{hasElevator && <span className={styles.Elevator}>{t(texts.Elevator)}</span>}
 					</div>
 					<div className={styles.Wrapper}>
 						<span className={styles.Operation}>{t(operationLabel)}</span>
 						<span className={styles.Price}> {priceLabel}</span>
+					</div>
+					<div className={styles.Wrapper}>
+						{hasAnyParkingOption && <span className={styles.Parking}>{parkingLabel}</span>}
 					</div>
 					<div className={styles.Footer}>
 						<Button className={styles.Button}>

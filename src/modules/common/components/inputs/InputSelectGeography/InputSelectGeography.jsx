@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import styles from './InputSelectGeography.module.scss';
 import { Col, FloatingLabel, Form } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -46,6 +47,7 @@ const InputSelectGeography = ({
 	defaultValue,
 	isRequired,
 }) => {
+	const { t } = useTranslation();
 	const [inputId] = useState(`input_${Math.random().toString(36).substr(2, 9)}`);
 	const inputSelectGeographyClassNames = classnames(styles.InputSelectGeography, className);
 
@@ -60,7 +62,7 @@ const InputSelectGeography = ({
 		>
 			<FloatingLabel controlId={`text_${inputId}`} label={label}>
 				<Form.Select aria-label='Select' value={value} onChange={onChange} disabled={isDisabled} required={isRequired}>
-					{defaultValue && <option value={defaultValue}>{defaultValue}</option>}
+					{defaultValue && <option value={defaultValue}>{t(defaultValue)}</option>}
 					{options.map((value, index) => {
 						return (
 							<option key={index} value={value}>

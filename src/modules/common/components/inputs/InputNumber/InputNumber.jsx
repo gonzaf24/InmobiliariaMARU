@@ -2,14 +2,15 @@ import React, { useCallback, useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-import styles from './InputNumber.module.scss';
 import { Col, FloatingLabel, Form } from 'react-bootstrap';
+
+import styles from './InputNumber.module.scss';
 
 const propTypes = {
 	className: PropTypes.string,
 	testId: PropTypes.string,
 	id: PropTypes.string,
-	value: PropTypes.string,
+	value: PropTypes.number,
 	onChange: PropTypes.func,
 	label: PropTypes.string,
 	placeholder: PropTypes.string,
@@ -21,7 +22,7 @@ const defaultProps = {
 	className: '',
 	testId: undefined,
 	id: undefined,
-	value: '',
+	value: 0,
 	onChange: () => {},
 	label: '',
 	placeholder: '',

@@ -2,10 +2,11 @@ import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-import styles from './TypeOperationForm.module.scss';
 import { Row } from 'react-bootstrap';
-import { DEFUALT_SELECTOR, SELECTORS } from '../../utils/constants';
+import { SELECTORS } from '../../utils/constants';
 import { InputNumberLabel, InputSelect } from '../../components';
+
+import styles from './TypeOperationForm.module.scss';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -13,7 +14,7 @@ const propTypes = {
 	id: PropTypes.string,
 	operation: PropTypes.string,
 	onOperationChange: PropTypes.func,
-	price: PropTypes.string,
+	price: PropTypes.number,
 	onPriceChange: PropTypes.func,
 };
 
@@ -28,6 +29,7 @@ const defaultProps = {
 };
 
 const PROPERTY_ACQUISITION_OPTIONS = Object.values(SELECTORS.PROPERTY_ACQUISITION_OPTIONS);
+const DEFUALT_SELECTOR = SELECTORS.DEFUALT_SELECTOR;
 
 const TypeOperationForm = ({ className, testId, id, operation, onOperationChange, price, onPriceChange }) => {
 	const typeOperationFormClassNames = classnames(styles.TypeOperationForm, className);
