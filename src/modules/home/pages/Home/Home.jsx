@@ -51,9 +51,16 @@ const Home = ({ className, testId, id }) => {
 
 	useEffect(() => {
 		const retrieveHouses = async () => {
-			const housesOut = await getFilteredHousesList();
+			// Recupera los filtros del almacenamiento local
+			const savedFilters = localStorage.getItem('filters');
+
+			console.log('savedFilters', savedFilters);
+			const filters = savedFilters ? JSON.parse(savedFilters) : {};
+
+			const housesOut = await getFilteredHousesList(filters);
 			setGreatPlaces(housesOut);
 		};
+
 		retrieveHouses();
 	}, []);
 

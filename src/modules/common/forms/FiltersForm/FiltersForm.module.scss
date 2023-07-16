@@ -18,4 +18,22 @@
 			justify-content: center;
 		}
 	}
+
+	.ButtonWrapper {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		@include devices(mobile, tablet) {
+			justify-content: flex-end;
+		}
+
+		.Button {
+			border: none !important;
+			width: 100%;
+
+			@include devices(mobile, tablet) {
+				width: unset;
+			}
+		}
+	}
 }

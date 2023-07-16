@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import geografia from '../../utils/geografia.json';
-import { Form, Row } from 'react-bootstrap';
+import { Button, Form, Row } from 'react-bootstrap';
 import { InputSelect, InputSelectGeography } from '../../components';
 import { SELECTORS } from '../../utils/constants';
 
@@ -84,6 +84,21 @@ const FiltersForm = ({ className, testId, id, onFilter }) => {
 	}, [operation, propertyType, country, region, city, neighborhood, minPrice, maxPrice]);
 
 	useEffect(() => {
+		const savedFilters = localStorage.getItem('filters');
+		if (savedFilters) {
+			const { operation, propertyType, country, region, city, neighborhood, minPrice, maxPrice } = JSON.parse(savedFilters);
+			setOperation(operation);
+			setPropertyType(propertyType);
+			setCountry(country);
+			setRegion(region);
+			setCity(city);
+			setNeighborhood(neighborhood);
+			setMinPrice(minPrice);
+			setMaxPrice(maxPrice);
+		}
+	}, []);
+
+	useEffect(() => {
 		if (!!country && !!region && !!city) {
 			setRegiones(geografia[country]);
 			setCiudades(geografia[country][region]);
@@ -155,6 +170,20 @@ const FiltersForm = ({ className, testId, id, onFilter }) => {
 	const MinMaxOptions = useMemo(() => {
 		return operationOptionsMap[operation] || [];
 	}, [operation]);
+
+	const handleClearFilters = () => {
+		setOperation(undefined);
+		setPropertyType(undefined);
+		setCountry('');
+		setRegion('');
+		setCity('');
+		setNeighborhood('');
+		setMinPrice(undefined);
+		setMaxPrice(undefined);
+
+		// Clear data from localStorage
+		localStorage.removeItem('filters');
+	};
 
 	const filtersFormClassNames = classnames(styles.FiltersForm, className);
 
@@ -245,6 +274,11 @@ const FiltersForm = ({ className, testId, id, onFilter }) => {
 						className={styles.Selector}
 					/>
 				</Row>
+				<div className={styles.ButtonWrapper}>
+					<Button className={styles.Button} variant='secondary' onClick={handleClearFilters}>
+						{t('Constants.ClearFilters')}
+					</Button>
+				</div>
 			</div>
 		</Form>
 	);

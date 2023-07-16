@@ -1,4 +1,9 @@
 @import '/src/styles/mixins.scss';
 
 .FilterModal {
+	.Modal {
+		.Button {
+			width: 100px;
+		}
+	}
 }
