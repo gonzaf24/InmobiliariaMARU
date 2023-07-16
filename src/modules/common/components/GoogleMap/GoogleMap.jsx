@@ -20,15 +20,15 @@ const defaultProps = {
 	className: '',
 	testId: undefined,
 	id: undefined,
-	lat: 41.4129159,
-	lng: 2.1865888,
+	lat: 41.3870154,
+	lng: 2.1700471,
 	showExactPosition: true,
 };
 
 const mapProps = {
 	center: {
-		lat: 41.4129159, // Latitude of Inmo in Barcelona
-		lng: 2.1865888, // Longitude of Inmo in Barcelona
+		lat: 41.3870154, // Latitude of Inmo in Barcelona
+		lng: 2.1700471, // Longitude of Inmo in Barcelona
 	},
 	zoom: 16,
 	options: {
@@ -42,9 +42,8 @@ const POSITION_RADIUS_ZONE = 5;
 const GoogleMap = ({ className, testId, id, lat, lng, showExactPosition }) => {
 	const [radiusMap, setRadiusMap] = useState(POSITION_RADIUS_EXACT);
 
-	const AnyReactComponent = useMemo(() => {
-		// eslint-disable-next-line react/display-name
-		return () => (
+	const PositionMarker = useMemo(() => {
+		const Marker = () => (
 			<div
 				style={{
 					position: 'absolute',
@@ -63,6 +62,8 @@ const GoogleMap = ({ className, testId, id, lat, lng, showExactPosition }) => {
 				}}
 			/>
 		);
+		Marker.displayName = 'Marker';
+		return Marker;
 	}, [radiusMap, showExactPosition, lat, lng]);
 
 	const radiusValue = useMemo(
@@ -98,8 +99,9 @@ const GoogleMap = ({ className, testId, id, lat, lng, showExactPosition }) => {
 				center={{ lat, lng }}
 				onChange={handleMapChange}
 				options={mapProps.options}
+				resetBoundsOnResize={true}
 			>
-				<AnyReactComponent />
+				<PositionMarker lat={lat} lng={lng} />
 			</GoogleMapReact>
 		</div>
 	);

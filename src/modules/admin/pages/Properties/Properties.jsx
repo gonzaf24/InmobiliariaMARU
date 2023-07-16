@@ -7,6 +7,7 @@ import { MdDeleteForever, MdEdit, MdHomeFilled } from 'react-icons/md';
 
 import styles from './Properties.module.scss';
 import { EditHouseModal, NewHouseModal, SELECTORS, useHouse, useOpenToggle } from '../../../common';
+import { useTranslation } from 'react-i18next';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -20,11 +21,25 @@ const defaultProps = {
 	id: undefined,
 };
 
+const texts = {
+	Operation: 'Constants.Operation',
+	City: 'Constants.City',
+	Neighborhood: 'Constants.Neighborhood',
+	Address: 'Constants.Address',
+	Description: 'Constants.Description',
+	Owner: 'Constants.Owner',
+	Photos: 'Constants.Photos',
+	Actions: 'Constants.Actions',
+	Loading: 'Constants.Loading',
+	Title: 'Properties.ListOfProperties.Title',
+};
+
 const getOperation = operation => {
 	return Object.values(SELECTORS.PROPERTY_ACQUISITION_OPTIONS).find(valueObj => valueObj.value === operation).label;
 };
 
 const Properties = ({ className, testId, id }) => {
+	const { t } = useTranslation();
 	const [dataTable, setDataTable] = useState([]);
 	const [selectedHouse, setSelectedHouse] = useState({}); // [1
 	const { getHousesList, isLoading } = useHouse();
@@ -53,7 +68,7 @@ const Properties = ({ className, testId, id }) => {
 	return (
 		<div className={propertiesClassNames} data-testid={testId} id={id}>
 			<div className={styles.HeaderWrapper}>
-				<span>{'Lista de Propiedades'}</span>
+				<span>{t(texts.Title)}</span>
 				<Button onClick={openNewHouse} className={styles.ButtonNewHouse}>
 					<MdHomeFilled />
 				</Button>
@@ -61,27 +76,27 @@ const Properties = ({ className, testId, id }) => {
 			<Table striped bordered hover responsive='sm'>
 				<thead>
 					<tr>
-						<th>Operation</th>
-						<th>City</th>
-						<th>Neighborhood</th>
-						<th>Address</th>
-						<th>Description</th>
-						<th>Owner</th>
-						<th>Photos</th>
-						<th>Acciones</th>
+						<th>{t(texts.Operation)}</th>
+						<th>{t(texts.City)}</th>
+						<th>{t(texts.Neighborhood)}</th>
+						<th>{t(texts.Address)}</th>
+						<th>{t(texts.Description)}</th>
+						<th>{t(texts.Owner)}</th>
+						<th>{t(texts.Photos)}</th>
+						<th>{t(texts.Actions)}</th>
 					</tr>
 				</thead>
 				<tbody>
 					{isLoading ? (
 						<tr>
 							<td colSpan='5' className='text-center'>
-								Cargando...
+								{t(texts.Loading)}
 							</td>
 						</tr>
 					) : (
 						dataTable.map((propertie, index) => (
 							<tr key={index}>
-								<td>{getOperation(propertie.operation)}</td>
+								<td>{t(getOperation(propertie.operation))}</td>
 								<td>{propertie.city}</td>
 								<td>{propertie.neighborhood}</td>
 								<td>{propertie.address}</td>

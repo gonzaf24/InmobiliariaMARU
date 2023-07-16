@@ -16,7 +16,7 @@ const propTypes = {
 	label: PropTypes.string,
 	colsWidth: PropTypes.number,
 	options: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string, label: PropTypes.string })),
-	defaultValue: PropTypes.string,
+	defaultValue: PropTypes.shape({ value: PropTypes.string, label: PropTypes.string }),
 	isRequired: PropTypes.bool,
 };
 
@@ -38,7 +38,6 @@ const InputSelect = ({ className, testId, id, colsWidth, value, onChange, label,
 	const handleChange = useCallback(
 		event => {
 			const _value = event.target.value;
-			console.log(_value);
 			if (_value === SELECTORS.DEFUALT_SELECTOR) {
 				return;
 			}
@@ -54,7 +53,7 @@ const InputSelect = ({ className, testId, id, colsWidth, value, onChange, label,
 		<Form.Group className={inputSelectClassNames} data-testid={testId} id={id} as={Col} md={colsWidth} controlId={inputId}>
 			<FloatingLabel controlId={`text_${inputId}`} label={label}>
 				<Form.Select aria-label='Select' value={value} onChange={handleChange} required={isRequired}>
-					{defaultValue && <option value={defaultValue}>{t(defaultValue)}</option>}
+					{defaultValue && <option value={defaultValue.value}>{t(defaultValue.label)}</option>}
 					{options?.map((option, index) => {
 						return (
 							<option key={index} value={option.value}>

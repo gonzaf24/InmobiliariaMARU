@@ -24,9 +24,9 @@ const propTypes = {
 	isAddress: PropTypes.bool,
 	onIsAddressChange: PropTypes.func,
 	exactPosition: PropTypes.bool,
-	onExactPostionChange: PropTypes.func,
+	onExactPositionChange: PropTypes.func,
 	showInMap: PropTypes.bool,
-	onShowOnMapChange: PropTypes.func,
+	onShowInMapChange: PropTypes.func,
 };
 
 const defaultProps = {
@@ -35,16 +35,16 @@ const defaultProps = {
 	id: undefined,
 	address: '',
 	onAddressChange: () => {},
-	lat: 41.3850639,
+	lat: undefined,
 	onLatChange: () => {},
-	lng: 2.1734035,
+	lng: undefined,
 	onLngChange: () => {},
 	isAddress: true,
 	onIsAddressChange: () => {},
 	exactPosition: false,
-	onExactPostionChange: () => {},
+	onExactPositionChange: () => {},
 	showInMap: true,
-	onShowOnMapChange: () => {},
+	onShowInMapChange: () => {},
 };
 
 const texts = {
@@ -65,35 +65,34 @@ const SearchAddressForm = ({
 	isAddress,
 	onIsAddressChange,
 	exactPosition,
-	onExactPostionChange,
+	onExactPositionChange,
 	showInMap,
-	onShowOnMapChange,
+	onShowInMapChange,
 }) => {
 	const { t } = useTranslation();
 
-	const handleSelect = useCallback(async result => {
-		const { description } = result;
-		onAddressChange(description);
-		try {
-			const response = await Geocode.fromAddress(description);
-			const { lat, lng } = response.results[0].geometry.location;
-			onLatChange(Number(lat));
-			onLngChange(Number(lng));
-		} catch (error) {
-			console.error(error);
-		}
-	}, []);
+	const handleSelect = useCallback(
+		async result => {
+			const { description } = result;
+			onAddressChange(description);
+			try {
+				const response = await Geocode.fromAddress(description);
+				const { lat, lng } = response.results[0].geometry.location;
+				onLatChange(Number(lat));
+				onLngChange(Number(lng));
+			} catch (error) {
+				console.error(error);
+			}
+		},
+		[onAddressChange, onLatChange, onLngChange]
+	);
 
-	const onSearchTypeChange = e => {
+	const onSearchTypeChange = () => {
 		onIsAddressChange(!isAddress);
 	};
 
-	const handleExactPostionChange = e => {
-		onExactPostionChange(!exactPosition);
-	};
-
-	const handleShowOnMapChange = e => {
-		onShowOnMapChange(!showInMap);
+	const handleShowOnMapChange = () => {
+		onShowInMapChange(!showInMap);
 	};
 
 	const latValue = lat || '';
@@ -109,19 +108,19 @@ const SearchAddressForm = ({
 					className={styles.Switch}
 					label={t(label)}
 					onChange={onSearchTypeChange}
-					checked={isAddress}
+					value={isAddress}
 				/>
 				<InputCheckbox
 					className={styles.Check}
-					label='Posicion extacta'
-					onChange={handleExactPostionChange}
-					checked={exactPosition}
+					label='Posición extacta'
+					onChange={onExactPositionChange}
+					value={exactPosition}
 				/>
 				<InputCheckbox
 					className={styles.Check}
 					label='Mostrar en mapa principal'
 					onChange={handleShowOnMapChange}
-					checked={showInMap}
+					value={showInMap}
 				/>
 			</Col>
 			{isAddress && (
@@ -146,7 +145,7 @@ const SearchAddressForm = ({
 				</Row>
 			)}
 
-			{lat && lng && <GoogleMap lat={lat} lng={lng} showExactPosition={exactPosition} />}
+			<GoogleMap lat={lat} lng={lng} showExactPosition={exactPosition} />
 
 			<div className={styles.LatLngWrapper}>
 				<span className={styles.Label}>{`Lat : ${latValue}`}</span>

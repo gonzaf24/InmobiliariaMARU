@@ -26,6 +26,38 @@ export default function useHouse() {
 		}
 	}, []);
 
+	const getFilteredHousesList = useCallback(async filters => {
+		try {
+			setState(prevState => ({ ...prevState, loading: true, hasError: false }));
+			const houses = await getHouses();
+
+			const filteredHouses = houses.filter(house => {
+				return (
+					house.showInMap !== false &&
+					(!filters.operation || house.operation === filters.operation) &&
+					(!filters.propertyType || house.propertyType === filters.propertyType) &&
+					(!filters.country || house.country === filters.country) &&
+					(!filters.region || house.region === filters.region) &&
+					(!filters.city || house.city === filters.city) &&
+					(!filters.neighborhood || house.neighborhood === filters.neighborhood) &&
+					(!filters.minPrice || house.price >= filters.minPrice) &&
+					(!filters.maxPrice || house.price <= filters.maxPrice)
+				);
+			});
+
+			setState(prevState => ({ ...prevState, loading: false }));
+			return filteredHouses;
+		} catch (error) {
+			setState(prevState => ({
+				...prevState,
+				loading: false,
+				hasError: true,
+				errorMessage: error.message,
+			}));
+			return [];
+		}
+	}, []);
+
 	const newHouse = useCallback(async house => {
 		try {
 			setState(prevState => ({ ...prevState, loading: true, hasError: false }));
@@ -83,6 +115,7 @@ export default function useHouse() {
 		errorCode: state.errorCode,
 		errorMessage: state.errorMessage,
 		getHousesList,
+		getFilteredHousesList,
 		newHouse,
 		editHouse,
 		removeHouse,

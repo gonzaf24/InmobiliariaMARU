@@ -17,6 +17,7 @@ import styles from './EditHouseForm.module.scss';
 import useToastContext from '../../../../../context/toastContext';
 import FileUploadForm from '../../FileUploadForm';
 import { UPLOAD_TYPE } from '../../FileUploadForm/FileUploadForm';
+import { useTranslation } from 'react-i18next';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -36,7 +37,14 @@ const defaultProps = {
 	house: {},
 };
 
+const texts = {
+	Cancel: 'Cancel',
+	Edit: 'Edit',
+};
+
 const EditHouseForm = ({ className, testId, id, onClose, house }) => {
+	const { t } = useTranslation();
+
 	const [operation, setOperation] = useState();
 	const [price, setPrice] = useState();
 
@@ -88,8 +96,8 @@ const EditHouseForm = ({ className, testId, id, onClose, house }) => {
 	const [lat, setLat] = useState();
 	const [lng, setLng] = useState();
 	const [isAddress, setIsAddress] = useState(true);
-	const [exactPosition, setExactPosition] = useState();
-	const [showInMap, setShowInMap] = useState();
+	const [exactPosition, setExactPosition] = useState(true);
+	const [showInMap, setShowInMap] = useState(true);
 	const [photos, setPhotos] = useState();
 	const [videos, setVideos] = useState();
 	const [documents, setDocuments] = useState();
@@ -404,10 +412,10 @@ const EditHouseForm = ({ className, testId, id, onClose, house }) => {
 				/>
 				<div className={styles.Footer}>
 					<Button variant='secondary' onClick={handleClose} className={styles.Button}>
-						Cancelar
+						{t(texts.Cancel)}
 					</Button>
 					<Button variant='primary' type='submit' className={styles.Button}>
-						Editar
+						{t(texts.Edit)}
 					</Button>
 				</div>
 			</div>

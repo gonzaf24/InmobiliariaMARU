@@ -27,7 +27,7 @@ const propTypes = {
 		elevator: PropTypes.bool,
 		parkingIncluded: PropTypes.bool,
 		parkingOptional: PropTypes.bool,
-		parkingPrice: PropTypes.bool,
+		parkingPrice: PropTypes.number,
 	}),
 };
 
