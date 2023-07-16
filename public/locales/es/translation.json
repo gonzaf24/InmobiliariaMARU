@@ -65,5 +65,7 @@
 	"Constants.List": "Lista",
 	"Constants.Map": "Mapa",
 	"Constants.Filters": "Filtros",
+	"Constants.Apply": "Aplicar",
+	"Constants.ClearFilters": "Limpiar filtros",
 	"Properties.ListOfProperties.Title": "Lista de propiedades"
 }

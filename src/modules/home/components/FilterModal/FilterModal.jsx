@@ -40,7 +40,7 @@ const FilterModal = ({ className, testId, id, onFilter }) => {
 			</Button>
 			<Modal
 				dataTestId={testId}
-				className={filterModalClassNames}
+				className={styles.Modal}
 				id={id}
 				header={t(texts.Title)}
 				isOpen={isOpen}
@@ -48,6 +48,11 @@ const FilterModal = ({ className, testId, id, onFilter }) => {
 				onClose={close}
 				backdrop='static'
 				effect={MODAL_TRANSITION_EFFECT.down}
+				footer={
+					<Button className={styles.Button} variant='primary' onClick={close}>
+						{t('Constants.Apply')}
+					</Button>
+				}
 			>
 				<FiltersForm onFilter={onFilter} />
 			</Modal>

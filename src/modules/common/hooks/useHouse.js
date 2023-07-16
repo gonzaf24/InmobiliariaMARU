@@ -31,6 +31,9 @@ export default function useHouse() {
 			setState(prevState => ({ ...prevState, loading: true, hasError: false }));
 			const houses = await getHouses();
 
+			// Guarda los filtros en el almacenamiento local
+			localStorage.setItem('filters', JSON.stringify(filters));
+
 			const filteredHouses = houses.filter(house => {
 				return (
 					house.showInMap !== false &&
@@ -39,7 +42,6 @@ export default function useHouse() {
 					(!filters.country || house.country === filters.country) &&
 					(!filters.region || house.region === filters.region) &&
 					(!filters.city || house.city === filters.city) &&
-					(!filters.neighborhood || house.neighborhood === filters.neighborhood) &&
 					(!filters.minPrice || house.price >= filters.minPrice) &&
 					(!filters.maxPrice || house.price <= filters.maxPrice)
 				);
