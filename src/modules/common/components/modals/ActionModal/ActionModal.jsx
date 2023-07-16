@@ -64,14 +64,14 @@ const ActionModal = ({
 			data-testid={dataTestId}
 			footer={
 				<>
+					{onReject && (
+						<Button variant='secondary' className={styles.RejectButton} onClick={onReject}>
+							{t(texts.Cancel)}
+						</Button>
+					)}
 					{onAccept && (
 						<Button variant='primary' className={styles.AcceptButton} onClick={onAccept} disabled={isLoading}>
 							{t(texts.Accept)}
-						</Button>
-					)}
-					{onReject && (
-						<Button variant='danger' className={styles.RejectButton} onClick={onReject}>
-							{t(texts.Cancel)}
 						</Button>
 					)}
 				</>

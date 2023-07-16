@@ -16,7 +16,7 @@ const propTypes = {
 	colsWidth: PropTypes.number,
 	isDisabled: PropTypes.bool,
 	options: PropTypes.arrayOf(PropTypes.string),
-	defaultValue: PropTypes.string,
+	defaultValue: PropTypes.shape({ value: PropTypes.string, label: PropTypes.string }),
 	isRequired: PropTypes.bool,
 };
 
@@ -62,7 +62,7 @@ const InputSelectGeography = ({
 		>
 			<FloatingLabel controlId={`text_${inputId}`} label={label}>
 				<Form.Select aria-label='Select' value={value} onChange={onChange} disabled={isDisabled} required={isRequired}>
-					{defaultValue && <option value={defaultValue}>{t(defaultValue)}</option>}
+					{defaultValue && <option value={defaultValue.value}>{t(defaultValue.label)}</option>}
 					{options.map((value, index) => {
 						return (
 							<option key={index} value={value}>

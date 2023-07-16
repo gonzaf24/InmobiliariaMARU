@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 
 import { Button } from 'react-bootstrap';
 import { SiGooglemaps } from 'react-icons/si';
-import { BsListTask, BsFilter } from 'react-icons/bs';
+import { BsListTask } from 'react-icons/bs';
 import { RealEstateList, RealEstateMap } from '../../components';
 
 import styles from './Home.module.scss';
 import { FiltersForm, useDevice, useHouse, useStep } from '../../../common';
+import { useTranslation } from 'react-i18next';
+import FilterModal from '../../components/FilterModal/FilterModal';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -32,45 +34,33 @@ const HOME_COMPONENTS = {
 	[HOME_STEPS.HOME_LIST]: RealEstateList,
 };
 
+const texts = {
+	List: 'Constants.List',
+	Map: 'Constants.Map',
+	Filters: 'Constants.Filters',
+};
+
 const INITIAL_STEP = HOME_STEPS.HOME_LIST;
 
 const Home = ({ className, testId, id }) => {
-	const { getHousesList } = useHouse();
+	const { t } = useTranslation();
+	const { getFilteredHousesList } = useHouse();
 	const { step, setStep } = useStep(INITIAL_STEP);
 	const [greatPlaces, setGreatPlaces] = useState([]);
 	const { isMobile, isTablet } = useDevice();
 
 	useEffect(() => {
 		const retrieveHouses = async () => {
-			const housesOut = await getHousesList();
-			const greatPlace = housesOut.map(house => {
-				console.log(house);
-				return {
-					lat: house.lat,
-					lng: house.lng,
-					id: house.id,
-					price: house.price,
-					photos: house.photos,
-					city: house.city,
-					neighborhood: house.neighborhood,
-					rooms: house.rooms,
-					bathrooms: house.bathrooms,
-					size: house.size,
-					createdAt: house.createdAt,
-					operation: house.operation,
-					street: house.street,
-					floor: house.floor,
-					exterior: house.exterior,
-					elevator: house.elevator,
-					parkingIncluded: house.parkingIncluded,
-					parkingOptional: house.parkingOptional,
-					parkingPrice: house.parkingPrice,
-				};
-			});
-			setGreatPlaces(greatPlace);
+			const housesOut = await getFilteredHousesList();
+			setGreatPlaces(housesOut);
 		};
 		retrieveHouses();
 	}, []);
+
+	const handleFilter = async filterParams => {
+		const housesOut = await getFilteredHousesList(filterParams);
+		setGreatPlaces(housesOut);
+	};
 
 	const isMobileOrTablet = isMobile || isTablet;
 	const HomeStep = HOME_COMPONENTS[step];
@@ -81,19 +71,15 @@ const Home = ({ className, testId, id }) => {
 	return (
 		<div className={homeClassNames} data-testid={testId} id={id}>
 			<div className={styles.Menu}>
-				{isMobileOrTablet && (
-					<Button className={styles.Button} variant='primary'>
-						<BsFilter />
-					</Button>
-				)}
+				{isMobileOrTablet && <FilterModal onFilter={handleFilter} />}
 				<div className={styles.Wrapper}>
 					<Button className={listButtonClassNames} variant='primary' onClick={() => setStep(HOME_STEPS.HOME_LIST)}>
 						<BsListTask />
-						<span className={styles.Text}>Lista</span>
+						<span className={styles.Text}>{t(texts.List)}</span>
 					</Button>
 					<Button className={mapButtonClassNames} variant='primary' onClick={() => setStep(HOME_STEPS.HOME_MAP)}>
 						<SiGooglemaps />
-						<span className={styles.Text}>Mapa</span>
+						<span className={styles.Text}>{t(texts.Map)}</span>
 					</Button>
 				</div>
 			</div>
@@ -101,9 +87,9 @@ const Home = ({ className, testId, id }) => {
 				{!isMobileOrTablet && (
 					<div className={styles.Filter}>
 						<div className={styles.Header}>
-							<span>Filtros</span>
+							<span>{t(texts.Filters)}</span>
 						</div>
-						<FiltersForm />
+						<FiltersForm onFilter={handleFilter} />
 					</div>
 				)}
 				<HomeStep greatPlaces={greatPlaces} className={styles.Map} />

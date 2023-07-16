@@ -49,5 +49,21 @@
 	"Constants.ParkingIncluded": "Parking included",
 	"Constants.ParkingOptional": "Parking optional",
 	"Constants.Exterior": "exterior",
-	"Constants.Elevator": "with elevator"
+	"Constants.Elevator": "with elevator",
+	"Constants.Operation": "Operation",
+	"Constants.Country": "Country",
+	"Constants.City": "City",
+	"Constants.Region": "Region",
+	"Constants.Neighborhood": "Neighborhood",
+	"Constants.Address": "Address",
+	"Constants.Description": "Description",
+	"Constants.Owner": "Owner",
+	"Constants.Photos": "Photos",
+	"Constants.Loading": "Loading...",
+	"Constants.Actions": "Actions",
+	"Constants.PropertyType": "Property type",
+	"Constants.List": "List",
+	"Constants.Map": "Map",
+	"Constants.Filters": "Filters",
+	"Properties.ListOfProperties.Title": "List of properties"
 }

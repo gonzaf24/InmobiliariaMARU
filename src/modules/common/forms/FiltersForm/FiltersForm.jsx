@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
@@ -8,45 +8,31 @@ import { InputSelect, InputSelectGeography } from '../../components';
 import { SELECTORS } from '../../utils/constants';
 
 import styles from './FiltersForm.module.scss';
+import { useTranslation } from 'react-i18next';
 
 const propTypes = {
 	className: PropTypes.string,
 	testId: PropTypes.string,
 	id: PropTypes.string,
-	operation: PropTypes.string,
-	onOperationChange: PropTypes.func,
-	price: PropTypes.string,
-	onPriceChange: PropTypes.func,
-	propertyType: PropTypes.string,
-	onPropertyTypeChange: PropTypes.func,
-	country: PropTypes.string,
-	onCountryChange: PropTypes.func,
-	region: PropTypes.string,
-	onRegionChange: PropTypes.func,
-	city: PropTypes.string,
-	onCityChange: PropTypes.func,
-	neighborhood: PropTypes.string,
-	onNeighborhoodChange: PropTypes.func,
+	onFilter: PropTypes.func,
 };
 
 const defaultProps = {
 	className: '',
 	testId: undefined,
 	id: undefined,
-	operation: '',
-	onOperationChange: () => {},
-	price: '',
-	onPriceChange: () => {},
-	propertyType: '',
-	onPropertyTypeChange: () => {},
-	country: '',
-	onCountryChange: () => {},
-	region: '',
-	onRegionChange: () => {},
-	city: '',
-	onCityChange: () => {},
-	neighborhood: '',
-	onNeighborhoodChange: () => {},
+	onFilter: () => {},
+};
+
+const texts = {
+	Operation: 'Constants.Operation',
+	PropertyType: 'Constants.PropertyType',
+	Country: 'Constants.Country',
+	Region: 'Constants.Region',
+	City: 'Constants.City',
+	Neighborhood: 'Constants.Neighborhood',
+	MinPrice: 'Constants.SelectMin',
+	MaxPrice: 'Constants.SelectMax',
 };
 
 const PROPERTY_ACQUISITION_OPTIONS = Object.values(SELECTORS.PROPERTY_ACQUISITION_OPTIONS);
@@ -54,32 +40,48 @@ const PROPERTY_TYPES = Object.values(SELECTORS.PROPERTY_TYPES);
 const DEFUALT_SELECTOR = SELECTORS.DEFUALT_SELECTOR;
 const MIN_MAX_DEFAULT_SELECTOR = SELECTORS.MIN_MAX_DEFAULT_SELECTOR;
 const RENT_PRICE_FILTER = Object.values(SELECTORS.RENT_PRICE_FILTER);
+const SALE_PRICE_FILTER = Object.values(SELECTORS.SALE_PRICE_FILTER);
 
-const FiltersForm = ({
-	className,
-	testId,
-	id,
-	operation,
-	onOperationChange,
-	propertyType,
-	onPropertyTypeChange,
-	price,
-	onPriceChange,
-	country,
-	onCountryChange,
-	region,
-	onRegionChange,
-	city,
-	onCityChange,
-	neighborhood,
-	onNeighborhoodChange,
-}) => {
+const operationOptionsMap = {
+	[SELECTORS.PROPERTY_ACQUISITION_OPTIONS.RENT.value]: RENT_PRICE_FILTER,
+	[SELECTORS.PROPERTY_ACQUISITION_OPTIONS.SALE.value]: SALE_PRICE_FILTER,
+};
+
+const FiltersForm = ({ className, testId, id, onFilter }) => {
+	const { t } = useTranslation();
+
+	const [operation, setOperation] = useState();
+	const [propertyType, setPropertyType] = useState();
+	const [country, setCountry] = useState('');
+	const [region, setRegion] = useState('');
+	const [city, setCity] = useState('');
+	const [neighborhood, setNeighborhood] = useState('');
+	const [minPrice, setMinPrice] = useState();
+	const [maxPrice, setMaxPrice] = useState();
+
 	const [regiones, setRegiones] = useState([]);
 	const [ciudades, setCiudades] = useState([]);
 	const [barrios, setBarrios] = useState([]);
 	const paisesMap = Object.keys(geografia);
 	const regionesMap = Object.keys(regiones);
 	const ciudadesMap = Object.keys(ciudades);
+
+	const getFilterValues = () => {
+		return {
+			operation,
+			propertyType,
+			country,
+			region,
+			city,
+			neighborhood,
+			minPrice,
+			maxPrice,
+		};
+	};
+
+	useEffect(() => {
+		onFilter(getFilterValues());
+	}, [operation, propertyType, country, region, city, neighborhood, minPrice, maxPrice]);
 
 	useEffect(() => {
 		if (!!country && !!region && !!city) {
@@ -90,13 +92,13 @@ const FiltersForm = ({
 	}, [country, region, city]);
 
 	const resetValues = useCallback(() => {
-		onCountryChange('');
+		setCountry('');
 		setRegiones([]);
 		setCiudades([]);
 		setBarrios([]);
-		onRegionChange('');
-		onCityChange('');
-		onNeighborhoodChange('');
+		setRegion('');
+		setCity('');
+		setNeighborhood('');
 	}, []);
 
 	const handlePaisSeleccionado = useCallback(event => {
@@ -105,13 +107,13 @@ const FiltersForm = ({
 			resetValues();
 			return;
 		}
-		onCountryChange(_country);
+		setCountry(_country);
 		setRegiones(geografia[_country]);
 		setCiudades([]);
 		setBarrios([]);
-		onRegionChange('');
-		onCityChange('');
-		onNeighborhoodChange('');
+		setRegion('');
+		setCity('');
+		setNeighborhood('');
 	}, []);
 
 	const handleRegionSeleccionada = useCallback(
@@ -120,11 +122,11 @@ const FiltersForm = ({
 			if (_region === SELECTORS.DEFUALT_SELECTOR) {
 				return;
 			}
-			onRegionChange(_region);
+			setRegion(_region);
 			setCiudades(geografia[country][_region]);
 			setBarrios([]);
-			onCityChange('');
-			onNeighborhoodChange('');
+			setCity('');
+			setNeighborhood('');
 		},
 		[country]
 	);
@@ -135,9 +137,9 @@ const FiltersForm = ({
 			if (_city === SELECTORS.DEFUALT_SELECTOR) {
 				return;
 			}
-			onCityChange(_city);
+			setCity(_city);
 			setBarrios(geografia[country][region][_city]);
-			onNeighborhoodChange('');
+			setNeighborhood('');
 		},
 		[country, region]
 	);
@@ -147,37 +149,37 @@ const FiltersForm = ({
 		if (_neighborhood === SELECTORS.DEFUALT_SELECTOR) {
 			return;
 		}
-		onNeighborhoodChange(_neighborhood);
+		setNeighborhood(_neighborhood);
 	}, []);
 
-	const submitForm = event => {
-		event.preventDefault();
-	};
+	const MinMaxOptions = useMemo(() => {
+		return operationOptionsMap[operation] || [];
+	}, [operation]);
 
 	const filtersFormClassNames = classnames(styles.FiltersForm, className);
 
 	return (
-		<Form onSubmit={submitForm}>
+		<Form>
 			<div className={filtersFormClassNames} data-testid={testId} id={id}>
 				<Row>
 					<InputSelect
 						colsWidth={12}
-						label='Operacion'
+						label={t(texts.Operation)}
 						options={PROPERTY_ACQUISITION_OPTIONS}
+						defaultValue={SELECTORS.DEFUALT_SELECTOR}
 						value={operation}
-						onChange={onOperationChange}
+						onChange={setOperation}
 						isRequired
-						defaultValue={DEFUALT_SELECTOR}
 						className={styles.Selector}
 					/>
 				</Row>
 				<Row>
 					<InputSelect
 						colsWidth={12}
-						label='Propiedad'
+						label={t(texts.PropertyType)}
 						options={PROPERTY_TYPES}
 						value={propertyType}
-						onChange={onPropertyTypeChange}
+						onChange={setPropertyType}
 						defaultValue={DEFUALT_SELECTOR}
 						className={styles.Selector}
 					/>
@@ -185,18 +187,18 @@ const FiltersForm = ({
 				<Row>
 					<InputSelectGeography
 						options={paisesMap}
-						defaultValue={SELECTORS.DEFUALT_SELECTOR}
+						defaultValue={DEFUALT_SELECTOR}
 						colsWidth={12}
-						label='Pais'
+						label={t(texts.Country)}
 						value={country}
 						onChange={handlePaisSeleccionado}
 						isRequired
 					/>
 					<InputSelectGeography
 						options={regionesMap}
-						defaultValue={SELECTORS.DEFUALT_SELECTOR}
+						defaultValue={DEFUALT_SELECTOR}
 						colsWidth={12}
-						label='Region'
+						label={t(texts.Region)}
 						value={region}
 						onChange={handleRegionSeleccionada}
 						isDisabled={!country}
@@ -204,9 +206,9 @@ const FiltersForm = ({
 					/>
 					<InputSelectGeography
 						options={ciudadesMap}
-						defaultValue={SELECTORS.DEFUALT_SELECTOR}
+						defaultValue={DEFUALT_SELECTOR}
 						colsWidth={12}
-						label='Ciudad'
+						label={t(texts.City)}
 						value={city}
 						onChange={handleCiudadSeleccionada}
 						isDisabled={!region}
@@ -214,9 +216,9 @@ const FiltersForm = ({
 					/>
 					<InputSelectGeography
 						options={barrios}
-						defaultValue={SELECTORS.DEFUALT_SELECTOR}
+						defaultValue={DEFUALT_SELECTOR}
 						colsWidth={12}
-						label='Barrio'
+						label={t(texts.Neighborhood)}
 						value={neighborhood}
 						onChange={handleBarrioSeleccionado}
 						isDisabled={!city}
@@ -226,19 +228,19 @@ const FiltersForm = ({
 				<Row>
 					<InputSelect
 						colsWidth={6}
-						label='Precio minimo'
-						options={RENT_PRICE_FILTER}
-						value={price}
-						onChange={onPriceChange}
+						label={t(texts.MinPrice)}
+						options={MinMaxOptions}
+						value={minPrice}
+						onChange={setMinPrice}
 						defaultValue={MIN_MAX_DEFAULT_SELECTOR.min}
 						className={styles.Selector}
 					/>
 					<InputSelect
 						colsWidth={6}
-						label='Precio maximo'
-						options={RENT_PRICE_FILTER}
-						value={price}
-						onChange={onPriceChange}
+						label={t(texts.MaxPrice)}
+						options={MinMaxOptions}
+						value={maxPrice}
+						onChange={setMaxPrice}
 						defaultValue={MIN_MAX_DEFAULT_SELECTOR.max}
 						className={styles.Selector}
 					/>

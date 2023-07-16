@@ -17,6 +17,7 @@ import OwnerContactForm from '../../OwnerContactForm';
 
 import styles from './NewHouseForm.module.scss';
 import useToastContext from '../../../../../context/toastContext';
+import { useTranslation } from 'react-i18next';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -34,7 +35,13 @@ const defaultProps = {
 	onClose: () => {},
 };
 
+const texts = {
+	Cancel: 'Cancel',
+	Create: 'Create',
+};
+
 const NewHouseForm = ({ className, testId, id, onClose }) => {
+	const { t } = useTranslation();
 	const [operation, setOperation] = useState();
 	const [price, setPrice] = useState();
 
@@ -88,8 +95,8 @@ const NewHouseForm = ({ className, testId, id, onClose }) => {
 	const [lat, setLat] = useState();
 	const [lng, setLng] = useState();
 	const [isAddress, setIsAddress] = useState(true);
-	const [exactPosition, setExactPosition] = useState(false);
-	const [showInMap, setShowInMap] = useState(false);
+	const [exactPosition, setExactPosition] = useState(true);
+	const [showInMap, setShowInMap] = useState(true);
 
 	const [photos, setPhotos] = useState([]);
 	const [videos, setVideos] = useState([]);
@@ -353,10 +360,10 @@ const NewHouseForm = ({ className, testId, id, onClose }) => {
 				/>
 				<div className={styles.Footer}>
 					<Button variant='secondary' onClick={handleClose} className={styles.Button}>
-						Cancelar
+						{t(texts.Cancel)}
 					</Button>
 					<Button variant='primary' type='submit' className={styles.Button}>
-						Crear
+						{t(texts.Create)}
 					</Button>
 				</div>
 			</div>

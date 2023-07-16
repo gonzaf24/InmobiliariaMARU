@@ -197,7 +197,7 @@ const PropertyForm = ({
 				<InputNumber colsWidth={2} label='Nro. Plantas' value={floors} onChange={onFloorsChange} />
 				<InputSelect
 					colsWidth={2}
-					label='Calefaccion'
+					label='Calefacción'
 					options={PROPERTY_HEATING_COOLING_OPTIONS}
 					value={heatingCooling}
 					onChange={onHeatingCoolingChange}
@@ -222,22 +222,21 @@ const PropertyForm = ({
 				<InputCheckbox
 					isDisabled={parkingOptional}
 					colsWidth={2}
-					label='Parking incluid'
+					label='Parking incluido'
 					value={parkingIncluded}
 					onChange={onParkingIncludedChange}
 				/>
 				<InputCheckbox
 					colsWidth={2}
-					label='Parking optional'
+					label='Parking opcional'
 					isDisabled={parkingIncluded}
 					value={parkingOptional}
 					onChange={onParkingOptionalChange}
 				/>
-
 				<InputNumberLabel
 					colsWidth={3}
 					isDisabled={parkingIncluded}
-					label='Parking price'
+					label='Precio parking'
 					text={'€/month'}
 					value={parkingPrice}
 					onChange={onParkingPriceChange}
@@ -246,17 +245,17 @@ const PropertyForm = ({
 			<Row>
 				<InputDate
 					colsWidth={3}
-					label='Fecha de construccion'
+					label='Fecha de construcción'
 					value={constructionYear}
 					onChange={onConstructionYearChange}
 				/>
-				<InputDate colsWidth={3} label='Fecha ult. renovacion' value={renovationYear} onChange={onRenovationYearChange} />
+				<InputDate colsWidth={3} label='Fecha ult. renovación' value={renovationYear} onChange={onRenovationYearChange} />
 				<InputNumber colsWidth={3} label='Antiguedad (años)' value={antiquity} onChange={onAntiquityChange} />
 			</Row>
 			<Row>
 				<InputTextarea
 					colsWidth={12}
-					label='Observaciones de la propiedad'
+					label='Observaciones de la propiedad (no se mostrara en la web)'
 					value={observations}
 					onChange={onObservationsChange}
 				/>

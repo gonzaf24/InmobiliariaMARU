@@ -153,11 +153,11 @@ const EditUser = ({ className, testId, id, data, onClose, onSuccess }) => {
 				{loading && <Loader animation='border' variant='primary' />}
 				{!loading && (
 					<div className={styles.Footer}>
+						<Button variant='secondary' className='w-100' onClick={onClose}>
+							{t(texts.Cancel)}
+						</Button>
 						<Button variant='primary' type='submit' className='w-100' disabled={hasErrors}>
 							{t(texts.Accept)}
-						</Button>
-						<Button variant='danger' className='w-100' onClick={onClose}>
-							{t(texts.Cancel)}
 						</Button>
 					</div>
 				)}
