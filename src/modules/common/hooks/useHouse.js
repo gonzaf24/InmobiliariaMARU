@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { deleteHouse, getHouses, postHouse, putHouse } from '../services/houseService';
+import { deleteHouse, getHouses, postHouse, putHouse, getHouseById } from '../services/houseService';
 
 export default function useHouse() {
 	const [state, setState] = useState({
@@ -8,6 +8,25 @@ export default function useHouse() {
 		errorMessage: null,
 		errorCode: null,
 	});
+
+	const getHouse = useCallback(async id => {
+		try {
+			setState(prevState => ({ ...prevState, loading: true, hasError: false }));
+			const house = await getHouseById(id);
+			setState(prevState => ({ ...prevState, loading: false }));
+			return house;
+		} catch (error) {
+			console.log('Error getting house: ', error);
+			setState(prevState => ({
+				...prevState,
+				loading: false,
+				hasError: true,
+				errorMessage: error.message,
+				errorCode: error.code,
+			}));
+			return null;
+		}
+	}, []);
 
 	const getHousesList = useCallback(async () => {
 		try {
@@ -32,7 +51,7 @@ export default function useHouse() {
 			const houses = await getHouses();
 
 			// Guarda los filtros en el almacenamiento local
-			localStorage.setItem('filters', JSON.stringify(filters));
+			localStorage.setItem('real_state_filters', JSON.stringify(filters));
 
 			const filteredHouses = houses.filter(house => {
 				return (
@@ -42,6 +61,7 @@ export default function useHouse() {
 					(!filters.country || house.country === filters.country) &&
 					(!filters.region || house.region === filters.region) &&
 					(!filters.city || house.city === filters.city) &&
+					(!filters.neighborhood || house.neighborhood === filters.neighborhood) &&
 					(!filters.minPrice || house.price >= filters.minPrice) &&
 					(!filters.maxPrice || house.price <= filters.maxPrice)
 				);
@@ -94,7 +114,7 @@ export default function useHouse() {
 			console.log('deleted house ', house);
 			setState({
 				loading: false,
-				error: false,
+				hasError: false,
 				errorCode: null,
 				errorMessage: null,
 			});
@@ -113,7 +133,7 @@ export default function useHouse() {
 
 	return {
 		isLoading: state.loading,
-		hasError: state.error,
+		hasError: state.hasError,
 		errorCode: state.errorCode,
 		errorMessage: state.errorMessage,
 		getHousesList,
@@ -121,5 +141,6 @@ export default function useHouse() {
 		newHouse,
 		editHouse,
 		removeHouse,
+		getHouse,
 	};
 }

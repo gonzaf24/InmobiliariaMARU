@@ -90,8 +90,8 @@ export const MODAL_TRANSITION_EFFECT = {
 const DEFUALT_SELECTOR = { label: 'Constants.SelectOne', value: '' };
 
 const MIN_MAX_DEFAULT_SELECTOR = {
-	min: { label: 'Constants.SelectMin', value: '' },
-	max: { label: 'Constants.SelectMax', value: '' },
+	min: { label: 'Constants.Option.SelectMin', value: '' },
+	max: { label: 'Constants.Option.SelectMax', value: '' },
 };
 
 export const SELECTORS = {

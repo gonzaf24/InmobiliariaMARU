@@ -84,7 +84,7 @@ const FiltersForm = ({ className, testId, id, onFilter }) => {
 	}, [operation, propertyType, country, region, city, neighborhood, minPrice, maxPrice]);
 
 	useEffect(() => {
-		const savedFilters = localStorage.getItem('filters');
+		const savedFilters = localStorage.getItem('real_state_filters');
 		if (savedFilters) {
 			const { operation, propertyType, country, region, city, neighborhood, minPrice, maxPrice } = JSON.parse(savedFilters);
 			setOperation(operation);
@@ -182,7 +182,7 @@ const FiltersForm = ({ className, testId, id, onFilter }) => {
 		setMaxPrice(undefined);
 
 		// Clear data from localStorage
-		localStorage.removeItem('filters');
+		localStorage.removeItem('real_state_filters');
 	};
 
 	const filtersFormClassNames = classnames(styles.FiltersForm, className);
@@ -199,6 +199,26 @@ const FiltersForm = ({ className, testId, id, onFilter }) => {
 						value={operation}
 						onChange={setOperation}
 						isRequired
+						className={styles.Selector}
+					/>
+				</Row>
+				<Row>
+					<InputSelect
+						colsWidth={6}
+						label={t(texts.MinPrice)}
+						options={MinMaxOptions}
+						value={minPrice}
+						onChange={setMinPrice}
+						defaultValue={MIN_MAX_DEFAULT_SELECTOR.min}
+						className={styles.Selector}
+					/>
+					<InputSelect
+						colsWidth={6}
+						label={t(texts.MaxPrice)}
+						options={MinMaxOptions}
+						value={maxPrice}
+						onChange={setMaxPrice}
+						defaultValue={MIN_MAX_DEFAULT_SELECTOR.max}
 						className={styles.Selector}
 					/>
 				</Row>
@@ -254,28 +274,9 @@ const FiltersForm = ({ className, testId, id, onFilter }) => {
 						isRequired
 					/>
 				</Row>
-				<Row>
-					<InputSelect
-						colsWidth={6}
-						label={t(texts.MinPrice)}
-						options={MinMaxOptions}
-						value={minPrice}
-						onChange={setMinPrice}
-						defaultValue={MIN_MAX_DEFAULT_SELECTOR.min}
-						className={styles.Selector}
-					/>
-					<InputSelect
-						colsWidth={6}
-						label={t(texts.MaxPrice)}
-						options={MinMaxOptions}
-						value={maxPrice}
-						onChange={setMaxPrice}
-						defaultValue={MIN_MAX_DEFAULT_SELECTOR.max}
-						className={styles.Selector}
-					/>
-				</Row>
+
 				<div className={styles.ButtonWrapper}>
-					<Button className={styles.Button} variant='secondary' onClick={handleClearFilters}>
+					<Button className={styles.Button} variant='primary' onClick={handleClearFilters}>
 						{t('Constants.ClearFilters')}
 					</Button>
 				</div>

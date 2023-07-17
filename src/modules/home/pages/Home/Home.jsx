@@ -44,25 +44,31 @@ const INITIAL_STEP = HOME_STEPS.HOME_LIST;
 
 const Home = ({ className, testId, id }) => {
 	const { t } = useTranslation();
-	const { getFilteredHousesList } = useHouse();
+	const { getFilteredHousesList, getHouse } = useHouse();
 	const { step, setStep } = useStep(INITIAL_STEP);
-	const [greatPlaces, setGreatPlaces] = useState([]);
 	const { isMobile, isTablet } = useDevice();
+	const [greatPlaces, setGreatPlaces] = useState([]);
 
 	useEffect(() => {
-		const retrieveHouses = async () => {
+		const fetchHouses = async () => {
 			// Recupera los filtros del almacenamiento local
-			const savedFilters = localStorage.getItem('filters');
-
-			console.log('savedFilters', savedFilters);
+			const savedFilters = localStorage.getItem('real_state_filters');
 			const filters = savedFilters ? JSON.parse(savedFilters) : {};
-
 			const housesOut = await getFilteredHousesList(filters);
 			setGreatPlaces(housesOut);
 		};
-
-		retrieveHouses();
+		fetchHouses();
 	}, []);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const house = await getHouse('64b2aefa6713c60014ebe60a'); // remplaza '123' con el ID de la casa que quieres
+			console.log('house ', house);
+			// Haz algo con la casa aquí
+		};
+
+		fetchData();
+	}, [getHouse]);
 
 	const handleFilter = async filterParams => {
 		const housesOut = await getFilteredHousesList(filterParams);

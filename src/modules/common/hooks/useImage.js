@@ -50,7 +50,7 @@ export default function useImage() {
 
 	return {
 		isLoading: state.loading,
-		hasUploadError: state.error,
+		hasUploadError: state.hasError,
 		errorCode: state.errorCode,
 		errorMessage: state.errorMessage,
 		deleteImage,
