@@ -15,6 +15,19 @@ export async function getHouses() {
 	return data;
 }
 
+export async function getHouseById(id) {
+	const response = await fetch(`${_URL}${_ENDPOINT}/${id}`, customFetch(dataApi.METHOD.GET));
+	if (!response.ok) {
+		const errorMessage = getError(response.status);
+		const err = new Error();
+		err.code = response.status;
+		err.message = errorMessage;
+		throw err;
+	}
+	const data = await response.json();
+	return data;
+}
+
 export async function postHouse(house) {
 	const response = await fetch(`${_URL}${_ENDPOINT}`, protectedFetch(dataApi.METHOD.POST, house));
 	if (!response.ok) {

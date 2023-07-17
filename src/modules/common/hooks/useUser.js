@@ -104,7 +104,7 @@ export default function useUser() {
 			console.log('deleted user ', user);
 			setState({
 				loading: false,
-				error: false,
+				hasError: false,
 				errorCode: null,
 				errorMessage: null,
 			});
@@ -124,7 +124,7 @@ export default function useUser() {
 	return {
 		isLogged: Boolean(jwt),
 		isLoading: state.loading,
-		hasError: state.error,
+		hasError: state.hasError,
 		errorCode: state.errorCode,
 		errorMessage: state.errorMessage,
 		user,

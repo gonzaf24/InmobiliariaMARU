@@ -1,8 +1,13 @@
 @import '/src/styles/mixins.scss';
 
 .FiltersForm {
-	.Selector {
+	& select {
 		width: 100%;
+	}
+
+	& label {
+		font-size: var(--bs-font-large);
+		color: var(--bs-primary);
 	}
 
 	.Footer {
@@ -30,6 +35,13 @@
 		.Button {
 			border: none !important;
 			width: 100%;
+			color: var(--bs-primary);
+			background-color: white;
+
+			&:hover {
+				background-color: var(--bs-primary);
+				color: white;
+			}
 
 			@include devices(mobile, tablet) {
 				width: unset;

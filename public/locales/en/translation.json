@@ -44,8 +44,10 @@
 	"Constants.Bedrooms": "b/room",
 	"Constants.FlatInStreet": "Flat in street",
 	"Constants.SelectOne": "Select",
-	"Constants.SelectMin": "Min",
-	"Constants.SelectMax": "Max",
+	"Constants.SelectMin": "Min. €",
+	"Constants.SelectMax": "Max. €",
+	"Constants.Option.SelectMin": "Min",
+	"Constants.Option.SelectMax": "Max",
 	"Constants.ParkingIncluded": "Parking included",
 	"Constants.ParkingOptional": "Parking optional",
 	"Constants.Exterior": "exterior",
@@ -67,5 +69,6 @@
 	"Constants.Filters": "Filters",
 	"Constants.Apply": "Apply",
 	"Constants.ClearFilters": "Clear filters",
-	"Properties.ListOfProperties.Title": "List of properties"
+	"Properties.ListOfProperties.Title": "List of properties",
+	"NotFound.Text.Title": "We're sorry, but the item you're looking for may no longer be available or has been removed."
 }
