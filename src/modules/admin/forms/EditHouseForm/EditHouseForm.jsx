@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { useHouse } from '../../../hooks';
-import { UPLOAD_TYPE } from '../../FileUploadForm/FileUploadForm';
+import { useHouse } from '../../../common/hooks';
 
-import TypeOperationForm from '../../TypeOperationForm';
-import AddressForm from '../../AddressForm';
-import PropertyForm from '../../PropertyForm/PropertyForm';
-import SearchAddressForm from '../../SearchAddressForm';
-import TitleDescriptionForm from '../../TitleDescriptionForm';
-import FileUploadForm from '../../FileUploadForm';
-import OwnerContactForm from '../../OwnerContactForm';
+import TypeOperationForm from '../../../common/forms/TypeOperationForm';
+import AddressForm from '../../../common/forms/AddressForm';
+import PropertyForm from '../../../common/forms/PropertyForm/PropertyForm';
+import SearchAddressForm from '../../../common/forms/SearchAddressForm';
+import TitleDescriptionForm from '../../../common/forms/TitleDescriptionForm';
+import OwnerContactForm from '../../../common/forms/OwnerContactForm';
 
-import styles from './NewHouseForm.module.scss';
-import useToastContext from '../../../../../context/toastContext';
+import useToastContext from '../../../../context/toastContext';
 import { useTranslation } from 'react-i18next';
+
+import styles from './EditHouseForm.module.scss';
+import FileUploadForm, { UPLOAD_TYPE } from '../FileUploadForm/FileUploadForm';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -25,6 +25,7 @@ const propTypes = {
 	id: PropTypes.string,
 	isOpen: PropTypes.bool,
 	onClose: PropTypes.func,
+	house: PropTypes.object,
 };
 
 const defaultProps = {
@@ -33,15 +34,17 @@ const defaultProps = {
 	id: undefined,
 	isOpen: false,
 	onClose: () => {},
+	house: {},
 };
 
 const texts = {
 	Cancel: 'Cancel',
-	Create: 'Create',
+	Edit: 'Edit',
 };
 
-const NewHouseForm = ({ className, testId, id, onClose }) => {
+const EditHouseForm = ({ className, testId, id, onClose, house }) => {
 	const { t } = useTranslation();
+
 	const [operation, setOperation] = useState();
 	const [price, setPrice] = useState();
 
@@ -62,23 +65,21 @@ const NewHouseForm = ({ className, testId, id, onClose }) => {
 	const [size, setSize] = useState();
 	const [floors, setFloors] = useState();
 	const [heatingCooling, setHeatingCooling] = useState();
-
-	const [water, setWater] = useState(false);
-	const [electricity, setElectricity] = useState(false);
-	const [gas, setGas] = useState(false);
-	const [furnished, setFurnished] = useState(false);
-	const [pets, setPets] = useState(false);
-	const [parkingIncluded, setParkingIncluded] = useState(false);
-	const [parkingOptional, setParkingOptional] = useState(false);
+	const [water, setWater] = useState();
+	const [electricity, setElectricity] = useState();
+	const [gas, setGas] = useState();
+	const [furnished, setFurnished] = useState();
+	const [pets, setPets] = useState();
+	const [parkingIncluded, setParkingIncluded] = useState();
+	const [parkingOptional, setParkingOptional] = useState();
 	const [parkingPrice, setParkingPrice] = useState();
-	const [pool, setPool] = useState(false);
-	const [jacuzzi, setJacuzzi] = useState(false);
-	const [garden, setGarden] = useState(false);
-	const [terrace, setTerrace] = useState(false);
-	const [horizontal, setHorizontal] = useState(false);
-	const [exterior, setExterior] = useState(false);
-	const [elevator, setElevator] = useState(false);
-
+	const [pool, setPool] = useState();
+	const [jacuzzi, setJacuzzi] = useState();
+	const [garden, setGarden] = useState();
+	const [terrace, setTerrace] = useState();
+	const [horizontal, setHorizontal] = useState();
+	const [exterior, setExterior] = useState();
+	const [elevator, setElevator] = useState();
 	const [constructionYear, setConstructionYear] = useState();
 	const [renovationYear, setRenovationYear] = useState();
 	const [antiquity, setAntiquity] = useState();
@@ -97,37 +98,93 @@ const NewHouseForm = ({ className, testId, id, onClose }) => {
 	const [isAddress, setIsAddress] = useState(true);
 	const [exactPosition, setExactPosition] = useState(true);
 	const [showInMap, setShowInMap] = useState(true);
+	const [photos, setPhotos] = useState();
+	const [videos, setVideos] = useState();
+	const [documents, setDocuments] = useState();
 
-	const [photos, setPhotos] = useState([]);
-	const [videos, setVideos] = useState([]);
-	const [documents, setDocuments] = useState([]);
-
-	const { newHouse, isLoading, hasError, errorMessage } = useHouse();
 	const navigate = useNavigate();
-
 	const { addSuccessToast, addErrorToast } = useToastContext();
 
+	const { editHouse, isLoading, hasError, errorMessage } = useHouse();
+
+	useEffect(() => {
+		setOperation(house?.operation);
+		setPrice(house?.price);
+		setCountry(house?.country);
+		setRegion(house?.region);
+		setCity(house?.city);
+		setNeighborhood(house?.neighborhood);
+		setPostalCode(house?.postalCode);
+		setStreet(house?.street);
+		setAddressNumber(house?.addressNumber);
+		setFloor(house?.floor);
+		setDoor(house?.door);
+		setStair(house?.stair);
+
+		setPropertyType(house?.propertyType);
+		setRooms(house?.rooms);
+		setBathrooms(house?.bathrooms);
+		setSize(house?.size);
+		setFloors(house?.floors);
+		setHeatingCooling(house?.heatingCooling);
+		setWater(house?.water);
+		setElectricity(house?.electricity);
+		setGas(house?.gas);
+		setFurnished(house?.furnished);
+		setPets(house?.pets);
+		setParkingIncluded(house?.parkingIncluded);
+		setParkingOptional(house?.parkingOptional);
+		setParkingPrice(house?.parkingPrice);
+		setPool(house?.pool);
+		setJacuzzi(house?.jacuzzi);
+		setGarden(house?.garden);
+		setTerrace(house?.terrace);
+		setHorizontal(house?.horizontal);
+		setExterior(house?.exterior);
+		setElevator(house?.elevator);
+		setConstructionYear(house?.constructionYear);
+		setRenovationYear(house?.renovationYear);
+		setAntiquity(house?.antiquity);
+		setObservations(house?.observations);
+
+		setOwnerName(house?.ownerName);
+		setOwnerPhone(house?.ownerPhone);
+		setOwnerEmail(house?.ownerEmail);
+
+		setTitle(house?.title);
+		setDescription(house?.description);
+
+		setAddress(house?.address);
+		setLat(house?.lat);
+		setLng(house?.lng);
+		setIsAddress(house?.isAddress);
+		setExactPosition(house?.exactPosition);
+		setShowInMap(house?.showInMap);
+
+		setPhotos(house?.photos);
+		setVideos(house?.videos);
+		setDocuments(house?.documents);
+	}, []);
+
 	const resetInputs = () => {
-		setOperation();
-		setPrice();
-
-		setCountry();
-		setRegion();
-		setCity();
-		setNeighborhood();
-		setPostalCode();
-		setStreet();
-		setAddressNumber();
-		setFloor();
-		setDoor();
-		setStair();
-
-		setPropertyType();
-		setRooms();
-		setBathrooms();
-		setSize();
-		setFloors();
-		setHeatingCooling();
+		setOperation(undefined);
+		setPrice(undefined);
+		setCountry(undefined);
+		setRegion(undefined);
+		setCity(undefined);
+		setNeighborhood(undefined);
+		setPostalCode(undefined);
+		setStreet(undefined);
+		setAddressNumber(undefined);
+		setFloor(undefined);
+		setDoor(undefined);
+		setStair(undefined);
+		setPropertyType(undefined);
+		setRooms(undefined);
+		setBathrooms(undefined);
+		setSize(undefined);
+		setFloors(undefined);
+		setHeatingCooling(undefined);
 		setWater(false);
 		setElectricity(false);
 		setGas(false);
@@ -135,7 +192,7 @@ const NewHouseForm = ({ className, testId, id, onClose }) => {
 		setPets(false);
 		setParkingIncluded(false);
 		setParkingOptional(false);
-		setParkingPrice();
+		setParkingPrice(undefined);
 		setPool(false);
 		setJacuzzi(false);
 		setGarden(false);
@@ -143,28 +200,23 @@ const NewHouseForm = ({ className, testId, id, onClose }) => {
 		setHorizontal(false);
 		setExterior(false);
 		setElevator(false);
-		setConstructionYear();
-		setRenovationYear();
-		setAntiquity();
-		setObservations();
-
-		setOwnerName();
-		setOwnerPhone();
-		setOwnerEmail();
-
-		setTitle();
-		setDescription();
-		setAddress();
-		setLat();
-		setLng();
+		setConstructionYear(undefined);
+		setRenovationYear(undefined);
+		setAntiquity(undefined);
+		setObservations(undefined);
+		setOwnerName(undefined);
+		setOwnerPhone(undefined);
+		setOwnerEmail(undefined);
+		setTitle(undefined);
+		setDescription(undefined);
+		setAddress(undefined);
+		setLat(undefined);
+		setLng(undefined);
 		setIsAddress(true);
 		setExactPosition(false);
 		setShowInMap(false);
-
 		setPhotos([]);
-
 		setVideos([]);
-
 		setDocuments([]);
 	};
 
@@ -172,6 +224,7 @@ const NewHouseForm = ({ className, testId, id, onClose }) => {
 		try {
 			e.preventDefault();
 			const data = {
+				id: house?.id,
 				operation,
 				price,
 				country,
@@ -224,9 +277,7 @@ const NewHouseForm = ({ className, testId, id, onClose }) => {
 				videos,
 				documents,
 			};
-
-			console.log('data ', data);
-			const response = await newHouse(data);
+			const response = await editHouse(data);
 			if (response) {
 				resetInputs(); // se reinician los inputs después de enviar los datos exitosamente
 				console.log('hay respuesta ', response);
@@ -247,11 +298,11 @@ const NewHouseForm = ({ className, testId, id, onClose }) => {
 		onClose();
 	};
 
-	const newHouseFormClassNames = classnames(styles.NewHouseForm, className);
+	const EditHouseFormClassNames = classnames(styles.EditHouseForm, className);
 
 	return (
-		<Form onSubmit={submitForm}>
-			<div className={newHouseFormClassNames} data-testid={testId} id={id}>
+		<Form onSubmit={submitForm} noValidate>
+			<div className={EditHouseFormClassNames} data-testid={testId} id={id}>
 				<TypeOperationForm operation={operation} onOperationChange={setOperation} price={price} onPriceChange={setPrice} />
 				<AddressForm
 					country={country}
@@ -341,6 +392,7 @@ const NewHouseForm = ({ className, testId, id, onClose }) => {
 					description={description}
 					onDescriptionChange={setDescription}
 				/>
+
 				<FileUploadForm files={photos} onFileChange={setPhotos} uploadType={UPLOAD_TYPE.IMAGE} />
 				<FileUploadForm files={videos} onFileChange={setVideos} uploadType={UPLOAD_TYPE.VIDEO} />
 				<FileUploadForm files={documents} onFileChange={setDocuments} uploadType={UPLOAD_TYPE.DOCUMENT} />
@@ -363,7 +415,7 @@ const NewHouseForm = ({ className, testId, id, onClose }) => {
 						{t(texts.Cancel)}
 					</Button>
 					<Button variant='primary' type='submit' className={styles.Button}>
-						{t(texts.Create)}
+						{t(texts.Edit)}
 					</Button>
 				</div>
 			</div>
@@ -371,7 +423,7 @@ const NewHouseForm = ({ className, testId, id, onClose }) => {
 	);
 };
 
-NewHouseForm.propTypes = propTypes;
-NewHouseForm.defaultProps = defaultProps;
+EditHouseForm.propTypes = propTypes;
+EditHouseForm.defaultProps = defaultProps;
 
-export default NewHouseForm;
+export default EditHouseForm;

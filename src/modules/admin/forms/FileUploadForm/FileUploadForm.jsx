@@ -2,8 +2,9 @@ import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
+import { FileSorteableList, VideoUpload } from '../../../common';
+
 import styles from './FileUploadForm.module.scss';
-import { FileSorteableList, VideoUpload } from '../../components';
 
 const propTypes = {
 	className: PropTypes.string,

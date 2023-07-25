@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { Button, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { Loader, useUser } from '../..';
+import { Loader, useUser } from '../../../common';
 
 import styles from './LoginForm.module.scss';
 

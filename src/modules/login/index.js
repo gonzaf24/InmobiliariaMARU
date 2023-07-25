@@ -1,3 +1,1 @@
-import Login from './Login';
-
-export { Login };
+export * from './pages';

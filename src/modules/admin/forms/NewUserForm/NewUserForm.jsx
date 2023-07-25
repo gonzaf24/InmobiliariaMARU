@@ -3,13 +3,11 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import { useTranslation } from 'react-i18next';
+import { Loader, USERS_TYPES, useUser } from '../../../common';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
-import { USERS_TYPES } from '../../../utils/constants';
-import { useUser } from '../../../hooks';
-import { Loader } from '../../../components';
-import useToastContext from '../../../../../context/toastContext';
+import useToastContext from '../../../../context/toastContext';
 
-import styles from './NewUser.module.scss';
+import styles from './NewUserForm.module.scss';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -34,8 +32,8 @@ const texts = {
 	Cancel: 'Cancel',
 };
 
-const NewUser = ({ className, testId, id, onClose, onSuccess }) => {
-	const newUserClassNames = classnames(styles.NewUser, className);
+const NewUserForm = ({ className, testId, id, onClose, onSuccess }) => {
+	const newUserClassNames = classnames(styles.NewUserForm, className);
 	const inputClassNames = classnames('form-control', styles.TextInput);
 	const { newUser, errorMessage } = useUser();
 	const { addSuccessToast, addErrorToast } = useToastContext();
@@ -208,7 +206,7 @@ const NewUser = ({ className, testId, id, onClose, onSuccess }) => {
 	);
 };
 
-NewUser.propTypes = propTypes;
-NewUser.defaultProps = defaultProps;
+NewUserForm.propTypes = propTypes;
+NewUserForm.defaultProps = defaultProps;
 
-export default NewUser;
+export default NewUserForm;

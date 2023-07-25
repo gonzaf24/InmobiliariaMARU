@@ -9,7 +9,7 @@
 
 	.Menu {
 		display: flex;
-		justify-content: center;
+		justify-content: flex-end;
 		align-items: center;
 		gap: 100px;
 		padding: 5px 25px;
@@ -19,12 +19,12 @@
 		-moz-box-shadow: 0px -2px 30px 0px rgba(54, 100, 179, 0.67);
 		box-shadow: 0px -2px 30px 0px rgba(54, 100, 179, 0.67);
 
-		@include mobile {
+		@include devices(mobile, tablet) {
 			padding: 10px;
 			justify-content: space-between;
 		}
 
-		.Wrapper {
+		.HeaderWrapper {
 			display: flex;
 			justify-content: flex-end;
 			align-items: center;
@@ -64,19 +64,25 @@
 			}
 		}
 	}
+
 	.Wrapper {
 		display: flex;
 		justify-content: center;
 		align-items: flex-start;
 		flex: 1 1;
-		padding: 0px 150px;
+		height: calc(100vh - 50px);
 
 		@include desktop {
 			padding: 0px 50px;
 		}
 
 		@include devices(tablet, mobile) {
-			padding: 0px;
+			position: absolute;
+			top: 100px;
+			bottom: -15px;
+			left: 0px;
+			right: 0px;
+			height: unset !important;
 		}
 
 		.Filter {
@@ -86,9 +92,10 @@
 			align-items: flex-start;
 			gap: 10px;
 			max-width: 300px;
+			width: 100%;
 			flex: 1;
 			border: 2px solid #d4deee;
-			border-radius: 0px 0px 10px 10px;
+			border-radius: 0px 0px var(--bs-radius-medium) var(--bs-radius-medium);
 			margin: 25px 15px 25px 25px;
 			position: relative;
 			padding: 25px;
@@ -100,7 +107,7 @@
 				left: -2px;
 				right: -2px;
 				height: 50px;
-				border-radius: 10px 10px 0px 0px;
+				border-radius: var(--bs-radius-medium) var(--bs-radius-medium) 0px 0px;
 				background-color: var(--bs-primary);
 				display: flex;
 				justify-content: center;
@@ -112,20 +119,19 @@
 			}
 		}
 
-		.Map,
-		.List {
+		.Step {
+			flex: 1 1;
 			display: flex;
 			flex-direction: column;
 			justify-content: flex-start;
 			align-items: flex-start;
 			gap: 10px;
-			flex: 1 1;
 			margin-top: 25px;
 			height: calc(100vh - 80px);
-			padding: 0px 0px 150px 0px;
 
 			@include devices(tablet, mobile) {
-				margin-top: 5px;
+				margin-top: 0px;
+				height: unset;
 			}
 		}
 	}

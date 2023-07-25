@@ -1,4 +1,3 @@
-import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 import RecoveryForm from './RecoveryForm';
 import OwnerContactForm from './OwnerContactForm';
@@ -7,14 +6,9 @@ import TypeOperationForm from './TypeOperationForm';
 import TitleDescriptionForm from './TitleDescriptionForm';
 import PropertyForm from './PropertyForm/PropertyForm';
 import AddressForm from './AddressForm';
-import FileUploadForm from './FileUploadForm';
 import FiltersForm from './FiltersForm';
 
-export * from './users';
-export * from './houses';
-
 export {
-	LoginForm,
 	RegisterForm,
 	RecoveryForm,
 	OwnerContactForm,
@@ -23,6 +17,5 @@ export {
 	TitleDescriptionForm,
 	PropertyForm,
 	AddressForm,
-	FileUploadForm,
 	FiltersForm,
 };
