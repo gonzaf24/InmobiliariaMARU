@@ -6,7 +6,8 @@ import { Button, Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { MdDeleteForever, MdEdit } from 'react-icons/md';
 import { ImUserPlus } from 'react-icons/im';
-import { EditUser, NewUser, useOpenToggle, useUser, ActionModal, Modal } from '../../../common';
+import { useOpenToggle, useUser, ActionModal, Modal } from '../../../common';
+import { EditUserForm, NewUserForm } from '../../forms';
 
 import styles from './Users.module.scss';
 
@@ -148,11 +149,11 @@ const Users = ({ className, testId, id }) => {
 				onClose={closeEditUser}
 				header={t(texts.EditUser)}
 			>
-				<EditUser data={user} onClose={closeEditUser} onSuccess={updateUsersTable} />
+				<EditUserForm data={user} onClose={closeEditUser} onSuccess={updateUsersTable} />
 			</Modal>
 
 			<Modal id={id} size='xs' isOpen={isOpenNewUser} onHide={closeNewUser} onClose={closeNewUser} header={t(texts.NewUser)}>
-				<NewUser data={user} onClose={closeNewUser} onSuccess={updateUsersTable} />
+				<NewUserForm data={user} onClose={closeNewUser} onSuccess={updateUsersTable} />
 			</Modal>
 		</div>
 	);

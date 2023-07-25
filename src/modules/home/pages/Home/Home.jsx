@@ -85,7 +85,7 @@ const Home = ({ className, testId, id }) => {
 		<div className={homeClassNames} data-testid={testId} id={id}>
 			<div className={styles.Menu}>
 				{isMobileOrTablet && <FilterModal onFilter={handleFilter} />}
-				<div className={styles.Wrapper}>
+				<div className={styles.HeaderWrapper}>
 					<Button className={listButtonClassNames} variant='primary' onClick={() => setStep(HOME_STEPS.HOME_LIST)}>
 						<BsListTask />
 						<span className={styles.Text}>{t(texts.List)}</span>
@@ -105,7 +105,7 @@ const Home = ({ className, testId, id }) => {
 						<FiltersForm onFilter={handleFilter} />
 					</div>
 				)}
-				<HomeStep greatPlaces={greatPlaces} className={styles.Map} />
+				<HomeStep greatPlaces={greatPlaces} className={styles.Step} />
 			</div>
 		</div>
 	);

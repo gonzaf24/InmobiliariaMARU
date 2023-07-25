@@ -2,16 +2,13 @@ import React, { useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-import { Button, FloatingLabel, Form } from 'react-bootstrap';
-
+import { FloatingLabel, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { USERS_TYPES } from '../../../utils/constants';
-import { useUser } from '../../../hooks';
-import useToastContext from '../../../../../context/toastContext';
-import useUserContext from '../../../../../context/userContext';
+import { USERS_TYPES, Button, Loader, useUser } from '../../../common';
+import useToastContext from '../../../../context/toastContext';
+import useUserContext from '../../../../context/userContext';
 
-import styles from './EditUser.module.scss';
-import { Loader } from '../../../components';
+import styles from './EditUserForm.module.scss';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -46,8 +43,8 @@ const texts = {
 	Cancel: 'Cancel',
 };
 
-const EditUser = ({ className, testId, id, data, onClose, onSuccess }) => {
-	const editUserClassNames = classnames(styles.EditUser, className);
+const EditUserForm = ({ className, testId, id, data, onClose, onSuccess }) => {
+	const editUserFormClassNames = classnames(styles.EditUserForm, className);
 	const { editUser, errorMessage } = useUser();
 	const { addSuccessToast, addErrorToast } = useToastContext();
 	const [type, setType] = useState(data.type);
@@ -116,12 +113,12 @@ const EditUser = ({ className, testId, id, data, onClose, onSuccess }) => {
 	const hasErrors = Object.keys(errors).some(key => errors[key] === true);
 
 	return (
-		<div className={editUserClassNames} data-testid={testId} id={id}>
+		<div className={editUserFormClassNames} data-testid={testId} id={id}>
 			<Form onSubmit={submitForm} className={styles.Form} noValidate>
 				<FloatingLabel controlId='idFormEditId' label='Id'>
 					<Form.Control type='text' placeholder='' disabled value={data.id} />
 				</FloatingLabel>
-				<FloatingLabel controlId='idFormEditUserName' label='Username'>
+				<FloatingLabel controlId='idFormEditUserFormName' label='Username'>
 					<Form.Control type='text' placeholder='Username' disabled value={data.username} />
 				</FloatingLabel>
 				<FloatingLabel controlId='idFormEditName' label='Name'>
@@ -153,10 +150,10 @@ const EditUser = ({ className, testId, id, data, onClose, onSuccess }) => {
 				{loading && <Loader animation='border' variant='primary' />}
 				{!loading && (
 					<div className={styles.Footer}>
-						<Button variant='secondary' className='w-100' onClick={onClose}>
+						<Button isSecondary onClick={onClose} isLoading={loading}>
 							{t(texts.Cancel)}
 						</Button>
-						<Button variant='primary' type='submit' className='w-100' disabled={hasErrors}>
+						<Button isPrimary type='submit' isLoading={loading} isDisabled={hasErrors}>
 							{t(texts.Accept)}
 						</Button>
 					</div>
@@ -166,7 +163,7 @@ const EditUser = ({ className, testId, id, data, onClose, onSuccess }) => {
 	);
 };
 
-EditUser.propTypes = propTypes;
-EditUser.defaultProps = defaultProps;
+EditUserForm.propTypes = propTypes;
+EditUserForm.defaultProps = defaultProps;
 
-export default EditUser;
+export default EditUserForm;

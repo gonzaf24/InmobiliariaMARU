@@ -48,7 +48,7 @@ $web-font-path: 'https://fonts.googleapis.com/css?family=Lato:300,400,700' !defa
 	border-color: var(--bs-primary);
 }
 .btn-secondary {
-	color: #000;
+	color: var(--bs-primary);
 	background-color: #fff;
 	border-color: var(--bs-primary);
 }
@@ -59,7 +59,7 @@ $web-font-path: 'https://fonts.googleapis.com/css?family=Lato:300,400,700' !defa
 }
 .btn-check:focus + .btn-secondary,
 .btn-secondary:focus {
-	color: #000;
+	color: var(--bs-primary);
 	background-color: white;
 	border-color: white;
 	box-shadow: 0 0 0 0.25rem rgba(217, 217, 217, 0.5);
@@ -69,7 +69,7 @@ $web-font-path: 'https://fonts.googleapis.com/css?family=Lato:300,400,700' !defa
 .btn-secondary:active,
 .btn-secondary.active,
 .show > .btn-secondary.dropdown-toggle {
-	color: #000;
+	color: var(--bs-primary);
 	background-color: white;
 	border-color: white;
 }
@@ -82,7 +82,7 @@ $web-font-path: 'https://fonts.googleapis.com/css?family=Lato:300,400,700' !defa
 }
 .btn-secondary:disabled,
 .btn-secondary.disabled {
-	color: #000;
+	color: var(--bs-primary);
 	background-color: #fff;
 	border-color: #fff;
 }

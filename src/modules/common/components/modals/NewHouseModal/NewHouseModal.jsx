@@ -3,12 +3,12 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import { useTranslation } from 'react-i18next';
-import { Modal } from '../../../components';
 
+import { Modal } from '../../../components';
 import { MODAL_TRANSITION_EFFECT } from '../../../utils/constants';
+import { NewHouseForm } from '../../../../admin';
 
 import styles from './NewHouseModal.module.scss';
-import { NewHouseForm } from '../../../forms';
 
 const propTypes = {
 	className: PropTypes.string,
