@@ -35,14 +35,11 @@ const FileUpload = ({ className, testId, id, disabled, categoryName, onSuccesUpl
 	const { uploadImage } = useImage();
 	const [isUploading, setIsUploading] = useState(false);
 
-	const buildFileName = useCallback(
-		(fileName, categoryName, useName) => {
-			const ext = fileName.split('.').pop();
-			const nameWithoutSpaces = fileName.split('.').slice(0, -1).join('.').replace(/ /g, '-').slice(0, MAX_LENGTH_FILE_NAME);
-			return useName ? `${categoryName}-${nameWithoutSpaces}-${Date.now()}.${ext}` : `${categoryName}-${Date.now()}.${ext}`;
-		},
-		[categoryName, useName]
-	);
+	const buildFileName = useCallback((fileName, categoryName, useName) => {
+		const ext = fileName.split('.').pop();
+		const nameWithoutSpaces = fileName.split('.').slice(0, -1).join('.').replace(/ /g, '-').slice(0, MAX_LENGTH_FILE_NAME);
+		return useName ? `${categoryName}-${nameWithoutSpaces}-${Date.now()}.${ext}` : `${categoryName}-${Date.now()}.${ext}`;
+	}, []);
 
 	const handleFileInputChange = useCallback(
 		async e => {
@@ -65,7 +62,7 @@ const FileUpload = ({ className, testId, id, disabled, categoryName, onSuccesUpl
 				setIsUploading(false);
 			}
 		},
-		[categoryName, onSuccesUpload, setIsUploading, uploadImage, useName]
+		[buildFileName, categoryName, onSuccesUpload, uploadImage, useName]
 	);
 
 	const handleClick = useCallback(() => {

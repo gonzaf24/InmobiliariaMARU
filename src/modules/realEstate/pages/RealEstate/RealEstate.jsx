@@ -36,7 +36,7 @@ const RealEstate = ({ className, testId, id }) => {
 			console.log('house ', house);
 		};
 		fetchData();
-	}, [getHouse, id]);
+	}, [getHouse, id, realEstateId]);
 
 	const is404Error = hasError && errorCode === 404;
 

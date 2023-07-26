@@ -38,11 +38,11 @@ const Switch = ({ className, dataTestId, id, onChange, options, value, activeCla
 		_option => () => {
 			onChange(_option.value);
 		},
-		[value, onChange]
+		[onChange]
 	);
 
 	const updateActiveButtonStyles = useCallback(() => {
-		if(activeButtonRef.current){
+		if (activeButtonRef.current) {
 			const activeButtonRect = activeButtonRef.current.getBoundingClientRect();
 			const switchRect = activeButtonRef.current.parentNode.getBoundingClientRect();
 			const activeButtonStyle = window.getComputedStyle(activeButtonRef.current);
@@ -73,7 +73,7 @@ const Switch = ({ className, dataTestId, id, onChange, options, value, activeCla
 		return () => {
 			window.removeEventListener('resize', handleResize);
 		};
-	}, []);
+	}, [updateActiveButtonStyles]);
 
 	const switchClassNames = classNames(styles.Switch, className);
 

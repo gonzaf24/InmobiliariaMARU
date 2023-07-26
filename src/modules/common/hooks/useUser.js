@@ -16,12 +16,12 @@ export default function useUser() {
 		errorCode: null,
 	});
 
-	const removeUserSession = () => {
+	const removeUserSession = useCallback(() => {
 		window.sessionStorage.removeItem('jwt');
 		window.sessionStorage.removeItem('user');
 		setUser(null);
 		setJWT(null);
-	};
+	}, []);
 
 	const login = useCallback(
 		async ({ username, password }) => {
@@ -45,13 +45,13 @@ export default function useUser() {
 				return error.message;
 			}
 		},
-		[setJWT]
+		[navigate, removeUserSession, setJWT, setUser]
 	);
 
 	const logout = useCallback(() => {
 		removeUserSession();
 		navigate('/', { replace: true });
-	}, []);
+	}, [navigate, removeUserSession]);
 
 	const users = useCallback(async () => {
 		try {

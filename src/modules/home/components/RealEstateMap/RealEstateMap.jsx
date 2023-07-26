@@ -86,11 +86,14 @@ const RealEstateMap = ({ className, center: centerProp, zoom: zoomProp, greatPla
 		setZoom(newZoom);
 	}, []);
 
-	const onChildClick = useCallback((key, childProps) => {
-		setCenter([childProps.lat, childProps.lng]);
-		setSelectedPlace(childProps);
-		openMarkerInfo();
-	}, []);
+	const onChildClick = useCallback(
+		(key, childProps) => {
+			setCenter([childProps.lat, childProps.lng]);
+			setSelectedPlace(childProps);
+			openMarkerInfo();
+		},
+		[openMarkerInfo]
+	);
 
 	const onChildMouseEnter = useCallback(key => {
 		setHoverKey(key);
@@ -145,7 +148,7 @@ const RealEstateMap = ({ className, center: centerProp, zoom: zoomProp, greatPla
 				selectedPlace?.city
 			}`;
 		}
-	}, [selectedPlace?.street, selectedPlace?.neighborhood, selectedPlace?.city]);
+	}, [selectedPlace?.street, selectedPlace?.neighborhood, selectedPlace?.city, isMobile, t]);
 	const markerInfoClassNames = classNames(styles.MarkerInfo, {
 		[styles.Open]: isOpenMarkerInfo,
 	});
