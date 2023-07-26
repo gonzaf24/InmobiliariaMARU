@@ -21,6 +21,7 @@ export default function useUser() {
 		window.sessionStorage.removeItem('user');
 		setUser(null);
 		setJWT(null);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const login = useCallback(
