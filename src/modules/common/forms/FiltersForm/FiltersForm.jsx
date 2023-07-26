@@ -3,10 +3,10 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import { Button, Form, Row } from 'react-bootstrap';
-import geografia from '../../utils/geografia.json';
-import { InputSelect, InputSelectGeography } from '../../components';
 import { useTranslation } from 'react-i18next';
+import geografia from '../../../../utils/geografia.json';
 import { SELECTORS } from '../../../../utils';
+import { InputSelect, InputSelectGeography } from '../../components';
 
 import styles from './FiltersForm.module.scss';
 
