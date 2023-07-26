@@ -3,11 +3,12 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import { Button, Table } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { MdDeleteForever, MdEdit, MdHomeFilled } from 'react-icons/md';
+import { SELECTORS } from '../../../../utils';
+import { EditHouseModal, NewHouseModal, useHouse, useOpenToggle } from '../../../common';
 
 import styles from './Properties.module.scss';
-import { EditHouseModal, NewHouseModal, SELECTORS, useHouse, useOpenToggle } from '../../../common';
-import { useTranslation } from 'react-i18next';
 
 const propTypes = {
 	className: PropTypes.string,

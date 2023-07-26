@@ -3,8 +3,9 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import { useTranslation } from 'react-i18next';
-import { Loader, USERS_TYPES, useUser } from '../../../common';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
+import { USERS_TYPES } from '../../../../utils';
+import { Loader, useUser } from '../../../common';
 import useToastContext from '../../../../context/toastContext';
 
 import styles from './NewUserForm.module.scss';

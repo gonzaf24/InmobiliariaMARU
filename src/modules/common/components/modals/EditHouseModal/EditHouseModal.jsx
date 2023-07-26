@@ -3,10 +3,9 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import { useTranslation } from 'react-i18next';
-
 import Modal from '../Modal';
-import { MODAL_TRANSITION_EFFECT } from '../../../utils/constants';
 import { EditHouseForm } from '../../../../admin';
+import { MODAL_TRANSITION_EFFECT } from '../../../../../utils';
 
 import styles from './EditHouseModal.module.scss';
 

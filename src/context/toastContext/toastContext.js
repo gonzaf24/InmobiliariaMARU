@@ -1,4 +1,4 @@
-import { createContext } from '../../app/contexts/context';
+import { createContext } from '../context';
 
 const CONTEXT_NAME = 'toastContext';
 

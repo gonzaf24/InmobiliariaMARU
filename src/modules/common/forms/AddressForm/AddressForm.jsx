@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 
 import geografia from '../../utils/geografia.json';
 import { Row } from 'react-bootstrap';
-import { SELECTORS } from '../../utils/constants';
 import { InputNumber, InputSelectGeography, InputText } from '../../components';
+import { SELECTORS } from '../../../../utils';
 
 import styles from './AddressForm.module.scss';
 

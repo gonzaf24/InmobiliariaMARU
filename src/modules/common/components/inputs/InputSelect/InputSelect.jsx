@@ -2,10 +2,11 @@ import React, { useCallback, useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-import styles from './InputSelect.module.scss';
 import { Col, FloatingLabel, Form } from 'react-bootstrap';
-import { SELECTORS } from '../../../utils';
 import { useTranslation } from 'react-i18next';
+import { SELECTORS } from '../../../../../utils';
+
+import styles from './InputSelect.module.scss';
 
 const propTypes = {
 	className: PropTypes.string,
