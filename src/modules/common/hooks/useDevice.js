@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useWindowSize } from 'usehooks-ts';
-import { BREAKPOINTS_DEVICES } from '../utils/constants';
+import { BREAKPOINTS_DEVICES } from '../../../utils';
 
 const useDevice = () => {
 	const { width } = useWindowSize();

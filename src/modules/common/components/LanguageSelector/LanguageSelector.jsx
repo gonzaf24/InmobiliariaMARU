@@ -2,11 +2,12 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-import styles from './LanguageSelector.module.scss';
 import { MdLanguage } from 'react-icons/md';
 import { useTranslation } from 'react-i18next';
-import { LANGUAGES } from '../../utils/constants';
 import { EnFlag, EsFlag } from '../../../../assets/icons';
+import { LANGUAGES } from '../../../../utils';
+
+import styles from './LanguageSelector.module.scss';
 
 const propTypes = {
 	className: PropTypes.string,

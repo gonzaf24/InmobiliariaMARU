@@ -1,12 +1,13 @@
 import React, { useRef } from 'react';
-import { Modal as ModalBoostrap } from 'react-bootstrap';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
+
+import { Modal as ModalBoostrap } from 'react-bootstrap';
 import { MdClose } from 'react-icons/md';
+import { MODAL_TRANSITION_EFFECT } from '../../../../../utils';
+import Loader from '../../Loader';
 
 import styles from './Modal.module.scss';
-import Loader from '../../Loader';
-import { MODAL_TRANSITION_EFFECT } from '../../../utils/constants';
 
 const propTypes = {
 	children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),

@@ -2,11 +2,11 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-import geografia from '../../utils/geografia.json';
 import { Button, Form, Row } from 'react-bootstrap';
+import geografia from '../../utils/geografia.json';
 import { InputSelect, InputSelectGeography } from '../../components';
-import { SELECTORS } from '../../utils/constants';
 import { useTranslation } from 'react-i18next';
+import { SELECTORS } from '../../../../utils';
 
 import styles from './FiltersForm.module.scss';
 

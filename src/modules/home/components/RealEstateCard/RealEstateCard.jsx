@@ -2,13 +2,13 @@ import React, { useCallback, useMemo } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Image, Slider } from '../../../common/components';
 import { NoImageAvailable } from '../../../../assets/images';
-import { SELECTORS } from '../../../common';
+import { SELECTORS } from '../../../../utils';
 
 import styles from './RealEstateCard.module.scss';
-import { Link } from 'react-router-dom';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -29,7 +29,7 @@ const propTypes = {
 		parkingIncluded: PropTypes.bool,
 		parkingOptional: PropTypes.bool,
 		parkingPrice: PropTypes.number,
-		id: PropTypes.number,
+		id: PropTypes.string,
 	}),
 };
 

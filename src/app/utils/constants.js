@@ -1,4 +1,4 @@
-export const TOASTS_TYPES = {
+/* export const TOASTS_TYPES = {
 	DEFAULT: 'DEFAULT',
 	SUCCESS: 'SUCCESS',
 	ERROR: 'ERROR',
@@ -57,3 +57,4 @@ export const MODAL_TRANSITION_EFFECT = {
 	up: 'up',
 	down: 'down',
 };
+ */

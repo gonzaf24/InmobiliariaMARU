@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 
 import { FloatingLabel, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { USERS_TYPES, Button, Loader, useUser } from '../../../common';
+import { USERS_TYPES } from '../../../../utils';
+import { Button, Loader, useUser } from '../../../common';
 import useToastContext from '../../../../context/toastContext';
 import useUserContext from '../../../../context/userContext';
 
