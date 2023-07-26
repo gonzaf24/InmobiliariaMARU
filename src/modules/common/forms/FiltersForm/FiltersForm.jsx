@@ -6,9 +6,9 @@ import geografia from '../../utils/geografia.json';
 import { Button, Form, Row } from 'react-bootstrap';
 import { InputSelect, InputSelectGeography } from '../../components';
 import { SELECTORS } from '../../utils/constants';
+import { useTranslation } from 'react-i18next';
 
 import styles from './FiltersForm.module.scss';
-import { useTranslation } from 'react-i18next';
 
 const propTypes = {
 	className: PropTypes.string,
