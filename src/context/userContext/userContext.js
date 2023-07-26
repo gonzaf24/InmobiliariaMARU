@@ -1,4 +1,4 @@
-import { createContext } from '../../utils/context';
+import { createContext } from '../context';
 
 const CONTEXT_NAME = 'User';
 

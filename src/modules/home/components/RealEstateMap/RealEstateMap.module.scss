@@ -12,10 +12,6 @@
 		bottom: 0px;
 	}
 
-	@include desktop {
-		padding: 0px 0px 50px 0px !important;
-	}
-
 	.MarkerInfo {
 		position: fixed;
 		opacity: 0;

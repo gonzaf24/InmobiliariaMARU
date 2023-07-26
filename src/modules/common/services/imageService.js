@@ -1,6 +1,6 @@
-import dataApi from '../utils/dataApi';
-import { getError } from '../utils/errors';
-import { protectedFetch, protectedFetchImage } from '../utils/request';
+import dataApi from './dataApi';
+import { getError } from './errors';
+import { protectedFetch, protectedFetchImage } from './request';
 
 const _URL = dataApi.BASE_URL;
 const _ENDPOINT = 'api/images';

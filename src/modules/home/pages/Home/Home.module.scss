@@ -70,7 +70,7 @@
 		justify-content: center;
 		align-items: flex-start;
 		flex: 1 1;
-		height: calc(100vh - 80px);
+		height: calc(100vh - 100px);
 
 		@include desktop {
 			padding: 0px 50px;
@@ -125,9 +125,9 @@
 			flex-direction: column;
 			justify-content: flex-start;
 			align-items: flex-start;
-			gap: 10px;
-			margin-top: 25px;
-			height: calc(100vh - 80px);
+			gap: 15px;
+			height: calc(100vh - 100px);
+			padding: 10px 5px 150px 5px;
 			overflow: scroll;
 
 			@include devices(tablet, mobile) {
@@ -137,17 +137,8 @@
 
 		.StepMap {
 			flex: 1 1;
-			display: flex;
-			flex-direction: column;
-			justify-content: flex-start;
-			align-items: flex-start;
-			gap: 10px;
-			margin-top: 25px;
-			height: calc(100vh - 140px);
-			overflow: scroll;
 
 			@include devices(tablet, mobile) {
-				margin-top: 0px;
 				height: unset;
 			}
 		}

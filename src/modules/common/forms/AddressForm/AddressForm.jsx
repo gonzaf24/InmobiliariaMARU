@@ -2,9 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-import geografia from '../../utils/geografia.json';
 import { Row } from 'react-bootstrap';
-import { SELECTORS } from '../../utils/constants';
+import geografia from '../../../../utils/geografia.json';
+import { SELECTORS } from '../../../../utils';
 import { InputNumber, InputSelectGeography, InputText } from '../../components';
 
 import styles from './AddressForm.module.scss';

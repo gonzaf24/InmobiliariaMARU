@@ -1,16 +1,17 @@
 import React, { useCallback, useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import { ImImage } from 'react-icons/im';
-import { formatFileNameToShow } from '../../../utils/formatters';
 
-import styles from './FileSorteableList.module.scss';
 import { FloatingLabel, Form, InputGroup, ListGroup } from 'react-bootstrap';
 import { BiDownArrowAlt, BiUpArrowAlt } from 'react-icons/bi';
+import { ImImage } from 'react-icons/im';
+import { useOpenToggle } from '../../../hooks';
+import { formatFileNameToShow } from '../../../../../utils';
 import FileUpload from '../FileUpload';
 import FileDelete from '../FileDelete';
 import ImagePreviewModal from '../../modals/ImagePreviewModal/ImagePreviewModal';
-import { useOpenToggle } from '../../../hooks';
+
+import styles from './FileSorteableList.module.scss';
 
 const propTypes = {
 	className: PropTypes.string,

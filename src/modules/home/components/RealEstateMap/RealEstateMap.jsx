@@ -8,7 +8,7 @@ import { BsChatLeftText } from 'react-icons/bs';
 import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-import { PROPERTY_ACQUISITION_OPTIONS } from '../../../../utils/constants';
+import { SELECTORS } from '../../../../utils/constants';
 import { CloseIcon } from '../../../../assets/icons';
 import { NoImageAvailable } from '../../../../assets/images';
 import { Image, Slider } from '../../../../modules';
@@ -70,7 +70,7 @@ const texts = {
 	Elevator: 'Constants.Elevator',
 };
 
-const PROPERTY_ACQUISITION = Object.values(PROPERTY_ACQUISITION_OPTIONS);
+const PROPERTY_ACQUISITION = Object.values(SELECTORS.PROPERTY_ACQUISITION_OPTIONS);
 
 const RealEstateMap = ({ className, center: centerProp, zoom: zoomProp, greatPlaces }) => {
 	const { t } = useTranslation();
@@ -86,11 +86,14 @@ const RealEstateMap = ({ className, center: centerProp, zoom: zoomProp, greatPla
 		setZoom(newZoom);
 	}, []);
 
-	const onChildClick = useCallback((key, childProps) => {
-		setCenter([childProps.lat, childProps.lng]);
-		setSelectedPlace(childProps);
-		openMarkerInfo();
-	}, []);
+	const onChildClick = useCallback(
+		(key, childProps) => {
+			setCenter([childProps.lat, childProps.lng]);
+			setSelectedPlace(childProps);
+			openMarkerInfo();
+		},
+		[openMarkerInfo]
+	);
 
 	const onChildMouseEnter = useCallback(key => {
 		setHoverKey(key);
@@ -133,7 +136,7 @@ const RealEstateMap = ({ className, center: centerProp, zoom: zoomProp, greatPla
 		return PROPERTY_ACQUISITION.find(option => option.value === selectedPlace?.operation)?.label;
 	}, [selectedPlace?.operation]);
 
-	const isSale = selectedPlace?.operation === PROPERTY_ACQUISITION_OPTIONS.SALE.value;
+	const isSale = selectedPlace?.operation === SELECTORS.PROPERTY_ACQUISITION_OPTIONS.SALE.value;
 
 	const priceLabel = isSale ? `${selectedPlace?.price} €` : `${selectedPlace?.price} €/${t('Constants.Month')}`;
 
@@ -145,7 +148,7 @@ const RealEstateMap = ({ className, center: centerProp, zoom: zoomProp, greatPla
 				selectedPlace?.city
 			}`;
 		}
-	}, [selectedPlace?.street, selectedPlace?.neighborhood, selectedPlace?.city]);
+	}, [selectedPlace?.street, selectedPlace?.neighborhood, selectedPlace?.city, isMobile, t]);
 	const markerInfoClassNames = classNames(styles.MarkerInfo, {
 		[styles.Open]: isOpenMarkerInfo,
 	});

@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 
 import { BsFilter } from 'react-icons/bs';
 import { Button } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
+import { MODAL_TRANSITION_EFFECT } from '../../../../utils';
+import { FiltersForm, Modal, useOpenToggle } from '../../../common';
 
 import styles from './FilterModal.module.scss';
-import { useTranslation } from 'react-i18next';
-import { FiltersForm, MODAL_TRANSITION_EFFECT, Modal, useOpenToggle } from '../../../common';
 
 const propTypes = {
 	className: PropTypes.string,

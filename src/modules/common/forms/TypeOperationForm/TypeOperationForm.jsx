@@ -3,8 +3,8 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import { Row } from 'react-bootstrap';
-import { SELECTORS } from '../../utils/constants';
 import { InputNumberLabel, InputSelect } from '../../components';
+import { SELECTORS } from '../../../../utils/constants';
 
 import styles from './TypeOperationForm.module.scss';
 

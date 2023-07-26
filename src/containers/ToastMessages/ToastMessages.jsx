@@ -1,12 +1,13 @@
 import React from 'react';
-import { Toast, ToastContainer, Button } from 'react-bootstrap';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import { MdClose } from 'react-icons/md';
-import useToastContext from '../../context/toastContext';
-import styles from './ToastMessages.module.scss';
+import { Toast, ToastContainer, Button } from 'react-bootstrap';
 import { DEFAULT_CLOSE_TIME_DELAY, TOASTS_TYPES } from '../../utils/constants';
+import useToastContext from '../../context/toastContext';
+
+import styles from './ToastMessages.module.scss';
 
 const propTypes = {
 	className: PropTypes.string,

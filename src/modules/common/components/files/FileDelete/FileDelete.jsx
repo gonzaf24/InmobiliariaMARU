@@ -1,15 +1,16 @@
 import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
+
 import { MdDeleteForever } from 'react-icons/md';
 import { useTranslation } from 'react-i18next';
-import ActionModal from '../../modals/ActionModal';
-import { formatFileNameToShow } from '../../../utils/formatters';
+import { useImage, useOpenToggle } from '../../../hooks';
+import { formatFileNameToShow } from '../../../../../utils';
 import Loader from '../../Loader';
+import ActionModal from '../../modals/ActionModal';
 import useToastContext from '../../../../../context/toastContext';
 
 import styles from './FileDelete.module.scss';
-import { useImage, useOpenToggle } from '../../../hooks';
 
 const propTypes = {
 	className: PropTypes.string,

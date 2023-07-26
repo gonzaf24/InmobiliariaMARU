@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useWindowSize } from 'usehooks-ts';
-import { BREAKPOINTS_DEVICES } from '../utils/constants';
+import { BREAKPOINTS_DEVICES } from '../../../utils';
 
 const useDevice = () => {
 	const { width } = useWindowSize();
@@ -24,14 +24,7 @@ const useDevice = () => {
 		setIsSmallDesktop(width > BREAKPOINTS_DEVICES.TABLET && width <= BREAKPOINTS_DEVICES.BIG_DESKTOP);
 		setIsBigDesktop(width > BREAKPOINTS_DEVICES.BIG_DESKTOP);
 		setIsDesktop(width > BREAKPOINTS_DEVICES.TABLET);
-	}, [
-		BREAKPOINTS_DEVICES.BIG_DESKTOP,
-		BREAKPOINTS_DEVICES.MOBILE,
-		BREAKPOINTS_DEVICES.SMALL_MOBILE,
-		BREAKPOINTS_DEVICES.SMALL_TABLET,
-		BREAKPOINTS_DEVICES.TABLET,
-		width,
-	]);
+	}, [width]);
 
 	return {
 		isSmallMobile,

@@ -76,7 +76,7 @@ const GoogleMap = ({ className, testId, id, lat, lng, showExactPosition }) => {
 			const calculatedRadius = radiusValue * value.zoom;
 			setRadiusMap(calculatedRadius);
 		},
-		[showExactPosition, radiusValue]
+		[radiusValue]
 	);
 
 	useEffect(() => {

@@ -3,8 +3,9 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import { Row } from 'react-bootstrap';
-import { SELECTORS } from '../../utils/constants';
+import { SELECTORS } from '../../../../utils';
 import { InputCheckbox, InputDate, InputNumber, InputNumberLabel, InputSelect, InputTextarea } from '../../components';
+
 import styles from './PropertyForm.module.scss';
 
 const propTypes = {
