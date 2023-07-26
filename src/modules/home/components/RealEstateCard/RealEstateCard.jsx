@@ -8,6 +8,7 @@ import { NoImageAvailable } from '../../../../assets/images';
 import { SELECTORS } from '../../../common';
 
 import styles from './RealEstateCard.module.scss';
+import { Link } from 'react-router-dom';
 
 const propTypes = {
 	className: PropTypes.string,
@@ -28,6 +29,7 @@ const propTypes = {
 		parkingIncluded: PropTypes.bool,
 		parkingOptional: PropTypes.bool,
 		parkingPrice: PropTypes.number,
+		id: PropTypes.number,
 	}),
 };
 
@@ -50,6 +52,7 @@ const defaultProps = {
 		parkingIncluded: false,
 		parkingOptional: false,
 		parkingPrice: 0,
+		id: undefined,
 	},
 };
 
@@ -87,6 +90,11 @@ const RealEstateCard = ({ className, testId, id, place }) => {
 		return PROPERTY_ACQUISITION.find(option => option.value === place?.operation)?.label;
 	}, [place?.operation]);
 
+	const onRealEstateCardClick = useCallback(() => {
+		const url = `/realEstate/${place?.id}`;
+		window.open(url, '_blank');
+	}, [place]);
+
 	const isSale = place?.operation === SELECTORS.PROPERTY_ACQUISITION_OPTIONS.SALE.value;
 
 	const priceLabel = isSale ? `${place?.price} €` : `${place?.price} €/${t(texts.Month)}`;
@@ -110,7 +118,9 @@ const RealEstateCard = ({ className, testId, id, place }) => {
 			<Slider className={styles.Slider}>{renderSliderImages()}</Slider>
 			<div className={styles.DescriptionWrapper}>
 				<div className={styles.Wrapper}>
-					<span className={styles.Address}>{addressLabel}</span>
+					<Link className={styles.Address} onClick={onRealEstateCardClick}>
+						{addressLabel}
+					</Link>
 				</div>
 				<div className={styles.Wrapper}>
 					<span className={styles.Operation}>{t(operationLabel)}</span>

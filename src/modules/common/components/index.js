@@ -6,10 +6,11 @@ import Switch from './Switch';
 import Image from './Image';
 import Slider from './Slider';
 import Button from './Button';
+import NotFound from './NotFound';
 
 export * from './files';
 export * from './modals';
 export * from './utils';
 export * from './inputs';
 
-export { Loader, LanguageSelector, FullSizeImage, Switch, Image, Slider, GoogleMap, Button };
+export { Loader, LanguageSelector, FullSizeImage, Switch, Image, Slider, GoogleMap, Button, NotFound };

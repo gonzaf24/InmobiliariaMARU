@@ -1,6 +1,6 @@
-import dataApi from './utils/dataApi';
-import { getError } from './utils/errors';
-import { customFetch, protectedFetch } from './utils/request';
+import dataApi from '../utils/dataApi';
+import { getError } from '../utils/errors';
+import { customFetch, protectedFetch } from '../utils/request';
 
 const _URL = dataApi.BASE_URL;
 const _ENDPOINT = 'api/users';

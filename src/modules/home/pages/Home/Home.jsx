@@ -30,8 +30,14 @@ const HOME_STEPS = {
 };
 
 const HOME_COMPONENTS = {
-	[HOME_STEPS.HOME_MAP]: RealEstateMap,
-	[HOME_STEPS.HOME_LIST]: RealEstateList,
+	[HOME_STEPS.HOME_MAP]: {
+		component: RealEstateMap,
+		className: 'StepMap',
+	},
+	[HOME_STEPS.HOME_LIST]: {
+		component: RealEstateList,
+		className: 'StepList',
+	},
 };
 
 const texts = {
@@ -76,7 +82,8 @@ const Home = ({ className, testId, id }) => {
 	};
 
 	const isMobileOrTablet = isMobile || isTablet;
-	const HomeStep = HOME_COMPONENTS[step];
+	const HomeStep = HOME_COMPONENTS[step].component;
+	const homeStepClassName = HOME_COMPONENTS[step].className;
 	const mapButtonClassNames = classnames(styles.Button, { [styles.Active]: step === HOME_STEPS.HOME_MAP });
 	const listButtonClassNames = classnames(styles.Button, { [styles.Active]: step === HOME_STEPS.HOME_LIST });
 	const homeClassNames = classnames(styles.Home, className);
@@ -105,7 +112,7 @@ const Home = ({ className, testId, id }) => {
 						<FiltersForm onFilter={handleFilter} />
 					</div>
 				)}
-				<HomeStep greatPlaces={greatPlaces} className={styles.Step} />
+				<HomeStep greatPlaces={greatPlaces} className={styles[homeStepClassName]} />
 			</div>
 		</div>
 	);
