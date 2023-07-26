@@ -1,4 +1,4 @@
-import { createContext } from '../../utils/context';
+import { createContext } from '../../modules/common';
 
 const CONTEXT_NAME = 'App';
 

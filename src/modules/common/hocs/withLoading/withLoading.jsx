@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-import DefaultLoader from '../../components/utils/Loader';
+import DefaultLoader from '../../components/Loader';
 import DefaultSkeleton from '../../components/utils/Skeleton';
 
 import styles from './withLoading.module.scss';
