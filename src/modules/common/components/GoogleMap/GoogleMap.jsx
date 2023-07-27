@@ -20,8 +20,8 @@ const defaultProps = {
 	className: '',
 	testId: undefined,
 	id: undefined,
-	lat: 41.3870154,
-	lng: 2.1700471,
+	lat: 41.3870154, // Latitude of Inmo in Barcelona
+	lng: 2.1700471, // Longitude of Inmo in Barcelona
 	showExactPosition: true,
 };
 
@@ -64,10 +64,12 @@ const GoogleMap = ({ className, testId, id, lat, lng, showExactPosition }) => {
 		);
 		Marker.displayName = 'Marker';
 		return Marker;
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [radiusMap, showExactPosition, lat, lng]);
 
 	const radiusValue = useMemo(
 		() => (showExactPosition ? POSITION_RADIUS_EXACT : POSITION_RADIUS_ZONE),
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[showExactPosition, radiusMap]
 	);
 

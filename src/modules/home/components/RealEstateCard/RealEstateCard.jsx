@@ -2,11 +2,12 @@ import React, { useCallback, useMemo } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
+import { LiaRulerCombinedSolid, LiaBedSolid } from 'react-icons/lia';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Image, Slider } from '../../../common/components';
 import { NoImageAvailable } from '../../../../assets/images';
-import { SELECTORS } from '../../../../utils';
+import { ROUTES, SELECTORS } from '../../../../utils';
 
 import styles from './RealEstateCard.module.scss';
 
@@ -91,7 +92,7 @@ const RealEstateCard = ({ className, testId, id, place }) => {
 	}, [place?.operation]);
 
 	const onRealEstateCardClick = useCallback(() => {
-		const url = `/realEstate/${place?.id}`;
+		const url = `${ROUTES.REAL_ESTATE}/${place?.id}`;
 		window.open(url, '_blank');
 	}, [place]);
 
@@ -122,14 +123,24 @@ const RealEstateCard = ({ className, testId, id, place }) => {
 						{addressLabel}
 					</Link>
 				</div>
-				<div className={styles.Wrapper}>
+				<div className={styles.OperationWrapper}>
 					<span className={styles.Operation}>{t(operationLabel)}</span>
 					<span className={styles.Price}> {priceLabel}</span>
 					{hasAnyParkingOption && <span className={styles.Parking}>{parkingLabel}</span>}
 				</div>
 				<div className={styles.Wrapper}>
-					{hasRooms && <span className={styles.Rooms}>{`${place?.rooms} ${t(texts.Bedrooms)}.`}</span>}
-					{hasSize && <span className={styles.Size}>{`${place?.size} m²`}</span>}
+					{hasRooms && (
+						<span className={styles.Rooms}>
+							<LiaBedSolid className={styles.Icon} />
+							{`${place?.rooms} ${t(texts.Bedrooms)}.`}
+						</span>
+					)}
+					{hasSize && (
+						<span className={styles.Size}>
+							<LiaRulerCombinedSolid className={styles.Icon} />
+							{`${place?.size} m²`}
+						</span>
+					)}
 					{hasFloor && <span className={styles.Floor}>{`${t(texts.Floor)} ${place?.floor}ª`}</span>}
 					{isExterior && <span className={styles.Exterior}>{t(texts.Exterior)}</span>}
 					{hasElevator && <span className={styles.Elevator}>{t(texts.Elevator)}</span>}

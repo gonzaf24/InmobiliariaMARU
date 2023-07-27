@@ -2,17 +2,19 @@ import React, { useMemo, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import GoogleMap from 'google-map-react';
 import classNames from 'classnames';
+import { LiaRulerCombinedSolid, LiaBedSolid } from 'react-icons/lia';
 
 import RealEstateMapMarker from '../RealEstateMapMarker';
 import { BsChatLeftText } from 'react-icons/bs';
 import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-import { SELECTORS } from '../../../../utils/constants';
+import { ROUTES, SELECTORS } from '../../../../utils/constants';
 import { CloseIcon } from '../../../../assets/icons';
 import { NoImageAvailable } from '../../../../assets/images';
 import { Image, Slider } from '../../../../modules';
 import { useDevice, useOpenToggle } from '../../../common';
+import { Link } from 'react-router-dom';
 
 import styles from './RealEstateMap.module.scss';
 
@@ -39,20 +41,17 @@ const defaultProps = {
 			{
 				featureType: 'transit.station',
 				elementType: 'labels',
-				stylers: [
-					{
-						visibility: 'off',
-					},
-				],
+				stylers: [{ visibility: 'off' }],
 			},
 			{
 				featureType: 'poi',
 				elementType: 'labels',
-				stylers: [
-					{
-						visibility: 'off',
-					},
-				],
+				stylers: [{ visibility: 'off' }],
+			},
+			{
+				featureType: 'administrative.neighborhood',
+				elementType: 'labels',
+				stylers: [{ visibility: 'on' }],
 			},
 		],
 	},
@@ -149,9 +148,11 @@ const RealEstateMap = ({ className, center: centerProp, zoom: zoomProp, greatPla
 			}`;
 		}
 	}, [selectedPlace?.street, selectedPlace?.neighborhood, selectedPlace?.city, isMobile, t]);
-	const markerInfoClassNames = classNames(styles.MarkerInfo, {
-		[styles.Open]: isOpenMarkerInfo,
-	});
+
+	const onRealEstateCardClick = useCallback(() => {
+		const url = `${ROUTES.REAL_ESTATE}/${selectedPlace?.id}`;
+		window.open(url, '_blank');
+	}, [selectedPlace]);
 
 	const hasRooms = !!selectedPlace?.rooms;
 	const hasSize = !!selectedPlace?.size;
@@ -165,6 +166,9 @@ const RealEstateMap = ({ className, center: centerProp, zoom: zoomProp, greatPla
 		? t('Constants.ParkingIncluded')
 		: `${t('Constants.ParkingOptional')} ${selectedPlace?.parkingPrice} €/${t(texts.Month)}`;
 
+	const markerInfoClassNames = classNames(styles.MarkerInfo, {
+		[styles.Open]: isOpenMarkerInfo,
+	});
 	const googleMapClassNames = classNames(styles.RealEstateMap, className);
 
 	return (
@@ -186,35 +190,49 @@ const RealEstateMap = ({ className, center: centerProp, zoom: zoomProp, greatPla
 				<CloseIcon onClick={closeMarkerIndo} className={styles.CloseButton} />
 				<Slider className={styles.Slider}>{renderSliderImages()}</Slider>
 				<div className={styles.Container}>
-					<div className={styles.Wrapper}>
-						<span className={styles.Address}>{addressLabel}</span>
-					</div>
-					{isMobile && (
+					<div className={styles.Group}>
+						<div className={styles.Wrapper}>
+							<Link className={styles.Address} onClick={onRealEstateCardClick}>
+								{addressLabel}
+							</Link>
+						</div>
 						<div className={styles.Wrapper}>
 							<span className={styles.City}>{selectedPlace?.city} </span>
 							<span className={styles.Neighborhood}>{selectedPlace?.neighborhood} </span>
 						</div>
-					)}
-					<div className={styles.Wrapper}>
-						{hasRooms && <span className={styles.Rooms}>{`${selectedPlace?.rooms} ${t(texts.Bedrooms)}.`}</span>}
-						{hasSize && <span className={styles.Size}>{`${selectedPlace?.size} m²`}</span>}
-						{hasFloor && <span className={styles.Floor}>{`${t(texts.Floor)} ${selectedPlace?.floor}ª`}</span>}
-						{isExterior && <span className={styles.Exterior}>{t(texts.Exterior)}</span>}
-						{hasElevator && <span className={styles.Elevator}>{t(texts.Elevator)}</span>}
+						<div className={styles.Wrapper}>
+							{hasRooms && (
+								<span className={styles.Rooms}>
+									<LiaBedSolid className={styles.Icon} />
+									{`${selectedPlace?.rooms} ${t(texts.Bedrooms)}.`}
+								</span>
+							)}
+							{hasSize && (
+								<span className={styles.Size}>
+									<LiaRulerCombinedSolid className={styles.Icon} />
+									{`${selectedPlace?.size} m²`}
+								</span>
+							)}
+							{hasFloor && <span className={styles.Floor}>{`${t(texts.Floor)} ${selectedPlace?.floor}ª`}</span>}
+						</div>
+						<div className={styles.Wrapper}>
+							{isExterior && <span className={styles.Exterior}>{t(texts.Exterior)}</span>}
+							{hasElevator && <span className={styles.Elevator}>{t(texts.Elevator)}</span>}
+						</div>
+						<div className={styles.Wrapper}>
+							{hasAnyParkingOption && <span className={styles.Parking}>{parkingLabel}</span>}
+						</div>
 					</div>
-					<div className={styles.Wrapper}>
+					<div className={styles.OperationWrapper}>
 						<span className={styles.Operation}>{t(operationLabel)}</span>
 						<span className={styles.Price}> {priceLabel}</span>
 					</div>
-					<div className={styles.Wrapper}>
-						{hasAnyParkingOption && <span className={styles.Parking}>{parkingLabel}</span>}
-					</div>
-					<div className={styles.Footer}>
-						<Button className={styles.Button}>
-							<span className={styles.Text}>contact</span>
-							<BsChatLeftText className={styles.Icon} />
-						</Button>
-					</div>
+				</div>
+				<div className={styles.Footer}>
+					<Button className={styles.Button}>
+						<span className={styles.Text}>contact</span>
+						<BsChatLeftText className={styles.Icon} />
+					</Button>
 				</div>
 			</div>
 		</div>

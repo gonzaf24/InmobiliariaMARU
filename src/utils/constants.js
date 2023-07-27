@@ -31,6 +31,14 @@ export const MODAL_TRANSITION_EFFECT = {
 	down: 'down',
 };
 
+export const ROUTES = {
+	HOME: '/',
+	ABOUT: '/about',
+	REAL_ESTATE: '/realEstate',
+	RENT: '/rent',
+	SALE: '/sale',
+};
+
 const DEFUALT_SELECTOR = { label: 'Constants.SelectOne', value: '' };
 
 const PROPERTY_TYPES = {

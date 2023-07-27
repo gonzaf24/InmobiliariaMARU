@@ -15,9 +15,9 @@
 		padding: 5px 25px;
 		background-color: var(--bs-primary) 3b;
 		height: 50px;
-		-webkit-box-shadow: 0px -2px 30px 0px rgba(54, 100, 179, 0.67);
-		-moz-box-shadow: 0px -2px 30px 0px rgba(54, 100, 179, 0.67);
-		box-shadow: 0px -2px 30px 0px rgba(54, 100, 179, 0.67);
+		-webkit-box-shadow: 0px 0px 10px 2px var(--bs-border-primary);
+		-moz-box-shadow: 0px 0px 10px 2px var(--bs-border-primary);
+		box-shadow: 0px 0px 10px 2px var(--bs-border-primary);
 
 		@include devices(mobile, tablet) {
 			padding: 10px;
@@ -71,6 +71,7 @@
 		align-items: flex-start;
 		flex: 1 1;
 		height: calc(100vh - 100px);
+		gap: 25px;
 
 		@include desktop {
 			padding: 0px 50px;
@@ -94,9 +95,9 @@
 			max-width: 300px;
 			width: 100%;
 			flex: 1;
-			border: 2px solid #d4deee;
+			border: 2px solid var(--bs-border-primary);
 			border-radius: 0px 0px var(--bs-radius-medium) var(--bs-radius-medium);
-			margin: 25px 15px 25px 25px;
+			margin-top: 25px;
 			position: relative;
 			padding: 25px;
 
@@ -127,7 +128,7 @@
 			align-items: flex-start;
 			gap: 15px;
 			height: calc(100vh - 100px);
-			padding: 10px 5px 150px 5px;
+			padding: 25px 5px 150px 5px;
 			overflow: scroll;
 
 			@include devices(tablet, mobile) {

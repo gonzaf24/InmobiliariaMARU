@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 
 import { Button, Form, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import geografia from '../../../../utils/geografia.json';
 import { SELECTORS } from '../../../../utils';
 import { InputSelect, InputSelectGeography } from '../../components';
+import geografia from '../../../../utils/geografia.json';
 
 import styles from './FiltersForm.module.scss';
 
@@ -66,8 +66,8 @@ const FiltersForm = ({ className, testId, id, onFilter }) => {
 	const regionesMap = Object.keys(regiones);
 	const ciudadesMap = Object.keys(ciudades);
 
-	const getFilterValues = () => {
-		return {
+	useEffect(() => {
+		onFilter({
 			operation,
 			propertyType,
 			country,
@@ -76,11 +76,8 @@ const FiltersForm = ({ className, testId, id, onFilter }) => {
 			neighborhood,
 			minPrice,
 			maxPrice,
-		};
-	};
-
-	useEffect(() => {
-		onFilter(getFilterValues());
+		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [operation, propertyType, country, region, city, neighborhood, minPrice, maxPrice]);
 
 	useEffect(() => {
