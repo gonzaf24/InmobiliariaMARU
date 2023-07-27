@@ -2,6 +2,7 @@
 
 .RealEstateMap {
 	height: 100%;
+	padding-top: 25px;
 
 	@include devices(mobile, tablet) {
 		padding: 0px !important;
@@ -17,21 +18,24 @@
 		opacity: 0;
 		top: 125px;
 		right: 50px;
-		width: 300px;
+		width: 335px;
 		background-color: var(--bs-white);
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
 		flex-direction: column;
-		gap: 10px;
 		transition: opacity 0.5s;
 		pointer-events: none;
-		border: 2px solid #00000099;
+		border: 2px solid #d4deed;
 		border-radius: 5px;
-		box-shadow: 10px 10px 25px 20px rgba(0, 0, 0, 0.3);
+		box-shadow: -5px 10px 30px 0px rgba(0, 0, 0, 0.3);
+
+		@include tablet {
+			top: 110px;
+			right: 5px;
+		}
 
 		@include mobile {
-			height: 100%;
 			width: unset;
 			flex: 1;
 			flex-direction: row;
@@ -41,15 +45,14 @@
 			bottom: 1px;
 			left: 1px;
 			right: 1px;
-			height: 125px;
+			height: 160px;
 			gap: 0px;
 			box-shadow: 0px -20px 25px 20px rgba(0, 0, 0, 0.3);
 		}
 
 		.CloseButton {
 			align-self: flex-end;
-			margin-right: 10px;
-			margin-top: 10px;
+			margin: 10px;
 			width: 30px;
 			height: 30px;
 			fill: #00000099 !important;
@@ -69,15 +72,14 @@
 
 		.Slider {
 			max-width: 300px;
-			min-height: 300px;
-			max-height: 300px;
-			padding: 5px;
+			height: 300px;
 
 			@include mobile {
 				max-width: 160px;
 				width: 160px;
 				min-height: unset;
 				height: 100%;
+				padding: 5px;
 
 				[class*='slick-list'] {
 					width: 150px;
@@ -106,16 +108,17 @@
 		}
 
 		.Container {
-			height: 180px;
+			height: 200px;
 			display: flex;
 			flex-direction: column;
-			justify-content: flex-start;
+			justify-content: space-between;
 			align-items: flex-start;
 			width: 100%;
 			gap: 5px;
 			overflow-y: scroll;
 			overflow-x: hidden;
 			scrollbar-width: none;
+			padding: 15px;
 
 			&::-webkit-scrollbar {
 				display: none;
@@ -123,10 +126,82 @@
 
 			@include mobile {
 				gap: 0px;
-				height: 115px;
+				height: 100%;
+				padding: 5px;
 			}
 
-			.Wrapper {
+			.Group {
+				display: flex;
+				flex-direction: column;
+
+				.Wrapper {
+					display: flex;
+					justify-content: flex-start;
+					align-items: center;
+					gap: 5px;
+
+					@include mobile {
+						margin-left: 0;
+						width: 100%;
+					}
+
+					.Address {
+						font-size: var(--bs-font-extra-large);
+						font-weight: 700;
+						white-space: initial;
+
+						@include mobile {
+							text-overflow: ellipsis;
+							overflow: hidden;
+							white-space: nowrap;
+						}
+					}
+
+					.City {
+						font-size: var(--bs-font-medium);
+						font-weight: 600;
+					}
+
+					.Neighborhood {
+						font-size: var(--bs-font-medium);
+						font-weight: 600;
+						text-overflow: ellipsis;
+						overflow: hidden;
+					}
+
+					.Rooms,
+					.Size,
+					.Exterior,
+					.Elevator,
+					.Parking {
+						font-size: var(--bs-font-large);
+						font-weight: 600;
+
+						@include mobile {
+							font-size: var(--bs-font-medium);
+						}
+
+						.Icon {
+							width: 15px;
+							height: 15px;
+							margin-right: 5px;
+						}
+					}
+
+					.Floor {
+						font-size: var(--bs-font-extra-large);
+						font-weight: 600;
+						text-overflow: ellipsis;
+						overflow: hidden;
+
+						@include mobile {
+							font-size: var(--bs-font-medium);
+						}
+					}
+				}
+			}
+
+			.OperationWrapper {
 				display: flex;
 				justify-content: flex-start;
 				align-items: center;
@@ -137,46 +212,6 @@
 					width: 100%;
 				}
 
-				.Address {
-					font-size: var(--bs-font-extra-large);
-					font-weight: 700;
-					white-space: initial;
-
-					@include mobile {
-						text-overflow: ellipsis;
-						overflow: hidden;
-						white-space: nowrap;
-					}
-				}
-
-				.City {
-					font-size: var(--bs-font-medium);
-					font-weight: 600;
-				}
-
-				.Neighborhood {
-					font-size: var(--bs-font-medium);
-					font-weight: 600;
-					text-overflow: ellipsis;
-					overflow: hidden;
-				}
-
-				.Rooms,
-				.Size,
-				.Exterior,
-				.Elevator,
-				.Parking {
-					font-size: var(--bs-font-medium);
-					font-weight: 600;
-				}
-
-				.Floor {
-					font-size: var(--bs-font-medium);
-					font-weight: 600;
-					text-overflow: ellipsis;
-					overflow: hidden;
-				}
-
 				.Operation,
 				.Price {
 					font-size: var(--bs-font-extra-extra-large);
@@ -185,40 +220,40 @@
 					overflow: hidden;
 				}
 			}
+		}
 
-			.Footer {
+		.Footer {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			height: 100%;
+			padding: 0px 15px 15px 15px;
+
+			@include mobile {
+				display: none !important;
+			}
+
+			.Button {
 				display: flex;
-				justify-content: center;
-				align-items: center;
-				width: 100%;
-				height: 100%;
+				padding: 5px 10px;
 
-				@include mobile {
-					justify-content: flex-start;
-					align-items: flex-end;
+				.Text {
+					margin-right: 5px;
+					font-size: var(--bs-font-small);
+					cursor: pointer;
 				}
 
-				.Button {
-					display: flex;
-					padding: 5px 10px;
+				.Icon {
+					width: 10px;
+					height: 10px;
+					fill: var(--bs-white);
+					cursor: pointer;
+				}
 
-					.Text {
-						margin-right: 5px;
-						font-size: var(--bs-font-small);
-						cursor: pointer;
-					}
-
-					.Icon {
-						width: 10px;
-						height: 10px;
-						fill: var(--bs-white);
-						cursor: pointer;
-					}
-
-					&:focus {
-						outline: none;
-						box-shadow: none;
-					}
+				&:focus {
+					outline: none;
+					box-shadow: none;
 				}
 			}
 		}
